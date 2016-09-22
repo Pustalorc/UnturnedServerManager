@@ -17,6 +17,7 @@ Upcoming Features:
 
 * Control on each of the server's console (ban and such)
 * Better Shutdown/Restart Feature (to just focus each server instead of global)
+* Ease of install for Workshop items, Rocket and plugins for rocket.
 
 Known Bugs:
 
