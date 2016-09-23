@@ -2113,6 +2113,11 @@ namespace Unturned_Server_Manager
             Form5 f = new Form5();
             f.ShowDialog();
         }
+
+        private void GithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager");
+        }
     }
     public static class DataContainer
     {

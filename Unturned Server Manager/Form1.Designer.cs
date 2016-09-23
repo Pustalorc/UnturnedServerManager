@@ -69,6 +69,7 @@
             this.AdvancedOptions4 = new System.Windows.Forms.Button();
             this.Shutdown = new System.Windows.Forms.Button();
             this.Restart = new System.Windows.Forms.Button();
+            this.GithubLink = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // CreditsMin1
@@ -457,11 +458,24 @@
             this.Restart.UseVisualStyleBackColor = true;
             this.Restart.Click += new System.EventHandler(this.Restart_Click);
             // 
+            // GithubLink
+            // 
+            this.GithubLink.AutoSize = true;
+            this.GithubLink.Location = new System.Drawing.Point(13, 337);
+            this.GithubLink.Name = "GithubLink";
+            this.GithubLink.Size = new System.Drawing.Size(133, 13);
+            this.GithubLink.TabIndex = 45;
+            this.GithubLink.TabStop = true;
+            this.GithubLink.Text = "Github Post (Source Code)";
+            this.GithubLink.VisitedLinkColor = System.Drawing.Color.Black;
+            this.GithubLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubLink_LinkClicked);
+            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 362);
+            this.Controls.Add(this.GithubLink);
             this.Controls.Add(this.Restart);
             this.Controls.Add(this.Shutdown);
             this.Controls.Add(this.AdvancedOptions4);
@@ -556,6 +570,7 @@
         private System.Windows.Forms.Button AdvancedOptions4;
         private System.Windows.Forms.Button Shutdown;
         private System.Windows.Forms.Button Restart;
+        private System.Windows.Forms.LinkLabel GithubLink;
     }
 }
 
