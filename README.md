@@ -9,7 +9,9 @@ Last Update: September 22, 2016
 Requirements:
 
 .Net 4.5 or Later
+
 Windows (ofc m8, I no help macs. Working on linux though.)
+
 Unturned Installed Somewhere In Your Computer
 
 
