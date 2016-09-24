@@ -22,6 +22,8 @@ Upcoming Features:
 Known Bugs:
 
 * Shutdown/Restart kills EVERY single .exe file launched with the name "unturned"
+* Owner can not be set due to an overflow.
+* Starting servers without passing through the advanced config sets everything to null and 0's
 
 --
 
