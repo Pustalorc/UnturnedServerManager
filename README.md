@@ -2,6 +2,8 @@
 
 Version: Public 1.0.0.1
 
+[![Build status](https://ci.appveyor.com/api/projects/status/bocigasg3gog25rg/branch/master?svg=true)](https://ci.appveyor.com/project/persiafighter/unturnedservermanager/branch/master)
+
 Last Update: September 23, 2016
 
 --
