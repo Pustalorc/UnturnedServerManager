@@ -712,7 +712,10 @@
             this.Controls.Add(this.NameSel);
             this.Controls.Add(this.NameDesc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form4";
+            this.ShowInTaskbar = false;
             this.Text = "Server 3 Advanced Options";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

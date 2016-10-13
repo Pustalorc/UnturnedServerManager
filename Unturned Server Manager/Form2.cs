@@ -195,7 +195,7 @@ namespace Unturned_Server_Manager
             {
                 try
                 {
-                    DataContainer.OwnerSer1 = Convert.ToInt32(OwnerSel.Text);
+                    DataContainer.OwnerSer1 = Convert.ToInt64(OwnerSel.Text);
                 }
                 catch (FormatException)
                 {

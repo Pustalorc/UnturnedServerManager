@@ -14,6 +14,11 @@ namespace Unturned_Server_Manager
 {
     public partial class Manager : Form
     {
+        #region Variables
+        private bool Server1Off;
+        private bool Server2Off;
+        private bool Server3Off;
+        private bool Server4Off;
         private string SavedState1;
         private string SavedState2;
         private string SavedState3;
@@ -98,6 +103,10 @@ namespace Unturned_Server_Manager
         private string ChatSer2;
         private string ChatSer3;
         private string ChatSer4;
+        private int PIDSer1;
+        private int PIDSer2;
+        private int PIDSer3;
+        private int PIDSer4;
         private bool Hide1;
         private string Path;
         private int Servers;
@@ -109,10 +118,17 @@ namespace Unturned_Server_Manager
         private bool IsVisible2;
         private string value;
         private int valueint;
+        private bool AcceptedDebugPlugins;
+        #endregion
         public Manager()
         {
             InitializeComponent();
             Startup();
+            LoadConfigGlobal();
+            LoadConfigAdvanced();
+            LoopCheckRocket();
+            LoopSaveGlobal();
+            DefaultConfig();
             Hide1 = false;
         }
 
@@ -120,6 +136,10 @@ namespace Unturned_Server_Manager
         { 
             Shutdown.Visible = false;
             Restart.Visible = false;
+            ShutdownSer1.Visible = false;
+            ShutdownSer2.Visible = false;
+            ShutdownSer3.Visible = false;
+            ShutdownSer4.Visible = false;
             Server2.Visible = false;
             Server3.Visible = false;
             Server4.Visible = false;
@@ -144,13 +164,152 @@ namespace Unturned_Server_Manager
             AdvancedOptions2.Visible = false;
             AdvancedOptions3.Visible = false;
             AdvancedOptions4.Visible = false;
+            WorkshopInstall2.Visible = false;
+            WorkshopInstall3.Visible = false;
+            WorkshopInstall4.Visible = false;
+            PluginInstall2.Visible = false;
+            PluginInstall3.Visible = false;
+            PluginInstall4.Visible = false;
+            RestartSer1.Visible = false;
+            RestartSer2.Visible = false;
+            RestartSer3.Visible = false;
+            RestartSer4.Visible = false;
+            StartSer1.Visible = true;
+            StartSer2.Visible = false;
+            StartSer3.Visible = false;
+            StartSer4.Visible = false;
             VACCheck1.Checked = true;
             BatchCheck1.Checked = true;
             NoGraphicsCheck1.Checked = true;
-            LoadConfigGlobal();
-            LoadConfigAdvanced();
-            ServerName1.Text = "Server";
+            VACCheck2.Checked = true;
+            BatchCheck2.Checked = true;
+            NoGraphicsCheck2.Checked = true;
+            VACCheck3.Checked = true;
+            BatchCheck3.Checked = true;
+            NoGraphicsCheck3.Checked = true;
+            VACCheck4.Checked = true;
+            BatchCheck4.Checked = true;
+            NoGraphicsCheck4.Checked = true;
+            Server1Off = true;
+            Server2Off = true;
+            Server3Off = true;
+            Server4Off = true;
+            ServerName1.Text = "Server 1";
+            ServerName2.Text = "Server 2";
+            ServerName3.Text = "Server 3";
+            ServerName4.Text = "Server 4";
             ExecPath.Text = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Unturned";
+            PluginInstall1.Enabled = false;
+            PluginInstall2.Enabled = false;
+            PluginInstall3.Enabled = false;
+            PluginInstall4.Enabled = false;
+            PluginInstall1.Text = "Disabled";
+            PluginInstall2.Text = "Disabled";
+            PluginInstall3.Text = "Disabled";
+            PluginInstall4.Text = "Disabled";
+        }
+
+        private async void LoopCheckRocket()
+        {
+            string Assembly = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Assembly-CSharp.dll";
+            string RAPI = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Rocket.API.dll";
+            string RCore = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Rocket.Core.dll";
+            string RUnturned = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Rocket.Unturned.dll";
+            int kys = 0;
+            while (kys < 5)
+            {
+                if (File.Exists(Assembly) == true && File.Exists(RAPI) == true && File.Exists(RCore) == true && File.Exists(RUnturned) == true)
+                {
+                    RocketInstall.Enabled = false; // Rocket IS installed
+                    RocketInstall.Text = "Rocket Is Already Installed!";
+                }
+                else
+                {
+                    RocketInstall.Enabled = true; // Rocket ISNT installed Or installation is CORRUPT.
+                    RocketInstall.Text = "Install Rocket (Global)";
+                }
+                await Task.Delay(100);
+            }
+        }
+
+        private void DefaultConfig()
+        {
+            DataContainer.MapSer1 = "Washington";
+            DataContainer.MapSer2 = "Washington";
+            DataContainer.MapSer3 = "Washington";
+            DataContainer.MapSer4 = "Washington";
+            DataContainer.PVPSer1 = true;
+            DataContainer.PVPSer2 = true;
+            DataContainer.PVPSer3 = true;
+            DataContainer.PVPSer4 = true;
+            DataContainer.FiPerOnly1 = false;
+            DataContainer.FiPerOnly2 = false;
+            DataContainer.FiPerOnly3 = false;
+            DataContainer.FiPerOnly4 = false;
+            DataContainer.MaxPlayers1 = 24;
+            DataContainer.MaxPlayers2 = 24;
+            DataContainer.MaxPlayers3 = 24;
+            DataContainer.MaxPlayers4 = 24;
+            DataContainer.Port1 = 27012;
+            DataContainer.Port2 = 27015;
+            DataContainer.Port3 = 27018;
+            DataContainer.Port4 = 27021;
+            DataContainer.NameSer1 = "Test Server #1";
+            DataContainer.NameSer2 = "Test Server #2";
+            DataContainer.NameSer3 = "Test Server #3";
+            DataContainer.NameSer4 = "Test Server #4";
+            DataContainer.DiffSer1 = "Normal";
+            DataContainer.DiffSer2 = "Normal";
+            DataContainer.DiffSer3 = "Normal";
+            DataContainer.DiffSer4 = "Normal";
+            DataContainer.CheatSer1 = false;
+            DataContainer.CheatSer2 = false;
+            DataContainer.CheatSer3 = false;
+            DataContainer.CheatSer4 = false;
+            DataContainer.PassSer1 = "";
+            DataContainer.PassSer2 = "";
+            DataContainer.PassSer3 = "";
+            DataContainer.PassSer4 = "";
+            DataContainer.QueueSer1 = 8;
+            DataContainer.QueueSer2 = 8;
+            DataContainer.QueueSer3 = 8;
+            DataContainer.QueueSer4 = 8;
+            DataContainer.OwnerSer1 = 0;
+            DataContainer.OwnerSer2 = 0;
+            DataContainer.OwnerSer3 = 0;
+            DataContainer.OwnerSer4 = 0;
+            DataContainer.WelcomeSer1 = "";
+            DataContainer.WelcomeSer2 = "";
+            DataContainer.WelcomeSer3 = "";
+            DataContainer.WelcomeSer4 = "";
+            DataContainer.SyncSer1 = false;
+            DataContainer.SyncSer2 = false;
+            DataContainer.SyncSer3 = false;
+            DataContainer.SyncSer4 = false;
+            DataContainer.LoadoutSer1 = "";
+            DataContainer.LoadoutSer2 = "";
+            DataContainer.LoadoutSer3 = "";
+            DataContainer.LoadoutSer4 = "";
+            DataContainer.HideAdminSer1 = false;
+            DataContainer.HideAdminSer2 = false;
+            DataContainer.HideAdminSer3 = false;
+            DataContainer.HideAdminSer4 = false;
+            DataContainer.BindSer1 = "0.0.0.0";
+            DataContainer.BindSer2 = "0.0.0.0";
+            DataContainer.BindSer3 = "0.0.0.0";
+            DataContainer.BindSer4 = "0.0.0.0";
+            DataContainer.FilterSer1 = false;
+            DataContainer.FilterSer2 = false;
+            DataContainer.FilterSer3 = false;
+            DataContainer.FilterSer4 = false;
+            DataContainer.CycleSer1 = 43200;
+            DataContainer.CycleSer2 = 43200;
+            DataContainer.CycleSer3 = 43200;
+            DataContainer.CycleSer4 = 43200;
+            DataContainer.ChatSer1 = 0;
+            DataContainer.ChatSer2 = 0;
+            DataContainer.ChatSer3 = 0;
+            DataContainer.ChatSer4 = 0;
         }
 
         private void Server1Vis()
@@ -187,6 +346,18 @@ namespace Unturned_Server_Manager
             AdvancedOptions2.Visible = IsVisible2;
             AdvancedOptions3.Visible = IsVisible2;
             AdvancedOptions4.Visible = IsVisible2;
+            WorkshopInstall1.Visible = IsVisible;
+            WorkshopInstall2.Visible = IsVisible2;
+            WorkshopInstall3.Visible = IsVisible2;
+            WorkshopInstall4.Visible = IsVisible2;
+            PluginInstall1.Visible = IsVisible;
+            PluginInstall2.Visible = IsVisible2;
+            PluginInstall3.Visible = IsVisible2;
+            PluginInstall4.Visible = IsVisible2;
+            StartSer1.Visible = IsVisible;
+            StartSer2.Visible = IsVisible2;
+            StartSer3.Visible = IsVisible2;
+            StartSer4.Visible = IsVisible2;
         }
 
         private void Server2Vis()
@@ -223,6 +394,18 @@ namespace Unturned_Server_Manager
             AdvancedOptions2.Visible = IsVisible;
             AdvancedOptions3.Visible = IsVisible2;
             AdvancedOptions4.Visible = IsVisible2;
+            WorkshopInstall1.Visible = IsVisible;
+            WorkshopInstall2.Visible = IsVisible;
+            WorkshopInstall3.Visible = IsVisible2;
+            WorkshopInstall4.Visible = IsVisible2;
+            PluginInstall1.Visible = IsVisible;
+            PluginInstall2.Visible = IsVisible;
+            PluginInstall3.Visible = IsVisible2;
+            PluginInstall4.Visible = IsVisible2;
+            StartSer1.Visible = IsVisible;
+            StartSer2.Visible = IsVisible;
+            StartSer3.Visible = IsVisible2;
+            StartSer4.Visible = IsVisible2;
         }
 
         private void Server3Vis()
@@ -259,6 +442,18 @@ namespace Unturned_Server_Manager
             AdvancedOptions2.Visible = IsVisible;
             AdvancedOptions3.Visible = IsVisible;
             AdvancedOptions4.Visible = IsVisible2;
+            WorkshopInstall1.Visible = IsVisible;
+            WorkshopInstall2.Visible = IsVisible;
+            WorkshopInstall3.Visible = IsVisible;
+            WorkshopInstall4.Visible = IsVisible2;
+            PluginInstall1.Visible = IsVisible;
+            PluginInstall2.Visible = IsVisible;
+            PluginInstall3.Visible = IsVisible;
+            PluginInstall4.Visible = IsVisible2;
+            StartSer1.Visible = IsVisible;
+            StartSer2.Visible = IsVisible;
+            StartSer3.Visible = IsVisible;
+            StartSer4.Visible = IsVisible2;
         }
 
         private void Server4Vis()
@@ -295,6 +490,18 @@ namespace Unturned_Server_Manager
             AdvancedOptions2.Visible = IsVisible;
             AdvancedOptions3.Visible = IsVisible;
             AdvancedOptions4.Visible = IsVisible;
+            WorkshopInstall1.Visible = IsVisible;
+            WorkshopInstall2.Visible = IsVisible;
+            WorkshopInstall3.Visible = IsVisible;
+            WorkshopInstall4.Visible = IsVisible;
+            PluginInstall1.Visible = IsVisible;
+            PluginInstall2.Visible = IsVisible;
+            PluginInstall3.Visible = IsVisible;
+            PluginInstall4.Visible = IsVisible;
+            StartSer1.Visible = IsVisible;
+            StartSer2.Visible = IsVisible;
+            StartSer3.Visible = IsVisible;
+            StartSer4.Visible = IsVisible;
         }
 
         private void RefreshSelection()
@@ -334,14 +541,101 @@ namespace Unturned_Server_Manager
             }
         }
 
-        private void TerminateProcesses()
+        private void TerminateProcessesGlobal()
         {
-            foreach (var process in Process.GetProcessesByName("Unturned"))
+            try
             {
-                process.Kill();
+                try
+                {
+                    Process p = Process.GetProcessById(PIDSer1);
+                    p.Kill();
+                }
+                catch (ArgumentException)
+                {
+                    // Ignore. Servers not running.
+                }
+                try
+                {
+                    Process p2 = Process.GetProcessById(PIDSer2);
+                    p2.Kill();
+                }
+                catch (ArgumentException)
+                {
+                    // Ignore. Servers not running.
+                }
+                try
+                {
+                    Process p3 = Process.GetProcessById(PIDSer3);
+                    p3.Kill();
+                }
+                catch (ArgumentException)
+                {
+                    // Ignore. Servers not running.
+                }
+                try
+                {
+                    Process p4 = Process.GetProcessById(PIDSer4);
+                    p4.Kill();
+                }
+                catch (ArgumentException)
+                {
+                    // Ignore. Servers not running.
+                }
+            }
+            catch(Win32Exception)
+            {
+                // Ignore. Useless Error.
             }
         }
-        
+
+        private void TerminateServer1()
+        {
+            try
+            {
+                Process.GetProcessById(PIDSer1).Kill();
+            }
+            catch(ArgumentException)
+            {
+                // Ignore, Server already offline.
+            }
+        }
+
+        private void TerminateServer2()
+        {
+            try
+            {
+                Process.GetProcessById(PIDSer2).Kill();
+            }
+            catch (ArgumentException)
+            {
+                // Ignore, Server already offline.
+            }
+        }
+
+        private void TerminateServer3()
+        {
+            try
+            {
+                Process.GetProcessById(PIDSer3).Kill();
+            }
+            catch (ArgumentException)
+            {
+                // Ignore, Server already offline.
+            }
+        }
+
+        private void TerminateServer4()
+        {
+            try
+            {
+                Process.GetProcessById(PIDSer4).Kill();
+            }
+            catch (ArgumentException)
+            {
+                // Ignore, Server already offline.
+            }
+        }
+
         private async void StartServer1()
         {
             Arguments = "";
@@ -375,11 +669,18 @@ namespace Unturned_Server_Manager
                 {
                     Arguments = "" + Arguments + " +insecureserver";
                 }
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = @"" + Path + "\\Unturned.exe";
-                startInfo.Arguments = @"" + Arguments + "/" + ServerName1.Text + "";
-                startInfo.WorkingDirectory = @"" + ExecPath.Text + "";
-                Process.Start(startInfo);
+                var Server1ID = new Process();
+                Server1ID.StartInfo.FileName = @"" + Path + "\\Unturned.exe";
+                Server1ID.StartInfo.Arguments = @"" + Arguments + "/" + ServerName1.Text + "";
+                Server1ID.StartInfo.WorkingDirectory = @"" + ExecPath.Text + "";
+                Server1ID.Start();
+                PIDSer1 = Server1ID.Id;
+                ShutdownSer1.Visible = true;
+                RestartSer1.Visible = true;
+                VACCheck1.Enabled = false;
+                NoGraphicsCheck1.Enabled = false;
+                BatchCheck1.Enabled = false;
+                Server1Off = false;
             }
             else
             {
@@ -402,7 +703,7 @@ namespace Unturned_Server_Manager
                 AdvancedOptions3.Visible = true;
                 AdvancedOptions4.Visible = true;
                 await Task.Delay(5000);
-                TerminateProcesses();
+                TerminateProcessesGlobal();
             }
             else if (ServerName2.Text != "")
             {
@@ -430,11 +731,18 @@ namespace Unturned_Server_Manager
                 {
                     Arguments2 = "" + Arguments2 + " +insecureserver";
                 }
-                ProcessStartInfo startInfo2 = new ProcessStartInfo();
-                startInfo2.FileName = @"" + Path + "\\Unturned.exe";
-                startInfo2.Arguments = @"" + Arguments2 + "/" + ServerName2.Text + "";
-                startInfo2.WorkingDirectory = @"" + ExecPath.Text + "";
-                Process.Start(startInfo2);
+                var Server2ID = new Process();
+                Server2ID.StartInfo.FileName = @"" + Path + "\\Unturned.exe";
+                Server2ID.StartInfo.Arguments = @"" + Arguments2 + "/" + ServerName2.Text + "";
+                Server2ID.StartInfo.WorkingDirectory = @"" + ExecPath.Text + "";
+                Server2ID.Start();
+                PIDSer2 = Server2ID.Id;
+                ShutdownSer2.Visible = true;
+                RestartSer2.Visible = true;
+                VACCheck2.Enabled = false;
+                NoGraphicsCheck2.Enabled = false;
+                BatchCheck2.Enabled = false;
+                Server2Off = false;
             }
             else
             {
@@ -447,7 +755,7 @@ namespace Unturned_Server_Manager
                 AdvancedOptions3.Visible = true;
                 AdvancedOptions4.Visible = true;
                 await Task.Delay(5000);
-                TerminateProcesses();
+                TerminateProcessesGlobal();
             }
         }
 
@@ -465,7 +773,7 @@ namespace Unturned_Server_Manager
                 AdvancedOptions3.Visible = true;
                 AdvancedOptions4.Visible = true;
                 await Task.Delay(5000);
-                TerminateProcesses();
+                TerminateProcessesGlobal();
             }
             else if (ServerName3.Text != "")
             {
@@ -493,11 +801,18 @@ namespace Unturned_Server_Manager
                 {
                     Arguments3 = "" + Arguments3 + " +insecureserver";
                 }
-                ProcessStartInfo startInfo3 = new ProcessStartInfo();
-                startInfo3.FileName = @"" + Path + "\\Unturned.exe";
-                startInfo3.Arguments = @"" + Arguments3 + "/" + ServerName3.Text + "";
-                startInfo3.WorkingDirectory = @"" + ExecPath.Text + "";
-                Process.Start(startInfo3);
+                var Server3ID = new Process();
+                Server3ID.StartInfo.FileName = @"" + Path + "\\Unturned.exe";
+                Server3ID.StartInfo.Arguments = @"" + Arguments3 + "/" + ServerName3.Text + "";
+                Server3ID.StartInfo.WorkingDirectory = @"" + ExecPath.Text + "";
+                Server3ID.Start();
+                PIDSer3 = Server3ID.Id;
+                ShutdownSer3.Visible = true;
+                RestartSer3.Visible = true;
+                VACCheck3.Enabled = false;
+                NoGraphicsCheck3.Enabled = false;
+                BatchCheck3.Enabled = false;
+                Server3Off = false;
             }
             else
             {
@@ -510,7 +825,7 @@ namespace Unturned_Server_Manager
                 AdvancedOptions3.Visible = true;
                 AdvancedOptions4.Visible = true;
                 await Task.Delay(5000);
-                TerminateProcesses();
+                TerminateProcessesGlobal();
             }
         }
 
@@ -528,7 +843,7 @@ namespace Unturned_Server_Manager
                 AdvancedOptions3.Visible = true;
                 AdvancedOptions4.Visible = true;
                 await Task.Delay(5000);
-                TerminateProcesses();
+                TerminateProcessesGlobal();
             }
             else if (ServerName4.Text != "")
             {
@@ -556,11 +871,18 @@ namespace Unturned_Server_Manager
                 {
                     Arguments4 = "" + Arguments4 + " +insecureserver";
                 }
-                ProcessStartInfo startInfo4 = new ProcessStartInfo();
-                startInfo4.FileName = @"" + Path + "\\Unturned.exe";
-                startInfo4.Arguments = @"" + Arguments4 + "/" + ServerName4.Text + "";
-                startInfo4.WorkingDirectory = @"" + ExecPath.Text + "";
-                Process.Start(startInfo4);
+                var Server4ID = new Process();
+                Server4ID.StartInfo.FileName = @"" + Path + "\\Unturned.exe";
+                Server4ID.StartInfo.Arguments = @"" + Arguments4 + "/" + ServerName4.Text + "";
+                Server4ID.StartInfo.WorkingDirectory = @"" + ExecPath.Text + "";
+                Server4ID.Start();
+                PIDSer4 = Server4ID.Id;
+                ShutdownSer4.Visible = true;
+                RestartSer4.Visible = true;
+                VACCheck4.Enabled = false;
+                NoGraphicsCheck4.Enabled = false;
+                BatchCheck4.Enabled = false;
+                Server4Off = false;
             }
             else
             {
@@ -573,7 +895,7 @@ namespace Unturned_Server_Manager
                 AdvancedOptions3.Visible = true;
                 AdvancedOptions4.Visible = true;
                 await Task.Delay(5000);
-                TerminateProcesses();
+                TerminateProcessesGlobal();
             }
         }
 
@@ -618,10 +940,13 @@ namespace Unturned_Server_Manager
             Run.Visible = Hide1;
         }
 
-        private void CreateConfigGlobal()
+        private async void LoopSaveGlobal()
         {
-            List<string> Config = new List<string>
+            int kys = 0;
+            while (kys < 5)
             {
+                List<string> Config = new List<string>
+                {
                 Servers2Run.Text,
                 ExecPath.Text,
                 Convert.ToString(VACCheck1.Checked),
@@ -640,19 +965,35 @@ namespace Unturned_Server_Manager
                 Convert.ToString(BatchCheck4.Checked),
                 Convert.ToString(NoGraphicsCheck4.Checked),
                 ServerName4.Text,
-            };
-            CreateConfigSave1();
-            CreateConfigSave2();
-            CreateConfigSave3();
-            CreateConfigSave4();
-            try
-            {
-                File.WriteAllLines(@"C:\Unturned_Manager\SaveConfig.dat", Config);
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Directory.CreateDirectory(@"C:\Unturned_Manager");
-                File.WriteAllLines(@"C:\Unturned_Manager\SaveConfig.dat", Config);
+                Convert.ToString(DataContainer.ModInstallFirst1),
+                Convert.ToString(DataContainer.ModInstallFirst2),
+                Convert.ToString(DataContainer.ModInstallFirst3),
+                Convert.ToString(DataContainer.ModInstallFirst4),
+                Convert.ToString(EnablePlugin.Checked),
+                Convert.ToString(PluginInstall1.Enabled),
+                Convert.ToString(PluginInstall2.Enabled),
+                Convert.ToString(PluginInstall3.Enabled),
+                Convert.ToString(PluginInstall4.Enabled),
+                PluginInstall1.Text,
+                PluginInstall2.Text,
+                PluginInstall3.Text,
+                PluginInstall4.Text,
+                Convert.ToString(AcceptedDebugPlugins)
+                };
+                CreateConfigSave1();
+                CreateConfigSave2();
+                CreateConfigSave3();
+                CreateConfigSave4();
+                try
+                {
+                    File.WriteAllLines(@"C:\Unturned_Manager\SaveConfig.dat", Config);
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    Directory.CreateDirectory(@"C:\Unturned_Manager");
+                    File.WriteAllLines(@"C:\Unturned_Manager\SaveConfig.dat", Config);
+                }
+                await Task.Delay(60000);
             }
         }
 
@@ -1514,208 +1855,379 @@ namespace Unturned_Server_Manager
             {
                 try
                 {
-                    string[] lines = File.ReadAllLines(@"C:\Unturned_Manager\SaveConfig.dat");
-                    // Global Stats
+                    try
+                    {
+                        string[] lines = File.ReadAllLines(@"C:\Unturned_Manager\SaveConfig.dat");
+                        // Global Stats
 
-                    Servers2Run.Text = lines[0];
-                    ExecPath.Text = lines[1];
+                        Servers2Run.Text = lines[0];
+                        ExecPath.Text = lines[1];
 
-                    // Server 1 Stats
+                        // Server 1 Stats
 
-                    try
-                    {
-                        VACCheck1.Checked = Convert.ToBoolean(lines[2]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[2] == "True")
+                        try
                         {
-                            VACCheck1.Checked = true;
+                            VACCheck1.Checked = Convert.ToBoolean(lines[2]);
                         }
-                        else if (lines[2] == "False")
+                        catch (FormatException)
                         {
-                            VACCheck1.Checked = false;
+                            if (lines[2] == "True")
+                            {
+                                VACCheck1.Checked = true;
+                            }
+                            else if (lines[2] == "False")
+                            {
+                                VACCheck1.Checked = false;
+                            }
                         }
-                    }
-                    try
-                    {
-                        BatchCheck1.Checked = Convert.ToBoolean(lines[3]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[3] == "True")
+                        try
                         {
-                            BatchCheck1.Checked = true;
+                            BatchCheck1.Checked = Convert.ToBoolean(lines[3]);
                         }
-                        else if (lines[3] == "False")
+                        catch (FormatException)
                         {
-                            BatchCheck1.Checked = false;
+                            if (lines[3] == "True")
+                            {
+                                BatchCheck1.Checked = true;
+                            }
+                            else if (lines[3] == "False")
+                            {
+                                BatchCheck1.Checked = false;
+                            }
                         }
-                    }
-                    try
-                    {
-                        NoGraphicsCheck1.Checked = Convert.ToBoolean(lines[4]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[4] == "True")
+                        try
                         {
-                            NoGraphicsCheck1.Checked = true;
+                            NoGraphicsCheck1.Checked = Convert.ToBoolean(lines[4]);
                         }
-                        else if (lines[4] == "False")
+                        catch (FormatException)
                         {
-                            NoGraphicsCheck1.Checked = false;
+                            if (lines[4] == "True")
+                            {
+                                NoGraphicsCheck1.Checked = true;
+                            }
+                            else if (lines[4] == "False")
+                            {
+                                NoGraphicsCheck1.Checked = false;
+                            }
                         }
-                    }
-                    ServerName1.Text = lines[5];
+                        ServerName1.Text = lines[5];
 
-                    // Server 2 Stats
+                        // Server 2 Stats
 
-                    try
-                    {
-                        VACCheck2.Checked = Convert.ToBoolean(lines[6]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[6] == "True")
+                        try
                         {
-                            VACCheck2.Checked = true;
+                            VACCheck2.Checked = Convert.ToBoolean(lines[6]);
                         }
-                        else if (lines[6] == "False")
+                        catch (FormatException)
                         {
-                            VACCheck2.Checked = false;
+                            if (lines[6] == "True")
+                            {
+                                VACCheck2.Checked = true;
+                            }
+                            else if (lines[6] == "False")
+                            {
+                                VACCheck2.Checked = false;
+                            }
                         }
-                    }
-                    try
-                    {
-                        BatchCheck2.Checked = Convert.ToBoolean(lines[7]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[7] == "True")
+                        try
                         {
-                            BatchCheck2.Checked = true;
+                            BatchCheck2.Checked = Convert.ToBoolean(lines[7]);
                         }
-                        else if (lines[7] == "False")
+                        catch (FormatException)
                         {
-                            BatchCheck2.Checked = false;
+                            if (lines[7] == "True")
+                            {
+                                BatchCheck2.Checked = true;
+                            }
+                            else if (lines[7] == "False")
+                            {
+                                BatchCheck2.Checked = false;
+                            }
                         }
-                    }
-                    try
-                    {
-                        NoGraphicsCheck2.Checked = Convert.ToBoolean(lines[8]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[8] == "True")
+                        try
                         {
-                            NoGraphicsCheck2.Checked = true;
+                            NoGraphicsCheck2.Checked = Convert.ToBoolean(lines[8]);
                         }
-                        else if (lines[8] == "False")
+                        catch (FormatException)
                         {
-                            NoGraphicsCheck2.Checked = false;
+                            if (lines[8] == "True")
+                            {
+                                NoGraphicsCheck2.Checked = true;
+                            }
+                            else if (lines[8] == "False")
+                            {
+                                NoGraphicsCheck2.Checked = false;
+                            }
                         }
-                    }
-                    ServerName2.Text = lines[9];
+                        ServerName2.Text = lines[9];
 
-                    // Server 3 Stats
+                        // Server 3 Stats
 
-                    try
-                    {
-                        VACCheck3.Checked = Convert.ToBoolean(lines[10]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[10] == "True")
+                        try
                         {
-                            VACCheck3.Checked = true;
+                            VACCheck3.Checked = Convert.ToBoolean(lines[10]);
                         }
-                        else if (lines[10] == "False")
+                        catch (FormatException)
                         {
-                            VACCheck3.Checked = false;
+                            if (lines[10] == "True")
+                            {
+                                VACCheck3.Checked = true;
+                            }
+                            else if (lines[10] == "False")
+                            {
+                                VACCheck3.Checked = false;
+                            }
                         }
-                    }
-                    try
-                    {
-                        BatchCheck3.Checked = Convert.ToBoolean(lines[11]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[11] == "True")
+                        try
                         {
-                            BatchCheck3.Checked = true;
+                            BatchCheck3.Checked = Convert.ToBoolean(lines[11]);
                         }
-                        else if (lines[11] == "False")
+                        catch (FormatException)
                         {
-                            BatchCheck3.Checked = false;
+                            if (lines[11] == "True")
+                            {
+                                BatchCheck3.Checked = true;
+                            }
+                            else if (lines[11] == "False")
+                            {
+                                BatchCheck3.Checked = false;
+                            }
                         }
-                    }
-                    try
-                    {
-                        NoGraphicsCheck3.Checked = Convert.ToBoolean(lines[12]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[12] == "True")
+                        try
                         {
-                            NoGraphicsCheck3.Checked = true;
+                            NoGraphicsCheck3.Checked = Convert.ToBoolean(lines[12]);
                         }
-                        else if (lines[12] == "False")
+                        catch (FormatException)
                         {
-                            NoGraphicsCheck3.Checked = false;
+                            if (lines[12] == "True")
+                            {
+                                NoGraphicsCheck3.Checked = true;
+                            }
+                            else if (lines[12] == "False")
+                            {
+                                NoGraphicsCheck3.Checked = false;
+                            }
                         }
-                    }
-                    ServerName3.Text = lines[13];
+                        ServerName3.Text = lines[13];
 
-                    // Server 4 Stats
+                        // Server 4 Stats
 
-                    try
-                    {
-                        VACCheck4.Checked = Convert.ToBoolean(lines[14]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[14] == "True")
+                        try
                         {
-                            VACCheck4.Checked = true;
+                            VACCheck4.Checked = Convert.ToBoolean(lines[14]);
                         }
-                        else if (lines[14] == "False")
+                        catch (FormatException)
                         {
-                            VACCheck4.Checked = false;
+                            if (lines[14] == "True")
+                            {
+                                VACCheck4.Checked = true;
+                            }
+                            else if (lines[14] == "False")
+                            {
+                                VACCheck4.Checked = false;
+                            }
                         }
+                        try
+                        {
+                            BatchCheck4.Checked = Convert.ToBoolean(lines[15]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[15] == "True")
+                            {
+                                BatchCheck4.Checked = true;
+                            }
+                            else if (lines[15] == "False")
+                            {
+                                BatchCheck4.Checked = false;
+                            }
+                        }
+                        try
+                        {
+                            NoGraphicsCheck4.Checked = Convert.ToBoolean(lines[16]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[16] == "True")
+                            {
+                                NoGraphicsCheck4.Checked = true;
+                            }
+                            else if (lines[16] == "False")
+                            {
+                                NoGraphicsCheck4.Checked = false;
+                            }
+                        }
+                        ServerName4.Text = lines[17];
+                        try
+                        {
+                            DataContainer.ModInstallFirst1 = Convert.ToBoolean(lines[18]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[18] == "True")
+                            {
+                                DataContainer.ModInstallFirst1 = true;
+                            }
+                            else if (lines[18] == "False")
+                            {
+                                DataContainer.ModInstallFirst1 = false;
+                            }
+                        }
+                        try
+                        {
+                            DataContainer.ModInstallFirst2 = Convert.ToBoolean(lines[19]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[19] == "True")
+                            {
+                                DataContainer.ModInstallFirst2 = true;
+                            }
+                            else if (lines[19] == "False")
+                            {
+                                DataContainer.ModInstallFirst2 = false;
+                            }
+                        }
+                        try
+                        {
+                            DataContainer.ModInstallFirst3 = Convert.ToBoolean(lines[20]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[20] == "True")
+                            {
+                                DataContainer.ModInstallFirst3 = true;
+                            }
+                            else if (lines[20] == "False")
+                            {
+                                DataContainer.ModInstallFirst3 = false;
+                            }
+                        }
+                        try
+                        {
+                            DataContainer.ModInstallFirst4 = Convert.ToBoolean(lines[21]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[21] == "True")
+                            {
+                                DataContainer.ModInstallFirst4 = true;
+                            }
+                            else if (lines[21] == "False")
+                            {
+                                DataContainer.ModInstallFirst4 = false;
+                            }
+                        }
+                        try
+                        {
+                            AcceptedDebugPlugins = Convert.ToBoolean(lines[31]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[31] == "True")
+                            {
+                                AcceptedDebugPlugins = true;
+                            }
+                            else if (lines[31] == "False")
+                            {
+                                AcceptedDebugPlugins = false;
+                            }
+                        }
+                        try
+                        {
+                            EnablePlugin.Checked = Convert.ToBoolean(lines[22]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[22] == "True")
+                            {
+                                EnablePlugin.Checked = true;
+                            }
+                            else if (lines[22] == "False")
+                            {
+                                EnablePlugin.Checked = false;
+                            }
+                        }
+                        try
+                        {
+                            PluginInstall1.Enabled = Convert.ToBoolean(lines[23]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[23] == "True")
+                            {
+                                PluginInstall1.Enabled = true;
+                            }
+                            else if (lines[23] == "False")
+                            {
+                                PluginInstall1.Enabled = false;
+                            }
+                        }
+                        try
+                        {
+                            PluginInstall2.Enabled = Convert.ToBoolean(lines[24]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[24] == "True")
+                            {
+                                PluginInstall2.Enabled = true;
+                            }
+                            else if (lines[24] == "False")
+                            {
+                                PluginInstall2.Enabled = false;
+                            }
+                        }
+                        try
+                        {
+                            PluginInstall3.Enabled = Convert.ToBoolean(lines[25]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[25] == "True")
+                            {
+                                PluginInstall3.Enabled = true;
+                            }
+                            else if (lines[25] == "False")
+                            {
+                                PluginInstall3.Enabled = false;
+                            }
+                        }
+                        try
+                        {
+                            PluginInstall4.Enabled = Convert.ToBoolean(lines[26]);
+                        }
+                        catch (FormatException)
+                        {
+                            if (lines[26] == "True")
+                            {
+                                PluginInstall4.Enabled = true;
+                            }
+                            else if (lines[26] == "False")
+                            {
+                                PluginInstall4.Enabled = false;
+                            }
+                        }
+                        PluginInstall1.Text = lines[27];
+                        PluginInstall2.Text = lines[28];
+                        PluginInstall3.Text = lines[29];
+                        PluginInstall4.Text = lines[30];
+                        RefreshSelection();
                     }
-                    try
+                    catch (IndexOutOfRangeException)
                     {
-                        BatchCheck4.Checked = Convert.ToBoolean(lines[15]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[15] == "True")
+                        DialogResult DeleteCorrupt = MessageBox.Show("The save config is corrupt. Do you want to delete the config file? Clicking \"Yes\" will simply ignore the corrupt data in the config and re-write the config.", "Corrupt", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (DeleteCorrupt == DialogResult.Yes)
                         {
-                            BatchCheck4.Checked = true;
+                            File.Delete(@"C:\Unturned_Manager\SaveConfig.dat");
+                            // Delete, but allow loaded values to continue
                         }
-                        else if (lines[15] == "False")
+                        else if (DeleteCorrupt == DialogResult.No)
                         {
-                            BatchCheck4.Checked = false;
-                        }
-                    }
-                    try
-                    {
-                        NoGraphicsCheck4.Checked = Convert.ToBoolean(lines[16]);
-                    }
-                    catch (FormatException)
-                    {
-                        if (lines[16] == "True")
-                        {
-                            NoGraphicsCheck4.Checked = true;
-                        }
-                        else if (lines[16] == "False")
-                        {
-                            NoGraphicsCheck4.Checked = false;
+                            // Ignore the file but set values to default
+                            Startup();
                         }
                     }
-                    ServerName4.Text = lines[17];
-                    RefreshSelection();
                 }
                 catch(FileNotFoundException)
                 {
@@ -1851,6 +2363,62 @@ namespace Unturned_Server_Manager
             }
         }
 
+        private async void CheckForServersTakenOff()
+        {
+            while (Server1Off != true || Server2Off != true || Server3Off != true || Server4Off != true)
+            {
+                await Task.Delay(100);
+                // Ignore
+            }
+            if (Server1Off == true && Server2Off == true && Server3Off == true && Server4Off == true)
+            {
+                Restart.Visible = false;
+                Shutdown.Visible = false;
+                Run.Visible = true;
+                ShutdownSer1.Visible = false;
+                ShutdownSer2.Visible = false;
+                ShutdownSer3.Visible = false;
+                ShutdownSer4.Visible = false;
+                RestartSer1.Visible = false;
+                RestartSer2.Visible = false;
+                RestartSer3.Visible = false;
+                RestartSer4.Visible = false;
+                ServerName1.ReadOnly = false;
+                ServerName2.ReadOnly = false;
+                ServerName3.ReadOnly = false;
+                ServerName4.ReadOnly = false;
+                VACCheck1.Enabled = true;
+                VACCheck2.Enabled = true;
+                VACCheck3.Enabled = true;
+                VACCheck4.Enabled = true;
+                NoGraphicsCheck1.Enabled = true;
+                NoGraphicsCheck2.Enabled = true;
+                NoGraphicsCheck3.Enabled = true;
+                NoGraphicsCheck4.Enabled = true;
+                BatchCheck1.Enabled = true;
+                BatchCheck2.Enabled = true;
+                BatchCheck3.Enabled = true;
+                BatchCheck4.Enabled = true;
+                Servers2Run.Enabled = true;
+                ExecPath.ReadOnly = false;
+            }
+        }
+
+        private async void CheckForServersOnline()
+        {
+            while (Server1Off != false || Server2Off != false || Server3Off != false || Server4Off != false)
+            {
+                await Task.Delay(100);
+                // Ignore
+            }
+            if (Server1Off == false && Server2Off == false && Server3Off == false && Server4Off == false)
+            {
+                Restart.Visible = true;
+                Shutdown.Visible = true;
+                Run.Visible = false;
+            }
+        }
+
         private void Servers2Run_DropDown(object sender, System.EventArgs e)
         {
             
@@ -1870,8 +2438,25 @@ namespace Unturned_Server_Manager
             AdvancedOptions2.Visible = false;
             AdvancedOptions3.Visible = false;
             AdvancedOptions4.Visible = false;
+            PluginInstall1.Visible = false;
+            PluginInstall2.Visible = false;
+            PluginInstall3.Visible = false;
+            PluginInstall4.Visible = false;
+            WorkshopInstall1.Visible = false;
+            WorkshopInstall2.Visible = false;
+            WorkshopInstall3.Visible = false;
+            WorkshopInstall4.Visible = false;
+            StartSer1.Visible = false;
+            StartSer2.Visible = false;
+            StartSer3.Visible = false;
+            StartSer4.Visible = false;
+            Servers2Run.Enabled = false;
+            ExecPath.ReadOnly = true;
             Path = ExecPath.Text;
             Arguments = "";
+            Arguments2 = "";
+            Arguments3 = "";
+            Arguments4 = "";
             try
             {
                 Servers = Convert.ToInt32(Servers2Run.Text);
@@ -1882,7 +2467,7 @@ namespace Unturned_Server_Manager
             }
             if (Servers == 1)
             {
-                CreateConfigGlobal();
+                ServerName1.ReadOnly = true;
                 CreateConfig1();
                 StartServer1();
             }
@@ -1899,7 +2484,8 @@ namespace Unturned_Server_Manager
                 }
                 else if (ServerName1.Text != ServerName2.Text)
                 {
-                    CreateConfigGlobal();
+                    ServerName1.ReadOnly = true;
+                    ServerName2.ReadOnly = true;
                     CreateConfig1();
                     CreateConfig2();
                     StartServer1();
@@ -1940,7 +2526,9 @@ namespace Unturned_Server_Manager
                 }
                 else if (ServerName1.Text != ServerName2.Text && ServerName1.Text != ServerName3.Text && ServerName2.Text != ServerName3.Text)
                 {
-                    CreateConfigGlobal();
+                    ServerName1.ReadOnly = true;
+                    ServerName2.ReadOnly = true;
+                    ServerName3.ReadOnly = true;
                     CreateConfig1();
                     CreateConfig2();
                     CreateConfig3();
@@ -2019,7 +2607,10 @@ namespace Unturned_Server_Manager
                 }
                 else if (ServerName1.Text != ServerName2.Text && ServerName1.Text != ServerName3.Text && ServerName1.Text != ServerName4.Text && ServerName2.Text != ServerName3.Text && ServerName2.Text != ServerName4.Text && ServerName3.Text != ServerName4.Text)
                 {
-                    CreateConfigGlobal();
+                    ServerName1.ReadOnly = true;
+                    ServerName2.ReadOnly = true;
+                    ServerName3.ReadOnly = true;
+                    ServerName4.ReadOnly = true;
                     CreateConfig1();
                     CreateConfig2();
                     CreateConfig3();
@@ -2030,6 +2621,7 @@ namespace Unturned_Server_Manager
                     StartServer4();
                 }
             }
+            CheckForServersTakenOff();
         }
 
         private void Restart_Click(object sender, EventArgs e)
@@ -2041,17 +2633,16 @@ namespace Unturned_Server_Manager
             catch (FormatException)
             {
                 MessageBox.Show("VALUE FOR SERVERS TO RUN IS NOT A NUMBER (how the fuck did you do that???)", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Servers = 1;
             }
-            TerminateProcesses();
+            TerminateProcessesGlobal();
             if (Servers == 1)
             {
-                CreateConfigGlobal();
                 CreateConfig1();
                 StartServer1();
             }
             else if (Servers == 2)
             {
-                CreateConfigGlobal();
                 CreateConfig1();
                 CreateConfig2();
                 StartServer1();
@@ -2059,7 +2650,6 @@ namespace Unturned_Server_Manager
             }
             else if (Servers == 3)
             {
-                CreateConfigGlobal();
                 CreateConfig1();
                 CreateConfig2();
                 CreateConfig3();
@@ -2069,7 +2659,6 @@ namespace Unturned_Server_Manager
             }
             else if (Servers == 4)
             {
-                CreateConfigGlobal();
                 CreateConfig1();
                 CreateConfig2();
                 CreateConfig3();
@@ -2086,8 +2675,38 @@ namespace Unturned_Server_Manager
             Restart.Visible = false;
             Shutdown.Visible = false;
             Run.Visible = true;
+            StartSer1.Visible = false;
+            StartSer2.Visible = false;
+            StartSer3.Visible = false;
+            StartSer4.Visible = false;
+            ShutdownSer1.Visible = false;
+            ShutdownSer2.Visible = false;
+            ShutdownSer3.Visible = false;
+            ShutdownSer4.Visible = false;
+            RestartSer1.Visible = false;
+            RestartSer2.Visible = false;
+            RestartSer3.Visible = false;
+            RestartSer4.Visible = false;
+            ServerName1.ReadOnly = false;
+            ServerName2.ReadOnly = false;
+            ServerName3.ReadOnly = false;
+            ServerName4.ReadOnly = false;
+            VACCheck1.Enabled = true;
+            VACCheck2.Enabled = true;
+            VACCheck3.Enabled = true;
+            VACCheck4.Enabled = true;
+            NoGraphicsCheck1.Enabled = true;
+            NoGraphicsCheck2.Enabled = true;
+            NoGraphicsCheck3.Enabled = true;
+            NoGraphicsCheck4.Enabled = true;
+            BatchCheck1.Enabled = true;
+            BatchCheck2.Enabled = true;
+            BatchCheck3.Enabled = true;
+            BatchCheck4.Enabled = true;
+            Servers2Run.Enabled = true;
+            ExecPath.ReadOnly = false;
             RefreshSelection();
-            TerminateProcesses();
+            TerminateProcessesGlobal();
         }
 
         private void AdvancedOptions1_Click(object sender, EventArgs e)
@@ -2117,6 +2736,275 @@ namespace Unturned_Server_Manager
         private void GithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/persiafighter/UnturnedServerManager");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/");
+        }
+
+        private void RocketInstall_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Please do not worry if the interface freezes. This is because it is currently downloading the required files. Thank you for your patience.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RocketInstall f = new RocketInstall();
+            f.ShowDialog();
+        }
+
+        private void ExecPath_TextChanged(object sender, EventArgs e)
+        {
+            DataContainer.ServerPath = ExecPath.Text;
+        }
+
+        private void ShutdownSer1_Click(object sender, EventArgs e)
+        {
+            TerminateServer1();
+            AdvancedOptions1.Visible = true;
+            VACCheck1.Enabled = true;
+            BatchCheck1.Enabled = true;
+            NoGraphicsCheck1.Enabled = true;
+            ServerName1.ReadOnly = false;
+            WorkshopInstall1.Visible = true;
+            PluginInstall1.Visible = true;
+            ShutdownSer1.Visible = false;
+            RestartSer1.Visible = false;
+            StartSer1.Visible = true;
+            Server1Off = true;
+        }
+
+        private void ShutdownSer2_Click(object sender, EventArgs e)
+        {
+            TerminateServer2();
+            AdvancedOptions2.Visible = true;
+            VACCheck2.Enabled = true;
+            BatchCheck2.Enabled = true;
+            NoGraphicsCheck2.Enabled = true;
+            ServerName2.ReadOnly = false;
+            WorkshopInstall2.Visible = true;
+            PluginInstall2.Visible = true;
+            ShutdownSer2.Visible = false;
+            RestartSer2.Visible = false;
+            StartSer2.Visible = true;
+            Server2Off = true;
+        }
+
+        private void ShutdownSer3_Click(object sender, EventArgs e)
+        {
+            TerminateServer3();
+            AdvancedOptions3.Visible = true;
+            VACCheck3.Enabled = true;
+            BatchCheck3.Enabled = true;
+            NoGraphicsCheck3.Enabled = true;
+            ServerName3.ReadOnly = false;
+            WorkshopInstall3.Visible = true;
+            PluginInstall3.Visible = true;
+            ShutdownSer3.Visible = false;
+            RestartSer3.Visible = false;
+            StartSer3.Visible = true;
+            Server3Off = true;
+        }
+
+        private void ShutdownSer4_Click(object sender, EventArgs e)
+        {
+            TerminateServer4();
+            AdvancedOptions4.Visible = true;
+            VACCheck4.Enabled = true;
+            BatchCheck4.Enabled = true;
+            NoGraphicsCheck4.Enabled = true;
+            ServerName4.ReadOnly = false;
+            WorkshopInstall4.Visible = true;
+            PluginInstall4.Visible = true;
+            ShutdownSer4.Visible = false;
+            RestartSer4.Visible = false;
+            StartSer4.Visible = true;
+            Server4Off = true;
+        }
+
+        private void RestartSer1_Click(object sender, EventArgs e)
+        {
+            TerminateServer1();
+            StartServer1();
+        }
+
+        private void RestartSer2_Click(object sender, EventArgs e)
+        {
+            TerminateServer2();
+            StartServer2();
+        }
+
+        private void RestartSer3_Click(object sender, EventArgs e)
+        {
+            TerminateServer3();
+            StartServer3();
+        }
+
+        private void RestartSer4_Click(object sender, EventArgs e)
+        {
+            TerminateServer4();
+            StartServer4();
+        }
+
+        private void StartSer1_Click(object sender, EventArgs e)
+        {
+            ServerName1.ReadOnly = true;
+            StartSer1.Visible = false;
+            RestartSer1.Visible = true;
+            ShutdownSer1.Visible = true;
+            AdvancedOptions1.Visible = false;
+            PluginInstall1.Visible = false;
+            WorkshopInstall1.Visible = false;
+            Servers2Run.Enabled = false;
+            ExecPath.ReadOnly = true;
+            Path = ExecPath.Text;
+            Arguments = "";
+            CreateConfig1();
+            StartServer1();
+            CheckForServersOnline();
+            CheckForServersTakenOff();
+        }
+
+        private void StartSer2_Click(object sender, EventArgs e)
+        {
+            ServerName2.ReadOnly = true;
+            StartSer2.Visible = false;
+            RestartSer2.Visible = true;
+            ShutdownSer2.Visible = true;
+            AdvancedOptions2.Visible = false;
+            PluginInstall2.Visible = false;
+            WorkshopInstall2.Visible = false;
+            Servers2Run.Enabled = false;
+            ExecPath.ReadOnly = true;
+            Path = ExecPath.Text;
+            Arguments2 = "";
+            CreateConfig2();
+            StartServer2();
+            CheckForServersOnline();
+            CheckForServersTakenOff();
+        }
+
+        private void StartSer3_Click(object sender, EventArgs e)
+        {
+            ServerName3.ReadOnly = true;
+            StartSer3.Visible = false;
+            RestartSer3.Visible = true;
+            ShutdownSer3.Visible = true;
+            AdvancedOptions3.Visible = false;
+            PluginInstall3.Visible = false;
+            WorkshopInstall3.Visible = false;
+            Servers2Run.Enabled = false;
+            ExecPath.ReadOnly = true;
+            Path = ExecPath.Text;
+            Arguments3 = "";
+            CreateConfig3();
+            StartServer3();
+            CheckForServersOnline();
+            CheckForServersTakenOff();
+        }
+
+        private void StartSer4_Click(object sender, EventArgs e)
+        {
+            ServerName4.ReadOnly = true;
+            StartSer4.Visible = false;
+            RestartSer4.Visible = true;
+            ShutdownSer4.Visible = true;
+            AdvancedOptions4.Visible = false;
+            PluginInstall4.Visible = false;
+            WorkshopInstall4.Visible = false;
+            Servers2Run.Enabled = false;
+            ExecPath.ReadOnly = true;
+            Path = ExecPath.Text;
+            Arguments4 = "";
+            CreateConfig4();
+            StartServer4();
+            CheckForServersOnline();
+            CheckForServersTakenOff();
+        }
+
+        private void WorkshopInstall1_Click(object sender, EventArgs e)
+        {
+            DataContainer.FolderName1 = ServerName1.Text;
+            Workshop1 f = new Workshop1();
+            f.ShowDialog();
+        }
+
+        private void WorkshopInstall2_Click(object sender, EventArgs e)
+        {
+            DataContainer.FolderName2 = ServerName2.Text;
+            Workshop2 f = new Workshop2();
+            f.ShowDialog();
+        }
+
+        private void WorkshopInstall3_Click(object sender, EventArgs e)
+        {
+            DataContainer.FolderName3 = ServerName3.Text;
+            Workshop3 f = new Workshop3();
+            f.ShowDialog();
+        }
+
+        private void WorkshopInstall4_Click(object sender, EventArgs e)
+        {
+            DataContainer.FolderName4 = ServerName4.Text;
+            Workshop4 f = new Workshop4();
+            f.ShowDialog();
+        }
+
+        private void PluginInstall1_Click(object sender, EventArgs e)
+        {
+            if (DataContainer.ModInstallFirst1 == true)
+            {
+                MessageBox.Show("Since this is the first time that you are going to install mods, we are going to download all required libraries. Please wait at least a minute for the download to complete.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            DataContainer.FolderName1 = ServerName1.Text;
+            Plugins1 f = new Plugins1();
+            f.ShowDialog();
+        }
+
+        private void EnablePlugin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (EnablePlugin.Checked == true)
+            {
+                if (AcceptedDebugPlugins == false)
+                {
+                    DialogResult Warning = MessageBox.Show("Enabling this feature can result in very weird and unhandled exceptions or errors. Do you still want to enable the feature?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (Warning == DialogResult.Yes)
+                    {
+                        PluginInstall1.Enabled = true;
+                        PluginInstall2.Enabled = true;
+                        PluginInstall3.Enabled = true;
+                        PluginInstall4.Enabled = true;
+                        PluginInstall1.Text = "Install Plugins";
+                        PluginInstall2.Text = "Install Plugins";
+                        PluginInstall3.Text = "Install Plugins";
+                        PluginInstall4.Text = "Install Plugins";
+                        AcceptedDebugPlugins = true;
+                    }
+                    else if (Warning == DialogResult.No)
+                    {
+                        EnablePlugin.Checked = false;
+                    }
+                }
+                else if (AcceptedDebugPlugins == true)
+                {
+                    PluginInstall1.Enabled = true;
+                    PluginInstall2.Enabled = true;
+                    PluginInstall3.Enabled = true;
+                    PluginInstall4.Enabled = true;
+                    PluginInstall1.Text = "Install Plugins";
+                    PluginInstall2.Text = "Install Plugins";
+                    PluginInstall3.Text = "Install Plugins";
+                    PluginInstall4.Text = "Install Plugins";
+                }
+            }
+            else if (EnablePlugin.Checked == false)
+            {
+                PluginInstall1.Enabled = false;
+                PluginInstall2.Enabled = false;
+                PluginInstall3.Enabled = false;
+                PluginInstall4.Enabled = false;
+                PluginInstall1.Text = "Disabled";
+                PluginInstall2.Text = "Disabled";
+                PluginInstall3.Text = "Disabled";
+                PluginInstall4.Text = "Disabled";
+            }
         }
     }
     public static class DataContainer
@@ -2187,10 +3075,10 @@ namespace Unturned_Server_Manager
         public static int QueueSer2;
         public static int QueueSer3;
         public static int QueueSer4;
-        public static int OwnerSer1;
-        public static int OwnerSer2;
-        public static int OwnerSer3;
-        public static int OwnerSer4;
+        public static long OwnerSer1;
+        public static long OwnerSer2;
+        public static long OwnerSer3;
+        public static long OwnerSer4;
         public static string WelcomeSer1;
         public static string WelcomeSer2;
         public static string WelcomeSer3;
@@ -2227,5 +3115,17 @@ namespace Unturned_Server_Manager
         public static bool SavedState2;
         public static bool SavedState3;
         public static bool SavedState4;
+        public static string FolderName1;
+        public static string FolderName2;
+        public static string FolderName3;
+        public static string FolderName4;
+        public static string ServerPath;
+        public static object[] ModdedItems;
+        public static bool SavedStateWorkshop;
+        public static int ServersRunning;
+        public static bool ModInstallFirst1;
+        public static bool ModInstallFirst2;
+        public static bool ModInstallFirst3;
+        public static bool ModInstallFirst4;
     }
 }

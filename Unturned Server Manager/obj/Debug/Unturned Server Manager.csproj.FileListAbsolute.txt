@@ -1,9 +1,0 @@
-c:\users\vpastor\documents\visual studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\bin\Debug\Unturned Server Manager.exe.config
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\bin\Debug\Unturned Server Manager.exe
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\bin\Debug\Unturned Server Manager.pdb
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\obj\Debug\Unturned Server Manager.csprojResolveAssemblyReference.cache
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\obj\Debug\Unturned_Server_Manager.Manager.resources
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\obj\Debug\Unturned_Server_Manager.Properties.Resources.resources
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\obj\Debug\Unturned Server Manager.csproj.GenerateResource.Cache
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\obj\Debug\Unturned Server Manager.exe
-C:\Users\vpastor\Documents\Visual Studio 2015\Projects\Unturned Server Manager\Unturned Server Manager\obj\Debug\Unturned Server Manager.pdb

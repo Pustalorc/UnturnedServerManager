@@ -53,9 +53,12 @@
   <PropertyGroup>
     <ApplicationIcon>44193.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -97,8 +100,44 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plugins1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugins1.Designer.cs">
+      <DependentUpon>Plugins1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RocketInstall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RocketInstall.Designer.cs">
+      <DependentUpon>RocketInstall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workshop4.Designer.cs">
+      <DependentUpon>Workshop4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workshop3.Designer.cs">
+      <DependentUpon>Workshop3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workshop2.Designer.cs">
+      <DependentUpon>Workshop2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workshop1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workshop1.Designer.cs">
+      <DependentUpon>Workshop1.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +153,9 @@
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Plugins1.resx">
+      <DependentUpon>Plugins1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -123,6 +165,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RocketInstall.resx">
+      <DependentUpon>RocketInstall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop4.resx">
+      <DependentUpon>Workshop4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop3.resx">
+      <DependentUpon>Workshop3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop2.resx">
+      <DependentUpon>Workshop2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workshop1.resx">
+      <DependentUpon>Workshop1.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

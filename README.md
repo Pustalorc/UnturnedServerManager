@@ -1,44 +1,57 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 1.0.0.1
+Version: Public 2.0.0.0
+
+
 
 [![Build status](https://ci.appveyor.com/api/projects/status/bocigasg3gog25rg/branch/master?svg=true)](https://ci.appveyor.com/project/persiafighter/unturnedservermanager/branch/master)
 
-Last Update: September 23, 2016
+
+
+Last Update: October 13, 2016
 
 --
 
-Requirements:
+#Requirements:
 
-* .Net 4.5 or Later
-* Windows (ofc m8, I no help macs. Working on linux though.)
-* Unturned Installed Somewhere In Your Computer
+.Net 4.5 or Later
+
+Windows (Will be working on mac version at some point in time)
+
+Unturned Installed Somewhere In Your Computer
 
 
-Upcoming Features:
+#Upcoming Features:
 
 * Control on each of the server's console (ban and such)
-* Better Shutdown/Restart Feature (to just focus each server instead of global)
-* Ease of install for workshop items, rocket and plugins.
+* Ease of install for plugins (Fix).
 
-Known Bugs:
+#Known Bugs:
 
-* Shutdown/Restart kills EVERY single .exe file launched with the name "unturned"
-* Owner can not be set due to an overflow.
-* Starting servers without passing through the advanced config sets everything to null and 0's
+* Plugins are either outdated or don't work
 
---
+* The libraries has a missing one but the file exists
 
-Download the program from here:
+
+#Download:
 
 http://www.mediafire.com/download/e2ai6to7zpyxn45/Unturned+Server+Manager.exe
 
 Or compile it yourself with the source code!
 
---
+#Reddit Post:
 
-Changelog:
+https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
-V1.0.0.1 - Added link to github page.
+#Changelog:
+
+**V2.0.0.0** - 
+
+* Added link to reddit post
+* Fixed SRS (Shutdown, restart and start) buttons to apply to the servers that the program started only.
+* Added Rocket Install, Workshop Install and Plugin Install (Plugin install is buggy!)
+* Added Per-Server SRS Features
+
+**V1.0.0.1** - Added link to github page.
 
 ----------- Unturned Server Manager -----------
