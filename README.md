@@ -25,6 +25,7 @@ Unturned Installed Somewhere In Your Computer
 
 * Control on each of the server's console (ban and such)
 * Ease of install for plugins (Fix).
+* Self-Updater
 
 #Known Bugs:
 
