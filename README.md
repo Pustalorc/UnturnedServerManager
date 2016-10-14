@@ -23,15 +23,15 @@ Unturned Installed Somewhere In Your Computer
 
 #Upcoming Features:
 
-* Control on each of the server's console (ban and such)
+* Control on each of the server's console (ban and such).
 * Ease of install for plugins (Fix).
-* Self-Updater
+* Self + Rocket + Unturned updater.
 
 #Known Bugs:
 
-* Plugins are either outdated or don't work
-
-* The libraries has a missing one but the file exists
+* Plugins are either outdated or don't work.
+* The rocket libraries has a missing dll but the dll exists.
+* Unable to update rocket on new update released.
 
 
 #Download:
