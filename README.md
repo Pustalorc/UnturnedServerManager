@@ -32,7 +32,8 @@ Unturned Installed Somewhere In Your Computer
 * Plugins are either outdated or don't work.
 * The rocket libraries has a missing dll but the dll exists.
 * Unable to update rocket on new update released.
-* Rocket installation freezes if extraction wasn't successfull (or if folders do NOT exist)
+* Rocket installation freezes if extraction wasn't successfull (or if folders do NOT exist).
+* Gold is set, but difficulty is set default to normal and can't be changed.
 
 
 #Download:
