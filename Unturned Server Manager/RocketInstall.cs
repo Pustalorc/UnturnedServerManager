@@ -132,7 +132,7 @@ namespace Unturned_Server_Manager
             {
                 try
                 {
-                    ZipFile.ExtractToDirectory(@"Temp\Rocket_Latest.zip", @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\");
+                    ZipFile.ExtractToDirectory(@"Temp\Rocket_Latest.zip", @"" + DataContainer.ServerPath + @"\");
                 }
                 catch(InvalidDataException)
                 {
