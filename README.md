@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 2.0.0.0
+Version: Public 2.0.1.0
 
 
 
@@ -8,7 +8,13 @@ Version: Public 2.0.0.0
 
 
 
-Last Update: October 13, 2016
+Last Update: November 4, 2016
+
+--
+
+#IMPORTANT:
+
+VERSION 2.0.1.0 OFFERS NO FIXES TO CURRENT KNOWN BUGS. THEY WILL BE FIXED SOON (FOR 3.0.0.0)
 
 --
 
@@ -47,6 +53,11 @@ Or compile it yourself with the source code!
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 #Changelog:
+
+**V2.0.1.0** - 
+
+* Changed how Rocket Install works due to rocket changing their builds and how they function. (Fully explained here: https://rocketmod.net/viewtopic.php?f=44&t=2961)
+* Added small self-version checking feature. Will be improved in expected 3.0.0.0 release.
 
 **V2.0.0.0** - 
 

@@ -67,17 +67,27 @@ namespace Unturned_Server_Manager
             bool FailedRocketMod = false;
             Completion.Value = 51;
             Step3.Enabled = true;
-            string License = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\LICENSE";
-            string Readme = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\README";
-            string Assembly = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Assembly-CSharp.dll";
-            string RAPI = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Rocket.API.dll";
-            string RCore = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Rocket.Core.dll";
-            string RUnturned = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Rocket.Unturned.dll";
-            string ScriptsFolder = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Scripts";
-            string Scripts1 = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Scripts\MyFirstRocketServer.bat";
-            string Scripts2 = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Scripts\start.bat";
-            string Scripts3 = @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\Scripts\update.bat";
-            
+            string Translation = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\English.dat";
+            string Icon = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\Icon.png";
+            string License = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\LICENSE";
+            string Readme = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\README";
+            string RAPI = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\Rocket.API.dll";
+            string RCore = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll";
+            string RUnturned = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll";
+            string Module = @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module";
+            string ScriptsFolder = @"" + DataContainer.ServerPath + @"\Scripts";
+            string Scripts1 = @"" + DataContainer.ServerPath + @"\Scripts\MyFirstRocketServer.bat";
+            string Scripts2 = @"" + DataContainer.ServerPath + @"\Scripts\start.bat";
+            string Scripts3 = @"" + DataContainer.ServerPath + @"\Scripts\update.bat";
+
+            if (File.Exists(Translation) == true)
+            {
+                File.Delete(Translation);
+            }
+            if (File.Exists(Icon) == true)
+            {
+                File.Delete(Icon);
+            }
             if (File.Exists(License) == true)
             {
                 File.Delete(License);
@@ -85,10 +95,6 @@ namespace Unturned_Server_Manager
             if (File.Exists(Readme) == true)
             {
                 File.Delete(Readme);
-            }
-            if (File.Exists(Assembly) == true)
-            {
-                File.Delete(Assembly);
             }
             if (File.Exists(RAPI) == true)
             {
@@ -101,6 +107,10 @@ namespace Unturned_Server_Manager
             if (File.Exists(RUnturned) == true)
             {
                 File.Delete(RUnturned);
+            }
+            if (File.Exists(Module) == true)
+            {
+                File.Delete(Module);
             }
             if (File.Exists(Scripts1) == true)
             {
@@ -118,11 +128,11 @@ namespace Unturned_Server_Manager
             {
                 Directory.Delete(ScriptsFolder);
             }
-            if (File.Exists(License) == false && File.Exists(Readme) == false && File.Exists(Assembly) == false && File.Exists(RAPI) == false && File.Exists(RCore) == false && File.Exists(RUnturned) == false && File.Exists(Scripts1) == false && File.Exists(Scripts2) == false && File.Exists(Scripts3) == false && Directory.Exists(ScriptsFolder) == false)
+            if (File.Exists(Translation) == false && File.Exists(Icon) == false && File.Exists(License) == false && File.Exists(Readme) == false && File.Exists(RAPI) == false && File.Exists(RCore) == false && File.Exists(RUnturned) == false && File.Exists(Module) == false && File.Exists(Scripts1) == false && File.Exists(Scripts2) == false && File.Exists(Scripts3) == false && Directory.Exists(ScriptsFolder) == false)
             {
                 try
                 {
-                    ZipFile.ExtractToDirectory(@"Temp\Rocket_Latest.zip", @"" + DataContainer.ServerPath + @"\Unturned_Data\Managed\");
+                    ZipFile.ExtractToDirectory(@"Temp\Rocket_Latest.zip", @"" + DataContainer.ServerPath + @"\Modules\Rocket.Unturned\");
                 }
                 catch(InvalidDataException)
                 {
@@ -150,7 +160,7 @@ namespace Unturned_Server_Manager
                         Completion.Value = 75 + Convert.ToInt32(i * 1.25);
                     }
                     await Task.Delay(1000);
-                    if (File.Exists(License) == true && File.Exists(Readme) == true && File.Exists(Assembly) == true && File.Exists(RAPI) == true && File.Exists(RCore) == true && File.Exists(RUnturned) == true)
+                    if (File.Exists(Translation) == true && File.Exists(Icon) == true && File.Exists(License) == true && File.Exists(Readme) == true && File.Exists(RAPI) == true && File.Exists(RCore) == true && File.Exists(RUnturned) == true && File.Exists(Module) == true)
                     {
                         DetailsFull.Text += "\r\nInstallation of rocket was successful.";
                         File.Delete(@"Temp\Rocket_Latest.zip");
@@ -160,7 +170,7 @@ namespace Unturned_Server_Manager
                         DetailsFull.Text += "\r\nError in the installation of rocket.";
                         File.Delete(@"Temp\Rocket_Latest.zip");
                     }
-                    if (File.Exists(License) == true && File.Exists(Readme) == true && File.Exists(Assembly) == true && File.Exists(RAPI) == true && File.Exists(RCore) == true && File.Exists(RUnturned) == true)
+                    if (File.Exists(Translation) == true && File.Exists(Icon) == true && File.Exists(License) == true && File.Exists(Readme) == true && File.Exists(RAPI) == true && File.Exists(RCore) == true && File.Exists(RUnturned) == true && File.Exists(Module) == true)
                     {
                         Step3.Enabled = false;
                         Step3.Checked = true;

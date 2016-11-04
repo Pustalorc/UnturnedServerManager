@@ -211,10 +211,10 @@ namespace Unturned_Server_Manager
 
         private async void LoopCheckRocket()
         {
-            string Assembly = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Assembly-CSharp.dll";
-            string RAPI = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Rocket.API.dll";
-            string RCore = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Rocket.Core.dll";
-            string RUnturned = @"" + ExecPath.Text + @"\Unturned_Data\Managed\Rocket.Unturned.dll";
+            string Assembly = @"" + ExecPath.Text + @"\Modules\Rocket.Unturned\Assembly-CSharp.dll";
+            string RAPI = @"" + ExecPath.Text + @"\Modules\Rocket.Unturned\Rocket.API.dll";
+            string RCore = @"" + ExecPath.Text + @"\Modules\Rocket.Unturned\Rocket.Core.dll";
+            string RUnturned = @"" + ExecPath.Text + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll";
             int kys = 0;
             while (kys < 5)
             {
