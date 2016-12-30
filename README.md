@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 3.0.0.1
+Version: Public 3.0.0.2
 
 
 
@@ -14,7 +14,7 @@ Last Update: December 30, 2017
 
 #IMPORTANT:
 
-**Version 3.0.0.1 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
+**Version 3.0.0.2 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
 
 --
 
@@ -49,6 +49,10 @@ Or compile it yourself with the source code!
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 #Changelog:
+
+**V3.0.0.2** - 
+
+* Fixed An Error With The Versions.dat File
 
 **V3.0.0.1** - 
 

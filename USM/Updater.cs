@@ -14,7 +14,10 @@ namespace USM
 {
     public partial class Updater : Form
     {
-        public const string VersionsDownload = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Versions.dat";
+        public const string USMVersionDownload = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USMVer.dat";
+        public const string UnturnedVersionDownload = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/UntVer.dat";
+        public const string RocketVersionDownload = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/RocVer.dat";
+        public const string PIVersionDownload = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/PIVer.dat";
         string[] Data;
         string[] InstalledData;
         public Updater()
@@ -26,9 +29,20 @@ namespace USM
             {
                 File.Delete(Comms.DataPath + "Versions.dat");
             }
-            Downloader.Download(VersionsDownload, "Versions.dat");
+            Downloader.Download(USMVersionDownload, "Versions.dat");
             Downloader.MoveFiles("Versions.dat", Comms.DataPath + "Versions.dat");
-            Data = File.ReadAllLines(Comms.DataPath + "Versions.dat");
+            Downloader.Download(UnturnedVersionDownload, "Unt.dat");
+            Downloader.Download(RocketVersionDownload, "Roc.dat");
+            Downloader.Download(PIVersionDownload, "PI.dat");
+            string[] USMVersion = File.ReadAllLines(Comms.DataPath + "Versions.dat");
+            string[] UnturnedVersion = File.ReadAllLines(Downloader.Temp + @"\Unt.dat");
+            string[] RocketVersion = File.ReadAllLines(Downloader.Temp + @"\Roc.dat");
+            string[] PIVersion = File.ReadAllLines(Downloader.Temp + @"\PI.dat");
+            Data = new string[4];
+            Data[0] = USMVersion[0];
+            Data[1] = UnturnedVersion[0];
+            Data[2] = RocketVersion[0];
+            Data[3] = PIVersion[0];
             if (File.Exists(Comms.DataPath + "Installed.dat") == true)
             {
                 InstalledData = File.ReadAllLines(Comms.DataPath + "Installed.dat");
@@ -145,6 +159,7 @@ namespace USM
                 File.Delete(Comms.DataPath + "Installed.dat");
             }
             File.WriteAllLines(Comms.DataPath + "Installed.dat", InstalledData);
+            Close();
         }
     }
 }

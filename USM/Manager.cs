@@ -59,18 +59,13 @@ namespace USM
         {
             Downloader.GetReady();
 
-            if (File.Exists(Comms.DataPath + "Versions.dat") == true)
+            Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USMVer.dat", "USM.dat");
+            string LatestVersion = File.ReadAllLines(Downloader.Temp + "USM.dat")[0];
+            if (LatestVersion != "3.0.0.2")
             {
-                File.Delete(Comms.DataPath + "Versions.dat");
+                Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.2, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
             }
-            Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Versions.dat", "Versions.dat");
-            Downloader.MoveFiles("Versions.dat", Comms.DataPath + "Versions.dat");
             Downloader.ShutOff();
-            string LatestVersion = File.ReadAllLines(Comms.DataPath + "Versions.dat")[0];
-            if (LatestVersion != "3.0.0.1")
-            {
-                Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.1, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
-            }
         }
 
         private void RedditLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
