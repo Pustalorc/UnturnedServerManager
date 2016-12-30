@@ -43,7 +43,10 @@ None as of right now.
 * Fixed Few Errors With Plugin Installer
 * Fixed Few Errors With Downloader.cs
 * Fixed Per-Server Saving Issue
+* Fixed Issue With Plugin Management Button Being Active After Server Launch
+* Fixed Issue With Not Setting Difficulty
 * Changed Server ID Managing
+* Removed Github File Rocket_Latest.zip - Changed To Rocket Direct Download Link
 
 **V3.0.0.2** - 
 
