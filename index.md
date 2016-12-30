@@ -1,14 +1,8 @@
-Version: Public 3.0.0.1
+Version: Public 3.0.0.3
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lnc18aoqi6s50u2w?svg=true)]()
 
 Last Update: December 30, 2017
-
---
-
-<h1>IMPORTANT:</h1>
-
-**Version 3.0.0.1 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
 
 --
 
@@ -42,6 +36,18 @@ Or compile it yourself with the source code!
 None as of right now.
 
 <h1>Changelog:</h1>
+
+**V3.0.0.3** - 
+
+* Fixed Updater
+* Fixed Few Errors With Plugin Installer
+* Fixed Few Errors With Downloader.cs
+* Fixed Per-Server Saving Issue
+* Changed Server ID Managing
+
+**V3.0.0.2** - 
+
+* Fixed An Error With The Versions.dat File
 
 **V3.0.0.1** - 
 
