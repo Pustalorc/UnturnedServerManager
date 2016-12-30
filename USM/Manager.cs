@@ -60,7 +60,7 @@ namespace USM
             Downloader.GetReady();
 
             Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USMVer.dat", "USM.dat");
-            string LatestVersion = File.ReadAllLines(Downloader.Temp + "USM.dat")[0];
+            string LatestVersion = File.ReadAllLines(Downloader.Temp + @"\USM.dat")[0];
             if (LatestVersion != "3.0.0.2")
             {
                 Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.2, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
