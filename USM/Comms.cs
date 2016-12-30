@@ -252,7 +252,7 @@ namespace USM
                         FinSync,
                         "Name " + FinPubName,
                         "Bind " + FinIP,
-                        FinDiff,
+                        "Mode " + FinDiff,
                         "Loadout 255/" + FinLoadout,
                         "Password " + FinPass,
                         "Welcome " + FinLogMes,
