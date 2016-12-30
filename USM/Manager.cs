@@ -44,14 +44,21 @@ namespace USM
             int c = 0;
             while (c < 500)
             {
-                Comms.UnturnedPath = SerPath.Text;
-                if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == false || File.Exists (Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == false)
+                if (Comms.RunningID[(Convert.ToInt32(EditServer.Value) - 1)] == Convert.ToInt32(EditServer.Value))
                 {
-                    Plugin.Enabled = false;
+                    
                 }
-                else if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == true)
+                else
                 {
-                    Plugin.Enabled = true;
+                    Comms.UnturnedPath = SerPath.Text;
+                    if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == false)
+                    {
+                        Plugin.Enabled = false;
+                    }
+                    else if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == true)
+                    {
+                        Plugin.Enabled = true;
+                    }
                 }
                 await Task.Delay(1);
             }

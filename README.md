@@ -50,6 +50,7 @@ https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 * Fixed Few Errors With Plugin Installer
 * Fixed Few Errors With Downloader.cs
 * Fixed Per-Server Saving Issue
+* Fixed Issue With Plugin Management Button Being Active After Server Launch
 * Changed Server ID Managing
 
 **V3.0.0.2** - 
