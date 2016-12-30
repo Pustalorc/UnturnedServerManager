@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 2.0.1.0
+Version: Public 3.0.0.0
 
 
 
@@ -8,13 +8,13 @@ Version: Public 2.0.1.0
 
 
 
-Last Update: November 4, 2016
+Last Update: December 30, 2017
 
 --
 
 #IMPORTANT:
 
-VERSION 2.0.1.0 OFFERS NO FIXES TO CURRENT KNOWN BUGS. THEY WILL BE FIXED SOON (FOR 3.0.0.0)
+**Version 3.0.0.0 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
 
 --
 
@@ -30,21 +30,17 @@ Unturned Installed Somewhere In Your Computer
 #Upcoming Features:
 
 * Control on each of the server's console (ban and such).
-* Ease of install for plugins (Fix).
-* Self + Rocket + Unturned updater.
+* Ease of update of Unturned.
+* Auto-Restart Option.
+* Ease of config for rocket settings and permissions.
 
 #Known Bugs:
 
-* Plugins are either outdated or don't work.
-* The rocket libraries has a missing dll but the dll exists.
-* Unable to update rocket on new update released.
-* Rocket installation freezes if extraction wasn't successfull (or if folders do NOT exist).
-* Gold is set, but difficulty is set default to normal and can't be changed.
-
+None as of right now.
 
 #Download:
 
-http://www.mediafire.com/download/e2ai6to7zpyxn45/Unturned+Server+Manager.exe
+https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USM.exe
 
 Or compile it yourself with the source code!
 
@@ -53,6 +49,30 @@ Or compile it yourself with the source code!
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 #Changelog:
+
+**V3.0.0.0** - 
+
+* Fixed Issue With Gold Mode
+* Fixed Rocket Installation Freezing
+* Fixed Rocket Updating
+* Fixed/Added Ease of install for plugins
+* Fixed Bug With Workshop Item IDs Not Displaying
+* Fixed Per-Server SRS
+* Added Full Updater
+* Added Plugin Integrity files to include downloads and web pages to working plugins and their names
+* Added System Tray Icon
+* Added Local Server Configuration Files
+* Added Button To Open Selected Workshop Items In Browser.
+* Disabled Unturned Updating For A Future, Much Better Update.
+* Removed Rocket Updating Animation
+* Removed Global SRS
+* Removed Rocket Libraries
+* Changed User Interface
+* Changed Max servers from 4 to 100
+* Changed USM.lock file position
+* Changed Per-Server SRS Limiters
+* Changed Self-Version Checking Feature To The Full Updater + Notification
+* Changed USM Configuration File
 
 **V2.0.1.0** - 
 
