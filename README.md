@@ -4,7 +4,7 @@ Version: Public 3.0.0.0
 
 
 
-[![Build status](https://ci.appveyor.com/api/projects/status/bocigasg3gog25rg/branch/master?svg=true)](https://ci.appveyor.com/project/persiafighter/unturnedservermanager/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/lnc18aoqi6s50u2w?svg=true)]()
 
 
 
