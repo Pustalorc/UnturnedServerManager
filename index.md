@@ -1,4 +1,4 @@
-Version: Public 3.0.0.0
+Version: Public 3.0.0.1
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lnc18aoqi6s50u2w?svg=true)]()
 
@@ -8,7 +8,7 @@ Last Update: December 30, 2017
 
 <h1>IMPORTANT:</h1>
 
-**Version 3.0.0.0 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
+**Version 3.0.0.1 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
 
 --
 
@@ -42,6 +42,12 @@ https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 None as of right now.
 
 <h1>Changelog:</h1>
+
+**V3.0.0.1** - 
+
+* Fixed An Error When Launching The Updater Tool
+* Fixed A Bug Returning An Exception When Loading The Plugin Installer Without The PI Files.
+* Added A Loop To Check If Rocket Is Installed, If It Isn't Plugin Install Is Disabled.
 
 **V3.0.0.0** - 
 
