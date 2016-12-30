@@ -53,18 +53,18 @@
             // 
             this.DeleteAll.Location = new System.Drawing.Point(381, 339);
             this.DeleteAll.Name = "DeleteAll";
-            this.DeleteAll.Size = new System.Drawing.Size(121, 23);
+            this.DeleteAll.Size = new System.Drawing.Size(73, 23);
             this.DeleteAll.TabIndex = 37;
-            this.DeleteAll.Text = "Delete Selected Items";
+            this.DeleteAll.Text = "Delete All";
             this.DeleteAll.UseVisualStyleBackColor = true;
             this.DeleteAll.Click += new System.EventHandler(this.DeleteAll_Click);
             // 
             // AlreadyInstalled
             // 
-            this.AlreadyInstalled.Enabled = false;
             this.AlreadyInstalled.FormattingEnabled = true;
             this.AlreadyInstalled.Location = new System.Drawing.Point(381, 25);
             this.AlreadyInstalled.Name = "AlreadyInstalled";
+            this.AlreadyInstalled.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.AlreadyInstalled.Size = new System.Drawing.Size(360, 304);
             this.AlreadyInstalled.TabIndex = 36;
             // 
@@ -103,11 +103,12 @@
             this.AvailableItems.Location = new System.Drawing.Point(15, 24);
             this.AvailableItems.Name = "AvailableItems";
             this.AvailableItems.Size = new System.Drawing.Size(360, 304);
+            this.AvailableItems.Sorted = true;
             this.AvailableItems.TabIndex = 28;
             // 
             // Configuration
             // 
-            this.Configuration.Location = new System.Drawing.Point(526, 339);
+            this.Configuration.Location = new System.Drawing.Point(501, 339);
             this.Configuration.Name = "Configuration";
             this.Configuration.Size = new System.Drawing.Size(108, 23);
             this.Configuration.TabIndex = 39;

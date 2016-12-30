@@ -173,6 +173,7 @@
             this.VAC.TabIndex = 10;
             this.VAC.Text = "VAC Secure Server";
             this.VAC.UseVisualStyleBackColor = true;
+            this.VAC.CheckedChanged += new System.EventHandler(this.VAC_CheckedChanged);
             // 
             // Graphics
             // 
@@ -185,6 +186,7 @@
             this.Graphics.TabIndex = 11;
             this.Graphics.Text = "No Graphics";
             this.Graphics.UseVisualStyleBackColor = true;
+            this.Graphics.CheckedChanged += new System.EventHandler(this.Graphics_CheckedChanged);
             // 
             // Console
             // 
@@ -197,6 +199,7 @@
             this.Console.TabIndex = 12;
             this.Console.Text = "Batch Mode (Console Mode)";
             this.Console.UseVisualStyleBackColor = true;
+            this.Console.CheckedChanged += new System.EventHandler(this.Console_CheckedChanged);
             // 
             // Desc6
             // 
@@ -222,6 +225,7 @@
             this.LocalFold.Name = "LocalFold";
             this.LocalFold.Size = new System.Drawing.Size(100, 20);
             this.LocalFold.TabIndex = 15;
+            this.LocalFold.TextChanged += new System.EventHandler(this.LocalFold_TextChanged);
             // 
             // Workshop
             // 

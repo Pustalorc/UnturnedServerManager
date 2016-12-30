@@ -26,20 +26,11 @@ namespace USM
         public Plugin()
         {
             InitializeComponent();
-            ServerDirectory = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
             SearchInstalledItems();
         }
 
         private void SearchInstalledItems()
         {
-            try
-            {
-                InstalledPlugins = ServerDirectory.GetFiles();
-            }
-            catch (DirectoryNotFoundException)
-            {
-                // Ignore, no current files installed
-            }
             try
             {
                 DownloadLinks = File.ReadAllLines(Comms.DataPath + @"PluginLinks.dat");
@@ -66,6 +57,17 @@ namespace USM
 
         private void UpdateOptions()
         {
+            ServerDirectory = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
+            try
+            {
+                InstalledPlugins = ServerDirectory.GetFiles();
+            }
+            catch (DirectoryNotFoundException)
+            {
+                // Ignore, no current files installed
+            }
+            AvailableItems.Items.Clear();
+            AlreadyInstalled.Items.Clear();
             if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins"))
             {
                 foreach (FileInfo File in InstalledPlugins)
@@ -89,6 +91,7 @@ namespace USM
             {
                 GetSelectedItems();
                 InstallItems();
+                UpdateOptions();
             }
         }
 
@@ -102,17 +105,33 @@ namespace USM
             {
                 GetSelectedItems();
                 OpenWebsite();
+                UpdateOptions();
             }
         }
 
         private void DeleteAll_Click(object sender, EventArgs e)
         {
-            Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins", true);
+            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == true)
+            {
+                Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins", true);
+                UpdateOptions();
+            }
+            else
+            {
+                MessageBox.Show("You have not installed any plugins yet.");
+            }
         }
 
         private void Configuration_Click(object sender, EventArgs e)
         {
-            Process.Start(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
+            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == true)
+            {
+                Process.Start(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
+            }
+            else
+            {
+                MessageBox.Show("You have not installed any plugins yet.");
+            }
         }
 
         private void SaveExit_Click(object sender, EventArgs e)

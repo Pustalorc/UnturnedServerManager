@@ -36,6 +36,7 @@ namespace USM
             Desc4.Text = "Currently Editing Server With ID: 1";
             Save(false);
             CheckRocket();
+            EditServer.Maximum = Servers2Run.Value;
         }
 
         private async void CheckRocket()
@@ -43,6 +44,7 @@ namespace USM
             int c = 0;
             while (c < 500)
             {
+                Comms.UnturnedPath = SerPath.Text;
                 if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == false || File.Exists (Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == false)
                 {
                     Plugin.Enabled = false;
@@ -61,9 +63,9 @@ namespace USM
 
             Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USMVer.dat", "USM.dat");
             string LatestVersion = File.ReadAllLines(Downloader.Temp + @"\USM.dat")[0];
-            if (LatestVersion != "3.0.0.2")
+            if (LatestVersion != "3.0.0.3")
             {
-                Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.2, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
+                Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.3, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
             }
             Downloader.ShutOff();
         }
@@ -83,17 +85,10 @@ namespace USM
             Process.Start("https://persiafighter.github.io/");
         }
 
-        private async void EditServer_ValueChanged(object sender, EventArgs e)
+        private void EditServer_ValueChanged(object sender, EventArgs e)
         {
-            Save(true);
             EditServer.Enabled = false;
-            await Task.Delay(1);
-            if (Convert.ToInt32(EditServer.Value) > Convert.ToInt32(Servers2Run.Value))
-            {
-                EditServer.Value = Servers2Run.Value;
-            }
-            Desc4.Text = "Currently Editing Server With ID: " + EditServer.Value;
-            await Task.Delay(100);
+            Servers2Run.Minimum = EditServer.Value;
             if (File.Exists(@"C:\Unturned_Manager\Server_ID_" + EditServer.Value + "_Config.dat"))
             {
                 Comms.LoadServerConfig(Convert.ToInt32(EditServer.Value));
@@ -128,6 +123,7 @@ namespace USM
             ConstConfig f = new ConstConfig();
             f.ShowDialog();
             Comms.SaveServerConfig(Convert.ToInt32(EditServer.Value));
+            Save(true);
         }
 
         private void Start_Click(object sender, EventArgs e)
@@ -271,19 +267,24 @@ namespace USM
             SaveGUIStatus.SaveGUI(Convert.ToInt32(Servers2Run.Value), SerPath.Text);
         }
 
-        private async void Servers2Run_ValueChanged(object sender, EventArgs e)
+        private void Servers2Run_ValueChanged(object sender, EventArgs e)
         {
-            await Task.Delay(1);
-            if (Convert.ToInt32(Servers2Run.Value) < Convert.ToInt32(EditServer.Value))
-            {
-                Servers2Run.Value = EditServer.Value;
-            }
+            Save(true);
+            EditServer.Maximum = Servers2Run.Value;
         }
 
         private void Updater_Click(object sender, EventArgs e)
         {
-            Updater f = new Updater();
-            f.ShowDialog();
+            if (SerPath.Text == "")
+            {
+                MessageBox.Show("No server path was set.");
+            }
+            else
+            {
+                Comms.UnturnedPath = SerPath.Text;
+                Updater f = new Updater();
+                f.ShowDialog();
+            }
         }
 
         private void Workshop_Click(object sender, EventArgs e)
@@ -322,6 +323,26 @@ namespace USM
                 Plugin f = new Plugin();
                 f.ShowDialog();
             }
+        }
+
+        private void LocalFold_TextChanged(object sender, EventArgs e)
+        {
+            Save(true);
+        }
+
+        private void Console_CheckedChanged(object sender, EventArgs e)
+        {
+            Save(true);
+        }
+
+        private void Graphics_CheckedChanged(object sender, EventArgs e)
+        {
+            Save(true);
+        }
+
+        private void VAC_CheckedChanged(object sender, EventArgs e)
+        {
+            Save(true);
         }
     }
 }

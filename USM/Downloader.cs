@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace USM
 {
@@ -17,14 +18,7 @@ namespace USM
         public const string PluginList1 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Plugins.dat";
         public const string PluginList2 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/PluginsDl.dat";
         public const string PluginList3 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/PluginsPage.dat";
-        public static string Translation;
-        public static string Icon;
-        public static string License;
-        public static string Readme;
-        public static string RAPI;
-        public static string RCore;
-        public static string RUnturned;
-        public static string Module;
+        public static string RocketFolder;
         public static string ScriptsFolder;
 
         public static void GetReady()
@@ -81,37 +75,9 @@ namespace USM
         {
             try
             {
-                if (File.Exists(Translation) == true)
+                if (Directory.Exists(RocketFolder) == true)
                 {
-                    File.Delete(Translation);
-                }
-                if (File.Exists(Icon) == true)
-                {
-                    File.Delete(Icon);
-                }
-                if (File.Exists(License) == true)
-                {
-                    File.Delete(License);
-                }
-                if (File.Exists(Readme) == true)
-                {
-                    File.Delete(Readme);
-                }
-                if (File.Exists(RAPI) == true)
-                {
-                    File.Delete(RAPI);
-                }
-                if (File.Exists(RCore) == true)
-                {
-                    File.Delete(RCore);
-                }
-                if (File.Exists(RUnturned) == true)
-                {
-                    File.Delete(RUnturned);
-                }
-                if (File.Exists(Module) == true)
-                {
-                    File.Delete(Module);
+                    Directory.Delete(RocketFolder, true);
                 }
                 if (Directory.Exists(ScriptsFolder) == true)
                 {
@@ -168,14 +134,7 @@ namespace USM
 
         public static bool InstallRocket()
         {
-            Translation = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat";
-            Icon = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png";
-            License = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE";
-            Readme = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README";
-            RAPI = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll";
-            RCore = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll";
-            RUnturned = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll";
-            Module = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module";
+            RocketFolder = @"" + Comms.UnturnedPath + @"\Modules\Rocket.Unturned";
             ScriptsFolder = @"" + Comms.UnturnedPath + @"\Scripts";
 
             bool SuccessDownload = Download(RocketDownload, "Rocket.zip");
@@ -190,11 +149,34 @@ namespace USM
                 return false;
             }
 
-            bool SuccessExtract = Extract("Rocket.zip", Comms.UnturnedPath);
+            bool SuccessExtract = Extract("Rocket.zip", Temp);
             if (SuccessExtract == false)
             {
                 return false;
             }
+
+            int Strikes = 0;
+            try
+            {
+                Directory.Move(Temp + @"\Modules\Rocket.Unturned", Comms.UnturnedPath + @"\Modules\Rocket.Unturned");
+            }
+            catch(Exception)
+            {
+                Strikes += 1;
+            }
+            try
+            {
+                Directory.Move(Temp + @"\Scripts", Comms.UnturnedPath + @"\Scripts");
+            }
+            catch(Exception)
+            {
+                Strikes += 1;
+            }
+            if (Strikes > 0)
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -234,7 +216,7 @@ namespace USM
                 return false;
             }
 
-            bool SuccessDownload3 = Download(PluginList3, "PluginsPages.dat");
+            bool SuccessDownload3 = Download(PluginList3, "PluginPages.dat");
             if (SuccessDownload3 == false)
             {
                 return false;
@@ -258,7 +240,7 @@ namespace USM
                 return false;
             }
 
-            bool SuccessMove3 = MoveFiles("PluginsPages.dat", Comms.DataPath + "PluginsPages.dat");
+            bool SuccessMove3 = MoveFiles("PluginPages.dat", Comms.DataPath + "PluginPages.dat");
             if (SuccessMove3 == false)
             {
                 return false;

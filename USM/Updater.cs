@@ -47,6 +47,13 @@ namespace USM
             {
                 InstalledData = File.ReadAllLines(Comms.DataPath + "Installed.dat");
             }
+            else if (File.Exists(Comms.DataPath + "Installed.dat") == false)
+            {
+                InstalledData = new string[3];
+                InstalledData[0] = "Custom";
+                InstalledData[1] = "N/A";
+                InstalledData[2] = "N/A";
+            }
             LoadVersions();
         }
 
@@ -94,6 +101,8 @@ namespace USM
             else if (SuccessInstall == true)
             {
                 InstalledData[1] = Data[2];
+                CRVer.Text = InstalledData[1];
+                MessageBox.Show("Rocket has been successfully isntalled.");
             }
         }
 
@@ -107,6 +116,8 @@ namespace USM
             else if (SuccessInstall == true)
             {
                 InstalledData[2] = Data[3];
+                CPIVer.Text = InstalledData[2];
+                MessageBox.Show("Plugin Integrity has been successfully isntalled.");
             }
         }
 
@@ -131,6 +142,7 @@ namespace USM
             else if (SuccessInstall2 == true)
             {
                 InstalledData[1] = Data[2];
+                CRVer.Text = InstalledData[1];
             }
 
             bool SuccessInstall3 = Downloader.InstallIntegrity();
@@ -141,14 +153,15 @@ namespace USM
             else if (SuccessInstall3 == true)
             {
                 InstalledData[2] = Data[3];
+                CPIVer.Text = InstalledData[2];
             }
 
-            Process.Start("http://www.mediafire.com/file/e2ai6to7zpyxn45/Unturned+Server+Manager.exe");
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager/blob/master/Data/USM.exe");
         }
 
         private void USM_Click(object sender, EventArgs e)
         {
-            Process.Start("http://www.mediafire.com/file/e2ai6to7zpyxn45/Unturned+Server+Manager.exe");
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager/blob/master/Data/USM.exe");
         }
 
         private void Updater_FormClosing(object sender, FormClosingEventArgs e)
