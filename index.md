@@ -22,13 +22,13 @@ Unturned Installed Somewhere In Your Computer
 
 <h1>Download:</h1>
 
-https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USM.exe
+[https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USM.exe](https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USM.exe)
 
 Or compile it yourself with the source code!
 
 <h1>Reddit Post:</h1>
 
-https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
+[https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/](https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/)
 
 <h1>Upcoming Features:</h1>
 
