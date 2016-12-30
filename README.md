@@ -53,6 +53,7 @@ https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 * Fixed Issue With Plugin Management Button Being Active After Server Launch
 * Fixed Issue With Not Setting Difficulty
 * Changed Server ID Managing
+* Removed Github File Rocket_Latest.zip - Changed To Rocket Direct Download Link
 
 **V3.0.0.2** - 
 

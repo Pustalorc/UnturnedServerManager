@@ -14,7 +14,7 @@ namespace USM
     static class Downloader
     {
         public const string Temp = @"C:\Unturned_Manager\TempDownload";
-        public const string RocketDownload = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Rocket_Latest.zip";
+        public const string RocketDownload = "https://ci.rocketmod.net/job/Rocket.Unturned/lastSuccessfulBuild/artifact/Rocket.Unturned/bin/Release/Rocket.zip";
         public const string PluginList1 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Plugins.dat";
         public const string PluginList2 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/PluginsDl.dat";
         public const string PluginList3 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/PluginsPage.dat";
