@@ -29,7 +29,10 @@ namespace USM
             Downloader.Download(VersionsDownload, "Versions.dat");
             Downloader.MoveFiles("Versions.dat", Comms.DataPath + "Versions.dat");
             Data = File.ReadAllLines(Comms.DataPath + "Versions.dat");
-            InstalledData = File.ReadAllLines(Comms.DataPath + "Installed.dat");
+            if (File.Exists(Comms.DataPath + "Installed.dat") == true)
+            {
+                InstalledData = File.ReadAllLines(Comms.DataPath + "Installed.dat");
+            }
             LoadVersions();
         }
 

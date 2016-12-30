@@ -21,6 +21,7 @@ namespace USM
         private string[] PluginNames;
         private string[] PluginWebLink;
         private string[] SelectedItems;
+        private bool Error = false;
 
         public Plugin()
         {
@@ -48,9 +49,13 @@ namespace USM
             catch (Exception)
             {
                 MessageBox.Show("An error has occured during initalization of the plugin installer. Make sure you have the latest updated integrity files.");
+                Error = true;
                 ShutOff();
             }
-            UpdateOptions();
+            if (Error == false)
+            {
+                UpdateOptions();
+            }
         }
 
         private async void ShutOff()

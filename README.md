@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 3.0.0.0
+Version: Public 3.0.0.1
 
 
 
@@ -14,7 +14,7 @@ Last Update: December 30, 2017
 
 #IMPORTANT:
 
-**Version 3.0.0.0 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
+**Version 3.0.0.1 has not been fully debugged! Please submit any possible bugs or errors that pop up as soon as possible!**
 
 --
 
@@ -49,6 +49,12 @@ Or compile it yourself with the source code!
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 #Changelog:
+
+**V3.0.0.1** - 
+
+* Fixed An Error When Launching The Updater Tool
+* Fixed A Bug Returning An Exception When Loading The Plugin Installer Without The PI Files.
+* Added A Loop To Check If Rocket Is Installed, If It Isn't Plugin Install Is Disabled.
 
 **V3.0.0.0** - 
 

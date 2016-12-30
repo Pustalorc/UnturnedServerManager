@@ -35,6 +35,24 @@ namespace USM
             }
             Desc4.Text = "Currently Editing Server With ID: 1";
             Save(false);
+            CheckRocket();
+        }
+
+        private async void CheckRocket()
+        {
+            int c = 0;
+            while (c < 500)
+            {
+                if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == false || File.Exists (Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == false)
+                {
+                    Plugin.Enabled = false;
+                }
+                else if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == true)
+                {
+                    Plugin.Enabled = true;
+                }
+                await Task.Delay(1);
+            }
         }
 
         private void CheckLatestVersion()
@@ -49,9 +67,9 @@ namespace USM
             Downloader.MoveFiles("Versions.dat", Comms.DataPath + "Versions.dat");
             Downloader.ShutOff();
             string LatestVersion = File.ReadAllLines(Comms.DataPath + "Versions.dat")[0];
-            if (LatestVersion != "3.0.0.0")
+            if (LatestVersion != "3.0.0.1")
             {
-                Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.0, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
+                Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.1, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
             }
         }
 
