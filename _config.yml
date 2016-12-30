@@ -1,0 +1,8 @@
+title: Unturned Server Manager
+description: Server Manager for Unturned
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-hacker
+
+gems:
+  - jekyll-mentions
