@@ -52,7 +52,6 @@
             this.CUVerDesc = new System.Windows.Forms.Label();
             this.UUnturned = new System.Windows.Forms.Button();
             this.Note3 = new System.Windows.Forms.Label();
-            this.Note4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UAll
@@ -206,7 +205,7 @@
             // Note2
             // 
             this.Note2.AutoSize = true;
-            this.Note2.Location = new System.Drawing.Point(9, 174);
+            this.Note2.Location = new System.Drawing.Point(9, 196);
             this.Note2.Name = "Note2";
             this.Note2.Size = new System.Drawing.Size(363, 13);
             this.Note2.TabIndex = 31;
@@ -215,7 +214,7 @@
             // Note1
             // 
             this.Note1.AutoSize = true;
-            this.Note1.Location = new System.Drawing.Point(9, 152);
+            this.Note1.Location = new System.Drawing.Point(9, 174);
             this.Note1.Name = "Note1";
             this.Note1.Size = new System.Drawing.Size(33, 13);
             this.Note1.TabIndex = 30;
@@ -270,20 +269,11 @@
             // Note3
             // 
             this.Note3.AutoSize = true;
-            this.Note3.Location = new System.Drawing.Point(9, 196);
+            this.Note3.Location = new System.Drawing.Point(9, 218);
             this.Note3.Name = "Note3";
             this.Note3.Size = new System.Drawing.Size(379, 13);
             this.Note3.TabIndex = 48;
             this.Note3.Text = "The server manager updater only redirects you to the download of the program.";
-            // 
-            // Note4
-            // 
-            this.Note4.AutoSize = true;
-            this.Note4.Location = new System.Drawing.Point(9, 218);
-            this.Note4.Name = "Note4";
-            this.Note4.Size = new System.Drawing.Size(399, 13);
-            this.Note4.TabIndex = 49;
-            this.Note4.Text = "Update to Unturned has been disabled until a method with steam gets programmed.";
             // 
             // Updater
             // 
@@ -291,7 +281,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.ClientSize = new System.Drawing.Size(545, 248);
-            this.Controls.Add(this.Note4);
             this.Controls.Add(this.Note3);
             this.Controls.Add(this.UAll);
             this.Controls.Add(this.LPIVer);
@@ -353,6 +342,5 @@
         private System.Windows.Forms.Label CUVerDesc;
         private System.Windows.Forms.Button UUnturned;
         private System.Windows.Forms.Label Note3;
-        private System.Windows.Forms.Label Note4;
     }
 }

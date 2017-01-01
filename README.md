@@ -12,6 +12,12 @@ Last Update: January 1, 2017
 
 --
 
+#Note:
+
+I'll be falling back to debugging and fixing the current state of the program. Please report the bugs. Once the program seems stable, i'll be working on new features.
+
+--
+
 #Requirements:
 
 .Net 4.5 or Later
@@ -24,6 +30,10 @@ Unturned Installed Somewhere In Your Computer
 #Upcoming Features:
 
 * Control on each of the server's console (ban and such).
+* Update All Plugins (bulk update).
+* Auto-Restart Option.
+* Ease of config for rocket settings and permissions.
+* USM Settings.
 
 #Known Bugs:
 
@@ -45,9 +55,11 @@ https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 * Fixed Unable To Start Program In Offline Mode
 * Fixed Bug When Puting A Non-Directory Link In Workshop Installer.
-* Fixed CRITICAL Bug when updating unturned which made all your data get deleted. BACKUP IS STILL RECOMMENDED WHEN DOING AN UNTURNED UPDATE.
+* Fixed Multiple Bugs With The Unturned Updater.
+* Removed Comment About Unturned Updating Being Disabled.
 * Enabled/Added Unturned Update Option
 * Added option to install workshop items by item ID.
+* Added "Update All" Button To Workshop Installer.
 * Added logger & system logging to Log.txt
 * Changed background color to all forms	
 
