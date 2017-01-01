@@ -311,9 +311,8 @@ namespace USM
                         Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
                         Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
                     }
-                    foreach (DirectoryInfo folder in MapsInstalled)
+                    foreach (DirectoryInfo folder in ContentInstalled)
                     {
-
                         Process SteamCMD = new Process();
                         ProcessStartInfo startInfo = new ProcessStartInfo();
                         startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
@@ -323,6 +322,18 @@ namespace USM
                         SteamCMD.WaitForExit();
                         CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
                     }
+                    foreach (DirectoryInfo folder in MapsInstalled)
+                    {
+                        Process SteamCMD = new Process();
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
+                        startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +exit";
+                        SteamCMD.StartInfo = startInfo;
+                        SteamCMD.Start();
+                        SteamCMD.WaitForExit();
+                        CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
+                    }
+                    RefreshInstalledContent();
                 }
                 catch (Exception)
                 {
