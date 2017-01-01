@@ -45,6 +45,7 @@ https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 * Fixed Unable To Start Program In Offline Mode
 * Fixed Bug When Puting A Non-Directory Link In Workshop Installer.
+* Fixed CRITICAL Bug when updating unturned which made all your data get deleted. BACKUP IS STILL RECOMMENDED WHEN DOING AN UNTURNED UPDATE.
 * Enabled/Added Unturned Update Option
 * Added option to install workshop items by item ID.
 * Added logger & system logging to Log.txt

@@ -181,16 +181,52 @@ namespace USM
                 return false;
             }
         }
-        
+
+        public static void CopyDirectory(string Source, string Destination, bool Subdirectories)
+        {
+            DirectoryInfo dir = new DirectoryInfo(Source);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            if (!Directory.Exists(Destination))
+            {
+                Directory.CreateDirectory(Destination);
+            }
+
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                if (!File.Exists(Destination))
+                {
+                    //
+                }
+                else
+                {
+                    string temppath = Path.Combine(Destination, file.Name);
+                    file.CopyTo(temppath, false);
+                }
+            }
+
+            if (Subdirectories)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = Path.Combine(Destination, subdir.Name);
+                    CopyDirectory(subdir.FullName, temppath, Subdirectories);
+                }
+            }
+        }
+
         public static bool PrepareUnturnedInstall()
         {
             try
             {
                 if (Directory.Exists(Comms.UnturnedPath) == true)
                 {
+                    CopyDirectory(Comms.UnturnedPath + @"\Servers", Comms.DataPath + @"\Backup", true);
                     Directory.Delete(Comms.UnturnedPath, true);
                 }
                 Directory.CreateDirectory(Comms.UnturnedPath);
+                CopyDirectory(Comms.DataPath + @"\Backup", Comms.UnturnedPath + @"\Servers", true);
                 return true;
             }
             catch (Exception e)
