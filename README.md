@@ -56,6 +56,7 @@ https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 * Fixed multiple bugs with the workshop install tool.
 * Fixed Logger.
 * Fixed Unturned Install.
+* Fixed "Update All" Workshop Items Bug.
 * Changed Unturned Install Method.
 
 **V3.0.0.4** - 
