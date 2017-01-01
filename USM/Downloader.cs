@@ -227,17 +227,9 @@ namespace USM
                     else if (SuccessBackup == true)
                     {
                         Directory.Delete(Comms.UnturnedPath, true);
+                        Directory.CreateDirectory(Comms.UnturnedPath);
+                        return true;
                     }
-                }
-                Directory.CreateDirectory(Comms.UnturnedPath);
-                bool SuccessRestore = MoveDirectory(Comms.DataPath + @"\Backup", Comms.UnturnedPath + @"\Servers");
-                if (SuccessRestore == false)
-                {
-                    return false;
-                }
-                else if (SuccessRestore == true)
-                {
-                    return true;
                 }
                 return true;
             }
@@ -342,7 +334,15 @@ namespace USM
                     }
                     else if (SuccessMove == true)
                     {
-                        return true;
+                        bool SuccessRestore = MoveDirectory(Comms.DataPath + @"\Backup", Comms.UnturnedPath + @"\Servers");
+                        if (SuccessRestore == false)
+                        {
+                            return false;
+                        }
+                        else if (SuccessRestore == true)
+                        {
+                            return true;
+                        }
                     }
                 }
             }
