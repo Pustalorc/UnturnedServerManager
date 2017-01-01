@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 3.0.0.3
+Version: Public 3.0.0.4
 
 
 
@@ -8,7 +8,7 @@ Version: Public 3.0.0.3
 
 
 
-Last Update: December 30, 2017
+Last Update: January 1, 2017
 
 --
 
@@ -24,9 +24,6 @@ Unturned Installed Somewhere In Your Computer
 #Upcoming Features:
 
 * Control on each of the server's console (ban and such).
-* Ease of update of Unturned.
-* Auto-Restart Option.
-* Ease of config for rocket settings and permissions.
 
 #Known Bugs:
 
@@ -43,6 +40,15 @@ Or compile it yourself with the source code!
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 #Changelog:
+
+**V3.0.0.4** - 
+
+* Fixed Unable To Start Program In Offline Mode
+* Fixed Bug When Puting A Non-Directory Link In Workshop Installer.
+* Enabled/Added Unturned Update Option
+* Added option to install workshop items by item ID.
+* Added logger & system logging to Log.txt
+* Changed background color to all forms	
 
 **V3.0.0.3** - 
 

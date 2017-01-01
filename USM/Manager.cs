@@ -17,10 +17,13 @@ namespace USM
         public Manager()
         {
             InitializeComponent();
+            BuildNotifyMenu();
             CheckLatestVersion();
             Notifier.Visible = true;
+            Logger.Log("Enabled tray icon.");
             if (File.Exists(Comms.DataPath + "Server_ID_1_Config.dat"))
             {
+                Logger.Log("Config file for server id 1 found, loading data.");
                 Comms.LoadServerConfig(1);
                 Comms.ConfigExists = true;
                 UpdateGUI();
@@ -32,21 +35,111 @@ namespace USM
             else
             {
                 Comms.ConfigExists = false;
+                Logger.Log("No config file for server id 1 was found, setting default data.");
             }
             Desc4.Text = "Currently Editing Server With ID: 1";
+            Logger.Log("Set Desc4's text to \"Currently Editing Server With ID: 1\".");
             Save(false);
+            Logger.Log("Enabled auto-save every 60 seconds.");
             CheckRocket();
             EditServer.Maximum = Servers2Run.Value;
         }
 
+        private void BuildNotifyMenu()
+        {
+            ContextMenu Menu = new ContextMenu();
+            MenuItem Exit = new MenuItem();
+            MenuItem UpdateTool = new MenuItem();
+            MenuItem Github = new MenuItem();
+            MenuItem Reddit = new MenuItem();
+            MenuItem Issues = new MenuItem();
+            IContainer Components = new Container();
+            Menu.MenuItems.AddRange( new MenuItem[] { Exit, UpdateTool, Github, Reddit, Issues });
+            Exit.Index = 0;
+            Exit.Text = "Exit";
+            Exit.Click += new EventHandler(Exit_Click);
+            UpdateTool.Index = 0;
+            UpdateTool.Text = "Update Tool";
+            UpdateTool.Click += new EventHandler(UpdateTool_Click);
+            Github.Index = 0;
+            Github.Text = "Github";
+            Github.Click += new EventHandler(Github_Click);
+            Reddit.Index = 0;
+            Reddit.Text = "Reddit";
+            Reddit.Click += new EventHandler(Reddit_Click);
+            Issues.Index = 0;
+            Issues.Text = "Issues";
+            Issues.Click += new EventHandler(Issues_Click);
+            Notifier.ContextMenu = Menu;
+            Logger.Log("Tray icon menu successfully set.");
+        }
+
+        private void Notifier_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (Comms.FormEnabled == false)
+            {
+                Show();
+                Comms.FormEnabled = true;
+                Logger.Log("Displayed the form.");
+            }
+            else if (Comms.FormEnabled == true)
+            {
+                Hide();
+                Comms.FormEnabled = false;
+                Logger.Log("Hid the form.");
+            }
+        }
+
+        private void Exit_Click(object Sender, EventArgs e)
+        {
+            Logger.Log("Closed application.");
+            Application.Exit();
+        }
+
+        private void Github_Click(object Sender, EventArgs e)
+        {
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager/");
+            Logger.Log("Opening website \"https://github.com/persiafighter/UnturnedServerManager/\".");
+        }
+
+        private void Issues_Click(object Sender, EventArgs e)
+        {
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager/issues");
+            Logger.Log("Opening website \"https://github.com/persiafighter/UnturnedServerManager/issues\".");
+        }
+
+        private void Reddit_Click(object Sender, EventArgs e)
+        {
+            Process.Start("https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/");
+            Logger.Log("Opening website \"https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/\".");
+        }
+
+        private void UpdateTool_Click(object Sender, EventArgs e)
+        {
+            Logger.Log("Attempting to open the update tool...");
+            if (SerPath.Text == "")
+            {
+                MessageBox.Show("No server path was set.");
+                Logger.Log("Failed to open update tool, no path for unturned data was set.");
+            }
+            else
+            {
+                Comms.UnturnedPath = SerPath.Text;
+                Updater f = new Updater();
+                Logger.Log("Successfully opened the update tool.");
+                f.ShowDialog();
+            }
+        }
+
         private async void CheckRocket()
         {
+            Logger.Log("Started loop to check if rocket is installed.");
             int c = 0;
             while (c < 500)
             {
                 if (Comms.RunningID[(Convert.ToInt32(EditServer.Value) - 1)] == Convert.ToInt32(EditServer.Value))
                 {
-                    
+
                 }
                 else
                 {
@@ -66,38 +159,56 @@ namespace USM
 
         private void CheckLatestVersion()
         {
-            Downloader.GetReady();
-
-            Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USMVer.dat", "USM.dat");
-            string LatestVersion = File.ReadAllLines(Downloader.Temp + @"\USM.dat")[0];
-            if (LatestVersion != "3.0.0.3")
+            Logger.Log("Checking latest version for USM.");
+            try
             {
-                Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.3, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
+                Downloader.GetReady();
+                Logger.Log("Created temp download folder.");
+                Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USMVer.dat", "USM.dat");
+                Logger.Log("Downloaded latest version file for USM.");
+                string LatestVersion = File.ReadAllLines(Downloader.Temp + @"\USM.dat")[0];
+                Logger.Log("Read data from latest USM version.");
+                if (LatestVersion != "3.0.0.4")
+                {
+                    Logger.Log("Version of the program is different than the latest one. Opened notification of a new update.");
+                    Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.4, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
+                }
+                Downloader.ShutOff();
+                Logger.Log("Deleted temp download folder.");
             }
-            Downloader.ShutOff();
+            catch (Exception)
+            {
+                // Ignore, offline mode or unable to retrieve version file.
+                Logger.Log("Unable to check for latest version, starting program.");
+            }
         }
 
         private void RedditLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/");
+            Logger.Log("Opening website \"https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/\".");
         }
 
         private void GithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/persiafighter/UnturnedServerManager/");
+            Logger.Log("Opening website \"https://github.com/persiafighter/UnturnedServerManager/\".");
         }
 
         private void LinkMe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://persiafighter.github.io/");
+            Logger.Log("Opening website \"https://persiafighter.github.io/\".");
         }
 
         private void EditServer_ValueChanged(object sender, EventArgs e)
         {
+            Logger.Log("Selected server for edit was changed to " + EditServer.Value);
             EditServer.Enabled = false;
             Servers2Run.Minimum = EditServer.Value;
             if (File.Exists(@"C:\Unturned_Manager\Server_ID_" + EditServer.Value + "_Config.dat"))
             {
+                Logger.Log("Configuration file was found for server with id " + EditServer.Value + ", loading data.");
                 Comms.LoadServerConfig(Convert.ToInt32(EditServer.Value));
                 Comms.ConfigExists = true;
                 LocalFold.Text = Comms.LocalName;
@@ -108,6 +219,7 @@ namespace USM
             }
             else
             {
+                Logger.Log("No configuration file was found for server with id " + EditServer.Value + ", using default values.");
                 Comms.ConfigExists = false;
                 LocalFold.Text = "";
                 VAC.Checked = true;
@@ -117,10 +229,12 @@ namespace USM
             if (Comms.RunningID[(Convert.ToInt32(EditServer.Value) - 1)] == Convert.ToInt32(EditServer.Value))
             {
                 EnableItems(false);
+                Logger.Log("Server is already running, disabling buttons.");
             }
             else
             {
                 EnableItems(true);
+                Logger.Log("Server is not running, enabling buttons.");
             }
             EditServer.Enabled = true;
         }
@@ -128,89 +242,136 @@ namespace USM
         private void AdvancedConfig_Click(object sender, EventArgs e)
         {
             ConstConfig f = new ConstConfig();
+            Logger.Log("Starting server config editor.");
             f.ShowDialog();
             Comms.SaveServerConfig(Convert.ToInt32(EditServer.Value));
+            Logger.Log("Saving server config.");
             Save(true);
+            Logger.Log("Forcing a global save.");
         }
 
         private void Start_Click(object sender, EventArgs e)
         {
+            Logger.Log("Trying to initiate the server...");
             bool ConfigSuccess = Comms.CreateServerConfig(LocalFold.Text, SerPath.Text);
             if (ConfigSuccess == true)
             {
+                Logger.Log("Config was successfully created. Trying to start server.");
                 bool Success = Running.Run(Convert.ToInt32(EditServer.Value), LocalFold.Text, Console.Checked, VAC.Checked, Graphics.Checked, SerPath.Text);
                 if (Success == true)
                 {
+                    Logger.Log("Server was successfully started.");
                     EnableItems(false);
+                    Logger.Log("Disabling buttons.");
                     Save(true);
+                    Logger.Log("Forcing a global save.");
                     Notifier.ShowBalloonTip(5000, "Successful Start", "Server " + LocalFold.Text + " with ID " + EditServer.Value + " has been successfully started.", ToolTipIcon.None);
+                    Logger.Log("Sent notification to user.");
+                }
+                else
+                {
+                    MessageBox.Show("There was an error starting the server.");
+                    Logger.Log("Server wasn't started. An error was encountered.");
                 }
             }
             else
             {
                 MessageBox.Show("There was an error creating the configuration for the server, please try again later.");
+                Logger.Log("Forcing a global save.");
             }
         }
 
         private void Restart_Click(object sender, EventArgs e)
         {
+            Logger.Log("Attempting to restart server...");
             bool Success = Reboot.RebootSer(Convert.ToInt32(EditServer.Value), LocalFold.Text, Console.Checked, VAC.Checked, Graphics.Checked, SerPath.Text);
             if (Success == true)
             {
+                Logger.Log("Server was successfully restarted.");
                 EnableItems(false);
+                Logger.Log("Disabling buttons.");
                 Notifier.ShowBalloonTip(5000, "Successful Restart", "Server " + LocalFold.Text + " with ID " + EditServer.Value + " has been successfully restarted.", ToolTipIcon.None);
+                Logger.Log("Sent notification to user.");
+            }
+            else
+            {
+                MessageBox.Show("There was an error during the restart of the server.");
+                Logger.Log("Restarting of server failed.");
+                EnableItems(true);
+                Logger.Log("Enabling buttons.");
             }
         }
 
         private void Shutdown_Click(object sender, EventArgs e)
         {
+            Logger.Log("Attempting to shut the server off.");
             bool Success = ShutdownS.ShutdownSer(Convert.ToInt32(EditServer.Value), LocalFold.Text);
             if (Success == true)
             {
                 EnableItems(true);
+                Logger.Log("Enabling buttons.");
                 Notifier.ShowBalloonTip(5000, "Successful Shutdown", "Server " + LocalFold.Text + " with ID " + EditServer.Value + " has been successfully stopped.", ToolTipIcon.None);
+                Logger.Log("Notifying user.");
+            }
+            else
+            {
+                MessageBox.Show("There was an error during the shutdown of the server.");
+                Logger.Log("Shutdown of server failed.");
+                EnableItems(true);
+                Logger.Log("Enabling buttons.");
             }
         }
 
         private void UpdateGUI()
         {
+            Logger.Log("Updating GUI items from local loaded data.");
             if (Comms.VAC == true)
             {
                 VAC.Checked = true;
+                Logger.Log("Checked VAC checkbox.");
             }
             else if (Comms.VAC == false)
             {
                 VAC.Checked = false;
+                Logger.Log("Unchecked VAC checkbox.");
             }
 
             if (Comms.Console == true)
             {
                 Console.Checked = true;
+                Logger.Log("Checked Console checkbox.");
             }
             else if (Comms.Console == false)
             {
                 Console.Checked = false;
+                Logger.Log("Unchecked Console checkbox.");
             }
 
             if (Comms.Graphics == true)
             {
                 Graphics.Checked = true;
+                Logger.Log("Checked Graphics checkbox.");
             }
             else if (Comms.Graphics == false)
             {
                 Graphics.Checked = false;
+                Logger.Log("Unchecked Graphics checkbox.");
             }
 
             LocalFold.Text = Comms.LocalName;
+            Logger.Log("Set local folder text.");
         }
 
         private void Manager_Load(object sender, EventArgs e)
         {
             if (File.Exists(Comms.DataPath + "GUI.dat") == true)
             {
+                Logger.Log("Old GUI data was found, loading.");
                 SaveGUIStatus.LoadGUI();
                 Servers2Run.Value = Convert.ToDecimal(SaveGUIStatus.MaxSerS);
+                Logger.Log("Loaded last maximum servers value.");
                 SerPath.Text = SaveGUIStatus.CurrDirS;
+                Logger.Log("Loaded server path to textbox.");
             }
         }
 
@@ -218,6 +379,7 @@ namespace USM
         {
             if (Forced == true)
             {
+                Logger.Log("A save was forced, saving data.");
                 Comms.LocalName = LocalFold.Text;
                 Comms.VAC = VAC.Checked;
                 Comms.Console = Console.Checked;
@@ -229,6 +391,7 @@ namespace USM
                 int c = 0;
                 while (c < 50)
                 {
+                    Logger.Log("Periodic timeout for save is over. Saving data.");
                     Comms.LocalName = LocalFold.Text;
                     Comms.VAC = VAC.Checked;
                     Comms.Console = Console.Checked;
@@ -271,63 +434,76 @@ namespace USM
 
         private void Manager_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Logger.Log("Saving latest GUI data.");
             SaveGUIStatus.SaveGUI(Convert.ToInt32(Servers2Run.Value), SerPath.Text);
         }
 
         private void Servers2Run_ValueChanged(object sender, EventArgs e)
         {
             Save(true);
+            Logger.Log("Forcing save of data.");
             EditServer.Maximum = Servers2Run.Value;
         }
 
         private void Updater_Click(object sender, EventArgs e)
         {
+            Logger.Log("Attempting to run the update tool...");
             if (SerPath.Text == "")
             {
                 MessageBox.Show("No server path was set.");
+                Logger.Log("Unable to run the update tool, no path was set.");
             }
             else
             {
                 Comms.UnturnedPath = SerPath.Text;
                 Updater f = new Updater();
+                Logger.Log("Displaying the update tool.");
                 f.ShowDialog();
             }
         }
 
         private void Workshop_Click(object sender, EventArgs e)
         {
+            Logger.Log("Attempting to run the workshop installer tool...");
             if (LocalFold.Text == "")
             {
                 MessageBox.Show("No name was set for the local server folder.");
+                Logger.Log("Unable to run the workshop installer tool, no name for the server was set.");
             }
             else if (SerPath.Text == "")
             {
                 MessageBox.Show("No server path was set.");
+                Logger.Log("Unable to run the workshop installer tool, no path was set.");
             }
             else
             {
                 Comms.LocalName = LocalFold.Text;
                 Comms.UnturnedPath = SerPath.Text;
                 Workshop f = new Workshop();
+                Logger.Log("Displaying the workshop installer tool.");
                 f.ShowDialog();
             }
         }
 
         private void Plugin_Click(object sender, EventArgs e)
         {
+            Logger.Log("Attempting to run the plugin installer tool...");
             if (LocalFold.Text == "")
             {
                 MessageBox.Show("No name was set for the local server folder.");
+                Logger.Log("Unable to run the plugin installer tool, no server name was set.");
             }
             else if (SerPath.Text == "")
             {
                 MessageBox.Show("No server path was set.");
+                Logger.Log("Unable to run the plugin installer tool, no path was set.");
             }
             else
             {
                 Comms.LocalName = LocalFold.Text;
                 Comms.UnturnedPath = SerPath.Text;
                 Plugin f = new Plugin();
+                Logger.Log("Displaying the plugin installer tool.");
                 f.ShowDialog();
             }
         }
@@ -335,21 +511,25 @@ namespace USM
         private void LocalFold_TextChanged(object sender, EventArgs e)
         {
             Save(true);
+            Logger.Log("Forcing save of data.");
         }
 
         private void Console_CheckedChanged(object sender, EventArgs e)
         {
             Save(true);
+            Logger.Log("Forcing save of data.");
         }
 
         private void Graphics_CheckedChanged(object sender, EventArgs e)
         {
             Save(true);
+            Logger.Log("Forcing save of data.");
         }
 
         private void VAC_CheckedChanged(object sender, EventArgs e)
         {
             Save(true);
+            Logger.Log("Forcing save of data.");
         }
     }
 }

@@ -61,6 +61,7 @@
             // 
             // AlreadyInstalled
             // 
+            this.AlreadyInstalled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.AlreadyInstalled.FormattingEnabled = true;
             this.AlreadyInstalled.Location = new System.Drawing.Point(381, 25);
             this.AlreadyInstalled.Name = "AlreadyInstalled";
@@ -98,9 +99,10 @@
             // 
             // AvailableItems
             // 
+            this.AvailableItems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.AvailableItems.CheckOnClick = true;
             this.AvailableItems.FormattingEnabled = true;
-            this.AvailableItems.Location = new System.Drawing.Point(15, 24);
+            this.AvailableItems.Location = new System.Drawing.Point(15, 25);
             this.AvailableItems.Name = "AvailableItems";
             this.AvailableItems.Size = new System.Drawing.Size(360, 304);
             this.AvailableItems.Sorted = true;
@@ -130,6 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.ClientSize = new System.Drawing.Size(753, 374);
             this.Controls.Add(this.Documentation);
             this.Controls.Add(this.Configuration);

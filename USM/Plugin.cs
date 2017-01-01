@@ -31,6 +31,7 @@ namespace USM
 
         private void SearchInstalledItems()
         {
+            Logger.Log("Loading plugin integrity files...");
             try
             {
                 DownloadLinks = File.ReadAllLines(Comms.DataPath + @"PluginLinks.dat");
@@ -39,12 +40,15 @@ namespace USM
             }
             catch (Exception)
             {
+                Logger.Log("Loading of files was unsuccessful, telling player to download the latest version.");
                 MessageBox.Show("An error has occured during initalization of the plugin installer. Make sure you have the latest updated integrity files.");
                 Error = true;
+                Logger.Log("Turning program off.");
                 ShutOff();
             }
             if (Error == false)
             {
+                Logger.Log("Plugin integrity files loaded.");
                 UpdateOptions();
             }
         }
@@ -52,32 +56,40 @@ namespace USM
         private async void ShutOff()
         {
             await Task.Delay(50);
+            Logger.Log("Closing form.");
             Close();
         }
 
         private void UpdateOptions()
         {
+            Logger.Log("Searching for installed plugins.");
             ServerDirectory = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
             try
             {
                 InstalledPlugins = ServerDirectory.GetFiles();
+                Logger.Log("Acquired installed plugins.");
             }
             catch (DirectoryNotFoundException)
             {
-                // Ignore, no current files installed
+                Logger.Log("No installed plugins were found.");
             }
             AvailableItems.Items.Clear();
             AlreadyInstalled.Items.Clear();
+            Logger.Log("Cleared display of both lists.");
             if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins"))
             {
+                Logger.Log("Displaying every already installed plugin.");
                 foreach (FileInfo File in InstalledPlugins)
                 {
                     AlreadyInstalled.Items.Add(File.Name);
+                    Logger.Log("Displayed the installed plugin " + File.Name);
                 }
             }
+            Logger.Log("Displaying available plugins.");
             foreach (string Files in PluginNames)
             {
                 AvailableItems.Items.Add(Files);
+                Logger.Log("Displayed the plugin " + Files);
             }
         }
 
@@ -86,9 +98,11 @@ namespace USM
             if (AvailableItems.CheckedIndices.Count == 0)
             {
                 MessageBox.Show("No plugins were selected.");
+                Logger.Log("User attempted to install plugins, but no plugins were selected.");
             }
             else if (AvailableItems.CheckedIndices.Count > 0)
             {
+                Logger.Log("Installing selected plugins.");
                 GetSelectedItems();
                 InstallItems();
                 UpdateOptions();
@@ -100,9 +114,11 @@ namespace USM
             if (AvailableItems.CheckedIndices.Count == 0)
             {
                 MessageBox.Show("No plugins were selected.");
+                Logger.Log("User attempted to get the documentation of plugins, but no plugins were selected.");
             }
             else if (AvailableItems.CheckedIndices.Count > 0)
             {
+                Logger.Log("Displaying documentation of user selected plugins");
                 GetSelectedItems();
                 OpenWebsite();
                 UpdateOptions();
@@ -113,12 +129,14 @@ namespace USM
         {
             if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == true)
             {
+                Logger.Log("Plugins were found to be installed, user decided to delete all. Deleting folder.");
                 Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins", true);
                 UpdateOptions();
             }
             else
             {
                 MessageBox.Show("You have not installed any plugins yet.");
+                Logger.Log("User attempted to delete all plugins, but no plugins are installed.");
             }
         }
 
@@ -127,10 +145,12 @@ namespace USM
             if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == true)
             {
                 Process.Start(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
+                Logger.Log("Plugins were found to be installed, user decided to open the folder. Opening folder.");
             }
             else
             {
                 MessageBox.Show("You have not installed any plugins yet.");
+                Logger.Log("User attempted to open the folder of plugins, but no plugins are installed.");
             }
         }
 
@@ -138,9 +158,11 @@ namespace USM
         {
             if (AvailableItems.CheckedIndices.Count > 0)
             {
+                Logger.Log("Plugins were selected before exit, installing.");
                 GetSelectedItems();
                 InstallItems();
             }
+            Logger.Log("Closing form.");
             Close();
         }
 

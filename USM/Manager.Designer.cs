@@ -57,6 +57,7 @@
             this.Desc9 = new System.Windows.Forms.Label();
             this.LinkMe = new System.Windows.Forms.LinkLabel();
             this.Notifier = new System.Windows.Forms.NotifyIcon(this.components);
+            this.SecCounter = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Servers2Run)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EditServer)).BeginInit();
             this.SuspendLayout();
@@ -136,7 +137,7 @@
             // 
             // AdvancedConfig
             // 
-            this.AdvancedConfig.Location = new System.Drawing.Point(476, 121);
+            this.AdvancedConfig.Location = new System.Drawing.Point(511, 127);
             this.AdvancedConfig.Name = "AdvancedConfig";
             this.AdvancedConfig.Size = new System.Drawing.Size(130, 23);
             this.AdvancedConfig.TabIndex = 7;
@@ -147,16 +148,16 @@
             // Desc4
             // 
             this.Desc4.AutoSize = true;
-            this.Desc4.Location = new System.Drawing.Point(329, 59);
+            this.Desc4.Location = new System.Drawing.Point(382, 62);
             this.Desc4.Name = "Desc4";
-            this.Desc4.Size = new System.Drawing.Size(141, 13);
+            this.Desc4.Size = new System.Drawing.Size(133, 13);
             this.Desc4.TabIndex = 8;
-            this.Desc4.Text = "Currently Server With ID: {0}";
+            this.Desc4.Text = "Currently Server With ID: 1";
             // 
             // Desc5
             // 
             this.Desc5.AutoSize = true;
-            this.Desc5.Location = new System.Drawing.Point(199, 97);
+            this.Desc5.Location = new System.Drawing.Point(244, 103);
             this.Desc5.Name = "Desc5";
             this.Desc5.Size = new System.Drawing.Size(85, 13);
             this.Desc5.TabIndex = 9;
@@ -167,7 +168,7 @@
             this.VAC.AutoSize = true;
             this.VAC.Checked = true;
             this.VAC.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.VAC.Location = new System.Drawing.Point(202, 125);
+            this.VAC.Location = new System.Drawing.Point(247, 131);
             this.VAC.Name = "VAC";
             this.VAC.Size = new System.Drawing.Size(118, 17);
             this.VAC.TabIndex = 10;
@@ -180,7 +181,7 @@
             this.Graphics.AutoSize = true;
             this.Graphics.Checked = true;
             this.Graphics.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Graphics.Location = new System.Drawing.Point(202, 148);
+            this.Graphics.Location = new System.Drawing.Point(247, 154);
             this.Graphics.Name = "Graphics";
             this.Graphics.Size = new System.Drawing.Size(85, 17);
             this.Graphics.TabIndex = 11;
@@ -193,7 +194,7 @@
             this.Console.AutoSize = true;
             this.Console.Checked = true;
             this.Console.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Console.Location = new System.Drawing.Point(202, 171);
+            this.Console.Location = new System.Drawing.Point(247, 177);
             this.Console.Name = "Console";
             this.Console.Size = new System.Drawing.Size(161, 17);
             this.Console.TabIndex = 12;
@@ -204,7 +205,7 @@
             // Desc6
             // 
             this.Desc6.AutoSize = true;
-            this.Desc6.Location = new System.Drawing.Point(473, 97);
+            this.Desc6.Location = new System.Drawing.Point(508, 103);
             this.Desc6.Name = "Desc6";
             this.Desc6.Size = new System.Drawing.Size(98, 13);
             this.Desc6.TabIndex = 13;
@@ -213,7 +214,7 @@
             // Desc7
             // 
             this.Desc7.AutoSize = true;
-            this.Desc7.Location = new System.Drawing.Point(199, 207);
+            this.Desc7.Location = new System.Drawing.Point(244, 213);
             this.Desc7.Name = "Desc7";
             this.Desc7.Size = new System.Drawing.Size(99, 13);
             this.Desc7.TabIndex = 14;
@@ -221,7 +222,7 @@
             // 
             // LocalFold
             // 
-            this.LocalFold.Location = new System.Drawing.Point(202, 233);
+            this.LocalFold.Location = new System.Drawing.Point(247, 239);
             this.LocalFold.Name = "LocalFold";
             this.LocalFold.Size = new System.Drawing.Size(100, 20);
             this.LocalFold.TabIndex = 15;
@@ -229,7 +230,7 @@
             // 
             // Workshop
             // 
-            this.Workshop.Location = new System.Drawing.Point(476, 150);
+            this.Workshop.Location = new System.Drawing.Point(511, 156);
             this.Workshop.Name = "Workshop";
             this.Workshop.Size = new System.Drawing.Size(130, 23);
             this.Workshop.TabIndex = 16;
@@ -239,7 +240,7 @@
             // 
             // Plugin
             // 
-            this.Plugin.Location = new System.Drawing.Point(476, 179);
+            this.Plugin.Location = new System.Drawing.Point(511, 185);
             this.Plugin.Name = "Plugin";
             this.Plugin.Size = new System.Drawing.Size(130, 23);
             this.Plugin.TabIndex = 17;
@@ -249,7 +250,7 @@
             // 
             // Start
             // 
-            this.Start.Location = new System.Drawing.Point(476, 238);
+            this.Start.Location = new System.Drawing.Point(511, 237);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(100, 23);
             this.Start.TabIndex = 18;
@@ -260,7 +261,7 @@
             // Desc8
             // 
             this.Desc8.AutoSize = true;
-            this.Desc8.Location = new System.Drawing.Point(473, 216);
+            this.Desc8.Location = new System.Drawing.Point(508, 213);
             this.Desc8.Name = "Desc8";
             this.Desc8.Size = new System.Drawing.Size(32, 13);
             this.Desc8.TabIndex = 19;
@@ -269,7 +270,7 @@
             // Restart
             // 
             this.Restart.Enabled = false;
-            this.Restart.Location = new System.Drawing.Point(476, 267);
+            this.Restart.Location = new System.Drawing.Point(511, 266);
             this.Restart.Name = "Restart";
             this.Restart.Size = new System.Drawing.Size(100, 23);
             this.Restart.TabIndex = 20;
@@ -280,7 +281,7 @@
             // Shutdown
             // 
             this.Shutdown.Enabled = false;
-            this.Shutdown.Location = new System.Drawing.Point(476, 296);
+            this.Shutdown.Location = new System.Drawing.Point(511, 295);
             this.Shutdown.Name = "Shutdown";
             this.Shutdown.Size = new System.Drawing.Size(100, 23);
             this.Shutdown.TabIndex = 21;
@@ -347,11 +348,13 @@
             this.Notifier.Icon = ((System.Drawing.Icon)(resources.GetObject("Notifier.Icon")));
             this.Notifier.Text = "USM";
             this.Notifier.Visible = true;
+            this.Notifier.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Notifier_MouseDoubleClick);
             // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.ClientSize = new System.Drawing.Size(834, 389);
             this.Controls.Add(this.LinkMe);
             this.Controls.Add(this.Desc9);
@@ -423,5 +426,6 @@
         private System.Windows.Forms.Label Desc9;
         private System.Windows.Forms.LinkLabel LinkMe;
         public System.Windows.Forms.NotifyIcon Notifier;
+        private System.Windows.Forms.Timer SecCounter;
     }
 }

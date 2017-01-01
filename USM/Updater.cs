@@ -80,7 +80,7 @@ namespace USM
 
         private void UUnturned_Click(object sender, EventArgs e)
         {
-            /*bool SuccessInstall = Downloader.InstallUnturned();
+            bool SuccessInstall = Downloader.InstallUnturned();
             if (SuccessInstall == false)
             {
                 MessageBox.Show("An error has occured during the update of unturned. Please manually update unturned.");
@@ -88,7 +88,7 @@ namespace USM
             else if (SuccessInstall == true)
             {
                 InstalledData[0] = Data[1];
-            }*/
+            }
         }
 
         private void URocket_Click(object sender, EventArgs e)
@@ -123,8 +123,7 @@ namespace USM
 
         private void UAll_Click(object sender, EventArgs e)
         {
-            // Disabled until steam cmd update method happens
-            /*bool SuccessInstall = Downloader.InstallUnturned();
+            bool SuccessInstall = Downloader.InstallUnturned();
             if (SuccessInstall == false)
             {
                 MessageBox.Show("An error has occured during the update of unturned. Please manually update unturned.");
@@ -132,7 +131,7 @@ namespace USM
             else if (SuccessInstall == true)
             {
                 InstalledData[0] = Data[1];
-            }*/
+            }
 
             bool SuccessInstall2 = Downloader.InstallRocket();
             if (SuccessInstall2 == false)

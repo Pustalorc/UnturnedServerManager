@@ -11,6 +11,7 @@ namespace USM
 {
     static class Comms
     {
+        public static bool FormEnabled = true;
         public static int[] PID = new int[100];
         public static string[] StoredName = new string[100];
         public static int[] RunningID = new int[100];

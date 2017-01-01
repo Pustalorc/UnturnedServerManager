@@ -52,7 +52,6 @@ namespace USM
 
         private void RefreshInstalledContent()
         {
-            AlreadyInstalled.Enabled = true;
             if (ContentLocation.Checked == true)
             {
                 try
@@ -92,13 +91,19 @@ namespace USM
                     // No current mods. Ignore but remove already placed items.
                 }
             }
-            AlreadyInstalled.Enabled = false;
         }
 
         private void Search_Click(object sender, EventArgs e)
         {
+            try
+            {
+                WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The path set is not a directory path.");
+            }
             AvailableItems.Items.Clear();
-            WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
             SearchDownloadedItems();
         }
 
@@ -234,6 +239,64 @@ namespace USM
                 {
                     Process.Start("http://steamcommunity.com/sharedfiles/filedetails/?id=" + file);
                 }
+            }
+        }
+
+        private void ID_TextChanged(object sender, EventArgs e)
+        {
+            Link.Text = "http://steamcommunity.com/sharedfiles/filedetails/?id=" + ID.Text;
+        }
+
+        private void Link_TextChanged(object sender, EventArgs e)
+        {
+            char[] LettersAndSymbols = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '/', ':', '=', '?'};
+            ID.Text = Link.Text.TrimStart(LettersAndSymbols);
+        }
+
+        private void InstallID_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
+            {
+                Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
+            }
+            try
+            {
+                if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
+                {
+                    Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
+                    Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
+                }
+                Process.Start(Comms.DataPath + @"SteamCMD\steamcmd.exe", " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + ID.Text + " +quit");
+                CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + ID.Text, true);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("An error has been encountered during the download of the item.");
+            }
+        }
+
+        private void UpdateAll_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
+            {
+                Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
+            }
+            try
+            {
+                if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
+                {
+                    Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
+                    Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
+                }
+                foreach (DirectoryInfo folder in MapsInstalled)
+                {
+                    Process.Start(Comms.DataPath + @"SteamCMD\steamcmd.exe", " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +quit");
+                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("An error has been encountered during the download of the item.");
             }
         }
     }

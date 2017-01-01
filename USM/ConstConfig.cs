@@ -18,6 +18,7 @@ namespace USM
             InitializeComponent();
             if (Comms.ConfigExists == true)
             {
+                Logger.Log("Already existing config was found, loading.");
                 LoadS();
             }
         }
@@ -538,10 +539,12 @@ namespace USM
 
         private void Exit_Click(object sender, EventArgs e)
         {
+            Logger.Log("Attempting to save current server config.");
             bool Success = Save();
             if(Success == true)
             {
                 Comms.ConfigExists = true;
+                Logger.Log("Server config was saved, closing form.");
                 Close();
             }
         }

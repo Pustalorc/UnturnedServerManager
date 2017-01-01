@@ -42,6 +42,14 @@
             this.WorkshopLocation = new System.Windows.Forms.TextBox();
             this.DirectoryDesc = new System.Windows.Forms.Label();
             this.OpenMods = new System.Windows.Forms.Button();
+            this.Desc1 = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.TextBox();
+            this.Desc2 = new System.Windows.Forms.Label();
+            this.Desc3 = new System.Windows.Forms.Label();
+            this.Desc4 = new System.Windows.Forms.Label();
+            this.Link = new System.Windows.Forms.TextBox();
+            this.InstallID = new System.Windows.Forms.Button();
+            this.UpdateAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Install
@@ -56,7 +64,7 @@
             // 
             // DeleteAll
             // 
-            this.DeleteAll.Location = new System.Drawing.Point(506, 338);
+            this.DeleteAll.Location = new System.Drawing.Point(262, 339);
             this.DeleteAll.Name = "DeleteAll";
             this.DeleteAll.Size = new System.Drawing.Size(231, 23);
             this.DeleteAll.TabIndex = 24;
@@ -66,17 +74,19 @@
             // 
             // AlreadyInstalled
             // 
-            this.AlreadyInstalled.Enabled = false;
+            this.AlreadyInstalled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.AlreadyInstalled.FormattingEnabled = true;
-            this.AlreadyInstalled.Location = new System.Drawing.Point(506, 133);
+            this.AlreadyInstalled.Location = new System.Drawing.Point(253, 59);
             this.AlreadyInstalled.Name = "AlreadyInstalled";
-            this.AlreadyInstalled.Size = new System.Drawing.Size(231, 199);
+            this.AlreadyInstalled.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.AlreadyInstalled.Size = new System.Drawing.Size(240, 274);
+            this.AlreadyInstalled.Sorted = true;
             this.AlreadyInstalled.TabIndex = 23;
             // 
             // AlreadyInstalledDesc
             // 
             this.AlreadyInstalledDesc.AutoSize = true;
-            this.AlreadyInstalledDesc.Location = new System.Drawing.Point(503, 117);
+            this.AlreadyInstalledDesc.Location = new System.Drawing.Point(250, 43);
             this.AlreadyInstalledDesc.Name = "AlreadyInstalledDesc";
             this.AlreadyInstalledDesc.Size = new System.Drawing.Size(167, 13);
             this.AlreadyInstalledDesc.TabIndex = 22;
@@ -103,7 +113,7 @@
             // MapsLocation
             // 
             this.MapsLocation.AutoSize = true;
-            this.MapsLocation.Location = new System.Drawing.Point(506, 92);
+            this.MapsLocation.Location = new System.Drawing.Point(502, 101);
             this.MapsLocation.Name = "MapsLocation";
             this.MapsLocation.Size = new System.Drawing.Size(51, 17);
             this.MapsLocation.TabIndex = 19;
@@ -115,7 +125,7 @@
             // 
             this.ContentLocation.AutoSize = true;
             this.ContentLocation.Checked = true;
-            this.ContentLocation.Location = new System.Drawing.Point(506, 69);
+            this.ContentLocation.Location = new System.Drawing.Point(502, 78);
             this.ContentLocation.Name = "ContentLocation";
             this.ContentLocation.Size = new System.Drawing.Size(200, 17);
             this.ContentLocation.TabIndex = 18;
@@ -146,11 +156,13 @@
             // 
             // AvailableItems
             // 
+            this.AvailableItems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.AvailableItems.CheckOnClick = true;
             this.AvailableItems.FormattingEnabled = true;
-            this.AvailableItems.Location = new System.Drawing.Point(11, 58);
+            this.AvailableItems.Location = new System.Drawing.Point(8, 59);
             this.AvailableItems.Name = "AvailableItems";
-            this.AvailableItems.Size = new System.Drawing.Size(485, 274);
+            this.AvailableItems.Size = new System.Drawing.Size(239, 274);
+            this.AvailableItems.Sorted = true;
             this.AvailableItems.TabIndex = 15;
             // 
             // WorkshopLocation
@@ -172,19 +184,100 @@
             // 
             // OpenMods
             // 
-            this.OpenMods.Location = new System.Drawing.Point(325, 338);
+            this.OpenMods.Location = new System.Drawing.Point(145, 339);
             this.OpenMods.Name = "OpenMods";
-            this.OpenMods.Size = new System.Drawing.Size(171, 23);
+            this.OpenMods.Size = new System.Drawing.Size(102, 23);
             this.OpenMods.TabIndex = 26;
-            this.OpenMods.Text = "Open Selected Items In Browser";
+            this.OpenMods.Text = "Open In Browser";
             this.OpenMods.UseVisualStyleBackColor = true;
             this.OpenMods.Click += new System.EventHandler(this.OpenMods_Click);
+            // 
+            // Desc1
+            // 
+            this.Desc1.AutoSize = true;
+            this.Desc1.Location = new System.Drawing.Point(502, 222);
+            this.Desc1.Name = "Desc1";
+            this.Desc1.Size = new System.Drawing.Size(189, 13);
+            this.Desc1.TabIndex = 27;
+            this.Desc1.Text = "Install By ID or link to steam workshop:";
+            // 
+            // ID
+            // 
+            this.ID.Location = new System.Drawing.Point(538, 250);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(100, 20);
+            this.ID.TabIndex = 28;
+            this.ID.TextChanged += new System.EventHandler(this.ID_TextChanged);
+            // 
+            // Desc2
+            // 
+            this.Desc2.AutoSize = true;
+            this.Desc2.Location = new System.Drawing.Point(502, 253);
+            this.Desc2.Name = "Desc2";
+            this.Desc2.Size = new System.Drawing.Size(21, 13);
+            this.Desc2.TabIndex = 29;
+            this.Desc2.Text = "ID:";
+            // 
+            // Desc3
+            // 
+            this.Desc3.AutoSize = true;
+            this.Desc3.Location = new System.Drawing.Point(502, 285);
+            this.Desc3.Name = "Desc3";
+            this.Desc3.Size = new System.Drawing.Size(23, 13);
+            this.Desc3.TabIndex = 30;
+            this.Desc3.Text = "OR";
+            // 
+            // Desc4
+            // 
+            this.Desc4.AutoSize = true;
+            this.Desc4.Location = new System.Drawing.Point(502, 316);
+            this.Desc4.Name = "Desc4";
+            this.Desc4.Size = new System.Drawing.Size(30, 13);
+            this.Desc4.TabIndex = 31;
+            this.Desc4.Text = "Link:";
+            // 
+            // Link
+            // 
+            this.Link.Location = new System.Drawing.Point(538, 313);
+            this.Link.Name = "Link";
+            this.Link.Size = new System.Drawing.Size(206, 20);
+            this.Link.TabIndex = 32;
+            this.Link.TextChanged += new System.EventHandler(this.Link_TextChanged);
+            // 
+            // InstallID
+            // 
+            this.InstallID.Location = new System.Drawing.Point(571, 339);
+            this.InstallID.Name = "InstallID";
+            this.InstallID.Size = new System.Drawing.Size(99, 23);
+            this.InstallID.TabIndex = 33;
+            this.InstallID.Text = "Install by id or link";
+            this.InstallID.UseVisualStyleBackColor = true;
+            this.InstallID.Click += new System.EventHandler(this.InstallID_Click);
+            // 
+            // UpdateAll
+            // 
+            this.UpdateAll.Location = new System.Drawing.Point(499, 124);
+            this.UpdateAll.Name = "UpdateAll";
+            this.UpdateAll.Size = new System.Drawing.Size(75, 23);
+            this.UpdateAll.TabIndex = 34;
+            this.UpdateAll.Text = "Update All";
+            this.UpdateAll.UseVisualStyleBackColor = true;
+            this.UpdateAll.Click += new System.EventHandler(this.UpdateAll_Click);
             // 
             // Workshop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.ClientSize = new System.Drawing.Size(753, 374);
+            this.Controls.Add(this.UpdateAll);
+            this.Controls.Add(this.InstallID);
+            this.Controls.Add(this.Link);
+            this.Controls.Add(this.Desc4);
+            this.Controls.Add(this.Desc3);
+            this.Controls.Add(this.Desc2);
+            this.Controls.Add(this.ID);
+            this.Controls.Add(this.Desc1);
             this.Controls.Add(this.OpenMods);
             this.Controls.Add(this.Install);
             this.Controls.Add(this.DeleteAll);
@@ -227,5 +320,13 @@
         private System.Windows.Forms.TextBox WorkshopLocation;
         private System.Windows.Forms.Label DirectoryDesc;
         private System.Windows.Forms.Button OpenMods;
+        private System.Windows.Forms.Label Desc1;
+        private System.Windows.Forms.TextBox ID;
+        private System.Windows.Forms.Label Desc2;
+        private System.Windows.Forms.Label Desc3;
+        private System.Windows.Forms.Label Desc4;
+        private System.Windows.Forms.TextBox Link;
+        private System.Windows.Forms.Button InstallID;
+        private System.Windows.Forms.Button UpdateAll;
     }
 }

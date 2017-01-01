@@ -118,7 +118,7 @@
             this.LMVer.Name = "LMVer";
             this.LMVer.Size = new System.Drawing.Size(40, 13);
             this.LMVer.TabIndex = 41;
-            this.LMVer.Text = "3.0.0.3";
+            this.LMVer.Text = "3.0.0.4";
             // 
             // LMVerDesc
             // 
@@ -136,7 +136,7 @@
             this.CMVer.Name = "CMVer";
             this.CMVer.Size = new System.Drawing.Size(40, 13);
             this.CMVer.TabIndex = 39;
-            this.CMVer.Text = "3.0.0.3";
+            this.CMVer.Text = "3.0.0.4";
             // 
             // CMVerDesc
             // 
@@ -259,12 +259,11 @@
             // 
             // UUnturned
             // 
-            this.UUnturned.Enabled = false;
             this.UUnturned.Location = new System.Drawing.Point(12, 11);
             this.UUnturned.Name = "UUnturned";
             this.UUnturned.Size = new System.Drawing.Size(130, 23);
             this.UUnturned.TabIndex = 25;
-            this.UUnturned.Text = "-- Disabled --";
+            this.UUnturned.Text = "Update Unturned";
             this.UUnturned.UseVisualStyleBackColor = true;
             this.UUnturned.Click += new System.EventHandler(this.UUnturned_Click);
             // 
@@ -290,6 +289,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.ClientSize = new System.Drawing.Size(545, 248);
             this.Controls.Add(this.Note4);
             this.Controls.Add(this.Note3);

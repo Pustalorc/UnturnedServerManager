@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS0168
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -49,6 +50,10 @@ namespace USM
         {
             try
             {
+                if (Directory.Exists(Dest) == false)
+                {
+                    Directory.CreateDirectory(Dest);
+                }
                 ZipFile.ExtractToDirectory(Temp + "\\" + Name, Dest);
                 return true;
             }
@@ -66,6 +71,92 @@ namespace USM
                 return true;
             }
             catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public static bool MoveDirectory(string Name, string Dest)
+        {
+            try
+            {
+                Directory.Move(Name, Dest);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool MoveDirectoryItems(string DirName, string Dest)
+        {
+            try
+            {
+                DirectoryInfo Directory = new DirectoryInfo(DirName);
+                FileInfo[] Files = Directory.GetFiles();
+                DirectoryInfo[] Folders = Directory.GetDirectories();
+                foreach (FileInfo s in Files)
+                {
+                    try
+                    {
+                        File.Move(s.FullName, Dest + "\\" + s.Name);
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+                foreach (DirectoryInfo s in Folders)
+                {
+                    try
+                    {
+                        System.IO.Directory.Move(s.FullName, Dest + "\\" + s.Name);
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool DownloadUnturned()
+        {
+            if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
+            {
+                Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
+            }
+            if (Directory.Exists(Comms.DataPath + @"SteamCMD\Unturned") == true)
+            {
+                Directory.Delete(Comms.DataPath + @"SteamCMD\Unturned");
+            }
+            Directory.CreateDirectory(Comms.DataPath + @"SteamCMD\Unturned");
+            try
+            {
+                if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
+                {
+                    Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
+                    Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
+                }
+                Process.Start(Comms.DataPath + @"SteamCMD\steamcmd.exe", " +login unturnedrocksupdate force_update +force_install_dir Unturned +app_update 304930 validate +exit");
+                bool SuccessMove = MoveDirectoryItems(Comms.DataPath + @"SteamCMD\Unturned", Comms.UnturnedPath);
+                if (SuccessMove == false)
+                {
+                    return false;
+                }
+                else if (SuccessMove == true)
+                {
+                    return true;
+                }
+                return true;
+            }
+            catch (Exception)
             {
                 return false;
             }
@@ -182,11 +273,11 @@ namespace USM
 
         public static bool InstallUnturned()
         {
-            // Use steam cmd to download unturned locally
-            /*if (SuccessDownload == false)
+            bool SuccessDownload = DownloadUnturned();
+            if (SuccessDownload == false)
             {
                 return false;
-            }*/
+            }
 
             bool SuccessPrepare = PrepareUnturnedInstall();
             if (SuccessPrepare == false)
@@ -194,8 +285,8 @@ namespace USM
                 return false;
             }
 
-            bool SuccessExtract = Extract("Unturned.zip", Comms.UnturnedPath);
-            if (SuccessExtract == false)
+            bool SuccessMove = Extract("Unturned.zip", Comms.UnturnedPath);
+            if (SuccessMove == false)
             {
                 return false;
             }

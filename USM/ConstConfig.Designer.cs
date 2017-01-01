@@ -87,9 +87,9 @@
             this.PerspFirstPer = new System.Windows.Forms.RadioButton();
             this.PerspBoth = new System.Windows.Forms.RadioButton();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.DiffNormal = new System.Windows.Forms.RadioButton();
             this.DiffEasy = new System.Windows.Forms.RadioButton();
             this.DiffHard = new System.Windows.Forms.RadioButton();
-            this.DiffNormal = new System.Windows.Forms.RadioButton();
             this.panel9 = new System.Windows.Forms.Panel();
             this.CheatsOff = new System.Windows.Forms.RadioButton();
             this.CheatsOn = new System.Windows.Forms.RadioButton();
@@ -712,6 +712,19 @@
             this.panel8.Size = new System.Drawing.Size(289, 23);
             this.panel8.TabIndex = 81;
             // 
+            // DiffNormal
+            // 
+            this.DiffNormal.AutoSize = true;
+            this.DiffNormal.Checked = true;
+            this.DiffNormal.Location = new System.Drawing.Point(110, 4);
+            this.DiffNormal.Name = "DiffNormal";
+            this.DiffNormal.Size = new System.Drawing.Size(58, 17);
+            this.DiffNormal.TabIndex = 29;
+            this.DiffNormal.TabStop = true;
+            this.DiffNormal.Tag = "Queue";
+            this.DiffNormal.Text = "Normal";
+            this.DiffNormal.UseVisualStyleBackColor = true;
+            // 
             // DiffEasy
             // 
             this.DiffEasy.AutoSize = true;
@@ -733,19 +746,6 @@
             this.DiffHard.Tag = "Queue";
             this.DiffHard.Text = "Hard";
             this.DiffHard.UseVisualStyleBackColor = true;
-            // 
-            // DiffNormal
-            // 
-            this.DiffNormal.AutoSize = true;
-            this.DiffNormal.Checked = true;
-            this.DiffNormal.Location = new System.Drawing.Point(110, 4);
-            this.DiffNormal.Name = "DiffNormal";
-            this.DiffNormal.Size = new System.Drawing.Size(58, 17);
-            this.DiffNormal.TabIndex = 29;
-            this.DiffNormal.TabStop = true;
-            this.DiffNormal.Tag = "Queue";
-            this.DiffNormal.Text = "Normal";
-            this.DiffNormal.UseVisualStyleBackColor = true;
             // 
             // panel9
             // 
@@ -883,6 +883,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.ClientSize = new System.Drawing.Size(384, 585);
             this.Controls.Add(this.panel12);
             this.Controls.Add(this.panel11);
