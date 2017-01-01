@@ -134,7 +134,7 @@ namespace USM
             }
             if (Directory.Exists(Comms.DataPath + @"SteamCMD\Unturned") == true)
             {
-                Directory.Delete(Comms.DataPath + @"SteamCMD\Unturned");
+                Directory.Delete(Comms.DataPath + @"SteamCMD\Unturned", true);
             }
             Directory.CreateDirectory(Comms.DataPath + @"SteamCMD\Unturned");
             try
