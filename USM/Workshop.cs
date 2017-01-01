@@ -320,7 +320,7 @@ namespace USM
                         SteamCMD.StartInfo = startInfo;
                         SteamCMD.Start();
                         SteamCMD.WaitForExit();
-                        CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
+                        CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + folder.Name, true);
                     }
                     foreach (DirectoryInfo folder in MapsInstalled)
                     {
