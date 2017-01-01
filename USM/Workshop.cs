@@ -253,11 +253,7 @@ namespace USM
 
         private void ID_TextChanged(object sender, EventArgs e)
         {
-            if (ID.Text != "")
-            {
-                Link.Text = "http://steamcommunity.com/sharedfiles/filedetails/?id=" + ID.Text;
-            }
-            else if (ID.Text == "")
+            if (ID.Text == "")
             {
                 Link.Text = "";
             }
@@ -266,7 +262,7 @@ namespace USM
         private void Link_TextChanged(object sender, EventArgs e)
         {
             char[] LettersAndSymbols = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '/', ':', '=', '?'};
-            ID.Text = Link.Text.TrimStart(LettersAndSymbols);
+            ID.Text = Link.Text.TrimStart(LettersAndSymbols).TrimEnd(LettersAndSymbols);
         }
 
         private void InstallID_Click(object sender, EventArgs e)
@@ -282,8 +278,21 @@ namespace USM
                     Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
                     Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
                 }
-                Process.Start(Comms.DataPath + @"SteamCMD\steamcmd.exe", " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + ID.Text + " +quit");
-                CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + ID.Text, true);
+                Process SteamCMD = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
+                startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + ID.Text + " +quit";
+                SteamCMD.StartInfo = startInfo;
+                SteamCMD.Start();
+                SteamCMD.WaitForExit();
+                if (MapsLocation.Checked == true)
+                {
+                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + ID.Text, true);
+                }
+                else if (ContentLocation.Checked == true)
+                {
+                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + ID.Text, true);
+                }
             }
             catch (Exception)
             {

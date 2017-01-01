@@ -90,6 +90,7 @@ namespace USM
             Timer = new Timer();
             Timer.Interval = 10;
             Timer.Tick += new EventHandler(Timer_tick);
+            Timer.Start();
         }
 
         private void Timer_tick(object Sender, EventArgs e)
