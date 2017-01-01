@@ -88,6 +88,8 @@ namespace USM
             else if (SuccessInstall == true)
             {
                 InstalledData[0] = Data[1];
+                CUVer.Text = InstalledData[0];
+                MessageBox.Show("Unturned has been successfully isntalled/updated.");
             }
         }
 
@@ -102,7 +104,7 @@ namespace USM
             {
                 InstalledData[1] = Data[2];
                 CRVer.Text = InstalledData[1];
-                MessageBox.Show("Rocket has been successfully isntalled.");
+                MessageBox.Show("Rocket has been successfully isntalled/updated.");
             }
         }
 
@@ -117,7 +119,7 @@ namespace USM
             {
                 InstalledData[2] = Data[3];
                 CPIVer.Text = InstalledData[2];
-                MessageBox.Show("Plugin Integrity has been successfully isntalled.");
+                MessageBox.Show("Plugin Integrity has been successfully isntalled/updated.");
             }
         }
 

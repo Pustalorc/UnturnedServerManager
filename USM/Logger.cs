@@ -16,7 +16,8 @@ namespace USM
 
         public static void Log(string Message)
         {
-            File.AppendAllText(Comms.DataPath + "Log.txt", Message);
+            string[] a = new string[] { "[" + TickTimer.ProgramTime + "s] - " + Message };
+            File.AppendAllLines(Comms.DataPath + "Log.txt", a);
         }
 
         public static void DeleteLogFile()

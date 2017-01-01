@@ -117,7 +117,7 @@
             this.LMVer.Name = "LMVer";
             this.LMVer.Size = new System.Drawing.Size(40, 13);
             this.LMVer.TabIndex = 41;
-            this.LMVer.Text = "3.0.0.4";
+            this.LMVer.Text = "3.0.0.5";
             // 
             // LMVerDesc
             // 
@@ -135,7 +135,7 @@
             this.CMVer.Name = "CMVer";
             this.CMVer.Size = new System.Drawing.Size(40, 13);
             this.CMVer.TabIndex = 39;
-            this.CMVer.Text = "3.0.0.4";
+            this.CMVer.Text = "3.0.0.5";
             // 
             // CMVerDesc
             // 

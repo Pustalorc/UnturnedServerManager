@@ -16,6 +16,11 @@ namespace USM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            new TickTimer().Show();
+            if (Directory.Exists(Comms.DataPath) == false)
+            {
+                Directory.CreateDirectory(Comms.DataPath);
+            }
             if (File.Exists(Comms.DataPath + "Logger.log") == true)
             {
                 Logger.DeleteLogFile();
@@ -68,6 +73,38 @@ namespace USM
                 Logger.Log("Exited program.");
                 Application.Exit();
             }
+        }
+    }
+    public class TickTimer : Form
+    {
+        public System.ComponentModel.IContainer components;
+        public Timer Timer;
+        public static decimal ProgramTime = 0.00M;
+        public TickTimer()
+        {
+            Opacity = 0;
+            ShowInTaskbar = false;
+            ShowIcon = false;
+            Hide();
+            components = new System.ComponentModel.Container();
+            Timer = new Timer();
+            Timer.Interval = 10;
+            Timer.Tick += new EventHandler(Timer_tick);
+        }
+
+        private void Timer_tick(object Sender, EventArgs e)
+        {
+            ProgramTime += 0.01M;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            // Clean up any components being used.
+            if (disposing)
+                if (components != null)
+                    components.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }

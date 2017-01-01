@@ -94,8 +94,11 @@ namespace USM
             try
             {
                 DirectoryInfo Directory = new DirectoryInfo(DirName);
+                Logger.Log("DirectoryInfo was set.");
                 FileInfo[] Files = Directory.GetFiles();
+                Logger.Log("FileInfo[] was set.");
                 DirectoryInfo[] Folders = Directory.GetDirectories();
+                Logger.Log("DirectoryInfo[] was set.");
                 foreach (FileInfo s in Files)
                 {
                     try
@@ -104,6 +107,7 @@ namespace USM
                     }
                     catch (Exception)
                     {
+                        Logger.Log("Error occured during the file loop.");
                         return false;
                     }
                 }
@@ -115,6 +119,7 @@ namespace USM
                     }
                     catch (Exception)
                     {
+                        Logger.Log("Error occured during the folder loop.");
                         return false;
                     }
                 }
@@ -122,6 +127,7 @@ namespace USM
             }
             catch (Exception)
             {
+                Logger.Log("Error occured before any loops could load.");
                 return false;
             }
         }
@@ -327,7 +333,7 @@ namespace USM
                 }
                 else if (SuccessPrepare == true)
                 {
-                    bool SuccessMove = MoveDirectoryItems(Comms.DataPath + @"SteamCMD\Unturned", Comms.UnturnedPath);
+                    bool SuccessMove = MoveDirectory(Comms.DataPath + @"SteamCMD\Unturned", Comms.UnturnedPath);
                     if (SuccessMove == false)
                     {
                         return false;

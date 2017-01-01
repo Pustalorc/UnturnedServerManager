@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 3.0.0.4
+Version: Public 3.0.0.5
 
 
 
@@ -50,6 +50,12 @@ Or compile it yourself with the source code!
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 #Changelog:
+
+**V3.0.0.5** - 
+
+* Fixed multiple bugs with the workshop install tool
+* Fixed Logger.
+* Fixed Unturned Install
 
 **V3.0.0.4** - 
 

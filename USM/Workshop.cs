@@ -102,6 +102,7 @@ namespace USM
             catch (Exception)
             {
                 MessageBox.Show("The path set is not a directory path.");
+                return;
             }
             AvailableItems.Items.Clear();
             SearchDownloadedItems();
@@ -208,8 +209,16 @@ namespace USM
 
         private void DeleteAll_Click(object sender, EventArgs e)
         {
-            Directory.Delete(@"" + Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop", true);
-            RefreshInstalledContent();
+            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop") == false)
+            {
+                MessageBox.Show("You haven't installed any workshop mods yet.");
+                return;
+            }
+            else
+            {
+                Directory.Delete(@"" + Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop", true);
+                RefreshInstalledContent();
+            }
         }
 
         private void ContentLocation_CheckedChanged(object sender, EventArgs e)
@@ -244,7 +253,14 @@ namespace USM
 
         private void ID_TextChanged(object sender, EventArgs e)
         {
-            Link.Text = "http://steamcommunity.com/sharedfiles/filedetails/?id=" + ID.Text;
+            if (ID.Text != "")
+            {
+                Link.Text = "http://steamcommunity.com/sharedfiles/filedetails/?id=" + ID.Text;
+            }
+            else if (ID.Text == "")
+            {
+                Link.Text = "";
+            }
         }
 
         private void Link_TextChanged(object sender, EventArgs e)
@@ -277,33 +293,41 @@ namespace USM
 
         private void UpdateAll_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
+            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop") == false)
             {
-                Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
+                MessageBox.Show("There are no workshop items installed.");
+                return;
             }
-            try
+            else if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop") == true)
             {
-                if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
+                if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
                 {
-                    Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
-                    Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
+                    Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
                 }
-                foreach (DirectoryInfo folder in MapsInstalled)
+                try
                 {
+                    if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
+                    {
+                        Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
+                        Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
+                    }
+                    foreach (DirectoryInfo folder in MapsInstalled)
+                    {
 
-                    Process SteamCMD = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
-                    startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +exit";
-                    SteamCMD.StartInfo = startInfo;
-                    SteamCMD.Start();
-                    SteamCMD.WaitForExit();
-                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
+                        Process SteamCMD = new Process();
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
+                        startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +exit";
+                        SteamCMD.StartInfo = startInfo;
+                        SteamCMD.Start();
+                        SteamCMD.WaitForExit();
+                        CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
+                    }
                 }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("An error has been encountered during the download of the item.");
+                catch (Exception)
+                {
+                    MessageBox.Show("An error has been encountered during the download of the item.");
+                }
             }
         }
     }
