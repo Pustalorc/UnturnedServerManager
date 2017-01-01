@@ -144,7 +144,13 @@ namespace USM
                     Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
                     Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
                 }
-                Process.Start(Comms.DataPath + @"SteamCMD\steamcmd.exe", " +login unturnedrocksupdate force_update +force_install_dir Unturned +app_update 304930 validate +exit");
+                Process SteamCMD = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
+                startInfo.Arguments = " +login unturnedrocksupdate force_update +force_install_dir Unturned +app_update 304930 validate +exit";
+                SteamCMD.StartInfo = startInfo;
+                SteamCMD.Start();
+                SteamCMD.WaitForExit();
                 return true;
             }
             catch (Exception)

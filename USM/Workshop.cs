@@ -290,7 +290,14 @@ namespace USM
                 }
                 foreach (DirectoryInfo folder in MapsInstalled)
                 {
-                    Process.Start(Comms.DataPath + @"SteamCMD\steamcmd.exe", " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +quit");
+
+                    Process SteamCMD = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
+                    startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +exit";
+                    SteamCMD.StartInfo = startInfo;
+                    SteamCMD.Start();
+                    SteamCMD.WaitForExit();
                     CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
                 }
             }
