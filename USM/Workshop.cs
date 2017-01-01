@@ -311,6 +311,10 @@ namespace USM
                         Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
                         Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
                     }
+                    DirectoryInfo Contents = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content");
+                    DirectoryInfo Maps = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps");
+                    ContentInstalled = Contents.GetDirectories();
+                    MapsInstalled = Maps.GetDirectories();
                     foreach (DirectoryInfo folder in ContentInstalled)
                     {
                         Process SteamCMD = new Process();
