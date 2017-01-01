@@ -138,11 +138,6 @@ namespace USM
             {
                 Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
             }
-            if (Directory.Exists(Comms.DataPath + @"SteamCMD\Unturned") == true)
-            {
-                Directory.Delete(Comms.DataPath + @"SteamCMD\Unturned", true);
-            }
-            Directory.CreateDirectory(Comms.DataPath + @"SteamCMD\Unturned");
             try
             {
                 if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
@@ -153,7 +148,7 @@ namespace USM
                 Process SteamCMD = new Process();
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
-                startInfo.Arguments = " +login unturnedrocksupdate force_update +force_install_dir Unturned +app_update 304930 validate +exit";
+                startInfo.Arguments = " +login unturnedrocksupdate force_update +force_install_dir \"" + Comms.UnturnedPath + "\" +app_update 304930 validate +exit";
                 SteamCMD.StartInfo = startInfo;
                 SteamCMD.Start();
                 SteamCMD.WaitForExit();
@@ -216,32 +211,6 @@ namespace USM
                     string temppath = Path.Combine(Destination, subdir.Name);
                     CopyDirectory(subdir.FullName, temppath, Subdirectories);
                 }
-            }
-        }
-
-        public static bool PrepareUnturnedInstall()
-        {
-            try
-            {
-                if (Directory.Exists(Comms.UnturnedPath) == true)
-                {
-                    bool SuccessBackup = MoveDirectory(Comms.UnturnedPath + @"\Servers", Comms.DataPath + @"\Backup");
-                    if (SuccessBackup == false)
-                    {
-                        return false;
-                    }
-                    else if (SuccessBackup == true)
-                    {
-                        Directory.Delete(Comms.UnturnedPath, true);
-                        Directory.CreateDirectory(Comms.UnturnedPath);
-                        return true;
-                    }
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
             }
         }
 
@@ -323,34 +292,6 @@ namespace USM
             if (SuccessDownload == false)
             {
                 return false;
-            }
-            else if (SuccessDownload == true)
-            {
-                bool SuccessPrepare = PrepareUnturnedInstall();
-                if (SuccessPrepare == false)
-                {
-                    return false;
-                }
-                else if (SuccessPrepare == true)
-                {
-                    bool SuccessMove = MoveDirectory(Comms.DataPath + @"SteamCMD\Unturned", Comms.UnturnedPath);
-                    if (SuccessMove == false)
-                    {
-                        return false;
-                    }
-                    else if (SuccessMove == true)
-                    {
-                        bool SuccessRestore = MoveDirectory(Comms.DataPath + @"\Backup", Comms.UnturnedPath + @"\Servers");
-                        if (SuccessRestore == false)
-                        {
-                            return false;
-                        }
-                        else if (SuccessRestore == true)
-                        {
-                            return true;
-                        }
-                    }
-                }
             }
             return true;
         }

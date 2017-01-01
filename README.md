@@ -53,9 +53,10 @@ https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 **V3.0.0.5** - 
 
-* Fixed multiple bugs with the workshop install tool
+* Fixed multiple bugs with the workshop install tool.
 * Fixed Logger.
-* Fixed Unturned Install
+* Fixed Unturned Install.
+* Changed Unturned Install Method.
 
 **V3.0.0.4** - 
 
