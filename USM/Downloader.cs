@@ -145,15 +145,6 @@ namespace USM
                     Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
                 }
                 Process.Start(Comms.DataPath + @"SteamCMD\steamcmd.exe", " +login unturnedrocksupdate force_update +force_install_dir Unturned +app_update 304930 validate +exit");
-                bool SuccessMove = MoveDirectoryItems(Comms.DataPath + @"SteamCMD\Unturned", Comms.UnturnedPath);
-                if (SuccessMove == false)
-                {
-                    return false;
-                }
-                else if (SuccessMove == true)
-                {
-                    return true;
-                }
                 return true;
             }
             catch (Exception)
@@ -314,17 +305,25 @@ namespace USM
             {
                 return false;
             }
-
-            bool SuccessPrepare = PrepareUnturnedInstall();
-            if (SuccessPrepare == false)
+            else if (SuccessDownload == true)
             {
-                return false;
-            }
-
-            bool SuccessMove = Extract("Unturned.zip", Comms.UnturnedPath);
-            if (SuccessMove == false)
-            {
-                return false;
+                bool SuccessPrepare = PrepareUnturnedInstall();
+                if (SuccessPrepare == false)
+                {
+                    return false;
+                }
+                else if (SuccessPrepare == true)
+                {
+                    bool SuccessMove = MoveDirectoryItems(Comms.DataPath + @"SteamCMD\Unturned", Comms.UnturnedPath);
+                    if (SuccessMove == false)
+                    {
+                        return false;
+                    }
+                    else if (SuccessMove == true)
+                    {
+                        return true;
+                    }
+                }
             }
             return true;
         }
