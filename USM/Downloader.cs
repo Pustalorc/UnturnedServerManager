@@ -213,11 +213,26 @@ namespace USM
             {
                 if (Directory.Exists(Comms.UnturnedPath) == true)
                 {
-                    CopyDirectory(Comms.UnturnedPath + @"\Servers", Comms.DataPath + @"\Backup", true);
-                    Directory.Delete(Comms.UnturnedPath, true);
+                    bool SuccessBackup = MoveDirectory(Comms.UnturnedPath + @"\Servers", Comms.DataPath + @"\Backup");
+                    if (SuccessBackup == false)
+                    {
+                        return false;
+                    }
+                    else if (SuccessBackup == true)
+                    {
+                        Directory.Delete(Comms.UnturnedPath, true);
+                    }
                 }
                 Directory.CreateDirectory(Comms.UnturnedPath);
-                CopyDirectory(Comms.DataPath + @"\Backup", Comms.UnturnedPath + @"\Servers", true);
+                bool SuccessRestore = MoveDirectory(Comms.DataPath + @"\Backup", Comms.UnturnedPath + @"\Servers");
+                if (SuccessRestore == false)
+                {
+                    return false;
+                }
+                else if (SuccessRestore == true)
+                {
+                    return true;
+                }
                 return true;
             }
             catch (Exception e)
