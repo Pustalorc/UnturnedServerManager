@@ -266,7 +266,7 @@ namespace USM
             ID.Text = post1.TrimEnd(LettersAndSymbols);
         }
 
-        private void InstallID_Click(object sender, EventArgs e)
+        private async void InstallID_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
             {
@@ -286,14 +286,18 @@ namespace USM
                 SteamCMD.StartInfo = startInfo;
                 SteamCMD.Start();
                 SteamCMD.WaitForExit();
+                await Task.Delay(1000);
                 if (MapsLocation.Checked == true)
                 {
-                    Directory.Move(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + ID.Text);
+                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + ID.Text, true);
                 }
                 else if (ContentLocation.Checked == true)
                 {
-                    Directory.Move(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + ID.Text);
+                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + ID.Text, true);
                 }
+                AvailableItems.Items.Clear();
+                WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
+                SearchDownloadedItems();
             }
             catch (Exception)
             {
@@ -334,6 +338,7 @@ namespace USM
                         SteamCMD.StartInfo = startInfo;
                         SteamCMD.Start();
                         SteamCMD.WaitForExit();
+                        Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + folder.Name);
                         Directory.Move(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + folder.Name);
                     }
                     foreach (DirectoryInfo folder in MapsInstalled)
@@ -345,6 +350,7 @@ namespace USM
                         SteamCMD.StartInfo = startInfo;
                         SteamCMD.Start();
                         SteamCMD.WaitForExit();
+                        Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name);
                         Directory.Move(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name);
                     }
                     RefreshInstalledContent();
