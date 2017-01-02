@@ -49,18 +49,14 @@ namespace USM
         {
             ContextMenu Menu = new ContextMenu();
             MenuItem Exit = new MenuItem();
-            MenuItem UpdateTool = new MenuItem();
             MenuItem Github = new MenuItem();
             MenuItem Reddit = new MenuItem();
             MenuItem Issues = new MenuItem();
             IContainer Components = new Container();
-            Menu.MenuItems.AddRange( new MenuItem[] { Exit, UpdateTool, Github, Reddit, Issues });
+            Menu.MenuItems.AddRange( new MenuItem[] { Exit, Github, Reddit, Issues });
             Exit.Index = 0;
             Exit.Text = "Exit";
             Exit.Click += new EventHandler(Exit_Click);
-            UpdateTool.Index = 0;
-            UpdateTool.Text = "Update Tool";
-            UpdateTool.Click += new EventHandler(UpdateTool_Click);
             Github.Index = 0;
             Github.Text = "Github";
             Github.Click += new EventHandler(Github_Click);
@@ -68,7 +64,7 @@ namespace USM
             Reddit.Text = "Reddit";
             Reddit.Click += new EventHandler(Reddit_Click);
             Issues.Index = 0;
-            Issues.Text = "Issues";
+            Issues.Text = "Issues And Suggestions";
             Issues.Click += new EventHandler(Issues_Click);
             Notifier.ContextMenu = Menu;
             Logger.Log("Tray icon menu successfully set.");
@@ -112,23 +108,6 @@ namespace USM
         {
             Process.Start("https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/");
             Logger.Log("Opening website \"https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/\".");
-        }
-
-        private void UpdateTool_Click(object Sender, EventArgs e)
-        {
-            Logger.Log("Attempting to open the update tool...");
-            if (SerPath.Text == "")
-            {
-                MessageBox.Show("No server path was set.");
-                Logger.Log("Failed to open update tool, no path for unturned data was set.");
-            }
-            else
-            {
-                Comms.UnturnedPath = SerPath.Text;
-                Updater f = new Updater();
-                Logger.Log("Successfully opened the update tool.");
-                f.ShowDialog();
-            }
         }
 
         private async void CheckRocket()
