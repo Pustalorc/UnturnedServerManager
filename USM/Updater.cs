@@ -55,6 +55,28 @@ namespace USM
                 InstalledData[2] = "N/A";
             }
             LoadVersions();
+            DisableUpdates();
+        }
+        
+        private async void DisableUpdates()
+        {
+            int c = 0;
+            while (c < 500)
+            {
+                if (Comms.AServerIsRunning == true)
+                {
+                    UUnturned.Enabled = false;
+                    URocket.Enabled = false;
+                    UAll.Enabled = false;
+                }
+                else if (Comms.AServerIsRunning == false)
+                {
+                    UUnturned.Enabled = true;
+                    URocket.Enabled = true;
+                    UAll.Enabled = true;
+                }
+                await Task.Delay(1);
+            }
         }
 
         private void LoadVersions()

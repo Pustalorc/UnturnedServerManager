@@ -43,6 +43,48 @@ namespace USM
             Logger.Log("Enabled auto-save every 60 seconds.");
             CheckRocket();
             EditServer.Maximum = Servers2Run.Value;
+            DisablePathSetting();
+            CheckIfAServerIsRunning();
+        }
+
+        private async void DisablePathSetting()
+        {
+            int c = 0;
+            while (c < 500)
+            {
+                if (Comms.AServerIsRunning == true)
+                {
+                    SerPath.ReadOnly = false;
+                    SerPath.Enabled = false;
+                }
+                else if (Comms.AServerIsRunning == false)
+                {
+                    SerPath.ReadOnly = true;
+                    SerPath.Enabled = true;
+                }
+                await Task.Delay(1);
+            }
+        }
+
+        private async void CheckIfAServerIsRunning()
+        {
+            int c = 0;
+            while (c < 500)
+            {
+                foreach (int id in Comms.RunningID)
+                {
+                    if (id != 0)
+                    {
+                        Comms.AServerIsRunning = true;
+                        break;
+                    }
+                    else if (id == 0)
+                    {
+                        Comms.AServerIsRunning = false;
+                    }
+                }
+                await Task.Delay(1);
+            }
         }
 
         private void BuildNotifyMenu()
@@ -185,6 +227,7 @@ namespace USM
             Logger.Log("Selected server for edit was changed to " + EditServer.Value);
             EditServer.Enabled = false;
             Servers2Run.Minimum = EditServer.Value;
+            Desc4.Text = "Currently Editing Server With ID: " + EditServer.Value;
             if (File.Exists(@"C:\Unturned_Manager\Server_ID_" + EditServer.Value + "_Config.dat"))
             {
                 Logger.Log("Configuration file was found for server with id " + EditServer.Value + ", loading data.");

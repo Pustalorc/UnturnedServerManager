@@ -148,11 +148,11 @@
             // Desc4
             // 
             this.Desc4.AutoSize = true;
-            this.Desc4.Location = new System.Drawing.Point(382, 62);
+            this.Desc4.Location = new System.Drawing.Point(356, 62);
             this.Desc4.Name = "Desc4";
-            this.Desc4.Size = new System.Drawing.Size(133, 13);
+            this.Desc4.Size = new System.Drawing.Size(168, 13);
             this.Desc4.TabIndex = 8;
-            this.Desc4.Text = "Currently Server With ID: 1";
+            this.Desc4.Text = "Currently Editing Server With ID: 1";
             // 
             // Desc5
             // 
