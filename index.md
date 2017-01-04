@@ -1,8 +1,8 @@
-Version: Public 3.0.0.3
+Version: Public 3.0.0.5
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lnc18aoqi6s50u2w?svg=true)]()
 
-Last Update: December 30, 2017
+Last Update: January 1, 2017
 
 --
 
@@ -11,8 +11,6 @@ Last Update: December 30, 2017
 .Net 4.5 or Later
 
 Windows (Will be working on mac version at some point in time)
-
-Unturned Installed Somewhere In Your Computer
 
 <h1>Download:</h1>
 
@@ -36,6 +34,27 @@ Or compile it yourself with the source code!
 None as of right now.
 
 <h1>Changelog:</h1>
+
+**V3.0.0.5** - 
+
+* Fixed multiple bugs with the workshop install tool.
+* Fixed Logger.
+* Fixed Unturned Install.
+* Fixed "Update All" Workshop Items Bug.
+* Fixed install by id workshop items bug.
+* Changed Unturned Install Method.
+
+**V3.0.0.4** - 
+
+* Fixed Unable To Start Program In Offline Mode
+* Fixed Bug When Puting A Non-Directory Link In Workshop Installer.
+* Fixed Multiple Bugs With The Unturned Updater.
+* Removed Comment About Unturned Updating Being Disabled.
+* Enabled/Added Unturned Update Option
+* Added option to install workshop items by item ID.
+* Added "Update All" Button To Workshop Installer.
+* Added logger & system logging to Log.txt
+* Changed background color to all forms	
 
 **V3.0.0.3** - 
 
