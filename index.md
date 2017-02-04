@@ -25,13 +25,25 @@ Or compile it yourself with the source code!
 <h1>Upcoming Features:</h1>
 
 * Control on each of the server's console (ban and such).
-* Ease of update of Unturned.
+* Update All Plugins (bulk update).
 * Auto-Restart Option.
 * Ease of config for rocket settings and permissions.
+* Delete Mod/Plugin Selected.
+* USM Settings.
 
 <h1>Known Bugs:</h1>
 
-None as of right now.
+* Unable to change the server path.
+* Plugin lists are incorrect but still allow download of a few items.
+* When program crashes, it is unable to start without finding and removing USM.lock file.
+* Multiple Log Sectors missing.
+* Unable to tell difference of what happened where in the logs.
+* Install by ID in workshop installer has a bug when adding a link there.
+* Messageboxes are incomplete.
+* Unknown DLL Files when installing a few ids.
+* Unable to see already downloaded items with install by ID.
+* Errors when using an incorrect format for a folder.
+* Shutdown/Restart makes player data loss.
 
 <h1>Changelog:</h1>
 
