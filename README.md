@@ -2,11 +2,7 @@
 
 Version: Public 3.0.0.5
 
-
-
 [![Build status](https://ci.appveyor.com/api/projects/status/lnc18aoqi6s50u2w?svg=true)]()
-
-
 
 Last Update: January 1, 2017
 
@@ -48,6 +44,7 @@ Unturned Installed Somewhere In Your Computer
 * Unknown DLL Files when installing a few ids.
 * Unable to see already downloaded items with install by ID.
 * Errors when using an incorrect format for a folder.
+* Shutdown/Restart makes player data loss.
 
 #Download:
 
