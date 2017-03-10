@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,54 +32,37 @@ namespace USM
         }
         private static void StartApp()
         {
-            if (File.Exists(Comms.DataPath + "USM.lock") == false)
+            string appGuid = "2d1dcd0a-9719-44f5-8f0e-2fd79d918fb5";
+            try
             {
-                try
+                using (Mutex mutex = new Mutex(false, "Global\\" + appGuid))
                 {
-                    File.Create(Comms.DataPath + "USM.lock").Close();
-                    Logger.Log("Created lock file.");
+                    if (!mutex.WaitOne(0, false))
+                    {
+                        MessageBox.Show("Another instance of unturned server manager is already running!", "Unturned Server Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                 }
-                catch(DirectoryNotFoundException)
-                {
-                    Directory.CreateDirectory(Comms.DataPath);
-                    Logger.Log("Created data directory.");
-                    File.Create(Comms.DataPath + "USM.lock").Close();
-                    Logger.Log("Created lock file.");
-                }
-                File.SetAttributes(Comms.DataPath + "USM.lock", FileAttributes.Hidden);
-                Logger.Log("Hidden lock file.");
-                try
-                {
-                    Logger.Log("Started main application.");
-                    Application.Run(new Manager());
-                    File.Delete(Comms.DataPath + "USM.lock");
-                    Logger.Log("Deleted lock file.");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("An Internal Exception Was Thrown. Rebooting Application.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    File.WriteAllText(Comms.DataPath + "Error.txt", Convert.ToString(e));
-                    Logger.Log("Created error file.");
-                    File.Delete(Comms.DataPath + "USM.lock");
-                    Logger.Log("Deleted lock file.");
-                    MessageBox.Show("Please send an issue report in our github page, with the details of what happened and the error file located at \"C:\\Unturned_Manager\\Error.txt\", then we can fix the error as soon as possible.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Logger.Log("Restarted program.");
-                    StartApp();
-                }
+                Logger.Log("Started main application.");
+                Application.Run(new Manager());
+                Logger.Log("Main application was closed.");
             }
-            else if (File.Exists(Comms.DataPath + "USM.lock") == true)
+            catch (Exception e)
             {
-                Logger.Log("Lock file was found again.");
-                MessageBox.Show("Cannot Run Unturned Server Manager, Another Instance Is Already Running!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Logger.Log("Exited program.");
-                Application.Exit();
+                MessageBox.Show("An Internal Exception Was Thrown. Rebooting Application.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                File.WriteAllText(Path.GetFullPath(Comms.DataPath + @"\Error.txt"), e.ToString());
+                Logger.Log("Created error file.");
+                MessageBox.Show("Please send an issue report in our github page, with the details of what happened and the error file located at \"C:\\Unturned_Manager\\Error.txt\", then we can fix the error as soon as possible.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Logger.Log("Restarted program.");
+                StartApp();
             }
         }
     }
+
     public class TickTimer : Form
     {
         public System.ComponentModel.IContainer components;
-        public Timer Timer;
+        public System.Windows.Forms.Timer Timer;
         public static decimal ProgramTime = 0.00M;
         public TickTimer()
         {
@@ -87,7 +71,7 @@ namespace USM
             ShowIcon = false;
             Hide();
             components = new System.ComponentModel.Container();
-            Timer = new Timer();
+            Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 10;
             Timer.Tick += new EventHandler(Timer_tick);
             Timer.Start();

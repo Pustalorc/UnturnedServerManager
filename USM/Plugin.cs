@@ -17,7 +17,6 @@ namespace USM
     {
         private DirectoryInfo ServerDirectory;
         private FileInfo[] InstalledPlugins;
-        private string[] DownloadLinks;
         private string[] PluginNames;
         private string[] PluginWebLink;
         private string[] SelectedItems;
@@ -34,9 +33,8 @@ namespace USM
             Logger.Log("Loading plugin integrity files...");
             try
             {
-                DownloadLinks = File.ReadAllLines(Comms.DataPath + @"PluginLinks.dat");
-                PluginNames = File.ReadAllLines(Comms.DataPath + @"Plugins.dat");
-                PluginWebLink = File.ReadAllLines(Comms.DataPath + @"PluginPages.dat");
+                PluginWebLink = File.ReadAllLines(Comms.DataPath + @"PluginLinks.dat");
+                PluginNames = File.ReadAllLines(Comms.DataPath + @"PluginNames.dat");
             }
             catch (Exception)
             {
@@ -46,7 +44,7 @@ namespace USM
                 Logger.Log("Turning program off.");
                 ShutOff();
             }
-            if (Error == false)
+            if (!Error)
             {
                 Logger.Log("Plugin integrity files loaded.");
                 UpdateOptions();
@@ -180,7 +178,7 @@ namespace USM
             }
         }
         
-        private void InstallItems()
+        private async void InstallItems()
         {
             for (int i = 0; i < SelectedItems.Length; i++)
             {
@@ -189,7 +187,7 @@ namespace USM
                     if (SelectedItems[i] == PluginNames[u])
                     {
                         Downloader.GetReady();
-                        Downloader.Download(DownloadLinks[u], SelectedItems[i]);
+                        Downloader.Download(PluginWebLink[u] + "latest.zip", SelectedItems[i]);
                         if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == false)
                         {
                             Directory.CreateDirectory(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
@@ -204,8 +202,29 @@ namespace USM
                 {
                     Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries", true);
                 }
+                while (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries"))
+                {
+                    await Task.Delay(1);
+                }
                 Directory.Move(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins\Libraries", Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries");
             }
+            FileInfo[] Files = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins").GetFiles();
+            string[] INVALIDFILES = new string[] { "WebSocket4Net.dll", "EngineIoClientDotNet.dll", "MOTDgd.dll.config", "Newtonsoft.Json.dll", "SocketIoClientDotNet.dll", "System.Threading.Tasks.NET35.dll" };
+            foreach (FileInfo file in Files)
+            {
+                foreach (string invalid in INVALIDFILES)
+                {
+                    if (file.Name == invalid)
+                    {
+                        if (File.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries\" + file.Name))
+                        {
+                            File.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries\" + file.Name);
+                        }
+                        File.Move(file.FullName, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries\" + file.Name);
+                    }
+                }
+            }
+            Downloader.ShutOff();
         }
 
         private void GetSelectedItems()

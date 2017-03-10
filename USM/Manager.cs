@@ -54,12 +54,12 @@ namespace USM
             {
                 if (Comms.AServerIsRunning == true)
                 {
-                    SerPath.ReadOnly = false;
+                    SerPath.ReadOnly = true;
                     SerPath.Enabled = false;
                 }
                 else if (Comms.AServerIsRunning == false)
                 {
-                    SerPath.ReadOnly = true;
+                    SerPath.ReadOnly = false;
                     SerPath.Enabled = true;
                 }
                 await Task.Delay(1);
@@ -158,18 +158,14 @@ namespace USM
             int c = 0;
             while (c < 500)
             {
-                if (Comms.RunningID[(Convert.ToInt32(EditServer.Value) - 1)] == Convert.ToInt32(EditServer.Value))
-                {
-
-                }
-                else
+                if (Comms.RunningID[(Convert.ToInt32(EditServer.Value) - 1)] != Convert.ToInt32(EditServer.Value))
                 {
                     Comms.UnturnedPath = SerPath.Text;
-                    if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == false)
+                    if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == false || File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == false || File.Exists(Comms.DataPath + @"PluginLinks.dat") == false || File.Exists(Comms.DataPath + @"PluginNames.dat") == false)
                     {
                         Plugin.Enabled = false;
                     }
-                    else if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == true)
+                    else if (Directory.Exists(Comms.UnturnedPath + @"\Modules") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\English.dat") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Icon.png") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\LICENSE") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\README") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.API.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Core.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.dll") == true && File.Exists(Comms.UnturnedPath + @"\Modules\Rocket.Unturned\Rocket.Unturned.module") == true && File.Exists(Comms.DataPath + @"PluginLinks.dat") == true && File.Exists(Comms.DataPath + @"PluginNames.dat") == true)
                     {
                         Plugin.Enabled = true;
                     }
@@ -185,14 +181,15 @@ namespace USM
             {
                 Downloader.GetReady();
                 Logger.Log("Created temp download folder.");
-                Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USMVer.dat", "USM.dat");
+                Downloader.Download("https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Versions.zip", "USM.zip");
                 Logger.Log("Downloaded latest version file for USM.");
-                string LatestVersion = File.ReadAllLines(Downloader.Temp + @"\USM.dat")[0];
+                Downloader.Extract("USM.zip", Downloader.Temp);
+                string LatestVersion = File.ReadAllLines(Downloader.Temp + @"\Versions.dat")[2];
                 Logger.Log("Read data from latest USM version.");
-                if (LatestVersion != "3.0.0.5")
+                if (LatestVersion != "3.0.1.0")
                 {
                     Logger.Log("Version of the program is different than the latest one. Opened notification of a new update.");
-                    Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.0.5, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
+                    Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.1.0, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
                 }
                 Downloader.ShutOff();
                 Logger.Log("Deleted temp download folder.");

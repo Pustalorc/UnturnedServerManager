@@ -16,9 +16,7 @@ namespace USM
     {
         public const string Temp = @"C:\Unturned_Manager\TempDownload";
         public const string RocketDownload = "https://ci.rocketmod.net/job/Rocket.Unturned/lastSuccessfulBuild/artifact/Rocket.Unturned/bin/Release/Rocket.zip";
-        public const string PluginList1 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Plugins.dat";
-        public const string PluginList2 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/PluginsDl.dat";
-        public const string PluginList3 = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/PluginsPage.dat";
+        public const string PluginDownload = "https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/Plugins.zip";
         public static string RocketFolder;
         public static string ScriptsFolder;
 
@@ -298,20 +296,8 @@ namespace USM
 
         public static bool InstallIntegrity()
         {
-            bool SuccessDownload1 = Download(PluginList1, "Plugins.dat");
-            if (SuccessDownload1 == false)
-            {
-                return false;
-            }
-
-            bool SuccessDownload2 = Download(PluginList2, "PluginLinks.dat");
-            if (SuccessDownload2 == false)
-            {
-                return false;
-            }
-
-            bool SuccessDownload3 = Download(PluginList3, "PluginPages.dat");
-            if (SuccessDownload3 == false)
+            bool SuccessDownload = Download(PluginDownload, "Plugins.zip");
+            if (SuccessDownload == false)
             {
                 return false;
             }
@@ -322,20 +308,8 @@ namespace USM
                 return false;
             }
 
-            bool SuccessMove1 = MoveFiles("Plugins.dat", Comms.DataPath + "Plugins.dat");
-            if (SuccessMove1 == false)
-            {
-                return false;
-            }
-
-            bool SuccessMove2 = MoveFiles("PluginLinks.dat", Comms.DataPath + "PluginLinks.dat");
-            if (SuccessMove2 == false)
-            {
-                return false;
-            }
-
-            bool SuccessMove3 = MoveFiles("PluginPages.dat", Comms.DataPath + "PluginPages.dat");
-            if (SuccessMove3 == false)
+            bool SuccessExtract = Extract("Plugins.zip", Comms.DataPath);
+            if (SuccessExtract == false)
             {
                 return false;
             }

@@ -249,9 +249,14 @@ namespace USM
                 }
             }
         }
+        private bool IsLink = false;
 
         private void ID_TextChanged(object sender, EventArgs e)
         {
+            if (IsLink == false)
+            {
+                Link.Text = "http://steamcommunity.com/sharedfiles/filedetails/?id=" + ID.Text;
+            }
             if (ID.Text == "")
             {
                 Link.Text = "";
@@ -260,9 +265,10 @@ namespace USM
 
         private void Link_TextChanged(object sender, EventArgs e)
         {
-            char[] LettersAndSymbols = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.', '/', ':', '=', '?'};
-            string post1 = Link.Text.TrimStart(LettersAndSymbols);
-            ID.Text = post1.TrimEnd(LettersAndSymbols);
+            IsLink = true;
+            char[] LettersAndSymbols = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '/', '?', '.', '>', ',', '<', '\'', '\"', ';', ':', '\\', '|', ']', '}', '[', '{', '=', '+', '-', '_', ')', '(', '*', '&', '^', '%', '$', '#', '@', '!', '`', '~' };
+            ID.Text = Link.Text.Trim(LettersAndSymbols);
+            IsLink = false;
         }
 
         private void InstallID_Click(object sender, EventArgs e)
@@ -293,14 +299,14 @@ namespace USM
                 {
                     CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + ID.Text, true);
                 }
-                AvailableItems.Items.Clear();
-                WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
-                SearchDownloadedItems();
             }
             catch (Exception)
             {
                 MessageBox.Show("An error has been encountered during the download of the item.");
             }
+            AvailableItems.Items.Clear();
+            WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
+            SearchDownloadedItems();
         }
 
         private void UpdateAll_Click(object sender, EventArgs e)
