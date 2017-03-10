@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 3.0.1.3
+Version: Public 3.0.1.4
 
 [![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/tag/v3.0.0.5) [![GitHub issues](https://img.shields.io/github/issues/persiafighter/UnturnedServerManager.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/issues) [![GitHub closed issues](https://img.shields.io/github/issues-closed/persiafighter/UnturnedServerManager.svg?style=plastic)]()
 
@@ -54,6 +54,10 @@ Or compile it yourself with the source code!
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
 #Changelog:
+
+**V3.0.1.4** - 
+
+* Fixed A Problem With The Updater Tool GUI Displaying + Storing The Wrong Version Values.
 
 **V3.0.1.3** - 
 

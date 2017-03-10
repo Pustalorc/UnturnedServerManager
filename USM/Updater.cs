@@ -98,7 +98,7 @@ namespace USM
             }
             else if (SuccessInstall == true)
             {
-                InstalledData[0] = Data[1];
+                InstalledData[0] = Data[0];
                 CUVer.Text = InstalledData[0];
                 MessageBox.Show("Unturned has been successfully isntalled/updated.");
             }
@@ -113,7 +113,7 @@ namespace USM
             }
             else if (SuccessInstall == true)
             {
-                InstalledData[1] = Data[2];
+                InstalledData[1] = Data[1];
                 CRVer.Text = InstalledData[1];
                 MessageBox.Show("Rocket has been successfully isntalled/updated.");
             }
@@ -143,7 +143,7 @@ namespace USM
             }
             else if (SuccessInstall == true)
             {
-                InstalledData[0] = Data[1];
+                InstalledData[0] = Data[0];
                 CUVer.Text = InstalledData[0];
             }
 
@@ -154,7 +154,7 @@ namespace USM
             }
             else if (SuccessInstall2 == true)
             {
-                InstalledData[1] = Data[2];
+                InstalledData[1] = Data[1];
                 CRVer.Text = InstalledData[1];
             }
 
