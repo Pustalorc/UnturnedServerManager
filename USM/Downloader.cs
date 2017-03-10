@@ -216,17 +216,13 @@ namespace USM
         {
             try
             {
-                if (File.Exists(Comms.DataPath + "Plugins.dat"))
-                {
-                    File.Delete(Comms.DataPath + "Plugins.dat");
-                }
                 if (File.Exists(Comms.DataPath + "PluginLinks.dat"))
                 {
                     File.Delete(Comms.DataPath + "PluginLinks.dat");
                 }
-                if (File.Exists(Comms.DataPath + "PluginPages.dat"))
+                if (File.Exists(Comms.DataPath + "PluginNames.dat"))
                 {
-                    File.Delete(Comms.DataPath + "PluginPages.dat");
+                    File.Delete(Comms.DataPath + "PluginNames.dat");
                 }
                 return true;
             }

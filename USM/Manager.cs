@@ -186,10 +186,10 @@ namespace USM
                 Downloader.Extract("USM.zip", Downloader.Temp);
                 string LatestVersion = File.ReadAllLines(Downloader.Temp + @"\Versions.dat")[2];
                 Logger.Log("Read data from latest USM version.");
-                if (LatestVersion != "3.0.1.1")
+                if (LatestVersion != "3.0.1.2")
                 {
                     Logger.Log("Version of the program is different than the latest one. Opened notification of a new update.");
-                    Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.1.1, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
+                    Notifier.ShowBalloonTip(5000, "New Version", "A new version for Unturned Server Manager is available! Head over to the github page for more information. Your version: 3.0.1.2, Latest Version: " + LatestVersion + ".", ToolTipIcon.None);
                 }
                 Downloader.ShutOff();
                 Logger.Log("Deleted temp download folder.");
