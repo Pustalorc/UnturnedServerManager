@@ -45,7 +45,7 @@ Windows (Will be working on mac version at some point in time)
 
 #Download:
 
-https://github.com/persiafighter/UnturnedServerManager/raw/master/Data/USM.exe
+https://github.com/persiafighter/UnturnedServerManager/releases/latest
 
 Or compile it yourself with the source code!
 
