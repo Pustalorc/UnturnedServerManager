@@ -117,7 +117,7 @@
             this.LMVer.Name = "LMVer";
             this.LMVer.Size = new System.Drawing.Size(40, 13);
             this.LMVer.TabIndex = 41;
-            this.LMVer.Text = "3.0.1.0";
+            this.LMVer.Text = "3.0.1.1";
             // 
             // LMVerDesc
             // 
@@ -135,7 +135,7 @@
             this.CMVer.Name = "CMVer";
             this.CMVer.Size = new System.Drawing.Size(40, 13);
             this.CMVer.TabIndex = 39;
-            this.CMVer.Text = "3.0.1.0";
+            this.CMVer.Text = "3.0.1.1";
             // 
             // CMVerDesc
             // 
@@ -305,11 +305,13 @@
             this.Controls.Add(this.CUVer);
             this.Controls.Add(this.CUVerDesc);
             this.Controls.Add(this.UUnturned);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Updater";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Updater";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Updater_FormClosing);
             this.ResumeLayout(false);

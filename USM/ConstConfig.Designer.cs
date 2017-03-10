@@ -928,6 +928,7 @@
             this.Controls.Add(this.NameDesc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ConstConfig";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Server\'s Advanced Config";
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
