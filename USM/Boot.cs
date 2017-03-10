@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace USM
@@ -17,7 +16,7 @@ namespace USM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new TickTimer().Show();
+            new TickTimer();
             if (Directory.Exists(Comms.DataPath) == false)
             {
                 Directory.CreateDirectory(Comms.DataPath);
@@ -30,22 +29,47 @@ namespace USM
             Logger.Log("Created log file.");
             StartApp();
         }
+
         private static void StartApp()
         {
-            string appGuid = "2d1dcd0a-9719-44f5-8f0e-2fd79d918fb5";
+            string appGuid = ((GuidAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value.ToString();
+            string mutexId = string.Format("Global\\{{{0}}}", appGuid);
+            var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), MutexRights.FullControl, AccessControlType.Allow);
+            var securitySettings = new MutexSecurity();
+            securitySettings.AddAccessRule(allowEveryoneRule);
             try
             {
-                using (Mutex mutex = new Mutex(false, "Global\\" + appGuid))
+                bool createdNew;
+                using (var mutex = new Mutex(false, mutexId, out createdNew, securitySettings))
                 {
-                    if (!mutex.WaitOne(0, false))
+                    var hasHandle = false;
+                    try
                     {
-                        MessageBox.Show("Another instance of unturned server manager is already running!", "Unturned Server Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
+                        try
+                        {
+                            hasHandle = mutex.WaitOne(0, false);
+                            if (hasHandle == false)
+                            {
+                                MessageBox.Show("Another instance of unturned server manager is already running!", "Unturned Server Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                        }
+                        catch (AbandonedMutexException)
+                        {
+                            hasHandle = true;
+                        }
+                        Logger.Log("Started main application.");
+                        Application.Run(new Manager());
+                        Logger.Log("Main application was closed.");
+                    }
+                    finally
+                    {
+                        if (hasHandle)
+                        {
+                            mutex.ReleaseMutex();
+                        }
                     }
                 }
-                Logger.Log("Started main application.");
-                Application.Run(new Manager());
-                Logger.Log("Main application was closed.");
             }
             catch (Exception e)
             {
@@ -59,37 +83,39 @@ namespace USM
         }
     }
 
-    public class TickTimer : Form
+    public class TickTimer
     {
-        public System.ComponentModel.IContainer components;
         public System.Windows.Forms.Timer Timer;
         public static decimal ProgramTime = 0.00M;
         public TickTimer()
         {
-            Opacity = 0;
-            ShowInTaskbar = false;
-            ShowIcon = false;
-            Hide();
-            components = new System.ComponentModel.Container();
             Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 10;
             Timer.Tick += new EventHandler(Timer_tick);
             Timer.Start();
+            Logger.Log("Started timer to keep the program time.");
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+            Timer.Dispose();
+            disposed = true;
         }
 
         private void Timer_tick(object Sender, EventArgs e)
         {
             ProgramTime += 0.01M;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            // Clean up any components being used.
-            if (disposing)
-                if (components != null)
-                    components.Dispose();
-
-            base.Dispose(disposing);
         }
     }
 }
