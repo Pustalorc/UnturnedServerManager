@@ -37,7 +37,7 @@ Windows (Will be working on mac version at some point in time)
 #Known Bugs:
 
 * **Shutdown/Restart makes player data loss.** _Side note, this bug cannot be fixed with vanilla servers (Admin/Owner can type the shutdown command in console/ingame, which would then make it secure), as USM cannot communicate with a vanilla server. On the other hand, rocket servers will have USMConnect installed (once it's developed, currently it's expected for when USM gets to 3.1.0.0) and will be able to have this problem fixed. Sorry for any rollbakcs the restart/shutdown buttons might cause_
-* ** Unknown Crash With Updater Tool.** _Exception reads that the program doesn't have access to the temp folder. Will most likely catch exception and ignore it._
+* **Unknown Crash With Updater Tool.** _Exception reads that the program doesn't have access to the temp folder. Will most likely catch exception and ignore it._
 
 #Download:
 
