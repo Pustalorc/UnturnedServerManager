@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Unturned_Server_Manager1.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ServerPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Unturned Server Manager\</Value>
+    </Setting>
+    <Setting Name="BaseConnect" Type="System.String" Scope="User">
+      <Value Profile="(Default)">datasource=******;port=3306;username=	sql8160724;password=agzvGTtNjC</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

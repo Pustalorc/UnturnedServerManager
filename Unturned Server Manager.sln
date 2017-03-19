@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USM", "Program\USM.csproj", "{AD1E039B-5B3B-4919-BFBF-82F987D51A0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Downloader", "Modules\Downloader\Downloader.csproj", "{788D28D1-A223-4CAD-9F23-09C4BA980D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{3754278C-B6E8-42DE-B12A-3D4DD6A8471A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD1E039B-5B3B-4919-BFBF-82F987D51A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1E039B-5B3B-4919-BFBF-82F987D51A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1E039B-5B3B-4919-BFBF-82F987D51A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1E039B-5B3B-4919-BFBF-82F987D51A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{788D28D1-A223-4CAD-9F23-09C4BA980D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{788D28D1-A223-4CAD-9F23-09C4BA980D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{788D28D1-A223-4CAD-9F23-09C4BA980D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{788D28D1-A223-4CAD-9F23-09C4BA980D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3754278C-B6E8-42DE-B12A-3D4DD6A8471A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3754278C-B6E8-42DE-B12A-3D4DD6A8471A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3754278C-B6E8-42DE-B12A-3D4DD6A8471A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3754278C-B6E8-42DE-B12A-3D4DD6A8471A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
