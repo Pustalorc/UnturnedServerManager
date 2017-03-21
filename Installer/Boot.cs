@@ -41,7 +41,19 @@ namespace Installer
                     {
                         hasHandle = true;
                     }
-                    Application.Run(new Main());
+                    Application.Run(new InstallType());
+                    if (Var.Type == 1)
+                    {
+                        Application.Run(new OneTime());
+                    }
+                    else if (Var.Type == 2)
+                    {
+                        Application.Run(new Full());
+                    }
+                    else
+                    {
+                        Application.Exit();
+                    }
                 }
                 finally
                 {

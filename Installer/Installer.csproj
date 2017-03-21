@@ -45,16 +45,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs">
+    <Compile Include="InstallType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="InstallType.Designer.cs">
+      <DependentUpon>InstallType.cs</DependentUpon>
     </Compile>
     <Compile Include="Boot.cs" />
+    <Compile Include="OneTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OneTime.Designer.cs">
+      <DependentUpon>OneTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="Var.cs" />
+    <EmbeddedResource Include="InstallType.resx">
+      <DependentUpon>InstallType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OneTime.resx">
+      <DependentUpon>OneTime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
