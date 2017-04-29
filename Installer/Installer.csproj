@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="English.cs" />
+    <Compile Include="French.cs" />
+    <Compile Include="ILanguage.cs" />
     <Compile Include="InstallType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,6 +55,13 @@
       <DependentUpon>InstallType.cs</DependentUpon>
     </Compile>
     <Compile Include="Boot.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="OneTime.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,9 +69,13 @@
       <DependentUpon>OneTime.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spanish.cs" />
     <Compile Include="Var.cs" />
     <EmbeddedResource Include="InstallType.resx">
       <DependentUpon>InstallType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OneTime.resx">
       <DependentUpon>OneTime.cs</DependentUpon>

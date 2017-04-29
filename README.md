@@ -2,13 +2,14 @@
 
 Version: Beta 3.1.0.0
 
-Last Update: March 19, 2017
+Last Update: April 29, 2017
 
 --
 
 # TODO:
 
 * Installer
+* Language Module
 * Auto Update Module
 * Updater Module
 * SRS Module

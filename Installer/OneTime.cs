@@ -28,7 +28,7 @@ namespace Installer
                 }
             }
         }
-        int IType = 0; // 1 is quick, 2 is advanced.
+        //int IType = 0; // 1 is quick, 2 is advanced.
         //int Stage = 0; 0 is IType, 1 is Var.ServerDataLocation, 2 is Var.SType, 3 is Var.Strings 
         // 0 and 1, 4 is port, 5 is maxplayers, 6 is map, 7 is difficulty, 8 is password, 9 is login
         // Message, 10 is Cheats, 11 is perspective, 12 is queue size, 13 is Owner, 14 is bind ip, 15

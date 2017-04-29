@@ -41,6 +41,11 @@ namespace Installer
                     {
                         hasHandle = true;
                     }
+                    Application.Run(new Main());
+                    if (Var.lang == null)
+                    {
+                        return;
+                    }
                     Application.Run(new InstallType());
                     if (Var.Type == 1)
                     {
@@ -48,7 +53,7 @@ namespace Installer
                     }
                     else if (Var.Type == 2)
                     {
-                        Application.Run(new Full());
+                        //Application.Run(new Full());
                     }
                     else
                     {

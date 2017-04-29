@@ -7,7 +7,7 @@ namespace USM
     public partial class Updater : Form
     {
         private string[] CurrentVersions;
-        private string[] LatestVersions;
+        private string[] LatestVersions = new string[4];
 
         public Updater()
         {
