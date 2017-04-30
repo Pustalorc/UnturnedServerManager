@@ -4,18 +4,18 @@ Version: Public 3.0.1.4
 
 [![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/tag/v3.0.0.5) [![GitHub issues](https://img.shields.io/github/issues/persiafighter/UnturnedServerManager.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/issues) [![GitHub closed issues](https://img.shields.io/github/issues-closed/persiafighter/UnturnedServerManager.svg?style=plastic)]()
 
-Last Update: March 10, 2017
+Last Update: April 30, 2017
 
 --
 
-#Requirements:
+# Requirements:
 
 .Net 4.5 or Later
 
-Windows (Will be working on mac version at some point in time)
+Windows (Will be working on linux version at some point in time)
 
 
-#Upcoming Features:
+# Upcoming Features:
 
 * Control on each of the server's console (ban and such).
 * Update All Plugins (bulk update).
@@ -24,32 +24,28 @@ Windows (Will be working on mac version at some point in time)
 * Delete Mod/Plugin Selected.
 * USM Settings.
 
-#Planed changes for the next addition update 3.0.2.0:
+# Note:
+I am working on the rework, USM 3.1. Feel free to support it!
 
-* Add A "Quick Server Setup" Button.
-* Add Ability To Delete Mod/Plugin Selected.
-* Add Ability To See Downloaded Items With Install By ID.
-* Fix Updater Tool Crash.
-* Fix Messageboxes Design.
-* Fix Accuracy Of Log Data.
-* Fix Path Usage.
-
-#Known Bugs:
+# Known Bugs:
 
 * **Shutdown/Restart makes player data loss.** _Side note, this bug cannot be fixed with vanilla servers (Admin/Owner can type the shutdown command in console/ingame, which would then make it secure), as USM cannot communicate with a vanilla server. On the other hand, rocket servers will have USMConnect installed (once it's developed, currently it's expected for when USM gets to 3.1.0.0) and will be able to have this problem fixed. Sorry for any rollbakcs the restart/shutdown buttons might cause_
-* **Unknown Crash With Updater Tool.** _Exception reads that the program doesn't have access to the temp folder. Will most likely catch exception and ignore it._
+* **Unable to install rocket if the server is not in the C:\ drive** _Side note, this bug will be fixed (hopefully) in the rework 3.1.
+* Unknown Crash With Updater Tool.
+* Program does not start-up if the data folder does not exist.
+* Plugin install button does not unlock/unblock ever.
 
-#Download:
+# Download:
 
 https://github.com/persiafighter/UnturnedServerManager/releases/latest
 
 Or compile it yourself with the source code!
 
-#Reddit Post:
+# Reddit Post:
 
 https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
 
-#Changelog:
+# Changelog:
 
 **V3.0.1.4** - 
 
