@@ -11,9 +11,8 @@ Last Update: April 29, 2017
 * Installer
 * Language Module
 * Auto Update Module
-* Updater Module
 * SRS Module
-* Remote Server Management Module
-* Main Program Remake
+* Remote Server Management Module - Possibly Replace This With Nightfish's RCon Program.
+* Main Program Rework
 
 ----------- Unturned Server Manager -----------

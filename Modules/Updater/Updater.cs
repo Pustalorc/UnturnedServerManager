@@ -3,11 +3,13 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 
-namespace Updater
+namespace UnturnedServerManager
 {
-    static public class Items
+    public enum UpdaterResults { SUCCESS, ERROR, NO_STEAM}
+
+    public class Updater
     {
-        public static bool Rocket(string dir)
+        public UpdaterResults Rocket(string dir)
         {
             try
             {
@@ -23,22 +25,22 @@ namespace Updater
                     Directory.Delete(Path.GetFullPath(ScrTarget), true);
                 }
                 ZipFile.ExtractToDirectory(Path.GetFullPath(ZipTarget), Path.GetFullPath(dir));
-                return true;
+                return UpdaterResults.SUCCESS;
             }
             catch (Exception)
             {
-                return false;
+                return UpdaterResults.ERROR;
             }
         }
 
-        public static bool Unturned(string dir)
+        public UpdaterResults Unturned(string dir)
         {
             try
             {
                 string ExeTarget = dir + "\\SteamCMD\\steamcmd.exe";
                 if (!File.Exists(Path.GetFullPath(ExeTarget)))
                 {
-                    return false;
+                    return UpdaterResults.NO_STEAM;
                 }
                 string UntTarget = Path.GetFullPath(dir);
                 Process SteamCMD = new Process();
@@ -48,11 +50,11 @@ namespace Updater
                 SteamCMD.StartInfo = startInfo;
                 SteamCMD.Start();
                 SteamCMD.WaitForExit();
-                return true;
+                return UpdaterResults.SUCCESS;
             }
             catch (Exception)
             {
-                return false;
+                return UpdaterResults.ERROR;
             }
         }
     }
