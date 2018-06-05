@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using Environment = Rocket.Core.Environment;
 
 namespace ATORTTeam.UnturnedServerManager.GUI
 {
@@ -86,13 +85,12 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         {
             Settings.Enabled = Status;
             ServerSettings.Enabled = Status;
-            Configuration.Enabled = Status;
+            JSONEditor.Enabled = Status;
             Toggle.Enabled = Status;
             OpenLocal.Enabled = Status;
             Restart.Enabled = false;
             Reset.Enabled = Status;
-            Rocket.Enabled = Status;
-            PermissionsEditor.Enabled = Status;
+            XMLEditor.Enabled = Status;
             Workshop.Enabled = Status;
             Plugin.Enabled = Status;
             DeleteServer.Enabled = Status;
@@ -207,21 +205,6 @@ namespace ATORTTeam.UnturnedServerManager.GUI
                 FileActions.DeleteDirectory(Path.Combine(server.Folder, "Level"));
             }
         }
-        private void Rocket_Click(object sender, EventArgs e)
-        {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
-
-                var f = new RocketmodConfiguration(Path.Combine(server.Folder, "Rocket"));
-                f.ShowDialog();
-
-                Show();
-                OtherGUIOpen = false;
-            }
-        }
         private void NewServer_Click(object sender, EventArgs e)
         {
             OtherGUIOpen = true;
@@ -269,36 +252,6 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
             LoadServers();
         }
-        private void Configuration_Click(object sender, EventArgs e)
-        {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
-
-                var f = new AdvancedUnturnedConfiguration(server.Folder);
-                f.ShowDialog();
-
-                Show();
-                OtherGUIOpen = false;
-            }
-        }
-        private void PermissionsEditor_Click(object sender, EventArgs e)
-        {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
-
-                var f = new RocketPermissions(Path.Combine(server.Folder, "Rocket", Environment.PermissionFile));
-                f.ShowDialog();
-
-                Show();
-                OtherGUIOpen = false;
-            }
-        }
         private void Servers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!Reloaded)
@@ -310,6 +263,37 @@ namespace ATORTTeam.UnturnedServerManager.GUI
                     SelectedServer = s.Substring(0, s.Length - VanillaPrefix.Value.Length);
 
                 LoadServerDetails();
+            }
+        }
+        private void XMLEditor_Click(object sender, EventArgs e)
+        {
+            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
+            if (server != null)
+            {
+                OtherGUIOpen = true;
+                Hide();
+
+                var f = new XMLEditor(server.Folder);
+                f.ShowDialog();
+
+                Show();
+                OtherGUIOpen = false;
+            }
+        }
+        private void JSONEditor_Click(object sender, EventArgs e)
+        {
+            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
+            if (server != null)
+            {
+                OtherGUIOpen = true;
+                Hide();
+
+                // Open JSON Editor GUI.
+                //var f = new AdvancedUnturnedConfiguration(server.Folder);
+                //f.ShowDialog();
+
+                Show();
+                OtherGUIOpen = false;
             }
         }
     }

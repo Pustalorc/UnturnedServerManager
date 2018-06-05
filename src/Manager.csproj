@@ -61,23 +61,11 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\External Libraries\Assembly-CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Costura, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.2.0.0\lib\net452\Costura.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Rocket.API">
-      <HintPath>..\External Libraries\Rocket.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Rocket.Core">
-      <HintPath>..\External Libraries\Rocket.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Rocket.Unturned">
-      <HintPath>..\External Libraries\Rocket.Unturned.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -128,29 +116,17 @@
     <Compile Include="GUI\Add Permission.Designer.cs">
       <DependentUpon>Add Permission.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Advanced Unturned Configuration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Advanced Unturned Configuration.Designer.cs">
-      <DependentUpon>Advanced Unturned Configuration.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\First Start.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\First Start.Designer.cs">
       <DependentUpon>First Start.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Rocketmod Configuration.cs">
+    <Compile Include="GUI\XMLEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Rocketmod Configuration.Designer.cs">
-      <DependentUpon>Rocketmod Configuration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Rocketmod Permissions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Rocketmod Permissions.Designer.cs">
-      <DependentUpon>Rocketmod Permissions.cs</DependentUpon>
+    <Compile Include="GUI\XMLEditor.Designer.cs">
+      <DependentUpon>XMLEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Loading\Entry.cs" />
     <Compile Include="GUI\Server Settings.cs">
@@ -178,7 +154,6 @@
       <DependentUpon>Plugin Download.cs</DependentUpon>
     </Compile>
     <Compile Include="Loading\Servers.cs" />
-    <Compile Include="Memory\Permissions.cs" />
     <Compile Include="Memory\Servers.cs" />
     <Compile Include="Memory\Steam Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,17 +186,8 @@
     <EmbeddedResource Include="GUI\Add Permission.resx">
       <DependentUpon>Add Permission.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Advanced Unturned Configuration.resx">
-      <DependentUpon>Advanced Unturned Configuration.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\First Start.resx">
       <DependentUpon>First Start.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Rocketmod Configuration.resx">
-      <DependentUpon>Rocketmod Configuration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Rocketmod Permissions.resx">
-      <DependentUpon>Rocketmod Permissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Server Settings.resx">
       <DependentUpon>Server Settings.cs</DependentUpon>
@@ -240,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Workshop Download.resx">
       <DependentUpon>Workshop Download.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\XMLEditor.resx">
+      <DependentUpon>XMLEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="README.md" />

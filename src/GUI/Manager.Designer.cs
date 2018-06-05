@@ -47,13 +47,12 @@
             this.ServerSettings = new System.Windows.Forms.RichTextBox();
             this.Settings_TXT = new System.Windows.Forms.Label();
             this.Restart = new System.Windows.Forms.Button();
-            this.PermissionsEditor = new System.Windows.Forms.Button();
             this.Mngmnt_TXT = new System.Windows.Forms.Label();
-            this.Configuration = new System.Windows.Forms.Button();
             this.ctrl_TXT = new System.Windows.Forms.Label();
-            this.Rocket = new System.Windows.Forms.Button();
             this.Reset = new System.Windows.Forms.Button();
             this.OpenLocal = new System.Windows.Forms.Button();
+            this.XMLEditor = new System.Windows.Forms.Button();
+            this.JSONEditor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Settings
@@ -68,7 +67,7 @@
             // 
             // Workshop
             // 
-            this.Workshop.Location = new System.Drawing.Point(391, 86);
+            this.Workshop.Location = new System.Drawing.Point(391, 57);
             this.Workshop.Name = "Workshop";
             this.Workshop.Size = new System.Drawing.Size(139, 23);
             this.Workshop.TabIndex = 16;
@@ -78,7 +77,7 @@
             // 
             // Plugin
             // 
-            this.Plugin.Location = new System.Drawing.Point(391, 115);
+            this.Plugin.Location = new System.Drawing.Point(391, 86);
             this.Plugin.Name = "Plugin";
             this.Plugin.Size = new System.Drawing.Size(139, 23);
             this.Plugin.TabIndex = 17;
@@ -88,7 +87,7 @@
             // 
             // Toggle
             // 
-            this.Toggle.Location = new System.Drawing.Point(388, 261);
+            this.Toggle.Location = new System.Drawing.Point(388, 230);
             this.Toggle.Name = "Toggle";
             this.Toggle.Size = new System.Drawing.Size(142, 23);
             this.Toggle.TabIndex = 18;
@@ -109,7 +108,7 @@
             // GithubLink
             // 
             this.GithubLink.AutoSize = true;
-            this.GithubLink.Location = new System.Drawing.Point(291, 407);
+            this.GithubLink.Location = new System.Drawing.Point(167, 407);
             this.GithubLink.Name = "GithubLink";
             this.GithubLink.Size = new System.Drawing.Size(38, 13);
             this.GithubLink.TabIndex = 23;
@@ -215,23 +214,13 @@
             // Restart
             // 
             this.Restart.Enabled = false;
-            this.Restart.Location = new System.Drawing.Point(388, 290);
+            this.Restart.Location = new System.Drawing.Point(388, 259);
             this.Restart.Name = "Restart";
             this.Restart.Size = new System.Drawing.Size(142, 23);
             this.Restart.TabIndex = 20;
             this.Restart.Text = "Restart Server";
             this.Restart.UseVisualStyleBackColor = true;
             this.Restart.Click += new System.EventHandler(this.Restart_Click);
-            // 
-            // PermissionsEditor
-            // 
-            this.PermissionsEditor.Location = new System.Drawing.Point(391, 57);
-            this.PermissionsEditor.Name = "PermissionsEditor";
-            this.PermissionsEditor.Size = new System.Drawing.Size(139, 23);
-            this.PermissionsEditor.TabIndex = 34;
-            this.PermissionsEditor.Text = "Permissions";
-            this.PermissionsEditor.UseVisualStyleBackColor = true;
-            this.PermissionsEditor.Click += new System.EventHandler(this.PermissionsEditor_Click);
             // 
             // Mngmnt_TXT
             // 
@@ -242,38 +231,18 @@
             this.Mngmnt_TXT.TabIndex = 35;
             this.Mngmnt_TXT.Text = "Management:";
             // 
-            // Configuration
-            // 
-            this.Configuration.Location = new System.Drawing.Point(391, 144);
-            this.Configuration.Name = "Configuration";
-            this.Configuration.Size = new System.Drawing.Size(139, 23);
-            this.Configuration.TabIndex = 36;
-            this.Configuration.Text = "Advanced Configuration";
-            this.Configuration.UseVisualStyleBackColor = true;
-            this.Configuration.Click += new System.EventHandler(this.Configuration_Click);
-            // 
             // ctrl_TXT
             // 
             this.ctrl_TXT.AutoSize = true;
-            this.ctrl_TXT.Location = new System.Drawing.Point(391, 242);
+            this.ctrl_TXT.Location = new System.Drawing.Point(391, 211);
             this.ctrl_TXT.Name = "ctrl_TXT";
             this.ctrl_TXT.Size = new System.Drawing.Size(43, 13);
             this.ctrl_TXT.TabIndex = 37;
             this.ctrl_TXT.Text = "Control:";
             // 
-            // Rocket
-            // 
-            this.Rocket.Location = new System.Drawing.Point(391, 173);
-            this.Rocket.Name = "Rocket";
-            this.Rocket.Size = new System.Drawing.Size(139, 23);
-            this.Rocket.TabIndex = 38;
-            this.Rocket.Text = "Rocket Settings";
-            this.Rocket.UseVisualStyleBackColor = true;
-            this.Rocket.Click += new System.EventHandler(this.Rocket_Click);
-            // 
             // Reset
             // 
-            this.Reset.Location = new System.Drawing.Point(391, 202);
+            this.Reset.Location = new System.Drawing.Point(391, 115);
             this.Reset.Name = "Reset";
             this.Reset.Size = new System.Drawing.Size(139, 23);
             this.Reset.TabIndex = 39;
@@ -283,7 +252,7 @@
             // 
             // OpenLocal
             // 
-            this.OpenLocal.Location = new System.Drawing.Point(388, 319);
+            this.OpenLocal.Location = new System.Drawing.Point(388, 288);
             this.OpenLocal.Name = "OpenLocal";
             this.OpenLocal.Size = new System.Drawing.Size(142, 23);
             this.OpenLocal.TabIndex = 40;
@@ -291,19 +260,38 @@
             this.OpenLocal.UseVisualStyleBackColor = true;
             this.OpenLocal.Click += new System.EventHandler(this.OpenLocal_Click);
             // 
+            // XMLEditor
+            // 
+            this.XMLEditor.Location = new System.Drawing.Point(391, 144);
+            this.XMLEditor.Name = "XMLEditor";
+            this.XMLEditor.Size = new System.Drawing.Size(139, 23);
+            this.XMLEditor.TabIndex = 41;
+            this.XMLEditor.Text = "XML Editor";
+            this.XMLEditor.UseVisualStyleBackColor = true;
+            this.XMLEditor.Click += new System.EventHandler(this.XMLEditor_Click);
+            // 
+            // JSONEditor
+            // 
+            this.JSONEditor.Location = new System.Drawing.Point(391, 173);
+            this.JSONEditor.Name = "JSONEditor";
+            this.JSONEditor.Size = new System.Drawing.Size(139, 23);
+            this.JSONEditor.TabIndex = 42;
+            this.JSONEditor.Text = "JSON Editor";
+            this.JSONEditor.UseVisualStyleBackColor = true;
+            this.JSONEditor.Click += new System.EventHandler(this.JSONEditor_Click);
+            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(559, 437);
+            this.Controls.Add(this.JSONEditor);
+            this.Controls.Add(this.XMLEditor);
             this.Controls.Add(this.OpenLocal);
             this.Controls.Add(this.Reset);
-            this.Controls.Add(this.Rocket);
             this.Controls.Add(this.ctrl_TXT);
-            this.Controls.Add(this.Configuration);
             this.Controls.Add(this.Mngmnt_TXT);
-            this.Controls.Add(this.PermissionsEditor);
             this.Controls.Add(this.Settings_TXT);
             this.Controls.Add(this.ServerSettings);
             this.Controls.Add(this.List_TXT);
@@ -349,12 +337,11 @@
         private System.Windows.Forms.RichTextBox ServerSettings;
         private System.Windows.Forms.Label Settings_TXT;
         private System.Windows.Forms.Button Restart;
-        private System.Windows.Forms.Button PermissionsEditor;
         private System.Windows.Forms.Label Mngmnt_TXT;
-        private System.Windows.Forms.Button Configuration;
         private System.Windows.Forms.Label ctrl_TXT;
-        private System.Windows.Forms.Button Rocket;
         private System.Windows.Forms.Button Reset;
         private System.Windows.Forms.Button OpenLocal;
+        private System.Windows.Forms.Button XMLEditor;
+        private System.Windows.Forms.Button JSONEditor;
     }
 }
