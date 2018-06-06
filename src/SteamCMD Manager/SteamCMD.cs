@@ -1,5 +1,6 @@
 ﻿using ATORTTeam.UnturnedServerManager.Configuration;
 using ATORTTeam.UnturnedServerManager.FileControl;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,14 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
 {
     public static class SteamCMD
     {
+        /// <summary>
+        /// Saved steam Username. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
+        /// </summary>
         internal static string Username = "";
+
+        /// <summary>
+        /// Saved steam Password. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
+        /// </summary>
         internal static string Password = "";
 
         /// <summary>
@@ -22,6 +30,8 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
         /// <param name="Command">The command to be run by SteamCMD. Must be a string such as if you were running steamcmd.exe from console yourself excluding username + password.</param>
         public static void RunCommand(string Command)
         {
+            VerifySteam();
+
             var login = new GUI.SteamLogin();
             var inst = Installation.Load();
             var steamcmdexe = Path.Combine(inst.InstallationPath, "steamcmd.exe");
@@ -66,6 +76,9 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
                 FileActions.CopyDirectory(workshopdir, ContentDir);
         }
 
+        /// <summary>
+        /// Verifies that SteamCMD is present in the installation. Should be called before running steamcmd.exe or doing anythig with steamcmd.
+        /// </summary>
         private static void VerifySteam()
         {
             var inst = Installation.Load();
@@ -80,7 +93,10 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
                     FileActions.Extract(ZipTarget, inst.InstallationPath);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

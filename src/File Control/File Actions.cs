@@ -14,7 +14,10 @@ namespace ATORTTeam.UnturnedServerManager.FileControl
         /// <returns>True if no exceptions occur during download, false otherwise.</returns>
         public static bool Download(string URL, string Destination)
         {
-            VerifyPath(Destination, true);
+            VerifyFilePath(Destination, true);
+
+            if (VerifyFile(Destination))
+                File.Delete(Destination);
 
             try
             {
@@ -65,8 +68,28 @@ namespace ATORTTeam.UnturnedServerManager.FileControl
                 return false;
             }
         }
+
+        /// <summary>
+        /// Verifies that the file exists.
+        /// </summary>
+        /// <param name="Path">Full path, including file name, to the file.</param>
+        /// <returns>True if the file exists, false otherwise.</returns>
         public static bool VerifyFile(string Path) => File.Exists(Path);
+
+        /// <summary>
+        /// Verifies that the directory in which a file is at exists.
+        /// </summary>
+        /// <param name="File">The full path, including file name, to the file.</param>
+        /// <param name="Create">If the directory should be created if it doesn't exist.</param>
+        /// <returns>True if directory existed from before, false otherwise.</returns>
         public static bool VerifyFilePath(string File, bool Create) => VerifyPath(Path.GetDirectoryName(File), Create);
+
+        /// <summary>
+        /// Verifies a path for a valid directory.
+        /// </summary>
+        /// <param name="Folder">The full path to a specific folder.</param>
+        /// <param name="Create">If the directory should be created if it doesn't exist.</param>
+        /// <returns>True if directory existed prior to the method calling, false otherwise.</returns>
         public static bool VerifyPath(string Folder, bool Create)
         {
             if (!Directory.Exists(Folder))
@@ -79,17 +102,29 @@ namespace ATORTTeam.UnturnedServerManager.FileControl
             else
                 return true;
         }
+
+        /// <summary>
+        /// Deletes an entire directory, recursively.
+        /// </summary>
+        /// <param name="Folder">The full path to a specific folder.</param>
         public static void DeleteDirectory(string Folder)
         {
             if (VerifyPath(Folder, false))
             {
                 try
                 {
+                    // Bug, if something is using resources in the directory, said resources are not deleted.
                     Directory.Delete(Folder, true);
                 }
                 catch { }
             }
         }
+
+        /// <summary>
+        /// Copies an entire directory recursively, verifying that everything exists.
+        /// </summary>
+        /// <param name="Folder">The full path to the target directory to copy.</param>
+        /// <param name="Destination">The full path to the destination directory.</param>
         public static void CopyDirectory(string Folder, string Destination)
         {
             if (VerifyPath(Folder, false))

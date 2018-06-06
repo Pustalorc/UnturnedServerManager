@@ -22,7 +22,7 @@ namespace ATORTTeam.UnturnedServerManager.ServerInstance
             s.Type = type;
 
             if (string.IsNullOrEmpty(clone))
-                FileActions.VerifyPath(s.Folder);
+                FileActions.VerifyPath(s.Folder, true);
             else
                 FileActions.CopyDirectory(clone, s.Folder);
 
@@ -34,7 +34,7 @@ namespace ATORTTeam.UnturnedServerManager.ServerInstance
             var commandsdat = Path.Combine(Folder, "Server", "Commands.dat");
             if (!FileActions.VerifyFile(commandsdat))
             {
-                FileActions.VerifyFilePath(commandsdat);
+                FileActions.VerifyFilePath(commandsdat, true);
 
                 var c = CommandsDotDat.Load(Name);
                 File.WriteAllLines(commandsdat, c.ToNelson);

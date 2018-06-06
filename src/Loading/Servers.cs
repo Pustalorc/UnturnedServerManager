@@ -13,18 +13,18 @@ namespace ATORTTeam.UnturnedServerManager.Loading
             if (Memory.Servers.Value.Count > 0)
                 return;
 
-            if (!FileActions.VerifyFile(Path.Combine(VanillaServerPath.Value, "Unturned.exe")) || !FileActions.VerifyFile(Path.Combine(RocketmodServerPath.Value, "Unturned.exe")))
+            while(!FileActions.VerifyFile(Path.Combine(VanillaServerPath.Value, "Unturned.exe")) || !FileActions.VerifyFile(Path.Combine(RocketmodServerPath.Value, "Unturned.exe")))
                 Updater.UpdateAll();
 
             var RocketmodDirectory = Path.Combine(RocketmodServerPath.Value, "Servers");
-            FileActions.VerifyPath(RocketmodDirectory);
+            FileActions.VerifyPath(RocketmodDirectory, true);
 
             var RocketmodDirectoryInfo = new DirectoryInfo(RocketmodDirectory);
             foreach (var rocketserver in RocketmodDirectoryInfo.GetDirectories())
                 Memory.Servers.Value.Add(Server.Create(rocketserver.Name, ServerType.RocketMod));
 
             var VanillaDirectory = Path.Combine(VanillaServerPath.Value, "Servers");
-            FileActions.VerifyPath(VanillaDirectory);
+            FileActions.VerifyPath(VanillaDirectory, true);
 
             var VanillaDirectoryInfo = new DirectoryInfo(VanillaDirectory);
             foreach (var vanillaserver in VanillaDirectoryInfo.GetDirectories())

@@ -24,9 +24,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         {
             AlreadyInstalled.Items.Clear();
             var workshoplocation = Path.Combine(Server, @"\Workshop\Content");
-
-            if (!FileActions.VerifyPath(workshoplocation))
-                return;
+            FileActions.VerifyPath(workshoplocation, true);
 
             DirectoryInfo Fldr = new DirectoryInfo(workshoplocation);
             DirectoryInfo[] Content = Fldr.GetDirectories();

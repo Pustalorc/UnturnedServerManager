@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FirstStart));
             this.Msg = new System.Windows.Forms.Label();
             this.SelectedPath = new System.Windows.Forms.TextBox();
             this.Browse = new System.Windows.Forms.Button();
@@ -40,15 +41,13 @@
             this.Msg.AutoSize = true;
             this.Msg.Location = new System.Drawing.Point(12, 9);
             this.Msg.Name = "Msg";
-            this.Msg.Size = new System.Drawing.Size(463, 39);
+            this.Msg.Size = new System.Drawing.Size(463, 52);
             this.Msg.TabIndex = 0;
-            this.Msg.Text = "Welcome to Unturned Server Manager\'s first-startup configuration!\r\n\r\nPlease speci" +
-    "fy the directory to which Unturned will be installed to and used for hosting the" +
-    " server.\r\n";
+            this.Msg.Text = resources.GetString("Msg.Text");
             // 
             // SelectedPath
             // 
-            this.SelectedPath.Location = new System.Drawing.Point(12, 60);
+            this.SelectedPath.Location = new System.Drawing.Point(12, 66);
             this.SelectedPath.Name = "SelectedPath";
             this.SelectedPath.Size = new System.Drawing.Size(378, 20);
             this.SelectedPath.TabIndex = 1;
@@ -57,7 +56,7 @@
             // 
             // Browse
             // 
-            this.Browse.Location = new System.Drawing.Point(396, 58);
+            this.Browse.Location = new System.Drawing.Point(396, 64);
             this.Browse.Name = "Browse";
             this.Browse.Size = new System.Drawing.Size(75, 23);
             this.Browse.TabIndex = 2;
@@ -71,7 +70,7 @@
             // 
             // ValidatePath
             // 
-            this.ValidatePath.Location = new System.Drawing.Point(396, 87);
+            this.ValidatePath.Location = new System.Drawing.Point(396, 93);
             this.ValidatePath.Name = "ValidatePath";
             this.ValidatePath.Size = new System.Drawing.Size(75, 23);
             this.ValidatePath.TabIndex = 3;
@@ -83,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 121);
+            this.ClientSize = new System.Drawing.Size(483, 127);
             this.Controls.Add(this.ValidatePath);
             this.Controls.Add(this.Browse);
             this.Controls.Add(this.SelectedPath);

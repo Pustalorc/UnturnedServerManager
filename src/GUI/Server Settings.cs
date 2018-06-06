@@ -31,7 +31,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             if (server.Type == ServerType.RocketMod)
             {
                 var Dir = Path.Combine(RocketmodServerPath.Value, "Maps");
-                FileActions.VerifyPath(Dir);
+                FileActions.VerifyPath(Dir, true);
 
                 var RocketmodDirectoryInfo = new DirectoryInfo(Dir);
                 foreach (var rocketserver in RocketmodDirectoryInfo.GetDirectories())

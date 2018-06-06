@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ATORT Team")]
 [assembly: AssemblyProduct("Unturned Server Manager")]
-[assembly: AssemblyCopyright("Copyright © ATORT Team 2018")]
+[assembly: AssemblyCopyright("Copyright © ATORT Team 2016-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
