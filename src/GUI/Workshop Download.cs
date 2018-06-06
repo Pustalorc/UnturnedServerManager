@@ -1,368 +1,101 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using ATORTTeam.UnturnedServerManager.FileControl;
+using ATORTTeam.UnturnedServerManager.SteamCMDManager;
+using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ATORTTeam.UnturnedServerManager.GUI
 {
     public partial class Workshop : Form
     {
-        /*private DirectoryInfo WorkshopDirectory;
-        private DirectoryInfo[] WorkshopItems;
-        private DirectoryInfo[] ContentInstalled;
-        private DirectoryInfo[] MapsInstalled;
-        private string[] SelectedItems;*/
+        private string Server;
+        private string ItemID = "";
 
-        public Workshop()
+        public Workshop(string ServerPath)
         {
             InitializeComponent();
-
-            //WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
-            //SearchDownloadedItems();
+            Server = ServerPath;
+            LoadInstalled();
         }
 
-        /*private void SearchDownloadedItems()
+        // Custom Methods
+        public void LoadInstalled()
         {
-            try
-            {
-                WorkshopItems = WorkshopDirectory.GetDirectories();
-                UpdateOptions();
-            }
-            catch (DirectoryNotFoundException)
-            {
-                MessageBox.Show("Selected location has no mods or does not exist.");
-            }
-        }
+            AlreadyInstalled.Items.Clear();
+            var workshoplocation = Path.Combine(Server, @"\Workshop\Content");
 
-        private void UpdateOptions()
-        {
-            foreach (DirectoryInfo folder in WorkshopItems)
-            {
-                AvailableItems.Items.Add(folder.Name);
-            }
-            // Check for Already Installed Mods In Content Folder
-            RefreshInstalledContent();
-        }
-
-        private void RefreshInstalledContent()
-        {
-            if (ContentLocation.Checked == true)
-            {
-                try
-                {
-                    DirectoryInfo Contents = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content");
-                    ContentInstalled = Contents.GetDirectories();
-                    // Check For Installed Content
-                    AlreadyInstalled.Items.Clear();
-                    foreach (DirectoryInfo folder in ContentInstalled)
-                    {
-                        AlreadyInstalled.Items.Add(folder.Name);
-                    }
-                }
-                catch (DirectoryNotFoundException)
-                {
-                    AlreadyInstalled.Items.Clear();
-                    // No current mods. Ignore but remove already placed items;
-                }
-            }
-            else if (MapsLocation.Checked == true)
-            {
-                // Check for already installed mods in the "maps" folder
-                try
-                {
-                    DirectoryInfo Maps = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps");
-                    MapsInstalled = Maps.GetDirectories();
-                    // Check For Installed Maps
-                    AlreadyInstalled.Items.Clear();
-                    foreach (DirectoryInfo folder in MapsInstalled)
-                    {
-                        AlreadyInstalled.Items.Add(folder.Name);
-                    }
-                }
-                catch (DirectoryNotFoundException)
-                {
-                    AlreadyInstalled.Items.Clear();
-                    // No current mods. Ignore but remove already placed items.
-                }
-            }
-        }
-
-        private void Search_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The path set is not a directory path.");
+            if (!FileActions.VerifyPath(workshoplocation))
                 return;
-            }
-            AvailableItems.Items.Clear();
-            SearchDownloadedItems();
+
+            DirectoryInfo Fldr = new DirectoryInfo(workshoplocation);
+            DirectoryInfo[] Content = Fldr.GetDirectories();
+            foreach (var folder in Content)
+                AlreadyInstalled.Items.Add(folder.Name);
+
+            Fldr = new DirectoryInfo(Path.Combine(Server, @"\Workshop\Maps"));
+            Content = Fldr.GetDirectories();
+            foreach (var folder in Content)
+                AlreadyInstalled.Items.Add(folder.Name);
         }
 
-        private void CopyDirectory(string Source, string Destination, bool Subdirectories)
-        {
-            DirectoryInfo dir = new DirectoryInfo(Source);
-            DirectoryInfo[] dirs = dir.GetDirectories();
-            if (Directory.Exists(Destination) == false)
-            {
-                Directory.CreateDirectory(Destination);
-            }
-
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
-            {
-                string temppath = Path.Combine(Destination, file.Name);
-                if (File.Exists(temppath) == false)
-                {
-                    file.CopyTo(temppath, false);
-                }
-                else if (File.Exists(temppath) == true)
-                {
-                    file.CopyTo(temppath, true);
-                }
-            }
-
-            if (Subdirectories == true)
-            {
-                foreach (DirectoryInfo subdir in dirs)
-                {
-                    string temppath = Path.Combine(Destination, subdir.Name);
-                    CopyDirectory(subdir.FullName, temppath, Subdirectories);
-                }
-            }
-        }
-
-        private void SaveExit_Click(object sender, EventArgs e)
-        {
-            SelectedItems = new string[AvailableItems.CheckedIndices.Count];
-            if (ContentLocation.Checked == true)
-            {
-                for (int i = 0; i <= AvailableItems.CheckedIndices.Count - 1; i++)
-                {
-                    SelectedItems[i] = Convert.ToString(AvailableItems.CheckedItems[i]);
-                }
-                foreach (string file in SelectedItems)
-                {
-                    CopyDirectory(@"" + WorkshopDirectory.FullName + @"\" + file, @"" + Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + file, true);
-                }
-            }
-            else if (MapsLocation.Checked == true)
-            {
-                for (int i = 0; i <= AvailableItems.CheckedIndices.Count - 1; i++)
-                {
-                    SelectedItems[i] = Convert.ToString(AvailableItems.CheckedItems[i]);
-                }
-                foreach (string file in SelectedItems)
-                {
-                    CopyDirectory(@"" + WorkshopDirectory.FullName + @"\" + file, @"" + Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + file, true);
-                }
-            }
-            Close();
-        }
-
-        private void Install_Click(object sender, EventArgs e)
-        {
-            SelectedItems = new string[AvailableItems.CheckedIndices.Count];
-            if (AvailableItems.CheckedItems.Count == 0)
-            {
-                MessageBox.Show("No Items Are Selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else if (AvailableItems.CheckedItems.Count > 0)
-            {
-                if (ContentLocation.Checked == true)
-                {
-                    for (int i = 0; i <= AvailableItems.CheckedIndices.Count - 1; i++)
-                    {
-                        SelectedItems[i] = Convert.ToString(AvailableItems.CheckedItems[i]);
-                    }
-                    foreach (string file in SelectedItems)
-                    {
-                        CopyDirectory(@"" + WorkshopDirectory.FullName + @"\" + file, @"" + Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + file, true);
-                    }
-                }
-                else if (MapsLocation.Checked == true)
-                {
-                    for (int i = 0; i <= AvailableItems.CheckedIndices.Count - 1; i++)
-                    {
-                        SelectedItems[i] = Convert.ToString(AvailableItems.CheckedItems[i]);
-                    }
-                    foreach (string file in SelectedItems)
-                    {
-                        CopyDirectory(@"" + WorkshopDirectory.FullName + @"\" + file, @"" + Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + file, true);
-                    }
-                }
-                AvailableItems.Items.Clear();
-                WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
-                SearchDownloadedItems();
-            }
-        }
-
-        private void DeleteAll_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop") == false)
-            {
-                MessageBox.Show("You haven't installed any workshop mods yet.");
-                return;
-            }
-            else
-            {
-                Directory.Delete(@"" + Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop", true);
-                RefreshInstalledContent();
-            }
-        }
-
-        private void ContentLocation_CheckedChanged(object sender, EventArgs e)
-        {
-            RefreshInstalledContent();
-        }
-
-        private void MapsLocation_CheckedChanged(object sender, EventArgs e)
-        {
-            RefreshInstalledContent();
-        }
-
-        private void OpenMods_Click(object sender, EventArgs e)
-        {
-            SelectedItems = new string[AvailableItems.CheckedIndices.Count];
-            if (AvailableItems.CheckedItems.Count == 0)
-            {
-                MessageBox.Show("No Items Are Selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else if (AvailableItems.CheckedItems.Count > 0)
-            {
-                for (int i = 0; i <= AvailableItems.CheckedIndices.Count - 1; i++)
-                {
-                    SelectedItems[i] = Convert.ToString(AvailableItems.CheckedItems[i]);
-                }
-                foreach (string file in SelectedItems)
-                {
-                    Process.Start("http://steamcommunity.com/sharedfiles/filedetails/?id=" + file);
-                }
-            }
-        }
-        private bool IsLink = false;
-
-        private void ID_TextChanged(object sender, EventArgs e)
-        {
-            if (IsLink == false)
-            {
-                Link.Text = "http://steamcommunity.com/sharedfiles/filedetails/?id=" + ID.Text;
-            }
-            if (ID.Text == "")
-            {
-                Link.Text = "";
-            }
-        }
-
-        private void Link_TextChanged(object sender, EventArgs e)
-        {
-            IsLink = true;
-            char[] LettersAndSymbols = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '/', '?', '.', '>', ',', '<', '\'', '\"', ';', ':', '\\', '|', ']', '}', '[', '{', '=', '+', '-', '_', ')', '(', '*', '&', '^', '%', '$', '#', '@', '!', '`', '~' };
-            ID.Text = Link.Text.Trim(LettersAndSymbols);
-            IsLink = false;
-        }
-
-        private void InstallID_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
-            {
-                Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
-            }
-            try
-            {
-                if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
-                {
-                    Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
-                    Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
-                }
-                Process SteamCMD = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
-                startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + ID.Text + " +quit";
-                SteamCMD.StartInfo = startInfo;
-                SteamCMD.Start();
-                SteamCMD.WaitForExit();
-                if (MapsLocation.Checked == true)
-                {
-                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + ID.Text, true);
-                }
-                else if (ContentLocation.Checked == true)
-                {
-                    CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + ID.Text, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + ID.Text, true);
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("An error has been encountered during the download of the item.");
-            }
-            AvailableItems.Items.Clear();
-            WorkshopDirectory = new DirectoryInfo(WorkshopLocation.Text);
-            SearchDownloadedItems();
-        }
-
+        // Control Events
+        private void DeleteAll_Click(object sender, EventArgs e) => FileActions.DeleteDirectory(Path.Combine(Server, "Workshop"));
+        private void View_Click(object sender, EventArgs e) => Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={ItemID}");
+        private void Exit_Click(object sender, EventArgs e) => Close();
         private void UpdateAll_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop") == false)
+            Hide();
+            if (AlreadyInstalled.Items.Count > 0)
             {
-                MessageBox.Show("There are no workshop items installed.");
-                return;
-            }
-            else if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop") == true)
-            {
-                if (Directory.Exists(Comms.DataPath + "SteamCMD") == false)
+                foreach (string s in AlreadyInstalled.Items)
                 {
-                    Directory.CreateDirectory(Comms.DataPath + "SteamCMD");
-                }
-                try
-                {
-                    if (File.Exists(Comms.DataPath + @"SteamCMD\steamcmd.exe") == false)
-                    {
-                        Downloader.Download("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip", "steamcmd.zip");
-                        Downloader.Extract("steamcmd.zip", Comms.DataPath + @"SteamCMD\");
-                    }
-                    DirectoryInfo Contents = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content");
-                    DirectoryInfo Maps = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps");
-                    ContentInstalled = Contents.GetDirectories();
-                    MapsInstalled = Maps.GetDirectories();
-                    foreach (DirectoryInfo folder in ContentInstalled)
-                    {
-                        Process SteamCMD = new Process();
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
-                        startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +exit";
-                        SteamCMD.StartInfo = startInfo;
-                        SteamCMD.Start();
-                        SteamCMD.WaitForExit();
-                        CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Content\" + folder.Name, true);
-                    }
-                    foreach (DirectoryInfo folder in MapsInstalled)
-                    {
-                        Process SteamCMD = new Process();
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.FileName = Comms.DataPath + @"SteamCMD\steamcmd.exe";
-                        startInfo.Arguments = " +login unturnedrocksupdate force_update +workshop_download_item 304930 " + folder.Name + " +exit";
-                        SteamCMD.StartInfo = startInfo;
-                        SteamCMD.Start();
-                        SteamCMD.WaitForExit();
-                        CopyDirectory(Comms.DataPath + @"SteamCMD\steamapps\workshop\content\304930\" + folder.Name, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Workshop\Maps\" + folder.Name, true);
-                    }
-                    RefreshInstalledContent();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("An error has been encountered during the download of the item.");
+                    SteamCMD.RunCommand($"+workshop_download_item 304930 {s} +quit");
+                    SteamCMD.MoveWorkshopFolder(s, Path.Combine(Server, "Workshop"));
                 }
             }
-        }*/
+            LoadInstalled();
+            Show();
+        }
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ItemID))
+            {
+                FileActions.DeleteDirectory(Path.Combine(Server, $@"\Workshop\Content\{ItemID}"));
+                FileActions.DeleteDirectory(Path.Combine(Server, $@"\Workshop\Maps\{ItemID}"));
+            }
+        }
+        private void InstallID_Click(object sender, EventArgs e)
+        {
+            Hide();
+            if (!string.IsNullOrEmpty(ID.Text))
+            {
+                SteamCMD.RunCommand($"+workshop_download_item 304930 {ID.Text} +quit");
+                SteamCMD.MoveWorkshopFolder(ID.Text, Path.Combine(Server, "Workshop"));
+            }
+            LoadInstalled();
+            Show();
+        }
+        private void AlreadyInstalled_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (AlreadyInstalled.SelectedItem != null)
+                ItemID = (string)AlreadyInstalled.SelectedItem;
+            else
+                ItemID = "";
+        }
+
+        private bool ControlChange = false;
+        private void ID_TextChanged(object sender, EventArgs e)
+        {
+            if (!ControlChange)
+                Link.Text = "http://steamcommunity.com/sharedfiles/filedetails/?id=" + ID.Text;
+        }
+        private void Link_TextChanged(object sender, EventArgs e)
+        {
+            ControlChange = true;
+            if (Link.Text.Length >= "https://steamcommunity.com/workshop/filedetails/?id=".Length)
+                ID.Text = Link.Text.Substring("https://steamcommunity.com/workshop/filedetails/?id=".Length);
+            ControlChange = false;
+        }
     }
 }

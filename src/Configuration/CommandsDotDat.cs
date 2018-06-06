@@ -54,7 +54,7 @@ namespace ATORTTeam.UnturnedServerManager.Configuration
         }
         public static CommandsDotDat Load(string ServerName)
         {
-            FilePath = @"config\Server_" + ServerName + "_commands.json";
+            FilePath = $@"config\Server_{ServerName}_commands.json";
 
             string file = Path.Combine(AppContext.BaseDirectory, FilePath);
 
@@ -64,32 +64,32 @@ namespace ATORTTeam.UnturnedServerManager.Configuration
         }
         public static void Delete(string ServerName)
         {
-            FilePath = @"config\Server_" + ServerName + "_commands.json";
+            FilePath = $@"config\Server_{ServerName}_commands.json";
             if (FileActions.VerifyFile(FilePath))
                 File.Delete(FilePath);
         }
 
         public override string ToString() =>
-            "Public Name: " + PublicName +
-            "\nPort: " + Port +
-            "\nPvP: " + PVP +
-            "\nPerspective: " + Perspective +
-            "\nMaxPlayers: " + MaxPlayers +
-            "\nMap: " + Map +
-            "\nDifficulty: " + Difficulty +
-            "\nGold Activated: " + GoldMode +
-            "\nCheats Enabled: " + Cheats +
-            "\nServer Password: " + Password +
-            "\nQueue Size: " + QueueSize +
-            "\nOwner Steam64ID: " + Owner +
-            "\nLogin Message: " + LoginMessage +
-            "\nSync Enabled: " + Sync +
-            "\nLoadout: " + Loadout +
-            "\nHide Admins: " + HideAdmins +
-            "\nBind: " + Bind +
-            "\nFilter: " + Filter +
-            "\nCycle: " + Cycle +
-            "\nChat Rate: " + ChatRate;
+            $"Public Name: {PublicName}" +
+            $"\nPort: {Port}" +
+            $"\nPvP: {PVP}" +
+            $"\nPerspective: {Perspective}" +
+            $"\nMaxPlayers: {MaxPlayers}" +
+            $"\nMap: {Map}" +
+            $"\nDifficulty: {Difficulty}" +
+            $"\nGold Activated: {GoldMode}" +
+            $"\nCheats Enabled: {Cheats}" +
+            $"\nServer Password: {Password}" +
+            $"\nQueue Size: {QueueSize}" +
+            $"\nOwner Steam64ID: {Owner}" +
+            $"\nLogin Message: {LoginMessage}" +
+            $"\nSync Enabled: {Sync}" +
+            $"\nLoadout: {Loadout}" +
+            $"\nHide Admins: {HideAdmins}" +
+            $"\nBind: {Bind}" +
+            $"\nFilter: {Filter}" +
+            $"\nCycle: {Cycle}" +
+            $"\nChat Rate: {ChatRate}";
         public List<string> ToNelson =>
             new List<string>()
             {

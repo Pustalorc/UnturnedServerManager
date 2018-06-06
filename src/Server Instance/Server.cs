@@ -46,7 +46,7 @@ namespace ATORTTeam.UnturnedServerManager.ServerInstance
                 return;
 
             Instance = new Process();
-            Instance.StartInfo = new ProcessStartInfo(ServerExec, Arguments + "/" + Name);
+            Instance.StartInfo = new ProcessStartInfo(ServerExec, $"{Arguments}/{Name}");
             Instance.StartInfo.WorkingDirectory = Type == ServerType.Vanilla ? VanillaServerPath.Value : RocketmodServerPath.Value;
             Instance.Start();
         }

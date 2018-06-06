@@ -88,7 +88,6 @@
     <Compile Include="Constants\RocketMod Server Item Prefix.cs" />
     <Compile Include="Constants\RocketMod Server Path.cs" />
     <Compile Include="Constants\RocketMod Download Link.cs" />
-    <Compile Include="Constants\SteamCMD Download Link.cs" />
     <Compile Include="Constants\Vanilla Server Item Prefix.cs" />
     <Compile Include="Constants\Vanilla Server Path.cs" />
     <Compile Include="File Control\File Actions.cs" />
@@ -122,12 +121,6 @@
     <Compile Include="GUI\First Start.Designer.cs">
       <DependentUpon>First Start.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\XMLEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\XMLEditor.Designer.cs">
-      <DependentUpon>XMLEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Loading\Entry.cs" />
     <Compile Include="GUI\Server Settings.cs">
       <SubType>Form</SubType>
@@ -155,7 +148,6 @@
     </Compile>
     <Compile Include="Loading\Servers.cs" />
     <Compile Include="Memory\Servers.cs" />
-    <Compile Include="Memory\Steam Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server Instance\Server Type.cs" />
     <Compile Include="Server Instance\Server.cs" />
@@ -165,6 +157,7 @@
     <Compile Include="GUI\Update Menu.Designer.cs">
       <DependentUpon>Update Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="SteamCMD Manager\SteamCMD.cs" />
     <Compile Include="Updating\Updater.cs" />
     <Compile Include="Versions\Rocket Build.cs" />
     <Compile Include="Versions\Unturned Build.cs" />
@@ -206,9 +199,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Workshop Download.resx">
       <DependentUpon>Workshop Download.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\XMLEditor.resx">
-      <DependentUpon>XMLEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="README.md" />

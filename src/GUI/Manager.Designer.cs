@@ -51,8 +51,6 @@
             this.ctrl_TXT = new System.Windows.Forms.Label();
             this.Reset = new System.Windows.Forms.Button();
             this.OpenLocal = new System.Windows.Forms.Button();
-            this.XMLEditor = new System.Windows.Forms.Button();
-            this.JSONEditor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Settings
@@ -87,9 +85,9 @@
             // 
             // Toggle
             // 
-            this.Toggle.Location = new System.Drawing.Point(388, 230);
+            this.Toggle.Location = new System.Drawing.Point(391, 168);
             this.Toggle.Name = "Toggle";
-            this.Toggle.Size = new System.Drawing.Size(142, 23);
+            this.Toggle.Size = new System.Drawing.Size(139, 23);
             this.Toggle.TabIndex = 18;
             this.Toggle.Text = "Start/Stop Server";
             this.Toggle.UseVisualStyleBackColor = true;
@@ -214,9 +212,9 @@
             // Restart
             // 
             this.Restart.Enabled = false;
-            this.Restart.Location = new System.Drawing.Point(388, 259);
+            this.Restart.Location = new System.Drawing.Point(391, 197);
             this.Restart.Name = "Restart";
-            this.Restart.Size = new System.Drawing.Size(142, 23);
+            this.Restart.Size = new System.Drawing.Size(139, 23);
             this.Restart.TabIndex = 20;
             this.Restart.Text = "Restart Server";
             this.Restart.UseVisualStyleBackColor = true;
@@ -234,7 +232,7 @@
             // ctrl_TXT
             // 
             this.ctrl_TXT.AutoSize = true;
-            this.ctrl_TXT.Location = new System.Drawing.Point(391, 211);
+            this.ctrl_TXT.Location = new System.Drawing.Point(391, 152);
             this.ctrl_TXT.Name = "ctrl_TXT";
             this.ctrl_TXT.Size = new System.Drawing.Size(43, 13);
             this.ctrl_TXT.TabIndex = 37;
@@ -252,33 +250,13 @@
             // 
             // OpenLocal
             // 
-            this.OpenLocal.Location = new System.Drawing.Point(388, 288);
+            this.OpenLocal.Location = new System.Drawing.Point(391, 226);
             this.OpenLocal.Name = "OpenLocal";
-            this.OpenLocal.Size = new System.Drawing.Size(142, 23);
+            this.OpenLocal.Size = new System.Drawing.Size(139, 23);
             this.OpenLocal.TabIndex = 40;
             this.OpenLocal.Text = "Open Local Folder";
             this.OpenLocal.UseVisualStyleBackColor = true;
             this.OpenLocal.Click += new System.EventHandler(this.OpenLocal_Click);
-            // 
-            // XMLEditor
-            // 
-            this.XMLEditor.Location = new System.Drawing.Point(391, 144);
-            this.XMLEditor.Name = "XMLEditor";
-            this.XMLEditor.Size = new System.Drawing.Size(139, 23);
-            this.XMLEditor.TabIndex = 41;
-            this.XMLEditor.Text = "XML Editor";
-            this.XMLEditor.UseVisualStyleBackColor = true;
-            this.XMLEditor.Click += new System.EventHandler(this.XMLEditor_Click);
-            // 
-            // JSONEditor
-            // 
-            this.JSONEditor.Location = new System.Drawing.Point(391, 173);
-            this.JSONEditor.Name = "JSONEditor";
-            this.JSONEditor.Size = new System.Drawing.Size(139, 23);
-            this.JSONEditor.TabIndex = 42;
-            this.JSONEditor.Text = "JSON Editor";
-            this.JSONEditor.UseVisualStyleBackColor = true;
-            this.JSONEditor.Click += new System.EventHandler(this.JSONEditor_Click);
             // 
             // Manager
             // 
@@ -286,8 +264,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(559, 437);
-            this.Controls.Add(this.JSONEditor);
-            this.Controls.Add(this.XMLEditor);
             this.Controls.Add(this.OpenLocal);
             this.Controls.Add(this.Reset);
             this.Controls.Add(this.ctrl_TXT);
@@ -341,7 +317,5 @@
         private System.Windows.Forms.Label ctrl_TXT;
         private System.Windows.Forms.Button Reset;
         private System.Windows.Forms.Button OpenLocal;
-        private System.Windows.Forms.Button XMLEditor;
-        private System.Windows.Forms.Button JSONEditor;
     }
 }

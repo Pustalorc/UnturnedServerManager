@@ -85,12 +85,10 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         {
             Settings.Enabled = Status;
             ServerSettings.Enabled = Status;
-            JSONEditor.Enabled = Status;
             Toggle.Enabled = Status;
             OpenLocal.Enabled = Status;
             Restart.Enabled = false;
             Reset.Enabled = Status;
-            XMLEditor.Enabled = Status;
             Workshop.Enabled = Status;
             Plugin.Enabled = Status;
             DeleteServer.Enabled = Status;
@@ -153,14 +151,18 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         }
         private void Workshop_Click(object sender, EventArgs e)
         {
-            OtherGUIOpen = true;
-            Hide();
+            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
+            if (server != null)
+            {
+                OtherGUIOpen = true;
+                Hide();
 
-            Workshop f = new Workshop();
-            f.ShowDialog();
+                Workshop f = new Workshop(server.Folder);
+                f.ShowDialog();
 
-            Show();
-            OtherGUIOpen = false;
+                Show();
+                OtherGUIOpen = false;
+            }
         }
         private void Plugin_Click(object sender, EventArgs e)
         {
@@ -263,37 +265,6 @@ namespace ATORTTeam.UnturnedServerManager.GUI
                     SelectedServer = s.Substring(0, s.Length - VanillaPrefix.Value.Length);
 
                 LoadServerDetails();
-            }
-        }
-        private void XMLEditor_Click(object sender, EventArgs e)
-        {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
-
-                var f = new XMLEditor(server.Folder);
-                f.ShowDialog();
-
-                Show();
-                OtherGUIOpen = false;
-            }
-        }
-        private void JSONEditor_Click(object sender, EventArgs e)
-        {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
-
-                // Open JSON Editor GUI.
-                //var f = new AdvancedUnturnedConfiguration(server.Folder);
-                //f.ShowDialog();
-
-                Show();
-                OtherGUIOpen = false;
             }
         }
     }

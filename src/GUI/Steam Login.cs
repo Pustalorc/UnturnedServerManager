@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ATORTTeam.UnturnedServerManager.SteamCMDManager;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -18,8 +19,8 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         {
             if (Remember.Checked)
             {
-                Memory.SteamLogin.Username = Username.Text;
-                Memory.SteamLogin.Password = Password.Text;
+                SteamCMD.Username = Username.Text;
+                SteamCMD.Password = Password.Text;
             }
         }
         private void Github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://github.com/persiafighter/UnturnedServerManager/wiki");
