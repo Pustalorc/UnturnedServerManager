@@ -4,9 +4,7 @@ Version: Public 4.0.0.0
 
 [![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
-Last Update: April 30, 2017
-
---
+Last Update: 7th June 2018
 
 # Requirements:
 
