@@ -4,8 +4,6 @@ Last Update: 7th June 2018
 
 [![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
---
-
 <h1>Requirements:</h1>
 
 .Net 4.6 or Later
