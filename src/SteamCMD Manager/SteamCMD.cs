@@ -65,10 +65,10 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
         public static void MoveWorkshopFolder(string ID, string DirectoryDestination)
         {
             var inst = Installation.Load();
-            var workshopdir = Path.Combine(inst.InstallationPath, $@"\steamapps\workshop\content\304930\{ID}");
+            var workshopdir = Path.Combine(inst.InstallationPath, "steamapps", "workshop", "content", "304930", ID);
             var MapMeta = Path.Combine(workshopdir, "Map.meta");
-            var MapsDir = Path.Combine(DirectoryDestination, "Maps");
-            var ContentDir = Path.Combine(DirectoryDestination, "Content");
+            var MapsDir = Path.Combine(DirectoryDestination, "Maps", ID);
+            var ContentDir = Path.Combine(DirectoryDestination, "Content", ID);
 
             if (FileActions.VerifyFile(MapMeta))
                 FileActions.CopyDirectory(workshopdir, MapsDir);

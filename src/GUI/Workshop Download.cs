@@ -23,24 +23,50 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         public void LoadInstalled()
         {
             AlreadyInstalled.Items.Clear();
-            var workshoplocation = Path.Combine(Server, @"\Workshop\Content");
+            var workshoplocation = Path.Combine(Server, "Workshop", "Content");
             FileActions.VerifyPath(workshoplocation, true);
 
             DirectoryInfo Fldr = new DirectoryInfo(workshoplocation);
             DirectoryInfo[] Content = Fldr.GetDirectories();
             foreach (var folder in Content)
                 AlreadyInstalled.Items.Add(folder.Name);
+            
+            workshoplocation = Path.Combine(Server, "Workshop", "Maps");
+            FileActions.VerifyPath(workshoplocation, true);
 
-            Fldr = new DirectoryInfo(Path.Combine(Server, @"\Workshop\Maps"));
+            Fldr = new DirectoryInfo(workshoplocation);
             Content = Fldr.GetDirectories();
             foreach (var folder in Content)
                 AlreadyInstalled.Items.Add(folder.Name);
+            
+            if (AlreadyInstalled.Items.Count == 0)
+            {
+                Delete.Enabled = false;
+                View.Enabled = false;
+                UpdateAll.Enabled = false;
+                DeleteAll.Enabled = false;
+                ItemID = "";
+            }
+            else
+            {
+                AlreadyInstalled.SelectedIndex = 0;
+                UpdateAll.Enabled = true;
+                DeleteAll.Enabled = true;
+            }
         }
 
         // Control Events
-        private void DeleteAll_Click(object sender, EventArgs e) => FileActions.DeleteDirectory(Path.Combine(Server, "Workshop"));
-        private void View_Click(object sender, EventArgs e) => Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={ItemID}");
         private void Exit_Click(object sender, EventArgs e) => Close();
+        private void DeleteAll_Click(object sender, EventArgs e)
+        {
+            FileActions.DeleteDirectory(Path.Combine(Server, "Workshop"));
+            LoadInstalled();
+        }
+        private void View_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ItemID))
+                Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={ItemID}");
+        }
         private void UpdateAll_Click(object sender, EventArgs e)
         {
             Hide();
@@ -59,9 +85,10 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         {
             if (!string.IsNullOrEmpty(ItemID))
             {
-                FileActions.DeleteDirectory(Path.Combine(Server, $@"\Workshop\Content\{ItemID}"));
-                FileActions.DeleteDirectory(Path.Combine(Server, $@"\Workshop\Maps\{ItemID}"));
+                FileActions.DeleteDirectory(Path.Combine(Server, "Workshop", "Content", ItemID));
+                FileActions.DeleteDirectory(Path.Combine(Server, "Workshop", "Maps", ItemID));
             }
+            LoadInstalled();
         }
         private void InstallID_Click(object sender, EventArgs e)
         {
@@ -77,9 +104,17 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         private void AlreadyInstalled_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AlreadyInstalled.SelectedItem != null)
+            {
+                Delete.Enabled = true;
+                View.Enabled = true;
                 ItemID = (string)AlreadyInstalled.SelectedItem;
+            }
             else
+            {
+                Delete.Enabled = false;
+                View.Enabled = false;
                 ItemID = "";
+            }
         }
 
         private bool ControlChange = false;

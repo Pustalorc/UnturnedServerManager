@@ -13,6 +13,9 @@ namespace ATORTTeam.UnturnedServerManager.ServerInstance
         public string Name { get; private set; }
         public ServerType Type { get; private set; }
         public bool IsRunning => Instance != null;
+        /// <summary>
+        /// The folder in which all the server data is stored.
+        /// </summary>
         public string Folder => Path.Combine(Type == ServerType.Vanilla ? VanillaServerPath.Value : RocketmodServerPath.Value, "Servers", Name);
 
         public static Server Create(string name, ServerType type, string clone = null)

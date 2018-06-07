@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.DeleteAll = new System.Windows.Forms.Button();
-            this.AlreadyInstalled = new System.Windows.Forms.ListBox();
             this.AlreadyInstalledDesc = new System.Windows.Forms.Label();
             this.Exit = new System.Windows.Forms.Button();
             this.Desc1 = new System.Windows.Forms.Label();
@@ -42,29 +41,19 @@
             this.UpdateAll = new System.Windows.Forms.Button();
             this.Delete = new System.Windows.Forms.Button();
             this.View = new System.Windows.Forms.Button();
+            this.AlreadyInstalled = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // DeleteAll
             // 
-            this.DeleteAll.Location = new System.Drawing.Point(12, 305);
+            this.DeleteAll.Enabled = false;
+            this.DeleteAll.Location = new System.Drawing.Point(12, 306);
             this.DeleteAll.Name = "DeleteAll";
             this.DeleteAll.Size = new System.Drawing.Size(62, 23);
             this.DeleteAll.TabIndex = 24;
             this.DeleteAll.Text = "Delete All";
             this.DeleteAll.UseVisualStyleBackColor = true;
             this.DeleteAll.Click += new System.EventHandler(this.DeleteAll_Click);
-            // 
-            // AlreadyInstalled
-            // 
-            this.AlreadyInstalled.BackColor = System.Drawing.SystemColors.Window;
-            this.AlreadyInstalled.FormattingEnabled = true;
-            this.AlreadyInstalled.Location = new System.Drawing.Point(12, 25);
-            this.AlreadyInstalled.Name = "AlreadyInstalled";
-            this.AlreadyInstalled.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.AlreadyInstalled.Size = new System.Drawing.Size(324, 264);
-            this.AlreadyInstalled.Sorted = true;
-            this.AlreadyInstalled.TabIndex = 23;
-            this.AlreadyInstalled.SelectedIndexChanged += new System.EventHandler(this.AlreadyInstalled_SelectedIndexChanged);
             // 
             // AlreadyInstalledDesc
             // 
@@ -149,6 +138,7 @@
             // 
             // UpdateAll
             // 
+            this.UpdateAll.Enabled = false;
             this.UpdateAll.Location = new System.Drawing.Point(80, 306);
             this.UpdateAll.Name = "UpdateAll";
             this.UpdateAll.Size = new System.Drawing.Size(65, 23);
@@ -159,7 +149,8 @@
             // 
             // Delete
             // 
-            this.Delete.Location = new System.Drawing.Point(151, 305);
+            this.Delete.Enabled = false;
+            this.Delete.Location = new System.Drawing.Point(151, 306);
             this.Delete.Name = "Delete";
             this.Delete.Size = new System.Drawing.Size(92, 23);
             this.Delete.TabIndex = 35;
@@ -169,7 +160,8 @@
             // 
             // View
             // 
-            this.View.Location = new System.Drawing.Point(249, 305);
+            this.View.Enabled = false;
+            this.View.Location = new System.Drawing.Point(249, 306);
             this.View.Name = "View";
             this.View.Size = new System.Drawing.Size(87, 23);
             this.View.TabIndex = 36;
@@ -177,12 +169,22 @@
             this.View.UseVisualStyleBackColor = true;
             this.View.Click += new System.EventHandler(this.View_Click);
             // 
+            // AlreadyInstalled
+            // 
+            this.AlreadyInstalled.FormattingEnabled = true;
+            this.AlreadyInstalled.Location = new System.Drawing.Point(12, 25);
+            this.AlreadyInstalled.Name = "AlreadyInstalled";
+            this.AlreadyInstalled.Size = new System.Drawing.Size(324, 277);
+            this.AlreadyInstalled.TabIndex = 37;
+            this.AlreadyInstalled.SelectedIndexChanged += new System.EventHandler(this.AlreadyInstalled_SelectedIndexChanged);
+            // 
             // Workshop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(543, 341);
+            this.Controls.Add(this.AlreadyInstalled);
             this.Controls.Add(this.View);
             this.Controls.Add(this.Delete);
             this.Controls.Add(this.UpdateAll);
@@ -194,7 +196,6 @@
             this.Controls.Add(this.ID);
             this.Controls.Add(this.Desc1);
             this.Controls.Add(this.DeleteAll);
-            this.Controls.Add(this.AlreadyInstalled);
             this.Controls.Add(this.AlreadyInstalledDesc);
             this.Controls.Add(this.Exit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -212,7 +213,6 @@
 
         #endregion
         private System.Windows.Forms.Button DeleteAll;
-        private System.Windows.Forms.ListBox AlreadyInstalled;
         private System.Windows.Forms.Label AlreadyInstalledDesc;
         private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.Label Desc1;
@@ -225,5 +225,6 @@
         private System.Windows.Forms.Button UpdateAll;
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.Button View;
+        private System.Windows.Forms.ListBox AlreadyInstalled;
     }
 }
