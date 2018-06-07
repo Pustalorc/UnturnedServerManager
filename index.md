@@ -1,57 +1,53 @@
-Version: Public 3.0.1.3
+Version: Public 4.0.0.0
 
-[![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/tag/v3.0.0.5) [![GitHub issues](https://img.shields.io/github/issues/persiafighter/UnturnedServerManager.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/issues) [![GitHub closed issues](https://img.shields.io/github/issues-closed/persiafighter/UnturnedServerManager.svg?style=plastic)]()
+Last Update: 7th June 2018
 
-Last Update: March 10, 2017
+[![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
 --
 
 <h1>Requirements:</h1>
 
-.Net 4.5 or Later
+.Net 4.6 or Later
 
-Windows (Will be working on mac version at some point in time)
+Windows
 
 <h1>Download:</h1>
 
-[https://github.com/persiafighter/UnturnedServerManager/releases/latest](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
-
-Or compile it yourself with the source code!
-
-<h1>Reddit Post:</h1>
-
-[https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/](https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/)
-
-<h1>Upcoming Features:</h1>
-
-* Control on each of the server's console (ban and such).
-* Update All Plugins (bulk update).
-* Auto-Restart Option.
-* Ease of config for rocket settings and permissions.
-* Delete Mod/Plugin Selected.
-* USM Settings.
-
-<h1>Planed Changes For 3.1.0.0</h1>
-
-* Control on each of the server's console (ban and such).
-* Add More Log Data.
-* Add Name Of Sector/Script That Called To Log.
-* Completing All Messageboxes.
-* Change Path Usage.
-* Update All Plugins (bulk update).
-* Auto-Restart Option.
-* Ease of config for rocket settings and permissions.
-* USM Settings.
-* Fix Shutdown/Restart Rollback
-* Allow to see already downloaded items with install by ID.
-* Add Ability To Delete Mod/Plugin Selected.
+[Releases](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
 <h1>Known Bugs:</h1>
 
-* Shutdown/Restart makes player data loss. _Side note, this bug cannot be fixed with vanilla servers (Admin/Owner can type the shutdown command in console/ingame, which would then make it secure), as USM cannot communicate with a vanilla server. On the other hand, rocket servers will have USMConnect installed (once it's developed, currently it's expected for when USM gets to 3.1.0.0) and will be able to have this problem fixed. Sorry for any rollbakcs the restart/shutdown buttons might cause_
+None as of 4.0.0.0
 
 <h1>Changelog:</h1>
 
+**V4.0.0.0** -
+
+* Added more local control over server instances.
+* Added filesystem control.
+* Added constants file.
+* Added steam login.
+* Added Costura.Fody so that no referenced libraries are required next to the executable
+* Improved plugin installer.
+* Improved workshop installer.
+* Improved design for the manager.
+* Improved installation checking.
+* Improved the entry for clean loading.
+* Improved back-end downloading + Updating.
+* Improved form controls for the server settings.
+* Improved saved configuration files to json formatted files.
+* Changed version retreival from github file to custom build numbers.
+* Changed background colour to "Control" from FF0000.
+* Removed project signing (due to Costura.Fody issues).
+* Removed self-version checking.
+* Removed logging.
+* Fixed updating issues.
+* Cleaned up & organised code.
+
+**V3.0.1.4** - 
+
+* Fixed A Problem With The Updater Tool GUI Displaying + Storing The Wrong Version Values.
 
 **V3.0.1.3** - 
 
