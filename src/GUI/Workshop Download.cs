@@ -126,8 +126,40 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         private void Link_TextChanged(object sender, EventArgs e)
         {
             ControlChange = true;
-            if (Link.Text.Length >= "https://steamcommunity.com/workshop/filedetails/?id=".Length)
-                ID.Text = Link.Text.Substring("https://steamcommunity.com/workshop/filedetails/?id=".Length);
+            ID.Text = "";
+
+            if (Link.Text.StartsWith("https://steamcommunity.com/sharedfiles/filedetails/?id="))
+            {
+                string id = Link.Text.Substring("https://steamcommunity.com/sharedfiles/filedetails/?id=".Length);
+
+                string iid = "";
+                foreach (char c in id)
+                {
+                    if (ulong.TryParse("" + c, out ulong n))
+                        iid += c;
+                    else
+                        break;
+                }
+
+                if (ulong.TryParse(iid, out ulong uid))
+                    ID.Text = iid;
+            }
+            else if (Link.Text.StartsWith("https://steamcommunity.com/workshop/filedetails/?id="))
+            {
+                string id = Link.Text.Substring("https://steamcommunity.com/workshop/filedetails/?id=".Length);
+
+                string iid = "";
+                foreach (char c in id)
+                {
+                    if (ulong.TryParse("" + c, out ulong n))
+                        iid += c;
+                    else
+                        break;
+                }
+
+                if (ulong.TryParse(iid, out ulong uid))
+                    ID.Text = iid;
+            }
             ControlChange = false;
         }
     }

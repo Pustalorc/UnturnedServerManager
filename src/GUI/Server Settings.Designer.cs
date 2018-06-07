@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConstConfig));
             this.Rate2 = new System.Windows.Forms.RadioButton();
             this.Cycle1 = new System.Windows.Forms.RadioButton();
             this.Cycle2 = new System.Windows.Forms.RadioButton();
@@ -1064,11 +1065,11 @@
             this.Controls.Add(this.NameSel);
             this.Controls.Add(this.NameDesc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConstConfig";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Server\'s Settings";
             this.panel5.ResumeLayout(false);

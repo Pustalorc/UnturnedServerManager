@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateMenu));
             this.UAll = new System.Windows.Forms.Button();
             this.LRVer = new System.Windows.Forms.Label();
             this.LRVerDesc = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             this.CUVer = new System.Windows.Forms.Label();
             this.CUVerDesc = new System.Windows.Forms.Label();
             this.UUnturned = new System.Windows.Forms.Button();
+            this.UValidate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UAll
@@ -54,7 +56,7 @@
             // LRVer
             // 
             this.LRVer.AutoSize = true;
-            this.LRVer.Location = new System.Drawing.Point(487, 45);
+            this.LRVer.Location = new System.Drawing.Point(501, 45);
             this.LRVer.Name = "LRVer";
             this.LRVer.Size = new System.Drawing.Size(27, 13);
             this.LRVer.TabIndex = 36;
@@ -63,7 +65,7 @@
             // LRVerDesc
             // 
             this.LRVerDesc.AutoSize = true;
-            this.LRVerDesc.Location = new System.Drawing.Point(357, 45);
+            this.LRVerDesc.Location = new System.Drawing.Point(380, 45);
             this.LRVerDesc.Name = "LRVerDesc";
             this.LRVerDesc.Size = new System.Drawing.Size(115, 13);
             this.LRVerDesc.TabIndex = 35;
@@ -100,7 +102,7 @@
             // LUVer
             // 
             this.LUVer.AutoSize = true;
-            this.LUVer.Location = new System.Drawing.Point(487, 16);
+            this.LUVer.Location = new System.Drawing.Point(501, 16);
             this.LUVer.Name = "LUVer";
             this.LUVer.Size = new System.Drawing.Size(27, 13);
             this.LUVer.TabIndex = 29;
@@ -109,7 +111,7 @@
             // LUVerDesc
             // 
             this.LUVerDesc.AutoSize = true;
-            this.LUVerDesc.Location = new System.Drawing.Point(357, 16);
+            this.LUVerDesc.Location = new System.Drawing.Point(380, 16);
             this.LUVerDesc.Name = "LUVerDesc";
             this.LUVerDesc.Size = new System.Drawing.Size(112, 13);
             this.LUVerDesc.TabIndex = 28;
@@ -143,12 +145,23 @@
             this.UUnturned.UseVisualStyleBackColor = true;
             this.UUnturned.Click += new System.EventHandler(this.UUnturned_Click);
             // 
+            // UValidate
+            // 
+            this.UValidate.Location = new System.Drawing.Point(482, 69);
+            this.UValidate.Name = "UValidate";
+            this.UValidate.Size = new System.Drawing.Size(104, 23);
+            this.UValidate.TabIndex = 48;
+            this.UValidate.Text = "Validate Unturned";
+            this.UValidate.UseVisualStyleBackColor = true;
+            this.UValidate.Click += new System.EventHandler(this.Validate_Click);
+            // 
             // UpdateMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(569, 103);
+            this.ClientSize = new System.Drawing.Size(598, 103);
+            this.Controls.Add(this.UValidate);
             this.Controls.Add(this.UAll);
             this.Controls.Add(this.LRVer);
             this.Controls.Add(this.LRVerDesc);
@@ -161,11 +174,11 @@
             this.Controls.Add(this.CUVerDesc);
             this.Controls.Add(this.UUnturned);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UpdateMenu";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Updater";
             this.ResumeLayout(false);
@@ -185,5 +198,6 @@
         private System.Windows.Forms.Label CUVer;
         private System.Windows.Forms.Label CUVerDesc;
         private System.Windows.Forms.Button UUnturned;
+        private System.Windows.Forms.Button UValidate;
     }
 }

@@ -90,7 +90,7 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
                 {
                     var ZipTarget = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
                     FileActions.Download(DownloadLink, ZipTarget);
-                    FileActions.Extract(ZipTarget, inst.InstallationPath);
+                    FileActions.ExtractZip(ZipTarget, inst.InstallationPath);
                 }
             }
             catch (Exception ex)

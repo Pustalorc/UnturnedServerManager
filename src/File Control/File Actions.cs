@@ -34,42 +34,6 @@ namespace ATORTTeam.UnturnedServerManager.FileControl
         }
 
         /// <summary>
-        /// Extracts all the contents of a .Zip file to its destination, overwriting the files if necessary.
-        /// </summary>
-        /// <param name="Zip">The full path to the zip file, filename and extension included.</param>
-        /// <param name="Destination">The destination folder for all the contents of the .Zip file to be extracted to.</param>
-        /// <returns>False if the file doesn't exist or if an issue occurs during the entire process of extraction (Ignoring issues when overwriting individual files). Returns true otherwise.</returns>
-        public static bool Extract(string Zip, string Destination)
-        {
-            try
-            {
-                VerifyPath(Destination, true);
-
-                if (!VerifyFile(Zip))
-                    return false;
-
-                foreach (ZipArchiveEntry Entry in new ZipArchive(File.OpenRead(Zip)).Entries)
-                {
-                    try
-                    {
-                        string dir = Path.GetFullPath(Path.Combine(Destination, Entry.FullName));
-
-                        VerifyFilePath(dir, true);
-
-                        if (Entry.Name != "")
-                            Entry.ExtractToFile(Path.GetFullPath(Path.Combine(Destination, Entry.FullName)), true);
-                    }
-                    catch { }
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Verifies that the file exists.
         /// </summary>
         /// <param name="Path">Full path, including file name, to the file.</param>
@@ -135,6 +99,33 @@ namespace ATORTTeam.UnturnedServerManager.FileControl
 
                 foreach (string newPath in Directory.GetFiles(Folder, "*.*", SearchOption.AllDirectories))
                     File.Copy(newPath, newPath.Replace(Folder, Destination), true);
+            }
+        }
+
+        /// <summary>
+        /// Extracts all the contents of a .Zip file into a specific folder.
+        /// </summary>
+        /// <param name="ZipFile">The full path, including file name, to the .Zip file.</param>
+        /// <param name="Destination">The full path where the files should be extracted to.</param>
+        public static void ExtractZip(string ZipFile, string Destination)
+        {
+            if (!VerifyFile(ZipFile))
+                return;
+
+            VerifyPath(Destination, true);
+
+            foreach (ZipArchiveEntry Entry in new ZipArchive(File.OpenRead(ZipFile)).Entries)
+            {
+                try
+                {
+                    string dir = Path.GetFullPath(Path.Combine(Destination, Entry.FullName));
+
+                    VerifyFilePath(dir, true);
+
+                    if (Entry.Name != "")
+                        Entry.ExtractToFile(dir, true);
+                }
+                catch { }
             }
         }
     }

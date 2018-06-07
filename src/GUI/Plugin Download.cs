@@ -1,232 +1,164 @@
-﻿using System;
+﻿using ATORTTeam.UnturnedServerManager.Constants;
+using ATORTTeam.UnturnedServerManager.FileControl;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ATORTTeam.UnturnedServerManager.GUI
 {
     public partial class Plugin : Form
     {
-        /*private DirectoryInfo ServerDirectory;
-        private FileInfo[] InstalledPlugins;
-        private string[] PluginNames;
-        private string[] PluginWebLink;
-        private string[] SelectedItems;
-        private bool Error = false;*/
+        private string Server;
+        private string ItemID = "";
 
-        public Plugin()
+        public Plugin(string ServerPath)
         {
             InitializeComponent();
-            //SearchInstalledItems();
+            Server = ServerPath;
+            LoadInstalled();
         }
 
-        /*private void SearchInstalledItems()
+        // Custom Methods
+        private void LoadInstalled()
         {
-            Logger.Log("Loading plugin integrity files...");
-            try
-            {
-                PluginWebLink = File.ReadAllLines(Comms.DataPath + @"PluginLinks.dat");
-                PluginNames = File.ReadAllLines(Comms.DataPath + @"PluginNames.dat");
-            }
-            catch (Exception)
-            {
-                Logger.Log("Loading of files was unsuccessful, telling player to download the latest version.");
-                MessageBox.Show("An error has occured during initalization of the plugin installer. Make sure you have the latest updated integrity files.");
-                Error = true;
-                Logger.Log("Turning program off.");
-                ShutOff();
-            }
-            if (!Error)
-            {
-                Logger.Log("Plugin integrity files loaded.");
-                UpdateOptions();
-            }
-        }
-
-        private async void ShutOff()
-        {
-            await Task.Delay(50);
-            Logger.Log("Closing form.");
-            Close();
-        }
-
-        private void UpdateOptions()
-        {
-            Logger.Log("Searching for installed plugins.");
-            ServerDirectory = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
-            try
-            {
-                InstalledPlugins = ServerDirectory.GetFiles();
-                Logger.Log("Acquired installed plugins.");
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Logger.Log("No installed plugins were found.");
-            }
-            AvailableItems.Items.Clear();
             AlreadyInstalled.Items.Clear();
-            Logger.Log("Cleared display of both lists.");
-            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins"))
-            {
-                Logger.Log("Displaying every already installed plugin.");
-                foreach (FileInfo File in InstalledPlugins)
-                {
-                    AlreadyInstalled.Items.Add(File.Name);
-                    Logger.Log("Displayed the installed plugin " + File.Name);
-                }
-            }
-            Logger.Log("Displaying available plugins.");
-            foreach (string Files in PluginNames)
-            {
-                AvailableItems.Items.Add(Files);
-                Logger.Log("Displayed the plugin " + Files);
-            }
-        }
+            var pluginlocation = Path.Combine(Server, "Rocket", "Plugins");
+            FileActions.VerifyPath(pluginlocation, true);
 
-        private void Install_Click(object sender, EventArgs e)
-        {
-            if (AvailableItems.CheckedIndices.Count == 0)
+            DirectoryInfo Fldr = new DirectoryInfo(pluginlocation);
+            FileInfo[] Content = Fldr.GetFiles("*.dll", SearchOption.TopDirectoryOnly);
+            foreach (var file in Content)
+                AlreadyInstalled.Items.Add(file.Name.Substring(0, file.Name.Length - 4));
+            
+            if (AlreadyInstalled.Items.Count == 0)
             {
-                MessageBox.Show("No plugins were selected.");
-                Logger.Log("User attempted to install plugins, but no plugins were selected.");
-            }
-            else if (AvailableItems.CheckedIndices.Count > 0)
-            {
-                Logger.Log("Installing selected plugins.");
-                GetSelectedItems();
-                InstallItems();
-                UpdateOptions();
-            }
-        }
-
-        private void Documentation_Click(object sender, EventArgs e)
-        {
-            if (AvailableItems.CheckedIndices.Count == 0)
-            {
-                MessageBox.Show("No plugins were selected.");
-                Logger.Log("User attempted to get the documentation of plugins, but no plugins were selected.");
-            }
-            else if (AvailableItems.CheckedIndices.Count > 0)
-            {
-                Logger.Log("Displaying documentation of user selected plugins");
-                GetSelectedItems();
-                OpenWebsite();
-                UpdateOptions();
-            }
-        }
-
-        private void DeleteAll_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == true)
-            {
-                Logger.Log("Plugins were found to be installed, user decided to delete all. Deleting folder.");
-                Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins", true);
-                UpdateOptions();
+                Delete.Enabled = false;
+                DeleteAll.Enabled = false;
+                Configuration.Enabled = false;
+                ItemID = "";
             }
             else
             {
-                MessageBox.Show("You have not installed any plugins yet.");
-                Logger.Log("User attempted to delete all plugins, but no plugins are installed.");
+                AlreadyInstalled.SelectedIndex = 0;
+                Delete.Enabled = true;
+                DeleteAll.Enabled = true;
+                Configuration.Enabled = true;
             }
         }
 
-        private void Configuration_Click(object sender, EventArgs e)
+        // Control Events
+        private void Exit_Click(object sender, System.EventArgs e) => Close();
+        private void AlreadyInstalled_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == true)
+            if (AlreadyInstalled.SelectedItem != null)
             {
-                Process.Start(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
-                Logger.Log("Plugins were found to be installed, user decided to open the folder. Opening folder.");
+                Delete.Enabled = true;
+                Configuration.Enabled = true;
+                ItemID = (string)AlreadyInstalled.SelectedItem;
             }
             else
             {
-                MessageBox.Show("You have not installed any plugins yet.");
-                Logger.Log("User attempted to open the folder of plugins, but no plugins are installed.");
+                Delete.Enabled = false;
+                Configuration.Enabled = true;
+                ItemID = "";
             }
         }
-
-        private void SaveExit_Click(object sender, EventArgs e)
+        private void DeleteAll_Click(object sender, System.EventArgs e)
         {
-            if (AvailableItems.CheckedIndices.Count > 0)
-            {
-                Logger.Log("Plugins were selected before exit, installing.");
-                GetSelectedItems();
-                InstallItems();
-            }
-            Logger.Log("Closing form.");
-            Close();
+            var pluginlocation = Path.Combine(Server, "Rocket", "Plugins");
+            var librarieslocation = Path.Combine(Server, "Rocket", "Libraries");
+
+            FileActions.DeleteDirectory(pluginlocation);
+            FileActions.DeleteDirectory(librarieslocation);
+
+            LoadInstalled();
         }
-
-        private void OpenWebsite()
+        private void Delete_Click(object sender, System.EventArgs e)
         {
-            for (int i = 0; i < SelectedItems.Length; i++)
+            var pluginlocation = Path.Combine(Server, "Rocket", "Plugins", ItemID);
+
+            FileActions.DeleteDirectory(pluginlocation);
+            File.Delete($"{pluginlocation}.dll");
+
+            LoadInstalled();
+        }
+        private void Install_Click(object sender, System.EventArgs e)
+        {
+            Hide();
+            var pluginlocation = Path.Combine(Server, "Rocket", "Plugins");
+            var librarieslocation = Path.Combine(Server, "Rocket", "Libraries");
+            var modulelocation = Path.Combine(RocketmodServerPath.Value, "Modules");
+
+            var tempname = Path.GetTempFileName();
+            var templocation = Path.Combine(Path.GetTempPath(), tempname.Substring(0, tempname.Length - 4));
+
+            var result = OpenZip.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                for (int u = 0; u < PluginNames.Length; u++)
+                FileStream stream = (FileStream)OpenZip.OpenFile();
+                FileActions.ExtractZip(stream.Name, templocation);
+
+                var tempLibraries = Path.Combine(templocation, "Libraries");
+                if (FileActions.VerifyPath(tempLibraries, false))
                 {
-                    if (SelectedItems[i] == PluginNames[u])
+                    DirectoryInfo Fldr = new DirectoryInfo(tempLibraries);
+                    FileInfo[] Content = Fldr.GetFiles("*.dll", SearchOption.TopDirectoryOnly);
+                    foreach (var file in Content)
                     {
-                        Process.Start(PluginWebLink[u]);
+                        var dest = Path.Combine(librarieslocation, file.Name);
+                        
+                        if (File.Exists(dest))
+                            File.Delete(dest);
+
+                        FileActions.VerifyFilePath(dest, true);
+                        file.MoveTo(dest);
+                    }
+                }
+
+                var tempPlugins = Path.Combine(templocation, "Plugins");
+                if (FileActions.VerifyPath(tempPlugins, false))
+                {
+                    DirectoryInfo Fldr = new DirectoryInfo(tempPlugins);
+                    FileInfo[] Content = Fldr.GetFiles("*.dll", SearchOption.TopDirectoryOnly);
+                    foreach (var file in Content)
+                    {
+                        var dest = Path.Combine(pluginlocation, file.Name);
+
+                        if (File.Exists(dest))
+                            File.Delete(dest);
+
+                        FileActions.VerifyFilePath(dest, true);
+                        file.MoveTo(dest);
+                    }
+                }
+
+                var tempModules = Path.Combine(templocation, "Modules");
+                if (FileActions.VerifyPath(tempModules, false))
+                {
+                    DirectoryInfo Fldr = new DirectoryInfo(tempModules);
+                    FileInfo[] Content = Fldr.GetFiles("*.dll", SearchOption.TopDirectoryOnly);
+                    foreach (var file in Content)
+                    {
+                        var dest = Path.Combine(modulelocation, file.Name);
+
+                        if (File.Exists(dest))
+                            File.Delete(dest);
+
+                        FileActions.VerifyFilePath(dest, true);
+                        file.MoveTo(dest);
                     }
                 }
             }
-        }
-        
-        private async void InstallItems()
-        {
-            for (int i = 0; i < SelectedItems.Length; i++)
-            {
-                for (int u = 0; u < PluginNames.Length; u++)
-                {
-                    if (SelectedItems[i] == PluginNames[u])
-                    {
-                        Downloader.GetReady();
-                        Downloader.Download(PluginWebLink[u] + "latest.zip", SelectedItems[i]);
-                        if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins") == false)
-                        {
-                            Directory.CreateDirectory(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
-                        }
-                        Downloader.Extract(SelectedItems[i], Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins");
-                    }
-                }
-            }
-            if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins\Libraries") == true)
-            {
-                if (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries") == true)
-                {
-                    Directory.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries", true);
-                }
-                while (Directory.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries"))
-                {
-                    await Task.Delay(1);
-                }
-                Directory.Move(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins\Libraries", Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries");
-            }
-            FileInfo[] Files = new DirectoryInfo(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Plugins").GetFiles();
-            string[] INVALIDFILES = new string[] { "WebSocket4Net.dll", "EngineIoClientDotNet.dll", "MOTDgd.dll.config", "Newtonsoft.Json.dll", "SocketIoClientDotNet.dll", "System.Threading.Tasks.NET35.dll" };
-            foreach (FileInfo file in Files)
-            {
-                foreach (string invalid in INVALIDFILES)
-                {
-                    if (file.Name == invalid)
-                    {
-                        if (File.Exists(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries\" + file.Name))
-                        {
-                            File.Delete(Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries\" + file.Name);
-                        }
-                        File.Move(file.FullName, Comms.UnturnedPath + @"\Servers\" + Comms.LocalName + @"\Rocket\Libraries\" + file.Name);
-                    }
-                }
-            }
-            Downloader.ShutOff();
-        }
 
-        private void GetSelectedItems()
+            LoadInstalled();
+            Show();
+        }
+        private void Configuration_Click(object sender, System.EventArgs e)
         {
-            SelectedItems = new string[AvailableItems.CheckedIndices.Count];
-            for (int i = 0; i < AvailableItems.CheckedIndices.Count; i++)
-            {
-                SelectedItems[i] = Convert.ToString(AvailableItems.CheckedItems[i]);
-            }
-        }*/
+            var pluginlocation = Path.Combine(Server, "Rocket", "Plugins", ItemID);
+
+            if (FileActions.VerifyPath(pluginlocation, false))
+                Process.Start(pluginlocation);
+        }
     }
 }

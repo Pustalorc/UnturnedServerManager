@@ -28,127 +28,111 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Install = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Plugin));
             this.DeleteAll = new System.Windows.Forms.Button();
-            this.AlreadyInstalled = new System.Windows.Forms.CheckedListBox();
             this.AlreadyInstalledDesc = new System.Windows.Forms.Label();
-            this.AvailableDesc = new System.Windows.Forms.Label();
-            this.SaveExit = new System.Windows.Forms.Button();
-            this.AvailableItems = new System.Windows.Forms.CheckedListBox();
+            this.Exit = new System.Windows.Forms.Button();
             this.Configuration = new System.Windows.Forms.Button();
-            this.Documentation = new System.Windows.Forms.Button();
+            this.AlreadyInstalled = new System.Windows.Forms.ListBox();
+            this.Delete = new System.Windows.Forms.Button();
+            this.Install = new System.Windows.Forms.Button();
+            this.OpenZip = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
-            // 
-            // Install
-            // 
-            this.Install.Location = new System.Drawing.Point(12, 339);
-            this.Install.Name = "Install";
-            this.Install.Size = new System.Drawing.Size(117, 23);
-            this.Install.TabIndex = 38;
-            this.Install.Text = "Install Selected Items";
-            this.Install.UseVisualStyleBackColor = true;
-            //this.Install.Click += new System.EventHandler(this.Install_Click);
             // 
             // DeleteAll
             // 
-            this.DeleteAll.Location = new System.Drawing.Point(381, 339);
+            this.DeleteAll.Location = new System.Drawing.Point(15, 334);
             this.DeleteAll.Name = "DeleteAll";
-            this.DeleteAll.Size = new System.Drawing.Size(73, 23);
+            this.DeleteAll.Size = new System.Drawing.Size(61, 23);
             this.DeleteAll.TabIndex = 37;
             this.DeleteAll.Text = "Delete All";
             this.DeleteAll.UseVisualStyleBackColor = true;
-            //this.DeleteAll.Click += new System.EventHandler(this.DeleteAll_Click);
-            // 
-            // AlreadyInstalled
-            // 
-            this.AlreadyInstalled.BackColor = System.Drawing.SystemColors.Window;
-            this.AlreadyInstalled.FormattingEnabled = true;
-            this.AlreadyInstalled.Location = new System.Drawing.Point(381, 25);
-            this.AlreadyInstalled.Name = "AlreadyInstalled";
-            this.AlreadyInstalled.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.AlreadyInstalled.Size = new System.Drawing.Size(360, 304);
-            this.AlreadyInstalled.TabIndex = 36;
+            this.DeleteAll.Click += new System.EventHandler(this.DeleteAll_Click);
             // 
             // AlreadyInstalledDesc
             // 
             this.AlreadyInstalledDesc.AutoSize = true;
-            this.AlreadyInstalledDesc.Location = new System.Drawing.Point(378, 9);
+            this.AlreadyInstalledDesc.Location = new System.Drawing.Point(12, 9);
             this.AlreadyInstalledDesc.Name = "AlreadyInstalledDesc";
             this.AlreadyInstalledDesc.Size = new System.Drawing.Size(124, 13);
             this.AlreadyInstalledDesc.TabIndex = 35;
             this.AlreadyInstalledDesc.Text = "Plugins Already Installed:";
             // 
-            // AvailableDesc
+            // Exit
             // 
-            this.AvailableDesc.AutoSize = true;
-            this.AvailableDesc.Location = new System.Drawing.Point(12, 9);
-            this.AvailableDesc.Name = "AvailableDesc";
-            this.AvailableDesc.Size = new System.Drawing.Size(138, 13);
-            this.AvailableDesc.TabIndex = 34;
-            this.AvailableDesc.Text = "Available Plugins For Install:";
-            // 
-            // SaveExit
-            // 
-            this.SaveExit.Location = new System.Drawing.Point(655, 339);
-            this.SaveExit.Name = "SaveExit";
-            this.SaveExit.Size = new System.Drawing.Size(82, 23);
-            this.SaveExit.TabIndex = 30;
-            this.SaveExit.Text = "Save and Exit";
-            this.SaveExit.UseVisualStyleBackColor = true;
-            //this.SaveExit.Click += new System.EventHandler(this.SaveExit_Click);
-            // 
-            // AvailableItems
-            // 
-            this.AvailableItems.BackColor = System.Drawing.SystemColors.Window;
-            this.AvailableItems.CheckOnClick = true;
-            this.AvailableItems.FormattingEnabled = true;
-            this.AvailableItems.Location = new System.Drawing.Point(15, 25);
-            this.AvailableItems.Name = "AvailableItems";
-            this.AvailableItems.Size = new System.Drawing.Size(360, 304);
-            this.AvailableItems.Sorted = true;
-            this.AvailableItems.TabIndex = 28;
+            this.Exit.Location = new System.Drawing.Point(386, 334);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(37, 23);
+            this.Exit.TabIndex = 30;
+            this.Exit.Text = "Exit";
+            this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // Configuration
             // 
-            this.Configuration.Location = new System.Drawing.Point(501, 339);
+            this.Configuration.Location = new System.Drawing.Point(272, 334);
             this.Configuration.Name = "Configuration";
             this.Configuration.Size = new System.Drawing.Size(108, 23);
             this.Configuration.TabIndex = 39;
             this.Configuration.Text = "Open Configuration";
             this.Configuration.UseVisualStyleBackColor = true;
-            //this.Configuration.Click += new System.EventHandler(this.Configuration_Click);
+            this.Configuration.Click += new System.EventHandler(this.Configuration_Click);
             // 
-            // Documentation
+            // AlreadyInstalled
             // 
-            this.Documentation.Location = new System.Drawing.Point(169, 339);
-            this.Documentation.Name = "Documentation";
-            this.Documentation.Size = new System.Drawing.Size(206, 23);
-            this.Documentation.TabIndex = 40;
-            this.Documentation.Text = "Open Documentation On Selected Items";
-            this.Documentation.UseVisualStyleBackColor = true;
-            //this.Documentation.Click += new System.EventHandler(this.Documentation_Click);
+            this.AlreadyInstalled.FormattingEnabled = true;
+            this.AlreadyInstalled.Location = new System.Drawing.Point(15, 25);
+            this.AlreadyInstalled.Name = "AlreadyInstalled";
+            this.AlreadyInstalled.Size = new System.Drawing.Size(408, 303);
+            this.AlreadyInstalled.TabIndex = 40;
+            this.AlreadyInstalled.SelectedIndexChanged += new System.EventHandler(this.AlreadyInstalled_SelectedIndexChanged);
+            // 
+            // Delete
+            // 
+            this.Delete.Location = new System.Drawing.Point(82, 334);
+            this.Delete.Name = "Delete";
+            this.Delete.Size = new System.Drawing.Size(92, 23);
+            this.Delete.TabIndex = 41;
+            this.Delete.Text = "Delete Selected";
+            this.Delete.UseVisualStyleBackColor = true;
+            this.Delete.Click += new System.EventHandler(this.Delete_Click);
+            // 
+            // Install
+            // 
+            this.Install.Location = new System.Drawing.Point(180, 334);
+            this.Install.Name = "Install";
+            this.Install.Size = new System.Drawing.Size(86, 23);
+            this.Install.TabIndex = 42;
+            this.Install.Text = "Install From Zip";
+            this.Install.UseVisualStyleBackColor = true;
+            this.Install.Click += new System.EventHandler(this.Install_Click);
+            // 
+            // OpenZip
+            // 
+            this.OpenZip.DefaultExt = "dll";
+            this.OpenZip.Filter = "\"Compressed (zipped) Folder\" (*.zip)|*.zip";
+            this.OpenZip.RestoreDirectory = true;
             // 
             // Plugin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(753, 374);
-            this.Controls.Add(this.Documentation);
-            this.Controls.Add(this.Configuration);
+            this.ClientSize = new System.Drawing.Size(441, 374);
             this.Controls.Add(this.Install);
-            this.Controls.Add(this.DeleteAll);
+            this.Controls.Add(this.Delete);
             this.Controls.Add(this.AlreadyInstalled);
+            this.Controls.Add(this.Configuration);
+            this.Controls.Add(this.DeleteAll);
             this.Controls.Add(this.AlreadyInstalledDesc);
-            this.Controls.Add(this.AvailableDesc);
-            this.Controls.Add(this.SaveExit);
-            this.Controls.Add(this.AvailableItems);
+            this.Controls.Add(this.Exit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Plugin";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Plugin Installer";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -156,15 +140,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Install;
         private System.Windows.Forms.Button DeleteAll;
-        private System.Windows.Forms.CheckedListBox AlreadyInstalled;
         private System.Windows.Forms.Label AlreadyInstalledDesc;
-        private System.Windows.Forms.Label AvailableDesc;
-        private System.Windows.Forms.Button SaveExit;
-        private System.Windows.Forms.CheckedListBox AvailableItems;
+        private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.Button Configuration;
-        private System.Windows.Forms.Button Documentation;
+        private System.Windows.Forms.ListBox AlreadyInstalled;
+        private System.Windows.Forms.Button Delete;
+        private System.Windows.Forms.Button Install;
+        private System.Windows.Forms.OpenFileDialog OpenZip;
     }
 }

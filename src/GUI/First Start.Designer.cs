@@ -88,11 +88,11 @@
             this.Controls.Add(this.SelectedPath);
             this.Controls.Add(this.Msg);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FirstStart";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "First Startup";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FirstStart_FormClosing);

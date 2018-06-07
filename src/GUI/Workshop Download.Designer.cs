@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Workshop));
             this.DeleteAll = new System.Windows.Forms.Button();
             this.AlreadyInstalledDesc = new System.Windows.Forms.Label();
             this.Exit = new System.Windows.Forms.Button();
@@ -199,11 +200,11 @@
             this.Controls.Add(this.AlreadyInstalledDesc);
             this.Controls.Add(this.Exit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Workshop";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Managing Workshop Items";
             this.ResumeLayout(false);

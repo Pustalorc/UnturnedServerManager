@@ -106,12 +106,12 @@
             // GithubLink
             // 
             this.GithubLink.AutoSize = true;
-            this.GithubLink.Location = new System.Drawing.Point(167, 407);
+            this.GithubLink.Location = new System.Drawing.Point(107, 407);
             this.GithubLink.Name = "GithubLink";
-            this.GithubLink.Size = new System.Drawing.Size(38, 13);
+            this.GithubLink.Size = new System.Drawing.Size(222, 13);
             this.GithubLink.TabIndex = 23;
             this.GithubLink.TabStop = true;
-            this.GithubLink.Text = "Github";
+            this.GithubLink.Text = "Github (Source Code, Issues, Wiki and more!)";
             this.GithubLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubLink_LinkClicked);
             // 
             // Desc9

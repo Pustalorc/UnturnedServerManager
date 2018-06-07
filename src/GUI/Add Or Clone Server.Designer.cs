@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddServer));
             this.Instructions = new System.Windows.Forms.Label();
             this.ServerName = new System.Windows.Forms.TextBox();
             this.OK = new System.Windows.Forms.Button();
@@ -95,11 +96,11 @@
             this.Controls.Add(this.ServerName);
             this.Controls.Add(this.Instructions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddServer";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Adding a new server...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddServer_FormClosing);

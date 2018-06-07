@@ -166,14 +166,18 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         }
         private void Plugin_Click(object sender, EventArgs e)
         {
-            OtherGUIOpen = true;
-            Hide();
+            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
+            if (server != null)
+            {
+                OtherGUIOpen = true;
+                Hide();
 
-            Plugin f = new Plugin();
-            f.ShowDialog();
+                Plugin f = new Plugin(server.Folder);
+                f.ShowDialog();
 
-            Show();
-            OtherGUIOpen = false;
+                Show();
+                OtherGUIOpen = false;
+            }
         }
         private void Restart_Click(object sender, EventArgs e)
         {

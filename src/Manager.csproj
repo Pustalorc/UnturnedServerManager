@@ -61,8 +61,8 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Costura, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Costura.Fody.2.0.0\lib\net452\Costura.dll</HintPath>
+    <Reference Include="Costura, Version=2.0.1.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.2.0.1\lib\net452\Costura.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -91,29 +91,11 @@
     <Compile Include="Constants\Vanilla Server Item Prefix.cs" />
     <Compile Include="Constants\Vanilla Server Path.cs" />
     <Compile Include="File Control\File Actions.cs" />
-    <Compile Include="GUI\Add Member.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Add Member.Designer.cs">
-      <DependentUpon>Add Member.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Add Or Clone Group.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Add Or Clone Group.Designer.cs">
-      <DependentUpon>Add Or Clone Group.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Add Or Clone Server.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\Add Or Clone Server.Designer.cs">
       <DependentUpon>Add Or Clone Server.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Add Permission.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Add Permission.Designer.cs">
-      <DependentUpon>Add Permission.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\First Start.cs">
       <SubType>Form</SubType>
@@ -167,17 +149,8 @@
     <Compile Include="GUI\Workshop Download.Designer.cs">
       <DependentUpon>Workshop Download.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="GUI\Add Member.resx">
-      <DependentUpon>Add Member.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Add Or Clone Group.resx">
-      <DependentUpon>Add Or Clone Group.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Add Or Clone Server.resx">
       <DependentUpon>Add Or Clone Server.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Add Permission.resx">
-      <DependentUpon>Add Permission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\First Start.resx">
       <DependentUpon>First Start.cs</DependentUpon>
@@ -227,11 +200,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Costura.Fody.2.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.2.0.0\build\Costura.Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Fody.3.0.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.3.0.3\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets'))" />
   </Target>
-  <Import Project="..\packages\Costura.Fody.2.0.0\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.2.0.0\build\Costura.Fody.targets')" />
   <Import Project="..\packages\Fody.3.0.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.0.3\build\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.2.0.1\build\Costura.Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -2,7 +2,7 @@
 
 Version: Public 4.0.0.0
 
-[![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/tag/v3.0.0.5) [![GitHub issues](https://img.shields.io/github/issues/persiafighter/UnturnedServerManager.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/issues)
+[![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
 Last Update: April 30, 2017
 
@@ -26,19 +26,18 @@ https://github.com/persiafighter/UnturnedServerManager/releases/latest
 
 **V4.0.0.0** -
 
-* Added Server.cs for a more local control over server instances.
-* Added rocket's configs editor.
-* Added permissions editor.
-* Added Config.json editor.
+* Added more local control over server instances.
 * Added filesystem control.
 * Added constants file.
 * Added steam login.
+* Added Costura.Fody so that no referenced libraries are required next to the executable
 * Improved plugin installer.
 * Improved workshop installer.
-* Improved design for Manager.cs.
-* Improved Entry.cs for clean loading.
+* Improved design for the manager.
+* Improved installation checking.
+* Improved the entry for clean loading.
 * Improved back-end downloading + Updating.
-* Improved form controls for Server Settings.cs.
+* Improved form controls for the server settings.
 * Improved saved configuration files to json formatted files.
 * Changed version retreival from github file to custom build numbers.
 * Changed background colour to "Control" from FF0000.

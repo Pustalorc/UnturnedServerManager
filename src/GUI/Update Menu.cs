@@ -2,7 +2,6 @@
 using ATORTTeam.UnturnedServerManager.Updating;
 using ATORTTeam.UnturnedServerManager.Versions;
 using System;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace ATORTTeam.UnturnedServerManager.GUI
@@ -15,11 +14,16 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
             LUVer.Text = UnturnedBuild.Value;
             LRVer.Text = RocketBuild.Value;
-            // Get latest manager version with github.
 
-            var InstalledVesions = LocalVersions.Load();
-            CUVer.Text = InstalledVesions.UnturnedVersion;
-            CRVer.Text = InstalledVesions.RocketModVersion;
+            LoadVersions();
+        }
+
+        // Custom Methods
+        private void LoadVersions()
+        {
+            var InstalledVersions = LocalVersions.Load();
+            CUVer.Text = InstalledVersions.UnturnedVersion;
+            CRVer.Text = InstalledVersions.RocketModVersion;
         }
         
         // Form Events
@@ -28,6 +32,16 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             Hide();
             
             Updater.UpdateUnturned();
+            LoadVersions();
+
+            Show();
+        }
+        private void Validate_Click(object sender, EventArgs e)
+        {
+            Hide();
+
+            Updater.ValidateUnturned();
+            LoadVersions();
 
             Show();
         }
@@ -36,6 +50,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             Hide();
             
             Updater.UpdateRocket();
+            LoadVersions();
 
             Show();
         }
@@ -44,6 +59,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             Hide();
             
             Updater.UpdateAll();
+            LoadVersions();
 
             Show();
         }
