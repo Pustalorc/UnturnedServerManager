@@ -1,8 +1,8 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 3.0.1.4
+Version: Public 4.0.0.0
 
-[![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/tag/v3.0.0.5) [![GitHub issues](https://img.shields.io/github/issues/persiafighter/UnturnedServerManager.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/issues) [![GitHub closed issues](https://img.shields.io/github/issues-closed/persiafighter/UnturnedServerManager.svg?style=plastic)]()
+[![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
 Last Update: April 30, 2017
 
@@ -10,42 +10,42 @@ Last Update: April 30, 2017
 
 # Requirements:
 
-.Net 4.5 or Later
+.Net 4.6 or Later
 
-Windows (Will be working on linux version at some point in time)
-
-
-# Upcoming Features:
-
-* Control on each of the server's console (ban and such).
-* Update All Plugins (bulk update).
-* Auto-Restart Option.
-* Ease of config for rocket settings and permissions.
-* Delete Mod/Plugin Selected.
-* USM Settings.
-
-# Note:
-I am working on the rework, USM 3.1. Feel free to support it!
+Windows
 
 # Known Bugs:
 
-* **Shutdown/Restart makes player data loss.** _Side note, this bug cannot be fixed with vanilla servers (Admin/Owner can type the shutdown command in console/ingame, which would then make it secure), as USM cannot communicate with a vanilla server. On the other hand, rocket servers will have USMConnect installed (once it's developed, currently it's expected for when USM gets to 3.1.0.0) and will be able to have this problem fixed. Sorry for any rollbakcs the restart/shutdown buttons might cause_
-* **Unable to install rocket if the server is not in the C:\ drive** _Side note, this bug will be fixed (hopefully) in the rework 3.1.
-* Unknown Crash With Updater Tool.
-* Program does not start-up if the data folder does not exist.
-* Plugin install button does not unlock/unblock ever.
+None as of 4.0.0.0
 
 # Download:
 
 https://github.com/persiafighter/UnturnedServerManager/releases/latest
 
-Or compile it yourself with the source code!
-
-# Reddit Post:
-
-https://www.reddit.com/r/unturned/comments/546y67/unturned_server_manager/
-
 # Changelog:
+
+**V4.0.0.0** -
+
+* Added more local control over server instances.
+* Added filesystem control.
+* Added constants file.
+* Added steam login.
+* Added Costura.Fody so that no referenced libraries are required next to the executable
+* Improved plugin installer.
+* Improved workshop installer.
+* Improved design for the manager.
+* Improved installation checking.
+* Improved the entry for clean loading.
+* Improved back-end downloading + Updating.
+* Improved form controls for the server settings.
+* Improved saved configuration files to json formatted files.
+* Changed version retreival from github file to custom build numbers.
+* Changed background colour to "Control" from FF0000.
+* Removed project signing (due to Costura.Fody issues).
+* Removed self-version checking.
+* Removed logging.
+* Fixed updating issues.
+* Cleaned up & organised code.
 
 **V3.0.1.4** - 
 
