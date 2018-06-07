@@ -173,8 +173,9 @@
     <EmbeddedResource Include="GUI\Workshop Download.resx">
       <DependentUpon>Workshop Download.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\LICENSE.md" />
     <None Include="packages.config" />
-    <None Include="README.md" />
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
