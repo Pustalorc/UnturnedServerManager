@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 4.0.0.0
+Version: Public 4.0.0.1
 
 [![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
@@ -14,13 +14,19 @@ Windows
 
 # Known Bugs:
 
-None as of 4.0.0.0
+None as of 4.0.0.1
 
 # Download:
 
 https://github.com/persiafighter/UnturnedServerManager/releases/latest
 
 # Changelog:
+
+**V4.0.0.1** -
+* Fixed raised exception when leaving the map field empty in the server configuration, saving and loading it again. (Credit to Luke_ArOres#0769 for finding it)
+* Fixed forgotten addition of auto-detection of workshop maps. (Credit to Luke_ArOres#0769 for reminding of this issue)
+* Fixed minor issue when loading maps for a vanilla server.
+* Updated Fody and Costura.Fody to latest versions.
 
 **V4.0.0.0** -
 

@@ -37,6 +37,24 @@ namespace ATORTTeam.UnturnedServerManager.GUI
                 foreach (var rocketserver in RocketmodDirectoryInfo.GetDirectories())
                     Maps.Items.Add(rocketserver.Name);
             }
+            else
+            {
+                var Dir = Path.Combine(RocketmodServerPath.Value, "Maps");
+                FileActions.VerifyPath(Dir, true);
+
+                var VanillaDirectoryInfo = new DirectoryInfo(Dir);
+                foreach (var rocketserver in VanillaDirectoryInfo.GetDirectories())
+                    Maps.Items.Add(rocketserver.Name);
+            }
+
+            var WorkshopMaps = Path.Combine(server.Folder, "Workshop", "Maps");
+            FileActions.VerifyPath(WorkshopMaps, true);
+
+            var Fldr = new DirectoryInfo(WorkshopMaps);
+            var Content = Fldr.GetDirectories();
+            foreach (var folder in Content)
+                foreach (var MapName in folder.GetDirectories())
+                    Maps.Items.Add(MapName.Name);
         }
         private void Save()
         {
@@ -82,7 +100,12 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
             NameSel.Text = conf.PublicName;
             Port.Value = conf.Port;
-            Maps.SelectedIndex = Maps.Items.IndexOf(conf.Map);
+
+            if (string.IsNullOrEmpty(conf.Map))
+                Maps.SelectedIndex = 0;
+            else
+                Maps.SelectedIndex = Maps.Items.IndexOf(conf.Map);
+
             PasswordSel.Text = conf.Password;
             OwnerID.Value = conf.Owner;
             MessageSel.Text = conf.LoginMessage;
