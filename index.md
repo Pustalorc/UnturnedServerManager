@@ -1,12 +1,10 @@
-Version: Public 4.0.0.0
-
-Last Update: 7th June 2018
+Version: Public 4.0.0.2
 
 [![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
 <h1>Requirements:</h1>
 
-.Net 4.6 or Later
+.Net 4.7 or Later
 
 Windows
 
@@ -16,9 +14,20 @@ Windows
 
 <h1>Known Bugs:</h1>
 
-None as of 4.0.0.0
+None as of 4.0.0.2
 
 <h1>Changelog:</h1>
+
+**V4.0.0.2** - 
+* Removed vanilla server option due to high disk usage.
+* Fixed updating menu crashing the application.
+* Code Cleanup (Jetbrains Rider)
+
+**V4.0.0.1** -
+* Fixed raised exception when leaving the map field empty in the server configuration, saving and loading it again. (Credit to Luke_ArOres#0769 for finding it)
+* Fixed forgotten addition of auto-detection of workshop maps. (Credit to Luke_ArOres#0769 for reminding of this issue)
+* Fixed minor issue when loading maps for a vanilla server.
+* Updated Fody and Costura.Fody to latest versions.
 
 **V4.0.0.0** -
 
@@ -154,6 +163,6 @@ None as of 4.0.0.0
 * Added Rocket Install, Workshop Install And Plugin Install (Plugin install is buggy!).
 * Added Per-Server SRS Features.
 
-**V1.0.0.1** - Added link to github page.
+**V1.0.0.1** -
 
------------ Unturned Server Manager -----------
+* Added link to github page.
