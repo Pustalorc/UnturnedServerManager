@@ -119,7 +119,7 @@
   </resheader>
   <data name="Msg.Text" xml:space="preserve">
     <value>Welcome to Unturned Server Manager's first-startup configuration!
-Make sure the drive you select here has enough space! (Minimum 20GB, Unturned is heavy)
+Make sure the drive you select here has enough space! (Minimum 10GB, Unturned is heavy)
 
 Please specify the directory to which Unturned will be installed to and used for hosting the server.
 </value>

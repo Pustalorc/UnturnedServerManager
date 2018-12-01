@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
+
 [assembly: AssemblyTitle("Unturned Server Manager")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]

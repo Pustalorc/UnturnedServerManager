@@ -1,49 +1,48 @@
-﻿using ATORTTeam.UnturnedServerManager.Configuration;
+﻿using System.IO;
+using ATORTTeam.UnturnedServerManager.Configuration;
 using ATORTTeam.UnturnedServerManager.Constants;
-using ATORTTeam.UnturnedServerManager.FileControl;
-using ATORTTeam.UnturnedServerManager.SteamCMDManager;
+using ATORTTeam.UnturnedServerManager.File_Control;
+using ATORTTeam.UnturnedServerManager.SteamCMD_Manager;
 using ATORTTeam.UnturnedServerManager.Versions;
-using System.IO;
 
 namespace ATORTTeam.UnturnedServerManager.Updating
 {
-    public static class Updater
+    internal static class Updater
     {
         /// <summary>
-        /// Installs the latest version of Unturned.
+        ///     Installs the latest version of Unturned.
         /// </summary>
         public static void UpdateUnturned()
         {
-            SteamCMD.RunCommand($"+force_install_dir \"{RocketmodServerPath.Value}\" +app_update 304930 +exit");
-            SteamCMD.RunCommand($"+force_install_dir \"{VanillaServerPath.Value}\" +app_update 304930 +exit");
+            SteamCmd.RunCommand($"+force_install_dir \"{RocketModServerPath.Value}\" +app_update 304930 +exit");
 
-            var InstalledVersions = LocalVersions.Load();
-            InstalledVersions.UnturnedVersion = UnturnedBuild.Value;
-            InstalledVersions.SaveJson();
+            var installedVersions = LocalVersions.Load();
+            installedVersions.UnturnedVersion = UnturnedBuild.Value;
+            installedVersions.SaveJson();
         }
 
         /// <summary>
-        /// Validates and Installs the latest version of Unturned.
+        ///     Validates and Installs the latest version of Unturned.
         /// </summary>
         public static void ValidateUnturned()
         {
-            SteamCMD.RunCommand($"+force_install_dir \"{RocketmodServerPath.Value}\" +app_update 304930 validate +exit");
-            SteamCMD.RunCommand($"+force_install_dir \"{VanillaServerPath.Value}\" +app_update 304930 validate +exit");
+            SteamCmd.RunCommand(
+                $"+force_install_dir \"{RocketModServerPath.Value}\" +app_update 304930 validate +exit");
 
-            var InstalledVersions = LocalVersions.Load();
-            InstalledVersions.UnturnedVersion = UnturnedBuild.Value;
-            InstalledVersions.SaveJson();
+            var installedVersions = LocalVersions.Load();
+            installedVersions.UnturnedVersion = UnturnedBuild.Value;
+            installedVersions.SaveJson();
         }
 
         /// <summary>
-        /// Downloads and installs RocketMod.
+        ///     Downloads and installs RocketMod.
         /// </summary>
         public static void UpdateRocket()
         {
-            var tempzip = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+            var tempZip = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
-            FileActions.Download(RocketUpdate.Value, tempzip);
-            FileActions.ExtractZip(tempzip, RocketmodServerPath.Value);
+            FileActions.Download(RocketUpdate.Value, tempZip);
+            FileActions.ExtractZip(tempZip, RocketModServerPath.Value);
 
             var local = LocalVersions.Load();
             local.RocketModVersion = RocketBuild.Value;
@@ -51,7 +50,7 @@ namespace ATORTTeam.UnturnedServerManager.Updating
         }
 
         /// <summary>
-        /// Downloads and installs Rocketmod + Unturned.
+        ///     Downloads and installs RocketMod + Unturned.
         /// </summary>
         public static void UpdateAll()
         {

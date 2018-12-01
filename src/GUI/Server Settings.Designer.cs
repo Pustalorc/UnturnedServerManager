@@ -1,6 +1,6 @@
 ﻿namespace ATORTTeam.UnturnedServerManager.GUI
 {
-    partial class ConstConfig
+    internal sealed partial class ConstConfig
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
 ﻿namespace ATORTTeam.UnturnedServerManager.GUI
 {
-    partial class SteamLogin
+    internal sealed partial class SteamLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -147,8 +147,8 @@
         private System.Windows.Forms.Label Note;
         private System.Windows.Forms.LinkLabel Github;
         private System.Windows.Forms.Button LogonSteam;
-        protected internal System.Windows.Forms.TextBox Username;
-        protected internal System.Windows.Forms.TextBox Password;
+        internal System.Windows.Forms.TextBox Username;
+        internal System.Windows.Forms.TextBox Password;
         private System.Windows.Forms.CheckBox Remember;
     }
 }

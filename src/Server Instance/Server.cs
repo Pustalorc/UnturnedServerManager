@@ -1,28 +1,27 @@
-﻿using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.Constants;
-using ATORTTeam.UnturnedServerManager.FileControl;
-using ATORTTeam.UnturnedServerManager.Memory;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
+using ATORTTeam.UnturnedServerManager.Configuration;
+using ATORTTeam.UnturnedServerManager.Constants;
+using ATORTTeam.UnturnedServerManager.File_Control;
+using ATORTTeam.UnturnedServerManager.Memory;
 
-namespace ATORTTeam.UnturnedServerManager.ServerInstance
+namespace ATORTTeam.UnturnedServerManager.Server_Instance
 {
-    public class Server
+    public sealed class Server
     {
-        private Process Instance;
-        public string Name { get; private set; }
-        public ServerType Type { get; private set; }
-        public bool IsRunning => Instance != null;
-        /// <summary>
-        /// The folder in which all the server data is stored.
-        /// </summary>
-        public string Folder => Path.Combine(Type == ServerType.Vanilla ? VanillaServerPath.Value : RocketmodServerPath.Value, "Servers", Name);
+        private Process _instance;
+        internal string Name { get; private set; }
+        internal bool IsRunning => _instance != null;
 
-        public static Server Create(string name, ServerType type, string clone = null)
+        /// <summary>
+        ///     The folder in which all the server data is stored.
+        /// </summary>
+        internal string Folder =>
+            Path.Combine(RocketModServerPath.Value, "Servers", Name);
+
+        internal static Server Create(string name, string clone = null)
         {
-            var s = new Server();
-            s.Name = name;
-            s.Type = type;
+            var s = new Server {Name = name};
 
             if (string.IsNullOrEmpty(clone))
                 FileActions.VerifyPath(s.Folder, true);
@@ -32,49 +31,59 @@ namespace ATORTTeam.UnturnedServerManager.ServerInstance
             return s;
         }
 
-        public void Start()
+        internal void Start()
         {
-            var commandsdat = Path.Combine(Folder, "Server", "Commands.dat");
-            if (!FileActions.VerifyFile(commandsdat))
+            var commandsDat = Path.Combine(Folder, "Server", "Commands.dat");
+            if (!FileActions.VerifyFile(commandsDat))
             {
-                FileActions.VerifyFilePath(commandsdat, true);
+                FileActions.VerifyFilePath(commandsDat, true);
 
                 var c = CommandsDotDat.Load(Name);
-                File.WriteAllLines(commandsdat, c.ToNelson);
+                File.WriteAllLines(commandsDat, c.ToNelson);
             }
 
-            string Arguments = " -batchmode -nographics +secureserver";
-            string ServerExec = Path.Combine(Type == ServerType.Vanilla ? VanillaServerPath.Value : RocketmodServerPath.Value, "Unturned.exe");
-            if (!FileActions.VerifyFile(ServerExec))
+            const string arguments = " -batchmode -nographics +secureserver";
+            var serverExec =
+                Path.Combine(RocketModServerPath.Value, "Unturned.exe");
+            if (!FileActions.VerifyFile(serverExec))
                 return;
 
-            Instance = new Process();
-            Instance.StartInfo = new ProcessStartInfo(ServerExec, $"{Arguments}/{Name}");
-            Instance.StartInfo.WorkingDirectory = Type == ServerType.Vanilla ? VanillaServerPath.Value : RocketmodServerPath.Value;
-            Instance.Start();
+            _instance = new Process
+            {
+                StartInfo = new ProcessStartInfo(serverExec, $"{arguments}/{Name}")
+                {
+                    WorkingDirectory = RocketModServerPath.Value
+                }
+            };
+            _instance.Start();
         }
-        public void Restart()
+
+        internal void Restart()
         {
             Shutdown();
             Start();
         }
-        public void Shutdown()
+
+        internal void Shutdown()
         {
             // Look into getting a control on the console window and writing text directly to it.
-            if (Instance == null)
+            if (_instance == null)
                 return;
 
-            if (!Instance.HasExited)
-                Instance.Kill();
+            if (!_instance.HasExited)
+                _instance.Kill();
 
-            Instance = null;
+            _instance = null;
             // In the meantime use this.
         }
-        public void Delete()
+
+        internal void Delete()
         {
             Shutdown();
 
-            while (Instance != null && !Instance.HasExited) { }
+            while (_instance?.HasExited == false)
+            {
+            }
 
             Servers.Value.Remove(this);
             CommandsDotDat.Delete(Name);

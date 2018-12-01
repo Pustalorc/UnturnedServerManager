@@ -1,6 +1,6 @@
 ﻿namespace ATORTTeam.UnturnedServerManager.GUI
 {
-    partial class Plugin
+    internal sealed partial class Plugin
     {
         /// <summary>
         /// Required designer variable.

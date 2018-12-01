@@ -1,6 +1,6 @@
 ﻿namespace ATORTTeam.UnturnedServerManager.GUI
 {
-    partial class FirstStart
+    internal sealed partial class FirstStart
     {
         /// <summary>
         /// Required designer variable.

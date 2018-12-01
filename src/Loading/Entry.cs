@@ -1,59 +1,40 @@
-﻿using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.GUI;
-using ATORTTeam.UnturnedServerManager.Loading;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
+using ATORTTeam.UnturnedServerManager.Configuration;
+using ATORTTeam.UnturnedServerManager.GUI;
 
-namespace ATORTTeam.UnturnedServerManager
+// ReSharper disable UnusedParameter.Global
+
+namespace ATORTTeam.UnturnedServerManager.Loading
 {
     /// <summary>
-    /// Entry point for UnturnedServerManager.
+    ///     Entry point for UnturnedServerManager.
     /// </summary>
-    public sealed class Entry
+    internal static class Entry
     {
         /// <summary>
-        /// Entry point.
-        /// </summary>
-        /// <param name="args">Arguments supplied by console or startup options.</param>
-        [STAThread]
-        public static void Main(string[] args)
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            
-            // Prevent crashing because of potato mistakes.
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-
-            if (IsSecondInstance)
-                return;
-
-            if (!Installation.Exists())
-                Application.Run(new FirstStart());
-
-            Servers.Load();
-
-            Application.Run(new Manager());
-        }
-
-        /// <summary>
-        /// Verifies if another instance of USM is running. Returns false if there isn't, true if there is.
+        ///     Verifies if another instance of USM is running. Returns false if there isn't, true if there is.
         /// </summary>
         private static bool IsSecondInstance
         {
             get
             {
-                string appGuid = ((GuidAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value.ToString();
-                string mutexId = string.Format("Global\\{{{0}}}", appGuid);
-                var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), MutexRights.FullControl, AccessControlType.Allow);
+                var appGuid = ((GuidAttribute) Assembly.GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value;
+                var mutexId = $"Global\\{{{appGuid}}}";
+                var allowEveryoneRule = new MutexAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null),
+                    MutexRights.FullControl, AccessControlType.Allow);
                 var securitySettings = new MutexSecurity();
                 securitySettings.AddAccessRule(allowEveryoneRule);
 
-                using (var mutex = new Mutex(false, mutexId, out bool createdNew, securitySettings))
+                // ReSharper disable UnusedVariable
+                using (var mutex = new Mutex(false, mutexId, out var createdNew, securitySettings))
+                    // ReSharper restore UnusedVariable
                 {
                     var hasHandle = false;
                     try
@@ -78,6 +59,28 @@ namespace ATORTTeam.UnturnedServerManager
                     }
                 }
             }
+        }
+
+        /// <summary>
+        ///     Entry point.
+        /// </summary>
+        /// <param name="args">Arguments supplied by console or startup options.</param>
+        [STAThread]
+        public static void Main(string[] args)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+            if (IsSecondInstance)
+                return;
+
+            if (!Installation.Exists())
+                Application.Run(new FirstStart());
+
+            Servers.Load();
+
+            Application.Run(new Manager());
         }
     }
 }

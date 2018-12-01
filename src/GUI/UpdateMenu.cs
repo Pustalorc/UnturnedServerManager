@@ -1,8 +1,8 @@
-﻿using ATORTTeam.UnturnedServerManager.Configuration;
+﻿using System;
+using System.Windows.Forms;
+using ATORTTeam.UnturnedServerManager.Configuration;
 using ATORTTeam.UnturnedServerManager.Updating;
 using ATORTTeam.UnturnedServerManager.Versions;
-using System;
-using System.Windows.Forms;
 
 namespace ATORTTeam.UnturnedServerManager.GUI
 {
@@ -21,21 +21,22 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         // Custom Methods
         private void LoadVersions()
         {
-            var InstalledVersions = LocalVersions.Load();
-            CUVer.Text = InstalledVersions.UnturnedVersion;
-            CRVer.Text = InstalledVersions.RocketModVersion;
+            var installedVersions = LocalVersions.Load();
+            CUVer.Text = installedVersions.UnturnedVersion;
+            CRVer.Text = installedVersions.RocketModVersion;
         }
-        
+
         // Form Events
         private void UUnturned_Click(object sender, EventArgs e)
         {
             Hide();
-            
+
             Updater.UpdateUnturned();
             LoadVersions();
 
             Show();
         }
+
         private void Validate_Click(object sender, EventArgs e)
         {
             Hide();
@@ -45,19 +46,21 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
             Show();
         }
+
         private void URocket_Click(object sender, EventArgs e)
         {
             Hide();
-            
+
             Updater.UpdateRocket();
             LoadVersions();
 
             Show();
         }
+
         private void UAll_Click(object sender, EventArgs e)
         {
             Hide();
-            
+
             Updater.UpdateAll();
             LoadVersions();
 

@@ -1,6 +1,6 @@
 ﻿namespace ATORTTeam.UnturnedServerManager.GUI
 {
-    partial class AddServer
+    internal sealed partial class AddServer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddServer));
             this.Instructions = new System.Windows.Forms.Label();
             this.ServerName = new System.Windows.Forms.TextBox();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
-            this.IsRocketmod = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // Instructions
@@ -55,7 +53,7 @@
             // 
             // OK
             // 
-            this.OK.Location = new System.Drawing.Point(59, 88);
+            this.OK.Location = new System.Drawing.Point(59, 65);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(75, 23);
             this.OK.TabIndex = 2;
@@ -65,7 +63,7 @@
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(140, 88);
+            this.Cancel.Location = new System.Drawing.Point(140, 65);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
             this.Cancel.TabIndex = 3;
@@ -73,30 +71,16 @@
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // IsRocketmod
-            // 
-            this.IsRocketmod.AutoSize = true;
-            this.IsRocketmod.Checked = true;
-            this.IsRocketmod.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.IsRocketmod.Location = new System.Drawing.Point(12, 65);
-            this.IsRocketmod.Name = "IsRocketmod";
-            this.IsRocketmod.Size = new System.Drawing.Size(115, 17);
-            this.IsRocketmod.TabIndex = 4;
-            this.IsRocketmod.Text = "Rocketmod Server";
-            this.IsRocketmod.UseVisualStyleBackColor = true;
-            // 
             // AddServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(227, 123);
-            this.Controls.Add(this.IsRocketmod);
+            this.ClientSize = new System.Drawing.Size(227, 99);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
             this.Controls.Add(this.ServerName);
             this.Controls.Add(this.Instructions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddServer";
@@ -115,6 +99,5 @@
         private System.Windows.Forms.TextBox ServerName;
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.Button Cancel;
-        private System.Windows.Forms.CheckBox IsRocketmod;
     }
 }

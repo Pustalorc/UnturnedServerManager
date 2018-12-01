@@ -1,20 +1,18 @@
-﻿using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.Constants;
-using ATORTTeam.UnturnedServerManager.FileControl;
-using ATORTTeam.UnturnedServerManager.ServerInstance;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using ATORTTeam.UnturnedServerManager.Configuration;
+using ATORTTeam.UnturnedServerManager.File_Control;
 
 namespace ATORTTeam.UnturnedServerManager.GUI
 {
-    public partial class Manager : Form
+    internal sealed partial class Manager : Form
     {
-        private bool OtherGUIOpen = false;
-        private string SelectedServer = "";
-        private bool Reloaded = false;
+        private bool _otherGuiOpen;
+        private bool _reloaded;
+        private string _selectedServer = "";
 
         public Manager()
         {
@@ -29,36 +27,32 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         // Custom methods.
         private void BuildNotifyMenu()
         {
-            ContextMenu Menu = new ContextMenu();
-            MenuItem Exit = new MenuItem();
-            MenuItem Wiki = new MenuItem();
-            MenuItem Issues = new MenuItem();
-            IContainer Components = new Container();
-            Menu.MenuItems.AddRange( new MenuItem[] { Exit, Wiki, Issues });
-            Exit.Index = 0;
-            Exit.Text = "Exit";
-            Exit.Click += new EventHandler(Exit_Click);
-            Wiki.Index = 0;
-            Wiki.Text = "Wiki";
-            Wiki.Click += new EventHandler(Github_Click);
-            Issues.Index = 0;
-            Issues.Text = "Issues And Suggestions";
-            Issues.Click += new EventHandler(Issues_Click);
-            Notifier.ContextMenu = Menu;
+            var menu = new ContextMenu();
+            var exit = new MenuItem();
+            var wiki = new MenuItem();
+            var issues = new MenuItem();
+            IContainer components = new Container();
+            menu.MenuItems.AddRange(new[] {exit, wiki, issues});
+            exit.Index = 0;
+            exit.Text = @"Exit";
+            exit.Click += Exit_Click;
+            wiki.Index = 0;
+            wiki.Text = @"Wiki";
+            wiki.Click += Github_Click;
+            issues.Index = 0;
+            issues.Text = @"Issues And Suggestions";
+            issues.Click += Issues_Click;
+            Notifier.ContextMenu = menu;
         }
+
         private void LoadServers()
         {
-            Reloaded = true;
+            _reloaded = true;
 
             Servers.Items.Clear();
 
             foreach (var s in Memory.Servers.Value)
-            {
-                if (s.Type == ServerType.RocketMod)
-                    Servers.Items.Add(s.Name + RocketmodPrefix.Value);
-                else
-                    Servers.Items.Add(s.Name + VanillaPrefix.Value);
-            }
+                Servers.Items.Add(s.Name);
 
             if (Servers.Items.Count == 0)
             {
@@ -70,206 +64,216 @@ namespace ATORTTeam.UnturnedServerManager.GUI
                 ToggleServerElements(true);
                 Servers.SelectedIndex = 0;
 
-                var s = (string)Servers.SelectedItem;
-                if (s.EndsWith(RocketmodPrefix.Value))
-                    SelectedServer = s.Substring(0, s.Length - RocketmodPrefix.Value.Length);
-                else if (s.EndsWith(VanillaPrefix.Value))
-                    SelectedServer = s.Substring(0, s.Length - VanillaPrefix.Value.Length);
+                _selectedServer = (string) Servers.SelectedItem;
 
                 LoadServerDetails();
             }
 
-            Reloaded = false;
+            _reloaded = false;
         }
-        private void ToggleServerElements(bool Status)
+
+        private void ToggleServerElements(bool status)
         {
-            Settings.Enabled = Status;
-            ServerSettings.Enabled = Status;
-            Toggle.Enabled = Status;
-            OpenLocal.Enabled = Status;
+            Settings.Enabled = status;
+            ServerSettings.Enabled = status;
+            Toggle.Enabled = status;
+            OpenLocal.Enabled = status;
             Restart.Enabled = false;
-            Reset.Enabled = Status;
-            Workshop.Enabled = Status;
-            Plugin.Enabled = Status;
-            DeleteServer.Enabled = Status;
-            CloneServer.Enabled = Status;
+            Reset.Enabled = status;
+            Workshop.Enabled = status;
+            Plugin.Enabled = status;
+            DeleteServer.Enabled = status;
+            CloneServer.Enabled = status;
         }
+
         private void LoadServerDetails()
         {
-            ServerSettings.Text = CommandsDotDat.Load(SelectedServer).ToString();
+            ServerSettings.Text = CommandsDotDat.Load(_selectedServer).ToString();
 
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                if (server.IsRunning)
-                    Restart.Enabled = true;
-                else
-                    Restart.Enabled = false;
-            }
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            if (server == null) return;
+
+            Restart.Enabled = server.IsRunning;
         }
 
         // Notification tray actions.
         private void Notifier_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (!OtherGUIOpen)
-            {
-                if (Visible)
-                    Hide();
-                else
-                    Show();
-            }
+            if (_otherGuiOpen) return;
+
+            if (Visible)
+                Hide();
+            else
+                Show();
         }
-        private void Exit_Click(object Sender, EventArgs e) => Application.Exit();
-        private void Github_Click(object Sender, EventArgs e) => Process.Start("https://github.com/persiafighter/UnturnedServerManager/wiki");
-        private void Issues_Click(object Sender, EventArgs e) => Process.Start("https://github.com/persiafighter/UnturnedServerManager/issues");
+
+        private static void Exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private static void Github_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager/wiki");
+        }
+
+        private static void Issues_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager/issues");
+        }
 
         // Form events.
-        private void GithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://github.com/persiafighter/UnturnedServerManager/");
-        private void LinkMe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://persiafighter.github.io/");
+        private void GithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/persiafighter/UnturnedServerManager/");
+        }
+
+        private void LinkMe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://persiafighter.github.io/");
+        }
+
         private void Settings_Click(object sender, EventArgs e)
         {
-            OtherGUIOpen = true;
+            _otherGuiOpen = true;
             Hide();
 
-            ConstConfig f = new ConstConfig(SelectedServer);
+            var f = new ConstConfig(_selectedServer);
             f.ShowDialog();
 
             Show();
-            OtherGUIOpen = false;
+            _otherGuiOpen = false;
             LoadServerDetails();
         }
+
         private void Updater_Click(object sender, EventArgs e)
         {
-            OtherGUIOpen = true;
+            _otherGuiOpen = true;
             Hide();
 
-            UpdateMenu f = new UpdateMenu();
+            var f = new UpdateMenu();
             f.ShowDialog();
 
             Show();
-            OtherGUIOpen = false;
+            _otherGuiOpen = false;
         }
+
         private void Workshop_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            if (server == null) return;
 
-                Workshop f = new Workshop(server.Folder);
-                f.ShowDialog();
+            _otherGuiOpen = true;
+            Hide();
 
-                Show();
-                OtherGUIOpen = false;
-            }
+            var f = new Workshop(server.Folder);
+            f.ShowDialog();
+
+            Show();
+            _otherGuiOpen = false;
         }
+
         private void Plugin_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            if (server == null) return;
 
-                Plugin f = new Plugin(server.Folder);
-                f.ShowDialog();
+            _otherGuiOpen = true;
+            Hide();
 
-                Show();
-                OtherGUIOpen = false;
-            }
+            var f = new Plugin(server.Folder);
+            f.ShowDialog();
+
+            Show();
+            _otherGuiOpen = false;
         }
+
         private void Restart_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-                server.Restart();
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            server?.Restart();
         }
+
         private void Toggle_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            if (server == null) return;
+
+            if (server.IsRunning)
             {
-                if (server.IsRunning)
-                {
-                    Restart.Enabled = false;
-                    server.Shutdown();
-                }
-                else
-                {
-                    Restart.Enabled = true;
-                    server.Start();
-                }
+                Restart.Enabled = false;
+                server.Shutdown();
+            }
+            else
+            {
+                Restart.Enabled = true;
+                server.Start();
             }
         }
+
         private void Reset_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                FileActions.DeleteDirectory(Path.Combine(server.Folder, "Players"));
-                FileActions.DeleteDirectory(Path.Combine(server.Folder, "Level"));
-            }
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            if (server == null) return;
+
+            FileActions.DeleteDirectory(Path.Combine(server.Folder, "Players"));
+            FileActions.DeleteDirectory(Path.Combine(server.Folder, "Level"));
         }
+
         private void NewServer_Click(object sender, EventArgs e)
         {
-            OtherGUIOpen = true;
+            _otherGuiOpen = true;
             Hide();
 
             var f = new AddServer();
             f.ShowDialog();
 
             Show();
-            OtherGUIOpen = false;
+            _otherGuiOpen = false;
             LoadServers();
         }
+
         private void OpenLocal_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
             if (server != null)
                 Process.Start(server.Folder);
         }
+
         private void CloneServer_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                OtherGUIOpen = true;
-                Hide();
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            if (server == null) return;
 
-                var f = new AddServer(server.Folder);
-                f.ShowDialog();
+            _otherGuiOpen = true;
+            Hide();
 
-                Show();
-                OtherGUIOpen = false;
-                LoadServers();
-            }
+            var f = new AddServer(server.Folder);
+            f.ShowDialog();
+
+            Show();
+            _otherGuiOpen = false;
+            LoadServers();
         }
+
         private void DeleteServer_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == SelectedServer);
-            if (server != null)
-            {
-                if (server.IsRunning)
-                    server.Shutdown();
+            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            if (server?.IsRunning == true)
+                server.Shutdown();
 
-                server.Delete();
-            }
+            server?.Delete();
 
             LoadServers();
         }
+
         private void Servers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!Reloaded)
-            {
-                var s = (string)Servers.SelectedItem;
-                if (s.EndsWith(RocketmodPrefix.Value))
-                    SelectedServer = s.Substring(0, s.Length - RocketmodPrefix.Value.Length);
-                else if (s.EndsWith(VanillaPrefix.Value))
-                    SelectedServer = s.Substring(0, s.Length - VanillaPrefix.Value.Length);
+            if (_reloaded) return;
 
-                LoadServerDetails();
-            }
+            _selectedServer = (string) Servers.SelectedItem;
+
+            LoadServerDetails();
         }
     }
 }

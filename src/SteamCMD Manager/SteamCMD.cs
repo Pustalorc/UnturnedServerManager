@@ -1,44 +1,46 @@
-﻿using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.FileControl;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using ATORTTeam.UnturnedServerManager.Configuration;
+using ATORTTeam.UnturnedServerManager.File_Control;
+using ATORTTeam.UnturnedServerManager.GUI;
 
-namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
+namespace ATORTTeam.UnturnedServerManager.SteamCMD_Manager
 {
-    public static class SteamCMD
+    internal static class SteamCmd
     {
         /// <summary>
-        /// Saved steam Username. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
+        ///     Saved steam Username. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
         /// </summary>
         internal static string Username = "";
 
         /// <summary>
-        /// Saved steam Password. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
+        ///     Saved steam Password. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
         /// </summary>
         internal static string Password = "";
 
         /// <summary>
-        /// Link to official steam download for SteamCMD.
+        ///     Link to official steam download for SteamCMD.
         /// </summary>
-        public static string DownloadLink => "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip";
+        private static string DownloadLink => "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip";
 
         /// <summary>
-        /// Runs a command directly into SteamCMD.
+        ///     Runs a command directly into SteamCMD.
         /// </summary>
-        /// <param name="Command">The command to be run by SteamCMD. Must be a string such as if you were running steamcmd.exe from console yourself excluding username + password.</param>
-        public static void RunCommand(string Command)
+        /// <param name="command">
+        ///     The command to be run by SteamCMD. Must be a string such as if you were running SteamCMD.exe from
+        ///     console yourself excluding username + password.
+        /// </param>
+        public static void RunCommand(string command)
         {
             VerifySteam();
 
-            var login = new GUI.SteamLogin();
+            var login = new SteamLogin();
             var inst = Installation.Load();
-            var steamcmdexe = Path.Combine(inst.InstallationPath, "steamcmd.exe");
+            var steamCmdExe = Path.Combine(inst.InstallationPath, "steamcmd.exe");
 
-            Process proc = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = steamcmdexe;
+            var proc = new Process();
+            var startInfo = new ProcessStartInfo {FileName = steamCmdExe};
 
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
@@ -47,10 +49,12 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
                 if (string.IsNullOrEmpty(login.Username.Text) || string.IsNullOrEmpty(login.Password.Text))
                     return;
 
-                startInfo.Arguments = $" +login {login.Username.Text} {login.Password.Text} {Command}";
+                startInfo.Arguments = $" +login {login.Username.Text} {login.Password.Text} {command}";
             }
             else
-                startInfo.Arguments = $" +login {Username} {Password} {Command}";
+            {
+                startInfo.Arguments = $" +login {Username} {Password} {command}";
+            }
 
             proc.StartInfo = startInfo;
             proc.Start();
@@ -58,40 +62,37 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMDManager
         }
 
         /// <summary>
-        /// Moves a downloaded workshop folder.
+        ///     Moves a downloaded workshop folder.
         /// </summary>
-        /// <param name="ID">The ID of the workshop folder.</param>
-        /// <param name="DirectoryDestination">The destination for the workshop folder.</param>
-        public static void MoveWorkshopFolder(string ID, string DirectoryDestination)
+        /// <param name="id">The ID of the workshop folder.</param>
+        /// <param name="directoryDestination">The destination for the workshop folder.</param>
+        public static void MoveWorkshopFolder(string id, string directoryDestination)
         {
             var inst = Installation.Load();
-            var workshopdir = Path.Combine(inst.InstallationPath, "steamapps", "workshop", "content", "304930", ID);
-            var MapMeta = Path.Combine(workshopdir, "Map.meta");
-            var MapsDir = Path.Combine(DirectoryDestination, "Maps", ID);
-            var ContentDir = Path.Combine(DirectoryDestination, "Content", ID);
+            var workshopDir = Path.Combine(inst.InstallationPath, "steamApps", "workshop", "content", "304930", id);
+            var mapMeta = Path.Combine(workshopDir, "Map.meta");
+            var mapsDir = Path.Combine(directoryDestination, "Maps", id);
+            var contentDir = Path.Combine(directoryDestination, "Content", id);
 
-            if (FileActions.VerifyFile(MapMeta))
-                FileActions.CopyDirectory(workshopdir, MapsDir);
-            else
-                FileActions.CopyDirectory(workshopdir, ContentDir);
+            FileActions.CopyDirectory(workshopDir, FileActions.VerifyFile(mapMeta) ? mapsDir : contentDir);
         }
 
         /// <summary>
-        /// Verifies that SteamCMD is present in the installation. Should be called before running steamcmd.exe or doing anythig with steamcmd.
+        ///     Verifies that SteamCMD is present in the installation. Should be called before running SteamCMD.exe or doing
+        ///     anything with SteamCMD.
         /// </summary>
         private static void VerifySteam()
         {
             var inst = Installation.Load();
-            var steamcmdexe = Path.Combine(inst.InstallationPath, "steamcmd.exe");
+            var steamCmdExe = Path.Combine(inst.InstallationPath, "steamcmd.exe");
 
             try
             {
-                if (!FileActions.VerifyFile(steamcmdexe))
-                {
-                    var ZipTarget = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
-                    FileActions.Download(DownloadLink, ZipTarget);
-                    FileActions.ExtractZip(ZipTarget, inst.InstallationPath);
-                }
+                if (FileActions.VerifyFile(steamCmdExe)) return;
+
+                var zipTarget = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+                FileActions.Download(DownloadLink, zipTarget);
+                FileActions.ExtractZip(zipTarget, inst.InstallationPath);
             }
             catch (Exception ex)
             {

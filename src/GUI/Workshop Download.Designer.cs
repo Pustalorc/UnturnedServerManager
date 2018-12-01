@@ -1,6 +1,6 @@
 ﻿namespace ATORTTeam.UnturnedServerManager.GUI
 {
-    partial class Workshop
+    internal sealed partial class Workshop
     {
         /// <summary>
         /// Required designer variable.
