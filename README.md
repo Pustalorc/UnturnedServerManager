@@ -1,6 +1,6 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 4.0.0.1
+Version: Public 4.0.0.2
 
 [![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
 
@@ -8,19 +8,24 @@ Last Update: 7th June 2018
 
 # Requirements:
 
-.Net 4.6 or Later
+.Net 4.7 or Later
 
 Windows
 
 # Known Bugs:
 
-None as of 4.0.0.1
+None as of 4.0.0.2
 
 # Download:
 
 https://github.com/persiafighter/UnturnedServerManager/releases/latest
 
 # Changelog:
+
+**V4.0.0.2** - 
+* Removed vanilla server option due to high disk usage.
+* Fixed updating menu crashing the application.
+* Code Cleanup (Jetbrains Rider)
 
 **V4.0.0.1** -
 * Fixed raised exception when leaving the map field empty in the server configuration, saving and loading it again. (Credit to Luke_ArOres#0769 for finding it)
