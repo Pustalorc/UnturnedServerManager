@@ -5,12 +5,12 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.GUI;
+using Pustalorc.Applications.USM.Configuration;
+using Pustalorc.Applications.USM.GUI;
 
 // ReSharper disable UnusedParameter.Global
 
-namespace ATORTTeam.UnturnedServerManager.Loading
+namespace Pustalorc.Applications.USM.Loading
 {
     /// <summary>
     ///     Entry point for UnturnedServerManager.

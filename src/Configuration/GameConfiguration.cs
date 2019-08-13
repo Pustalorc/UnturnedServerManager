@@ -1,36 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using ATORTTeam.UnturnedServerManager.File_Control;
 using Newtonsoft.Json;
+using Pustalorc.Applications.USM.File_Control;
 
-namespace ATORTTeam.UnturnedServerManager.Configuration
+namespace Pustalorc.Applications.USM.Configuration
 {
-    public sealed class CommandsDotDat
+    /// <summary>
+    /// Configuration in json of the server configuration.
+    /// </summary>
+    public sealed class GameConfiguration
     {
         [JsonIgnore] private static string _filePath;
 
-        public string Bind = "0.0.0.0";
-        public int ChatRate = 0;
-        public bool Cheats = false;
-        public int Cycle = 43200;
-        public string Difficulty = "Normal";
-        public bool Filter = false;
-        public bool GoldMode = false;
-        public bool HideAdmins = false;
-        public string Loadout = "";
-        public string LoginMessage = "";
-        public string Map = "Washington";
-        public int MaxPlayers = 24;
-        public long Owner = 76561197960265728;
-        public string Password = "";
-        public string Perspective = "Both";
-        public int Port = 27015;
-
-        public string PublicName = "Test Server";
-        public bool Pvp = true;
-        public int QueueSize = 8;
-        public bool Sync = false;
+        public string Bind { get; set; } = "0.0.0.0";
+        public int ChatRate { get; set; } = 0;
+        public bool Cheats { get; set; } = false;
+        public int Cycle { get; set; } = 43200;
+        public string Difficulty { get; set; } = "Normal";
+        public bool Filter { get; set; } = false;
+        public bool GoldMode { get; set; } = false;
+        public bool HideAdmins { get; set; } = false;
+        public string Loadout { get; set; } = "";
+        public string LoginMessage { get; set; } = "";
+        public string Map { get; set; } = "Washington";
+        public int MaxPlayers { get; set; } = 24;
+        public long Owner { get; set; } = 76561197960265728;
+        public string Password { get; set; } = "";
+        public string Perspective { get; set; } = "Both";
+        public int Port { get; set; } = 27015;
+        public string PublicName { get; set; } = "Test Server";
+        public bool Pvp { get; set; } = true;
+        public int QueueSize { get; set; } = 8;
+        public bool Sync { get; set; } = false;
 
         public IEnumerable<string> ToNelson =>
             new List<string>
@@ -78,26 +80,40 @@ namespace ATORTTeam.UnturnedServerManager.Configuration
                 if (path != null)
                     Directory.CreateDirectory(path);
 
-            var config = new CommandsDotDat();
+            var config = new GameConfiguration();
             config.SaveJson();
         }
 
-        public static CommandsDotDat Load(string serverName)
+        public static GameConfiguration Load(string serverName)
         {
-            _filePath = $@"config\Server_{serverName}_commands.json";
+            _filePath = $@"config/Server_{serverName}_commands.json";
 
             var file = Path.Combine(AppContext.BaseDirectory, _filePath);
 
             EnsureExists();
 
-            return JsonConvert.DeserializeObject<CommandsDotDat>(File.ReadAllText(file));
+            return JsonConvert.DeserializeObject<GameConfiguration>(File.ReadAllText(file));
         }
 
         public static void Delete(string serverName)
         {
-            _filePath = $@"config\Server_{serverName}_commands.json";
+            _filePath = $@"config/Server_{serverName}_commands.json";
             if (FileActions.VerifyFile(_filePath))
                 File.Delete(_filePath);
+        }
+
+        public static void Clone(string server1, string server2)
+        {
+            var config1 = $@"config/Server_{server1}_commands.json";
+            _filePath = $"config/Server_{server2}_commands.json";
+
+            if (!FileActions.VerifyFile(config1))
+                return;
+
+            if (FileActions.VerifyFile(_filePath))
+                File.Delete(_filePath);
+
+            File.Copy(config1, _filePath);
         }
 
         public override string ToString()

@@ -1,11 +1,14 @@
-﻿namespace ATORTTeam.UnturnedServerManager.GUI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class Plugin
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -140,13 +143,13 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button DeleteAll;
-        private System.Windows.Forms.Label AlreadyInstalledDesc;
-        private System.Windows.Forms.Button Exit;
-        private System.Windows.Forms.Button Configuration;
-        private System.Windows.Forms.ListBox AlreadyInstalled;
-        private System.Windows.Forms.Button Delete;
-        private System.Windows.Forms.Button Install;
-        private System.Windows.Forms.OpenFileDialog OpenZip;
+        private Button DeleteAll;
+        private Label AlreadyInstalledDesc;
+        private Button Exit;
+        private Button Configuration;
+        private ListBox AlreadyInstalled;
+        private Button Delete;
+        private Button Install;
+        private OpenFileDialog OpenZip;
     }
 }

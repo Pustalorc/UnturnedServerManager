@@ -1,11 +1,14 @@
-﻿namespace ATORTTeam.UnturnedServerManager.GUI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class Workshop
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -213,19 +216,19 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button DeleteAll;
-        private System.Windows.Forms.Label AlreadyInstalledDesc;
-        private System.Windows.Forms.Button Exit;
-        private System.Windows.Forms.Label Desc1;
-        private System.Windows.Forms.TextBox ID;
-        private System.Windows.Forms.Label Desc2;
-        private System.Windows.Forms.Label Desc3;
-        private System.Windows.Forms.Label Desc4;
-        private System.Windows.Forms.TextBox Link;
-        private System.Windows.Forms.Button InstallID;
-        private System.Windows.Forms.Button UpdateAll;
-        private System.Windows.Forms.Button Delete;
-        private System.Windows.Forms.Button View;
-        private System.Windows.Forms.ListBox AlreadyInstalled;
+        private Button DeleteAll;
+        private Label AlreadyInstalledDesc;
+        private Button Exit;
+        private Label Desc1;
+        private TextBox ID;
+        private Label Desc2;
+        private Label Desc3;
+        private Label Desc4;
+        private TextBox Link;
+        private Button InstallID;
+        private Button UpdateAll;
+        private Button Delete;
+        private Button View;
+        private ListBox AlreadyInstalled;
     }
 }

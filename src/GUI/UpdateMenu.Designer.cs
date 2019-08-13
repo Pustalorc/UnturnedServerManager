@@ -1,11 +1,14 @@
-﻿namespace ATORTTeam.UnturnedServerManager.GUI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Pustalorc.Applications.USM.GUI
 {
-    partial class UpdateMenu
+    sealed partial class UpdateMenu
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -28,15 +31,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateMenu));
             this.UAll = new System.Windows.Forms.Button();
             this.LRVer = new System.Windows.Forms.Label();
             this.LRVerDesc = new System.Windows.Forms.Label();
             this.CRVer = new System.Windows.Forms.Label();
             this.CRVerDesc = new System.Windows.Forms.Label();
             this.URocket = new System.Windows.Forms.Button();
-            this.LUVer = new System.Windows.Forms.Label();
-            this.LUVerDesc = new System.Windows.Forms.Label();
             this.CUVer = new System.Windows.Forms.Label();
             this.CUVerDesc = new System.Windows.Forms.Label();
             this.UUnturned = new System.Windows.Forms.Button();
@@ -99,28 +99,10 @@
             this.URocket.UseVisualStyleBackColor = true;
             this.URocket.Click += new System.EventHandler(this.URocket_Click);
             // 
-            // LUVer
-            // 
-            this.LUVer.AutoSize = true;
-            this.LUVer.Location = new System.Drawing.Point(501, 16);
-            this.LUVer.Name = "LUVer";
-            this.LUVer.Size = new System.Drawing.Size(27, 13);
-            this.LUVer.TabIndex = 29;
-            this.LUVer.Text = "N/A";
-            // 
-            // LUVerDesc
-            // 
-            this.LUVerDesc.AutoSize = true;
-            this.LUVerDesc.Location = new System.Drawing.Point(380, 16);
-            this.LUVerDesc.Name = "LUVerDesc";
-            this.LUVerDesc.Size = new System.Drawing.Size(112, 13);
-            this.LUVerDesc.TabIndex = 28;
-            this.LUVerDesc.Text = "Latest Unturned Build:";
-            // 
             // CUVer
             // 
             this.CUVer.AutoSize = true;
-            this.CUVer.Location = new System.Drawing.Point(294, 16);
+            this.CUVer.Location = new System.Drawing.Point(343, 16);
             this.CUVer.Name = "CUVer";
             this.CUVer.Size = new System.Drawing.Size(27, 13);
             this.CUVer.TabIndex = 27;
@@ -131,9 +113,9 @@
             this.CUVerDesc.AutoSize = true;
             this.CUVerDesc.Location = new System.Drawing.Point(159, 16);
             this.CUVerDesc.Name = "CUVerDesc";
-            this.CUVerDesc.Size = new System.Drawing.Size(129, 13);
+            this.CUVerDesc.Size = new System.Drawing.Size(178, 13);
             this.CUVerDesc.TabIndex = 26;
-            this.CUVerDesc.Text = "Current Unturned Version:";
+            this.CUVerDesc.Text = "Last Performed Update of Unturned:";
             // 
             // UUnturned
             // 
@@ -168,13 +150,10 @@
             this.Controls.Add(this.CRVer);
             this.Controls.Add(this.CRVerDesc);
             this.Controls.Add(this.URocket);
-            this.Controls.Add(this.LUVer);
-            this.Controls.Add(this.LUVerDesc);
             this.Controls.Add(this.CUVer);
             this.Controls.Add(this.CUVerDesc);
             this.Controls.Add(this.UUnturned);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UpdateMenu";
@@ -187,17 +166,15 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button UAll;
-        private System.Windows.Forms.Label LRVer;
-        private System.Windows.Forms.Label LRVerDesc;
-        private System.Windows.Forms.Label CRVer;
-        private System.Windows.Forms.Label CRVerDesc;
-        private System.Windows.Forms.Button URocket;
-        private System.Windows.Forms.Label LUVer;
-        private System.Windows.Forms.Label LUVerDesc;
-        private System.Windows.Forms.Label CUVer;
-        private System.Windows.Forms.Label CUVerDesc;
-        private System.Windows.Forms.Button UUnturned;
-        private System.Windows.Forms.Button UValidate;
+        private Button UAll;
+        private Label LRVer;
+        private Label LRVerDesc;
+        private Label CRVer;
+        private Label CRVerDesc;
+        private Button URocket;
+        private Label CUVer;
+        private Label CUVerDesc;
+        private Button UUnturned;
+        private Button UValidate;
     }
 }

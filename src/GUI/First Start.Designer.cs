@@ -1,11 +1,14 @@
-﻿namespace ATORTTeam.UnturnedServerManager.GUI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class FirstStart
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -103,10 +106,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label Msg;
-        private System.Windows.Forms.TextBox SelectedPath;
-        private System.Windows.Forms.Button Browse;
-        private System.Windows.Forms.FolderBrowserDialog FolderBrowser;
-        private System.Windows.Forms.Button ValidatePath;
+        private Label Msg;
+        private TextBox SelectedPath;
+        private Button Browse;
+        private FolderBrowserDialog FolderBrowser;
+        private Button ValidatePath;
     }
 }

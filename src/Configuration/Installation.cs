@@ -2,11 +2,14 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace ATORTTeam.UnturnedServerManager.Configuration
+namespace Pustalorc.Applications.USM.Configuration
 {
+    /// <summary>
+    /// Configuration for where to locate the server installation.
+    /// </summary>
     public sealed class Installation
     {
-        [JsonIgnore] private static string FilePath => @"config\Installation.json";
+        [JsonIgnore] private static string FilePath => @"config/Installation.json";
 
         public string InstallationPath { get; set; } = AppContext.BaseDirectory;
 

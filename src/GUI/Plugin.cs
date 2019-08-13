@@ -2,10 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.Constants;
-using ATORTTeam.UnturnedServerManager.File_Control;
+using Pustalorc.Applications.USM.Constants;
+using Pustalorc.Applications.USM.File_Control;
 
-namespace ATORTTeam.UnturnedServerManager.GUI
+namespace Pustalorc.Applications.USM.GUI
 {
     internal partial class Plugin : Form
     {
@@ -95,7 +95,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             Hide();
             var pluginLocation = Path.Combine(_server, "Rocket", "Plugins");
             var librariesLocation = Path.Combine(_server, "Rocket", "Libraries");
-            var moduleLocation = Path.Combine(RocketModServerPath.Value, "Modules");
+            var moduleLocation = Path.Combine(ServerPath.Value, "Modules");
 
             var tempName = Path.GetTempFileName();
             var tempLocation = Path.Combine(Path.GetTempPath(), tempName.Substring(0, tempName.Length - 4));

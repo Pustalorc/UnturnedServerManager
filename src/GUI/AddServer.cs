@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.Memory;
-using ATORTTeam.UnturnedServerManager.Server_Instance;
+using Pustalorc.Applications.USM.Loading;
+using Pustalorc.Applications.USM.Server_Instance;
 
-namespace ATORTTeam.UnturnedServerManager.GUI
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class AddServer : Form
     {
@@ -41,13 +41,13 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         {
             var illegalName =
                 new Regex(
-                    "(^(PRN|AUX|NUL|CON|COM[1-9]|LPT[1-9]|(\\.+)$)(\\..*)?$)|(([\\x00-\\x1f\\\\?*:\";‌​|/<>])+)|([\\. ]+)",
+                    "(^(PRN|AUX|NUL|CON|COM[1-9]|LPT[1-9]|(\\.+)$)(\\..*)?$)|(([\\x00-\\x1f\\\\?*:\";‌​|/<>])+)|([\\.]+)",
                     RegexOptions.IgnoreCase);
 
             if (!_accepted || illegalName.IsMatch(ServerName.Text) || string.IsNullOrEmpty(ServerName.Text)) return;
 
-            if (!Servers.Value.Exists(k => k.Name == ServerName.Text))
-                Servers.Value.Add(Server.Create(ServerName.Text, _clone));
+            if (!Servers.RegisteredServers.Exists(k => k.Name == ServerName.Text))
+                Servers.RegisteredServers.Add(Server.Create(ServerName.Text, _clone));
         }
     }
 }

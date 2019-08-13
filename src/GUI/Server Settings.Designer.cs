@@ -1,11 +1,14 @@
-﻿namespace ATORTTeam.UnturnedServerManager.GUI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class ConstConfig
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -1112,85 +1115,85 @@
         }
 
         #endregion
-        private System.Windows.Forms.RadioButton Rate2;
-        private System.Windows.Forms.RadioButton Cycle1;
-        private System.Windows.Forms.RadioButton Cycle2;
-        private System.Windows.Forms.RadioButton Rate1;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.RadioButton GoldFalse;
-        private System.Windows.Forms.RadioButton GoldTrue;
-        private System.Windows.Forms.Label GoldDesc;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label RateDesc;
-        private System.Windows.Forms.Label CycleDesc;
-        private System.Windows.Forms.Label FilterDesc;
-        private System.Windows.Forms.Label IPDesc;
-        private System.Windows.Forms.Label HideDesc;
-        private System.Windows.Forms.TextBox LoadoutSel;
-        private System.Windows.Forms.Label LoadoutDesc;
-        private System.Windows.Forms.Label SyncDesc;
-        private System.Windows.Forms.TextBox MessageSel;
-        private System.Windows.Forms.Label MessageDesc;
-        private System.Windows.Forms.Label OwnerDesc;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton MaxPlayersVal4;
-        private System.Windows.Forms.RadioButton MaxPlayersVal1;
-        private System.Windows.Forms.RadioButton MaxPlayersVal2;
-        private System.Windows.Forms.RadioButton MaxPlayersVal3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton QueueSize1;
-        private System.Windows.Forms.RadioButton QueueSize3;
-        private System.Windows.Forms.RadioButton QueueSize4;
-        private System.Windows.Forms.RadioButton QueueSize2;
-        private System.Windows.Forms.TextBox PasswordSel;
-        private System.Windows.Forms.Label QueueDesc;
-        private System.Windows.Forms.Label PasswordDesc;
-        private System.Windows.Forms.Label CheatsDesc;
-        private System.Windows.Forms.Label DifficultyDesc;
-        private System.Windows.Forms.Label MapDesc;
-        private System.Windows.Forms.Button Exit;
-        private System.Windows.Forms.Label MaxDesc;
-        private System.Windows.Forms.Label FirstDesc;
-        private System.Windows.Forms.Label PvPDesc;
-        private System.Windows.Forms.Label PortDesc;
-        private System.Windows.Forms.TextBox NameSel;
-        private System.Windows.Forms.Label NameDesc;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.RadioButton PvPOff;
-        private System.Windows.Forms.RadioButton PvPOn;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.RadioButton PerspFirstPer;
-        private System.Windows.Forms.RadioButton PerspBoth;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.RadioButton DiffNormal;
-        private System.Windows.Forms.RadioButton DiffEasy;
-        private System.Windows.Forms.RadioButton DiffHard;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.RadioButton CheatsOff;
-        private System.Windows.Forms.RadioButton CheatsOn;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.RadioButton SyncOff;
-        private System.Windows.Forms.RadioButton SyncOn;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.RadioButton HideAdFalse;
-        private System.Windows.Forms.RadioButton HideAdTrue;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.RadioButton FilterOff;
-        private System.Windows.Forms.RadioButton FilterOn;
-        private System.Windows.Forms.NumericUpDown OwnerID;
-        private System.Windows.Forms.NumericUpDown ChatRate;
-        private System.Windows.Forms.NumericUpDown Cycle;
-        private System.Windows.Forms.NumericUpDown Queue;
-        private System.Windows.Forms.NumericUpDown IPField4;
-        private System.Windows.Forms.NumericUpDown IPField3;
-        private System.Windows.Forms.NumericUpDown IPField2;
-        private System.Windows.Forms.NumericUpDown IPField1;
-        private System.Windows.Forms.Label IPDot1;
-        private System.Windows.Forms.Label IPDot3;
-        private System.Windows.Forms.Label IPDot2;
-        private System.Windows.Forms.NumericUpDown MaxPlayers;
-        private System.Windows.Forms.NumericUpDown Port;
-        private System.Windows.Forms.ComboBox Maps;
+        private RadioButton Rate2;
+        private RadioButton Cycle1;
+        private RadioButton Cycle2;
+        private RadioButton Rate1;
+        private Panel panel5;
+        private RadioButton GoldFalse;
+        private RadioButton GoldTrue;
+        private Label GoldDesc;
+        private Panel panel4;
+        private Panel panel3;
+        private Label RateDesc;
+        private Label CycleDesc;
+        private Label FilterDesc;
+        private Label IPDesc;
+        private Label HideDesc;
+        private TextBox LoadoutSel;
+        private Label LoadoutDesc;
+        private Label SyncDesc;
+        private TextBox MessageSel;
+        private Label MessageDesc;
+        private Label OwnerDesc;
+        private Panel panel2;
+        private RadioButton MaxPlayersVal4;
+        private RadioButton MaxPlayersVal1;
+        private RadioButton MaxPlayersVal2;
+        private RadioButton MaxPlayersVal3;
+        private Panel panel1;
+        private RadioButton QueueSize1;
+        private RadioButton QueueSize3;
+        private RadioButton QueueSize4;
+        private RadioButton QueueSize2;
+        private TextBox PasswordSel;
+        private Label QueueDesc;
+        private Label PasswordDesc;
+        private Label CheatsDesc;
+        private Label DifficultyDesc;
+        private Label MapDesc;
+        private Button Exit;
+        private Label MaxDesc;
+        private Label FirstDesc;
+        private Label PvPDesc;
+        private Label PortDesc;
+        private TextBox NameSel;
+        private Label NameDesc;
+        private Panel panel6;
+        private RadioButton PvPOff;
+        private RadioButton PvPOn;
+        private Panel panel7;
+        private RadioButton PerspFirstPer;
+        private RadioButton PerspBoth;
+        private Panel panel8;
+        private RadioButton DiffNormal;
+        private RadioButton DiffEasy;
+        private RadioButton DiffHard;
+        private Panel panel9;
+        private RadioButton CheatsOff;
+        private RadioButton CheatsOn;
+        private Panel panel10;
+        private RadioButton SyncOff;
+        private RadioButton SyncOn;
+        private Panel panel11;
+        private RadioButton HideAdFalse;
+        private RadioButton HideAdTrue;
+        private Panel panel12;
+        private RadioButton FilterOff;
+        private RadioButton FilterOn;
+        private NumericUpDown OwnerID;
+        private NumericUpDown ChatRate;
+        private NumericUpDown Cycle;
+        private NumericUpDown Queue;
+        private NumericUpDown IPField4;
+        private NumericUpDown IPField3;
+        private NumericUpDown IPField2;
+        private NumericUpDown IPField1;
+        private Label IPDot1;
+        private Label IPDot3;
+        private Label IPDot2;
+        private NumericUpDown MaxPlayers;
+        private NumericUpDown Port;
+        private ComboBox Maps;
     }
 }

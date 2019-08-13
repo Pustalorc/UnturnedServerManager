@@ -2,12 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.Constants;
-using ATORTTeam.UnturnedServerManager.File_Control;
-using ATORTTeam.UnturnedServerManager.Memory;
+using Pustalorc.Applications.USM.Configuration;
+using Pustalorc.Applications.USM.Constants;
+using Pustalorc.Applications.USM.File_Control;
+using Pustalorc.Applications.USM.Loading;
 
-namespace ATORTTeam.UnturnedServerManager.GUI
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class ConstConfig : Form
     {
@@ -26,8 +26,8 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         // Custom Methods
         private void LoadMaps()
         {
-            var server = Servers.Value.Find(k => k.Name == _targetServer);
-            var dir = Path.Combine(RocketModServerPath.Value, "Maps");
+            var server = Servers.RegisteredServers.Find(k => k.Name == _targetServer);
+            var dir = Path.Combine(ServerPath.Value, "Maps");
             FileActions.VerifyPath(dir, true);
 
             var rocketModDirectoryInfo = new DirectoryInfo(dir);
@@ -45,7 +45,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void Save()
         {
-            var conf = CommandsDotDat.Load(_targetServer);
+            var conf = GameConfiguration.Load(_targetServer);
             conf.PublicName = NameSel.Text.Length < 5 ? "Unturned" : NameSel.Text;
             conf.Port = (int) Port.Value;
             conf.Pvp = PvPOn.Checked;
@@ -72,12 +72,17 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             conf.Cycle = Cycle1.Checked ? 43200 : (int) Cycle.Value;
             conf.ChatRate = Rate1.Checked ? 0 : (int) ChatRate.Value;
             conf.SaveJson();
+
+            var commandsDat = Path.Combine(ServerPath.Value, "Servers", _targetServer, "Server", "Commands.dat");
+            FileActions.VerifyFilePath(commandsDat, true);
+            File.WriteAllLines(commandsDat, conf.ToNelson);
+
             Close();
         }
 
         private void LoadSaved()
         {
-            var conf = CommandsDotDat.Load(_targetServer);
+            var conf = GameConfiguration.Load(_targetServer);
 
             var bindBytes = conf.Bind.Split('.').ToList().ConvertAll(k =>
             {

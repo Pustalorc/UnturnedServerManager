@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.Configuration;
+using Pustalorc.Applications.USM.Configuration;
 
-namespace ATORTTeam.UnturnedServerManager.GUI
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class FirstStart : Form
     {
