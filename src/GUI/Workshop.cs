@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.File_Control;
-using ATORTTeam.UnturnedServerManager.SteamCMD_Manager;
+using Pustalorc.Applications.USM.Constants;
+using Pustalorc.Applications.USM.File_Control;
+using Pustalorc.Applications.USM.SteamCMD_Manager;
 
 // ReSharper disable UnusedVariable
 
-namespace ATORTTeam.UnturnedServerManager.GUI
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class Workshop : Form
     {
@@ -82,7 +84,10 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             if (AlreadyInstalled.Items.Count > 0)
                 foreach (string s in AlreadyInstalled.Items)
                 {
-                    SteamCmd.RunCommand($"+workshop_download_item 304930 {s} +quit");
+                    SteamCmd.RunCommand(
+                        (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                            ? $"+force_install_dir \"{ServerPath.Value}\" "
+                            : "") + $"+workshop_download_item 304930 {ID.Text} +quit");
                     SteamCmd.MoveWorkshopFolder(s, Path.Combine(_server, "Workshop"));
                 }
 
@@ -106,7 +111,10 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             Hide();
             if (!string.IsNullOrEmpty(ID.Text))
             {
-                SteamCmd.RunCommand($"+workshop_download_item 304930 {ID.Text} +quit");
+                SteamCmd.RunCommand(
+                    (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                        ? $"+force_install_dir \"{ServerPath.Value}\" "
+                        : "") + $"+workshop_download_item 304930 {ID.Text} +quit");
                 SteamCmd.MoveWorkshopFolder(ID.Text, Path.Combine(_server, "Workshop"));
             }
 
@@ -133,7 +141,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         private void ID_TextChanged(object sender, EventArgs e)
         {
             if (!_controlChange)
-                Link.Text = $@"http://steamcommunity.com/sharedfiles/filedetails/?id={ID.Text}";
+                Link.Text = $@"https://steamcommunity.com/sharedfiles/filedetails/?id={ID.Text}";
         }
 
         private void Link_TextChanged(object sender, EventArgs e)

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.Updating;
-using ATORTTeam.UnturnedServerManager.Versions;
+using Pustalorc.Applications.USM.Configuration;
+using Pustalorc.Applications.USM.Updating;
+using Pustalorc.Applications.USM.Versions;
 
-namespace ATORTTeam.UnturnedServerManager.GUI
+namespace Pustalorc.Applications.USM.GUI
 {
-    public partial class UpdateMenu : Form
+    public sealed partial class UpdateMenu : Form
     {
         public UpdateMenu()
         {
             InitializeComponent();
 
-            LUVer.Text = UnturnedBuild.Value;
             LRVer.Text = RocketBuild.Value;
 
             LoadVersions();
@@ -22,7 +21,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
         private void LoadVersions()
         {
             var installedVersions = LocalVersions.Load();
-            CUVer.Text = installedVersions.UnturnedVersion;
+            CUVer.Text = installedVersions.LastUnturnedUpdate.ToString();
             CRVer.Text = installedVersions.RocketModVersion;
         }
 

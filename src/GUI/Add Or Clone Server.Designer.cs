@@ -1,11 +1,14 @@
-﻿namespace ATORTTeam.UnturnedServerManager.GUI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class AddServer
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -95,9 +98,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label Instructions;
-        private System.Windows.Forms.TextBox ServerName;
-        private System.Windows.Forms.Button OK;
-        private System.Windows.Forms.Button Cancel;
+        private Label Instructions;
+        public TextBox ServerName;
+        private Button OK;
+        private Button Cancel;
     }
 }

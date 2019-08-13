@@ -1,11 +1,14 @@
-﻿namespace ATORTTeam.UnturnedServerManager.GUI
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class Manager
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -131,7 +134,7 @@
             this.LinkMe.Size = new System.Drawing.Size(64, 13);
             this.LinkMe.TabIndex = 26;
             this.LinkMe.TabStop = true;
-            this.LinkMe.Text = "persiafighter";
+            this.LinkMe.Text = "Pustalorc";
             this.LinkMe.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkMe_LinkClicked);
             // 
             // Notifier
@@ -296,26 +299,26 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button Settings;
-        private System.Windows.Forms.Button Workshop;
-        private System.Windows.Forms.Button Plugin;
-        private System.Windows.Forms.Button Toggle;
-        private System.Windows.Forms.Button Updater;
-        private System.Windows.Forms.LinkLabel GithubLink;
-        private System.Windows.Forms.Label Desc9;
-        private System.Windows.Forms.LinkLabel LinkMe;
-        public System.Windows.Forms.NotifyIcon Notifier;
-        private System.Windows.Forms.ListBox Servers;
-        private System.Windows.Forms.Button NewServer;
-        private System.Windows.Forms.Button DeleteServer;
-        private System.Windows.Forms.Button CloneServer;
-        private System.Windows.Forms.Label List_TXT;
-        private System.Windows.Forms.RichTextBox ServerSettings;
-        private System.Windows.Forms.Label Settings_TXT;
-        private System.Windows.Forms.Button Restart;
-        private System.Windows.Forms.Label Mngmnt_TXT;
-        private System.Windows.Forms.Label ctrl_TXT;
-        private System.Windows.Forms.Button Reset;
-        private System.Windows.Forms.Button OpenLocal;
+        private Button Settings;
+        private Button Workshop;
+        private Button Plugin;
+        private Button Toggle;
+        private Button Updater;
+        private LinkLabel GithubLink;
+        private Label Desc9;
+        private LinkLabel LinkMe;
+        public NotifyIcon Notifier;
+        private ListBox Servers;
+        private Button NewServer;
+        private Button DeleteServer;
+        private Button CloneServer;
+        private Label List_TXT;
+        private RichTextBox ServerSettings;
+        private Label Settings_TXT;
+        private Button Restart;
+        private Label Mngmnt_TXT;
+        private Label ctrl_TXT;
+        private Button Reset;
+        private Button OpenLocal;
     }
 }

@@ -2,13 +2,16 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace ATORTTeam.UnturnedServerManager.Configuration
+namespace Pustalorc.Applications.USM.Configuration
 {
+    /// <summary>
+    /// Configuration to save the version or time that the last update was done for either one.
+    /// </summary>
     public sealed class LocalVersions
     {
-        [JsonIgnore] private static string FilePath => @"config\Versions.json";
+        [JsonIgnore] private static string FilePath => @"config/Versions.json";
 
-        public string UnturnedVersion { get; set; } = "N/A";
+        public DateTime LastUnturnedUpdate { get; set; } = DateTime.Now;
         public string RocketModVersion { get; set; } = "N/A";
 
         public void SaveJson()

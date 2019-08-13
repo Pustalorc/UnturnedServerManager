@@ -1,11 +1,13 @@
-﻿using System.IO;
-using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.Constants;
-using ATORTTeam.UnturnedServerManager.File_Control;
-using ATORTTeam.UnturnedServerManager.SteamCMD_Manager;
-using ATORTTeam.UnturnedServerManager.Versions;
+﻿using System;
+using System.IO;
+using System.Windows.Forms;
+using Pustalorc.Applications.USM.Configuration;
+using Pustalorc.Applications.USM.Constants;
+using Pustalorc.Applications.USM.File_Control;
+using Pustalorc.Applications.USM.SteamCMD_Manager;
+using Pustalorc.Applications.USM.Versions;
 
-namespace ATORTTeam.UnturnedServerManager.Updating
+namespace Pustalorc.Applications.USM.Updating
 {
     internal static class Updater
     {
@@ -14,10 +16,10 @@ namespace ATORTTeam.UnturnedServerManager.Updating
         /// </summary>
         public static void UpdateUnturned()
         {
-            SteamCmd.RunCommand($"+force_install_dir \"{RocketModServerPath.Value}\" +app_update 304930 +exit");
+            SteamCmd.RunCommand($"+force_install_dir \"{ServerPath.Value}\" +app_update 1110390 +exit");
 
             var installedVersions = LocalVersions.Load();
-            installedVersions.UnturnedVersion = UnturnedBuild.Value;
+            installedVersions.LastUnturnedUpdate = DateTime.Now;
             installedVersions.SaveJson();
         }
 
@@ -27,10 +29,10 @@ namespace ATORTTeam.UnturnedServerManager.Updating
         public static void ValidateUnturned()
         {
             SteamCmd.RunCommand(
-                $"+force_install_dir \"{RocketModServerPath.Value}\" +app_update 304930 validate +exit");
+                $"+force_install_dir \"{ServerPath.Value}\" +app_update 1110390 validate +exit");
 
             var installedVersions = LocalVersions.Load();
-            installedVersions.UnturnedVersion = UnturnedBuild.Value;
+            installedVersions.LastUnturnedUpdate = DateTime.Now;
             installedVersions.SaveJson();
         }
 
@@ -41,8 +43,15 @@ namespace ATORTTeam.UnturnedServerManager.Updating
         {
             var tempZip = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
-            FileActions.Download(RocketUpdate.Value, tempZip);
-            FileActions.ExtractZip(tempZip, RocketModServerPath.Value);
+            if (!FileActions.Download(RocketDownloadUrl.Value, tempZip))
+            {
+                MessageBox.Show(
+                    "An error occured during download. Please verify that rocketmod servers are available and try again later.",
+                    "Rocketmod download failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            FileActions.ExtractZip(tempZip, ServerPath.Value);
 
             var local = LocalVersions.Load();
             local.RocketModVersion = RocketBuild.Value;

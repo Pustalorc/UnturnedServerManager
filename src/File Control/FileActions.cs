@@ -2,7 +2,7 @@
 using System.IO.Compression;
 using System.Net;
 
-namespace ATORTTeam.UnturnedServerManager.File_Control
+namespace Pustalorc.Applications.USM.File_Control
 {
     internal static class FileActions
     {
@@ -12,7 +12,7 @@ namespace ATORTTeam.UnturnedServerManager.File_Control
         /// <param name="url">Uniform Resource Locator for the file.</param>
         /// <param name="destination">Full path to destination including desired filename.</param>
         /// <returns>True if no exceptions occur during download, false otherwise.</returns>
-        public static void Download(string url, string destination)
+        public static bool Download(string url, string destination)
         {
             VerifyFilePath(destination, true);
 
@@ -28,8 +28,10 @@ namespace ATORTTeam.UnturnedServerManager.File_Control
             }
             catch
             {
-                // Ignores any exceptions when downloading the file.
+                return false;
             }
+
+            return true;
         }
 
         /// <summary>
@@ -48,9 +50,9 @@ namespace ATORTTeam.UnturnedServerManager.File_Control
         /// <param name="file">The full path, including file name, to the file.</param>
         /// <param name="create">If the directory should be created if it doesn't exist.</param>
         /// <returns>True if directory existed from before, false otherwise.</returns>
-        public static void VerifyFilePath(string file, bool create)
+        public static bool VerifyFilePath(string file, bool create)
         {
-            VerifyPath(Path.GetDirectoryName(file), create);
+            return VerifyPath(Path.GetDirectoryName(file), create);
         }
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace ATORTTeam.UnturnedServerManager.File_Control
             }
             catch
             {
-                // Prevents any exceptions when deleting the folder from crashing the application.
+                // Ignores any errors, including if there is a resource still in use.
             }
         }
 

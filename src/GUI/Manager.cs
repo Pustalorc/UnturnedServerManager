@@ -1,12 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.File_Control;
+using Pustalorc.Applications.USM.Configuration;
+using Pustalorc.Applications.USM.File_Control;
 
-namespace ATORTTeam.UnturnedServerManager.GUI
+namespace Pustalorc.Applications.USM.GUI
 {
     internal sealed partial class Manager : Form
     {
@@ -31,7 +30,6 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             var exit = new MenuItem();
             var wiki = new MenuItem();
             var issues = new MenuItem();
-            IContainer components = new Container();
             menu.MenuItems.AddRange(new[] {exit, wiki, issues});
             exit.Index = 0;
             exit.Text = @"Exit";
@@ -51,7 +49,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
             Servers.Items.Clear();
 
-            foreach (var s in Memory.Servers.Value)
+            foreach (var s in Loading.Servers.RegisteredServers)
                 Servers.Items.Add(s.Name);
 
             if (Servers.Items.Count == 0)
@@ -88,9 +86,9 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void LoadServerDetails()
         {
-            ServerSettings.Text = CommandsDotDat.Load(_selectedServer).ToString();
+            ServerSettings.Text = GameConfiguration.Load(_selectedServer).ToString();
 
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
 
             Restart.Enabled = server.IsRunning;
@@ -114,23 +112,23 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private static void Github_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/persiafighter/UnturnedServerManager/wiki");
+            Process.Start("https://github.com/pustalorc/UnturnedServerManager/wiki");
         }
 
         private static void Issues_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/persiafighter/UnturnedServerManager/issues");
+            Process.Start("https://github.com/pustalorc/UnturnedServerManager/issues");
         }
 
         // Form events.
         private void GithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/persiafighter/UnturnedServerManager/");
+            Process.Start("https://github.com/pustalorc/UnturnedServerManager/");
         }
 
         private void LinkMe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://persiafighter.github.io/");
+            Process.Start("https://pustalorc.github.io/");
         }
 
         private void Settings_Click(object sender, EventArgs e)
@@ -160,7 +158,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void Workshop_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
 
             _otherGuiOpen = true;
@@ -175,7 +173,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void Plugin_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
 
             _otherGuiOpen = true;
@@ -190,13 +188,13 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void Restart_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             server?.Restart();
         }
 
         private void Toggle_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
 
             if (server.IsRunning)
@@ -213,7 +211,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void Reset_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
 
             FileActions.DeleteDirectory(Path.Combine(server.Folder, "Players"));
@@ -235,14 +233,14 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void OpenLocal_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server != null)
                 Process.Start(server.Folder);
         }
 
         private void CloneServer_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
 
             _otherGuiOpen = true;
@@ -251,6 +249,8 @@ namespace ATORTTeam.UnturnedServerManager.GUI
             var f = new AddServer(server.Folder);
             f.ShowDialog();
 
+            GameConfiguration.Clone(server.Name, f.ServerName.Text);
+
             Show();
             _otherGuiOpen = false;
             LoadServers();
@@ -258,7 +258,7 @@ namespace ATORTTeam.UnturnedServerManager.GUI
 
         private void DeleteServer_Click(object sender, EventArgs e)
         {
-            var server = Memory.Servers.Value.Find(k => k.Name == _selectedServer);
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server?.IsRunning == true)
                 server.Shutdown();
 

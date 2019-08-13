@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using ATORTTeam.UnturnedServerManager.Configuration;
-using ATORTTeam.UnturnedServerManager.File_Control;
-using ATORTTeam.UnturnedServerManager.GUI;
+using System.Runtime.InteropServices;
+using Pustalorc.Applications.USM.Configuration;
+using Pustalorc.Applications.USM.File_Control;
 
-namespace ATORTTeam.UnturnedServerManager.SteamCMD_Manager
+namespace Pustalorc.Applications.USM.SteamCMD_Manager
 {
     internal static class SteamCmd
     {
-        /// <summary>
-        ///     Saved steam Username. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
-        /// </summary>
-        internal static string Username = "";
-
-        /// <summary>
-        ///     Saved steam Password. NEVER MAKE IT PUBLIC STATIC, IT'S ALREADY BAD ENOUGH WITH INTERNAL STATIC.
-        /// </summary>
-        internal static string Password = "";
-
         /// <summary>
         ///     Link to official steam download for SteamCMD.
         /// </summary>
@@ -35,26 +25,16 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMD_Manager
         {
             VerifySteam();
 
-            var login = new SteamLogin();
             var inst = Installation.Load();
             var steamCmdExe = Path.Combine(inst.InstallationPath, "steamcmd.exe");
 
             var proc = new Process();
-            var startInfo = new ProcessStartInfo {FileName = steamCmdExe};
 
-            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
-            {
-                login.ShowDialog();
+            var startInfo = new ProcessStartInfo {FileName = steamCmdExe, Arguments = $" +login anonymous {command}"};
 
-                if (string.IsNullOrEmpty(login.Username.Text) || string.IsNullOrEmpty(login.Password.Text))
-                    return;
-
-                startInfo.Arguments = $" +login {login.Username.Text} {login.Password.Text} {command}";
-            }
-            else
-            {
-                startInfo.Arguments = $" +login {Username} {Password} {command}";
-            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                startInfo = new ProcessStartInfo
+                    {FileName = "/bin/bash", Arguments = $"steamcmd +login anonymous {command}"};
 
             proc.StartInfo = startInfo;
             proc.Start();
@@ -69,7 +49,7 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMD_Manager
         public static void MoveWorkshopFolder(string id, string directoryDestination)
         {
             var inst = Installation.Load();
-            var workshopDir = Path.Combine(inst.InstallationPath, "steamApps", "workshop", "content", "304930", id);
+            var workshopDir = Path.Combine(inst.InstallationPath, "steamapps", "workshop", "content", "304930", id);
             var mapMeta = Path.Combine(workshopDir, "Map.meta");
             var mapsDir = Path.Combine(directoryDestination, "Maps", id);
             var contentDir = Path.Combine(directoryDestination, "Content", id);
@@ -83,6 +63,8 @@ namespace ATORTTeam.UnturnedServerManager.SteamCMD_Manager
         /// </summary>
         private static void VerifySteam()
         {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) return;
+
             var inst = Installation.Load();
             var steamCmdExe = Path.Combine(inst.InstallationPath, "steamcmd.exe");
 
