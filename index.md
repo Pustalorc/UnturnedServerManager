@@ -1,22 +1,45 @@
-Version: Public 4.0.0.2
+Version: Public 4.0.1.1
 
-[![Github Releases](https://img.shields.io/github/downloads/persiafighter/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
+[![Github Releases](https://img.shields.io/github/downloads/Pustalorc/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
-<h1>Requirements:</h1>
+# Requirements:
 
-.Net 4.7 or Later
+.Net 4.8 or Later
 
-Windows
+Windows or Linux
 
-<h1>Download:</h1>
+# Download:
 
-[Releases](https://github.com/persiafighter/UnturnedServerManager/releases/latest)
+[Releases](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
-<h1>Known Bugs:</h1>
+# Changelog:
 
-None as of 4.0.0.2
+**V4.0.1.1** -
+* Updated .NET Framework to 4.8
+* Updated packages to latest versions
 
-<h1>Changelog:</h1>
+**V4.0.1.0** -
+* Added Try Catch to prevent crashing when retrieving RocketMod's latest build if it isn't available.
+* Added a message when downloading rocketmod fails.
+* Added support to run SteamCMD on Linux without checking if it exists (See Linux install wiki)
+* Added support to startup a server on Linux by using ServerHelper.sh that comes with 1110390.
+* Added minor console logging for startup/shutdown of a server since 1110390 doesn't have fully functional console output in Linux.
+* Added install check support for Linux (verifying that Unturned_Headless.x86_64 exists).
+* Added a limit to how many times verification of the installation happens (Previously unlimited, now only 10 tries).
+* Updated packages to latest versions.
+* Changed APPID download from 304930 (Unturned) to 1110390 (Unturned Dedicated Server Tool)
+* Changed initial message to not mention 10GB required, and instead mention 3GB minimum. (U3DS is small in comparison to the base game)
+* Changed all links from my previous username to my current username.
+* Removed Steam Login (1110390 can be downloaded with Anonymous steam login) 
+* Removed tracking of unturned version, instead using DateTime to figure out when was the last update done at.
+* Removed unneeded Memory.Servers and moved its use to Loading.Servers.
+* Removed all in-software icons (current incompatibility with Linux)
+* Fixed server cloning not copying over the settings.
+* Fixed changing settings not applying to the server.
+* Fixed unable to create servers with a space in their name.
+* Fixed any possible errors during download from crashing the program.
+* Fixed all paths to use a normal slash instead of a backwards slash (Compatibility with Linux)
+* Fixed GameConfiguration.cs for JSON (Was using fields, now uses properties)
 
 **V4.0.0.2** - 
 * Removed vanilla server option due to high disk usage.
@@ -163,6 +186,6 @@ None as of 4.0.0.2
 * Added Rocket Install, Workshop Install And Plugin Install (Plugin install is buggy!).
 * Added Per-Server SRS Features.
 
-**V1.0.0.1** -
+**V1.0.0.1** - Added link to github page.
 
-* Added link to github page.
+----------- Unturned Server Manager -----------
