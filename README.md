@@ -1,12 +1,12 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 4.0.1.0
+Version: Public 4.0.1.1
 
 [![Github Releases](https://img.shields.io/github/downloads/Pustalorc/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
 # Requirements:
 
-.Net 4.7 or Later
+.Net 4.8 or Later
 
 Windows or Linux
 
@@ -15,6 +15,10 @@ Windows or Linux
 https://github.com/Pustalorc/UnturnedServerManager/releases/latest
 
 # Changelog:
+
+**V4.0.1.1** -
+* Updated .NET Framework to 4.8
+* Updated packages to latest versions
 
 **V4.0.1.0** -
 * Added Try Catch to prevent crashing when retrieving RocketMod's latest build if it isn't available.
