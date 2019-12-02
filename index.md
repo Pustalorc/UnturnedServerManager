@@ -1,10 +1,11 @@
-Version: Public 4.0.1.1
+
+Version: Public 4.0.1.2
 
 [![Github Releases](https://img.shields.io/github/downloads/Pustalorc/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
 # Requirements:
 
-.Net 4.8 or Later
+[.Net Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) or later versions
 
 Windows or Linux
 
@@ -13,6 +14,10 @@ Windows or Linux
 [Releases](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
 # Changelog:
+
+**V4.0.1.2** -
+* Rocketmod shut their dedicated machines down. "Latest" rocketmod version is now permanently [#1363](https://github.com/RocketMod/Rocket.Unturned/releases/tag/4.9.3.0)
+* Modified update menu to work correctly without rocketmod versions.
 
 **V4.0.1.1** -
 * Updated .NET Framework to 4.8
