@@ -1,12 +1,12 @@
 ----------- Unturned Server Manager -----------
 
-Version: Public 4.0.1.1
+Version: Public 4.0.1.2
 
 [![Github Releases](https://img.shields.io/github/downloads/Pustalorc/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
 # Requirements:
 
-.Net 4.8 or Later
+[.Net Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) or later versions
 
 Windows or Linux
 
