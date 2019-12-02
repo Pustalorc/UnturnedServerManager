@@ -12,7 +12,6 @@ namespace Pustalorc.Applications.USM.Configuration
         [JsonIgnore] private static string FilePath => @"config/Versions.json";
 
         public DateTime LastUnturnedUpdate { get; set; } = DateTime.Now;
-        public string RocketModVersion { get; set; } = "N/A";
 
         public void SaveJson()
         {

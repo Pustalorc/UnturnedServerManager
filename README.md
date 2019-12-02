@@ -16,6 +16,10 @@ https://github.com/Pustalorc/UnturnedServerManager/releases/latest
 
 # Changelog:
 
+**V4.0.1.2** -
+* Rocketmod shut their dedicated machines down. "Latest" rocketmod version is now permanently [#1363](https://github.com/RocketMod/Rocket.Unturned/releases/tag/4.9.3.0)
+* Modified update menu to work correctly without rocketmod versions.
+
 **V4.0.1.1** -
 * Updated .NET Framework to 4.8
 * Updated packages to latest versions

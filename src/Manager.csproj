@@ -111,7 +111,6 @@
     </Compile>
     <Compile Include="SteamCMD Manager\SteamCMD.cs" />
     <Compile Include="Updating\Updater.cs" />
-    <Compile Include="Versions\RocketBuild.cs" />
     <Compile Include="GUI\Workshop.cs">
       <SubType>Form</SubType>
     </Compile>

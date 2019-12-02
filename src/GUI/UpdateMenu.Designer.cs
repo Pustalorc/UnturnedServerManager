@@ -32,10 +32,6 @@ namespace Pustalorc.Applications.USM.GUI
         private void InitializeComponent()
         {
             this.UAll = new System.Windows.Forms.Button();
-            this.LRVer = new System.Windows.Forms.Label();
-            this.LRVerDesc = new System.Windows.Forms.Label();
-            this.CRVer = new System.Windows.Forms.Label();
-            this.CRVerDesc = new System.Windows.Forms.Label();
             this.URocket = new System.Windows.Forms.Button();
             this.CUVer = new System.Windows.Forms.Label();
             this.CUVerDesc = new System.Windows.Forms.Label();
@@ -45,7 +41,7 @@ namespace Pustalorc.Applications.USM.GUI
             // 
             // UAll
             // 
-            this.UAll.Location = new System.Drawing.Point(12, 69);
+            this.UAll.Location = new System.Drawing.Point(179, 41);
             this.UAll.Name = "UAll";
             this.UAll.Size = new System.Drawing.Size(130, 23);
             this.UAll.TabIndex = 47;
@@ -53,56 +49,20 @@ namespace Pustalorc.Applications.USM.GUI
             this.UAll.UseVisualStyleBackColor = true;
             this.UAll.Click += new System.EventHandler(this.UAll_Click);
             // 
-            // LRVer
-            // 
-            this.LRVer.AutoSize = true;
-            this.LRVer.Location = new System.Drawing.Point(501, 45);
-            this.LRVer.Name = "LRVer";
-            this.LRVer.Size = new System.Drawing.Size(27, 13);
-            this.LRVer.TabIndex = 36;
-            this.LRVer.Text = "N/A";
-            // 
-            // LRVerDesc
-            // 
-            this.LRVerDesc.AutoSize = true;
-            this.LRVerDesc.Location = new System.Drawing.Point(380, 45);
-            this.LRVerDesc.Name = "LRVerDesc";
-            this.LRVerDesc.Size = new System.Drawing.Size(115, 13);
-            this.LRVerDesc.TabIndex = 35;
-            this.LRVerDesc.Text = "Latest Rocket Version:";
-            // 
-            // CRVer
-            // 
-            this.CRVer.AutoSize = true;
-            this.CRVer.Location = new System.Drawing.Point(294, 45);
-            this.CRVer.Name = "CRVer";
-            this.CRVer.Size = new System.Drawing.Size(27, 13);
-            this.CRVer.TabIndex = 34;
-            this.CRVer.Text = "N/A";
-            // 
-            // CRVerDesc
-            // 
-            this.CRVerDesc.AutoSize = true;
-            this.CRVerDesc.Location = new System.Drawing.Point(159, 45);
-            this.CRVerDesc.Name = "CRVerDesc";
-            this.CRVerDesc.Size = new System.Drawing.Size(120, 13);
-            this.CRVerDesc.TabIndex = 33;
-            this.CRVerDesc.Text = "Current Rocket Version:";
-            // 
             // URocket
             // 
             this.URocket.Location = new System.Drawing.Point(12, 40);
             this.URocket.Name = "URocket";
             this.URocket.Size = new System.Drawing.Size(130, 23);
             this.URocket.TabIndex = 32;
-            this.URocket.Text = "Update Rocket";
+            this.URocket.Text = "Install/Update Rocket";
             this.URocket.UseVisualStyleBackColor = true;
             this.URocket.Click += new System.EventHandler(this.URocket_Click);
             // 
             // CUVer
             // 
             this.CUVer.AutoSize = true;
-            this.CUVer.Location = new System.Drawing.Point(343, 16);
+            this.CUVer.Location = new System.Drawing.Point(332, 16);
             this.CUVer.Name = "CUVer";
             this.CUVer.Size = new System.Drawing.Size(27, 13);
             this.CUVer.TabIndex = 27;
@@ -111,7 +71,7 @@ namespace Pustalorc.Applications.USM.GUI
             // CUVerDesc
             // 
             this.CUVerDesc.AutoSize = true;
-            this.CUVerDesc.Location = new System.Drawing.Point(159, 16);
+            this.CUVerDesc.Location = new System.Drawing.Point(148, 16);
             this.CUVerDesc.Name = "CUVerDesc";
             this.CUVerDesc.Size = new System.Drawing.Size(178, 13);
             this.CUVerDesc.TabIndex = 26;
@@ -129,7 +89,7 @@ namespace Pustalorc.Applications.USM.GUI
             // 
             // UValidate
             // 
-            this.UValidate.Location = new System.Drawing.Point(482, 69);
+            this.UValidate.Location = new System.Drawing.Point(339, 40);
             this.UValidate.Name = "UValidate";
             this.UValidate.Size = new System.Drawing.Size(104, 23);
             this.UValidate.TabIndex = 48;
@@ -142,13 +102,9 @@ namespace Pustalorc.Applications.USM.GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(598, 103);
+            this.ClientSize = new System.Drawing.Size(455, 76);
             this.Controls.Add(this.UValidate);
             this.Controls.Add(this.UAll);
-            this.Controls.Add(this.LRVer);
-            this.Controls.Add(this.LRVerDesc);
-            this.Controls.Add(this.CRVer);
-            this.Controls.Add(this.CRVerDesc);
             this.Controls.Add(this.URocket);
             this.Controls.Add(this.CUVer);
             this.Controls.Add(this.CUVerDesc);
@@ -167,10 +123,6 @@ namespace Pustalorc.Applications.USM.GUI
 
         #endregion
         private Button UAll;
-        private Label LRVer;
-        private Label LRVerDesc;
-        private Label CRVer;
-        private Label CRVerDesc;
         private Button URocket;
         private Label CUVer;
         private Label CUVerDesc;

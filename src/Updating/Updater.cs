@@ -5,7 +5,6 @@ using Pustalorc.Applications.USM.Configuration;
 using Pustalorc.Applications.USM.Constants;
 using Pustalorc.Applications.USM.File_Control;
 using Pustalorc.Applications.USM.SteamCMD_Manager;
-using Pustalorc.Applications.USM.Versions;
 
 namespace Pustalorc.Applications.USM.Updating
 {
@@ -46,16 +45,12 @@ namespace Pustalorc.Applications.USM.Updating
             if (!FileActions.Download(RocketDownloadUrl.Value, tempZip))
             {
                 MessageBox.Show(
-                    "An error occured during download. Please verify that rocketmod servers are available and try again later.",
+                    "An error occured during download. Please verify that you can access github.",
                     "Rocketmod download failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             FileActions.ExtractZip(tempZip, ServerPath.Value);
-
-            var local = LocalVersions.Load();
-            local.RocketModVersion = RocketBuild.Value;
-            local.SaveJson();
         }
 
         /// <summary>

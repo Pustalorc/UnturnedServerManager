@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using Pustalorc.Applications.USM.Configuration;
 using Pustalorc.Applications.USM.Updating;
-using Pustalorc.Applications.USM.Versions;
 
 namespace Pustalorc.Applications.USM.GUI
 {
@@ -11,9 +10,6 @@ namespace Pustalorc.Applications.USM.GUI
         public UpdateMenu()
         {
             InitializeComponent();
-
-            LRVer.Text = RocketBuild.Value;
-
             LoadVersions();
         }
 
@@ -22,7 +18,6 @@ namespace Pustalorc.Applications.USM.GUI
         {
             var installedVersions = LocalVersions.Load();
             CUVer.Text = installedVersions.LastUnturnedUpdate.ToString();
-            CRVer.Text = installedVersions.RocketModVersion;
         }
 
         // Form Events

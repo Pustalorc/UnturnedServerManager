@@ -3,6 +3,6 @@
     internal static class RocketDownloadUrl
     {
         public static string Value =>
-            "https://ci.rocketmod.net/job/Rocket.Unturned/lastSuccessfulBuild/artifact/Rocket.Unturned/bin/Release/Rocket.zip";
+            "https://github.com/RocketMod/Rocket.Unturned/releases/download/4.9.3.0/Rocket.Unturned.zip";
     }
 }
