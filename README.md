@@ -12,7 +12,7 @@ Windows or Linux
 
 # Download:
 
-https://github.com/Pustalorc/UnturnedServerManager/releases/latest
+[Releases](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
 # Changelog:
 
