@@ -76,7 +76,7 @@ namespace Pustalorc.Applications.USM.Loading
                 return;
 
             if (!Installation.Exists())
-                Application.Run(new FirstStart());
+              //  Application.Run(new FirstStart());
 
             Servers.Load();
 

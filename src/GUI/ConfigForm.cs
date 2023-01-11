@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,11 +10,11 @@ using Pustalorc.Applications.USM.Loading;
 
 namespace Pustalorc.Applications.USM.GUI
 {
-    internal sealed partial class ConstConfig : Form
+    internal sealed partial class ConfigForm : Form
     {
         private readonly string _targetServer;
 
-        public ConstConfig(string serverName)
+        public ConfigForm(string serverName)
         {
             InitializeComponent();
 
@@ -281,6 +282,17 @@ namespace Pustalorc.Applications.USM.GUI
         private void Cycle_CheckedChanged(object sender, EventArgs e)
         {
             CycleChange();
+        }
+
+        private void btn_config_Click(object sender, EventArgs e)
+        {
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _targetServer);
+            if (server != null)
+            {
+
+
+                Process.Start("notepad.exe", server.Folder + @"\Config.json");
+            }
         }
     }
 }

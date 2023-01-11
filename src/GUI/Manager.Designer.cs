@@ -32,263 +32,271 @@ namespace Pustalorc.Applications.USM.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Manager));
             this.Settings = new System.Windows.Forms.Button();
             this.Workshop = new System.Windows.Forms.Button();
             this.Plugin = new System.Windows.Forms.Button();
             this.Toggle = new System.Windows.Forms.Button();
             this.Updater = new System.Windows.Forms.Button();
-            this.GithubLink = new System.Windows.Forms.LinkLabel();
-            this.Desc9 = new System.Windows.Forms.Label();
-            this.LinkMe = new System.Windows.Forms.LinkLabel();
             this.Notifier = new System.Windows.Forms.NotifyIcon(this.components);
             this.Servers = new System.Windows.Forms.ListBox();
             this.NewServer = new System.Windows.Forms.Button();
             this.DeleteServer = new System.Windows.Forms.Button();
             this.CloneServer = new System.Windows.Forms.Button();
-            this.List_TXT = new System.Windows.Forms.Label();
             this.ServerSettings = new System.Windows.Forms.RichTextBox();
             this.Settings_TXT = new System.Windows.Forms.Label();
             this.Restart = new System.Windows.Forms.Button();
-            this.Mngmnt_TXT = new System.Windows.Forms.Label();
-            this.ctrl_TXT = new System.Windows.Forms.Label();
             this.Reset = new System.Windows.Forms.Button();
             this.OpenLocal = new System.Windows.Forms.Button();
+            this.btn_stop_server = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Settings
             // 
-            this.Settings.Location = new System.Drawing.Point(255, 12);
+            this.Settings.BackColor = System.Drawing.Color.DarkGreen;
+            this.Settings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Settings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Settings.ForeColor = System.Drawing.SystemColors.Control;
+            this.Settings.Location = new System.Drawing.Point(732, 362);
             this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(130, 23);
+            this.Settings.Size = new System.Drawing.Size(245, 47);
             this.Settings.TabIndex = 7;
-            this.Settings.Text = "Change Server Settings";
-            this.Settings.UseVisualStyleBackColor = true;
+            this.Settings.Text = " Server Settings";
+            this.Settings.UseVisualStyleBackColor = false;
             this.Settings.Click += new System.EventHandler(this.Settings_Click);
             // 
             // Workshop
             // 
-            this.Workshop.Location = new System.Drawing.Point(391, 57);
+            this.Workshop.BackColor = System.Drawing.Color.DarkGreen;
+            this.Workshop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Workshop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Workshop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Workshop.ForeColor = System.Drawing.SystemColors.Control;
+            this.Workshop.Location = new System.Drawing.Point(706, 124);
             this.Workshop.Name = "Workshop";
-            this.Workshop.Size = new System.Drawing.Size(139, 23);
+            this.Workshop.Size = new System.Drawing.Size(245, 42);
             this.Workshop.TabIndex = 16;
             this.Workshop.Text = "Workshop Content";
-            this.Workshop.UseVisualStyleBackColor = true;
+            this.Workshop.UseVisualStyleBackColor = false;
             this.Workshop.Click += new System.EventHandler(this.Workshop_Click);
             // 
             // Plugin
             // 
-            this.Plugin.Location = new System.Drawing.Point(391, 86);
+            this.Plugin.BackColor = System.Drawing.Color.DarkGreen;
+            this.Plugin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Plugin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Plugin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Plugin.ForeColor = System.Drawing.SystemColors.Control;
+            this.Plugin.Location = new System.Drawing.Point(563, 479);
             this.Plugin.Name = "Plugin";
-            this.Plugin.Size = new System.Drawing.Size(139, 23);
+            this.Plugin.Size = new System.Drawing.Size(245, 39);
             this.Plugin.TabIndex = 17;
             this.Plugin.Text = "Rocket Plugins";
-            this.Plugin.UseVisualStyleBackColor = true;
+            this.Plugin.UseVisualStyleBackColor = false;
             this.Plugin.Click += new System.EventHandler(this.Plugin_Click);
             // 
             // Toggle
             // 
-            this.Toggle.Location = new System.Drawing.Point(391, 168);
+            this.Toggle.BackColor = System.Drawing.Color.LimeGreen;
+            this.Toggle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Toggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Toggle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Toggle.ForeColor = System.Drawing.SystemColors.Control;
+            this.Toggle.Location = new System.Drawing.Point(341, 381);
             this.Toggle.Name = "Toggle";
-            this.Toggle.Size = new System.Drawing.Size(139, 23);
+            this.Toggle.Size = new System.Drawing.Size(333, 44);
             this.Toggle.TabIndex = 18;
-            this.Toggle.Text = "Start/Stop Server";
-            this.Toggle.UseVisualStyleBackColor = true;
+            this.Toggle.Text = "Start Server";
+            this.Toggle.UseVisualStyleBackColor = false;
             this.Toggle.Click += new System.EventHandler(this.Toggle_Click);
             // 
             // Updater
             // 
-            this.Updater.Location = new System.Drawing.Point(12, 402);
+            this.Updater.BackColor = System.Drawing.Color.DarkGreen;
+            this.Updater.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Updater.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Updater.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Updater.ForeColor = System.Drawing.SystemColors.Control;
+            this.Updater.Location = new System.Drawing.Point(814, 479);
             this.Updater.Name = "Updater";
-            this.Updater.Size = new System.Drawing.Size(75, 23);
+            this.Updater.Size = new System.Drawing.Size(163, 38);
             this.Updater.TabIndex = 22;
             this.Updater.Text = "Update Tool";
-            this.Updater.UseVisualStyleBackColor = true;
+            this.Updater.UseVisualStyleBackColor = false;
             this.Updater.Click += new System.EventHandler(this.Updater_Click);
-            // 
-            // GithubLink
-            // 
-            this.GithubLink.AutoSize = true;
-            this.GithubLink.Location = new System.Drawing.Point(107, 407);
-            this.GithubLink.Name = "GithubLink";
-            this.GithubLink.Size = new System.Drawing.Size(222, 13);
-            this.GithubLink.TabIndex = 23;
-            this.GithubLink.TabStop = true;
-            this.GithubLink.Text = "Github (Source Code, Issues, Wiki and more!)";
-            this.GithubLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubLink_LinkClicked);
-            // 
-            // Desc9
-            // 
-            this.Desc9.AutoSize = true;
-            this.Desc9.Location = new System.Drawing.Point(335, 407);
-            this.Desc9.Name = "Desc9";
-            this.Desc9.Size = new System.Drawing.Size(152, 13);
-            this.Desc9.TabIndex = 25;
-            this.Desc9.Text = "Programmed and Designed by:";
-            // 
-            // LinkMe
-            // 
-            this.LinkMe.AutoSize = true;
-            this.LinkMe.Location = new System.Drawing.Point(483, 407);
-            this.LinkMe.Name = "LinkMe";
-            this.LinkMe.Size = new System.Drawing.Size(64, 13);
-            this.LinkMe.TabIndex = 26;
-            this.LinkMe.TabStop = true;
-            this.LinkMe.Text = "Pustalorc";
-            this.LinkMe.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkMe_LinkClicked);
             // 
             // Notifier
             // 
             this.Notifier.BalloonTipText = "Unturned Server Manager";
             this.Notifier.BalloonTipTitle = "Unturned Server Manager";
-            this.Notifier.Icon = ((System.Drawing.Icon)(resources.GetObject("Notifier.Icon")));
             this.Notifier.Text = "Unturned Server Manager";
             this.Notifier.Visible = true;
             this.Notifier.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Notifier_MouseDoubleClick);
             // 
             // Servers
             // 
+            this.Servers.BackColor = System.Drawing.Color.Green;
+            this.Servers.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Servers.ForeColor = System.Drawing.SystemColors.MenuBar;
             this.Servers.FormattingEnabled = true;
-            this.Servers.Location = new System.Drawing.Point(11, 36);
+            this.Servers.ItemHeight = 25;
+            this.Servers.Location = new System.Drawing.Point(12, 96);
             this.Servers.Name = "Servers";
-            this.Servers.Size = new System.Drawing.Size(153, 290);
+            this.Servers.Size = new System.Drawing.Size(328, 279);
             this.Servers.TabIndex = 27;
             this.Servers.SelectedIndexChanged += new System.EventHandler(this.Servers_SelectedIndexChanged);
             // 
             // NewServer
             // 
-            this.NewServer.Location = new System.Drawing.Point(11, 332);
+            this.NewServer.BackColor = System.Drawing.Color.LimeGreen;
+            this.NewServer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.NewServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NewServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewServer.ForeColor = System.Drawing.SystemColors.Control;
+            this.NewServer.Location = new System.Drawing.Point(12, 390);
             this.NewServer.Name = "NewServer";
-            this.NewServer.Size = new System.Drawing.Size(49, 23);
+            this.NewServer.Size = new System.Drawing.Size(148, 38);
             this.NewServer.TabIndex = 28;
             this.NewServer.Text = "New";
-            this.NewServer.UseVisualStyleBackColor = true;
+            this.NewServer.UseVisualStyleBackColor = false;
             this.NewServer.Click += new System.EventHandler(this.NewServer_Click);
             // 
             // DeleteServer
             // 
-            this.DeleteServer.Location = new System.Drawing.Point(117, 332);
+            this.DeleteServer.BackColor = System.Drawing.Color.Red;
+            this.DeleteServer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DeleteServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeleteServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteServer.ForeColor = System.Drawing.SystemColors.Control;
+            this.DeleteServer.Location = new System.Drawing.Point(12, 475);
             this.DeleteServer.Name = "DeleteServer";
-            this.DeleteServer.Size = new System.Drawing.Size(47, 23);
+            this.DeleteServer.Size = new System.Drawing.Size(148, 38);
             this.DeleteServer.TabIndex = 29;
             this.DeleteServer.Text = "Delete";
-            this.DeleteServer.UseVisualStyleBackColor = true;
+            this.DeleteServer.UseVisualStyleBackColor = false;
             this.DeleteServer.Click += new System.EventHandler(this.DeleteServer_Click);
             // 
             // CloneServer
             // 
-            this.CloneServer.Location = new System.Drawing.Point(66, 332);
+            this.CloneServer.BackColor = System.Drawing.Color.Gold;
+            this.CloneServer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CloneServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloneServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloneServer.ForeColor = System.Drawing.Color.Black;
+            this.CloneServer.Location = new System.Drawing.Point(12, 431);
             this.CloneServer.Name = "CloneServer";
-            this.CloneServer.Size = new System.Drawing.Size(45, 23);
+            this.CloneServer.Size = new System.Drawing.Size(148, 38);
             this.CloneServer.TabIndex = 30;
             this.CloneServer.Text = "Clone";
-            this.CloneServer.UseVisualStyleBackColor = true;
+            this.CloneServer.UseVisualStyleBackColor = false;
             this.CloneServer.Click += new System.EventHandler(this.CloneServer_Click);
-            // 
-            // List_TXT
-            // 
-            this.List_TXT.AutoSize = true;
-            this.List_TXT.Location = new System.Drawing.Point(12, 17);
-            this.List_TXT.Name = "List_TXT";
-            this.List_TXT.Size = new System.Drawing.Size(75, 13);
-            this.List_TXT.TabIndex = 31;
-            this.List_TXT.Text = "Local Servers:";
             // 
             // ServerSettings
             // 
-            this.ServerSettings.Location = new System.Drawing.Point(170, 41);
+            this.ServerSettings.BackColor = System.Drawing.Color.ForestGreen;
+            this.ServerSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServerSettings.ForeColor = System.Drawing.SystemColors.Window;
+            this.ServerSettings.Location = new System.Drawing.Point(346, 96);
             this.ServerSettings.Name = "ServerSettings";
             this.ServerSettings.ReadOnly = true;
-            this.ServerSettings.Size = new System.Drawing.Size(215, 285);
+            this.ServerSettings.Size = new System.Drawing.Size(328, 279);
             this.ServerSettings.TabIndex = 32;
             this.ServerSettings.Text = "";
+            this.ServerSettings.TextChanged += new System.EventHandler(this.ServerSettings_TextChanged);
             // 
             // Settings_TXT
             // 
             this.Settings_TXT.AutoSize = true;
-            this.Settings_TXT.Location = new System.Drawing.Point(167, 17);
+            this.Settings_TXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Settings_TXT.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Settings_TXT.Location = new System.Drawing.Point(12, 32);
             this.Settings_TXT.Name = "Settings_TXT";
-            this.Settings_TXT.Size = new System.Drawing.Size(82, 13);
+            this.Settings_TXT.Size = new System.Drawing.Size(159, 31);
             this.Settings_TXT.TabIndex = 33;
-            this.Settings_TXT.Text = "Server Settings:";
+            this.Settings_TXT.Text = "You Server";
+            this.Settings_TXT.Click += new System.EventHandler(this.Settings_TXT_Click);
             // 
             // Restart
             // 
-            this.Restart.Enabled = false;
-            this.Restart.Location = new System.Drawing.Point(391, 197);
+            this.Restart.BackColor = System.Drawing.Color.DarkRed;
+            this.Restart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Restart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Restart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Restart.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Restart.Location = new System.Drawing.Point(341, 424);
             this.Restart.Name = "Restart";
-            this.Restart.Size = new System.Drawing.Size(139, 23);
+            this.Restart.Size = new System.Drawing.Size(333, 45);
             this.Restart.TabIndex = 20;
             this.Restart.Text = "Restart Server";
-            this.Restart.UseVisualStyleBackColor = true;
+            this.Restart.UseVisualStyleBackColor = false;
             this.Restart.Click += new System.EventHandler(this.Restart_Click);
-            // 
-            // Mngmnt_TXT
-            // 
-            this.Mngmnt_TXT.AutoSize = true;
-            this.Mngmnt_TXT.Location = new System.Drawing.Point(391, 41);
-            this.Mngmnt_TXT.Name = "Mngmnt_TXT";
-            this.Mngmnt_TXT.Size = new System.Drawing.Size(72, 13);
-            this.Mngmnt_TXT.TabIndex = 35;
-            this.Mngmnt_TXT.Text = "Management:";
-            // 
-            // ctrl_TXT
-            // 
-            this.ctrl_TXT.AutoSize = true;
-            this.ctrl_TXT.Location = new System.Drawing.Point(391, 152);
-            this.ctrl_TXT.Name = "ctrl_TXT";
-            this.ctrl_TXT.Size = new System.Drawing.Size(43, 13);
-            this.ctrl_TXT.TabIndex = 37;
-            this.ctrl_TXT.Text = "Control:";
             // 
             // Reset
             // 
-            this.Reset.Location = new System.Drawing.Point(391, 115);
+            this.Reset.BackColor = System.Drawing.Color.DarkGreen;
+            this.Reset.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Reset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Reset.ForeColor = System.Drawing.SystemColors.Control;
+            this.Reset.Location = new System.Drawing.Point(706, 172);
             this.Reset.Name = "Reset";
-            this.Reset.Size = new System.Drawing.Size(139, 23);
+            this.Reset.Size = new System.Drawing.Size(245, 67);
             this.Reset.TabIndex = 39;
             this.Reset.Text = "Clear Map and User Data";
-            this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.UseVisualStyleBackColor = false;
             this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
             // OpenLocal
             // 
-            this.OpenLocal.Location = new System.Drawing.Point(391, 226);
+            this.OpenLocal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.OpenLocal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OpenLocal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OpenLocal.ForeColor = System.Drawing.SystemColors.Control;
+            this.OpenLocal.Location = new System.Drawing.Point(732, 415);
             this.OpenLocal.Name = "OpenLocal";
-            this.OpenLocal.Size = new System.Drawing.Size(139, 23);
+            this.OpenLocal.Size = new System.Drawing.Size(245, 45);
             this.OpenLocal.TabIndex = 40;
             this.OpenLocal.Text = "Open Local Folder";
             this.OpenLocal.UseVisualStyleBackColor = true;
             this.OpenLocal.Click += new System.EventHandler(this.OpenLocal_Click);
             // 
+            // btn_stop_server
+            // 
+            this.btn_stop_server.BackColor = System.Drawing.Color.Red;
+            this.btn_stop_server.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_stop_server.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_stop_server.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_stop_server.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn_stop_server.Location = new System.Drawing.Point(341, 381);
+            this.btn_stop_server.Name = "btn_stop_server";
+            this.btn_stop_server.Size = new System.Drawing.Size(333, 44);
+            this.btn_stop_server.TabIndex = 41;
+            this.btn_stop_server.Text = "Stop Server";
+            this.btn_stop_server.UseVisualStyleBackColor = false;
+            this.btn_stop_server.Click += new System.EventHandler(this.tn_stop_server_Click);
+            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(559, 437);
+            this.BackColor = System.Drawing.Color.DarkGreen;
+            this.ClientSize = new System.Drawing.Size(989, 529);
             this.Controls.Add(this.OpenLocal);
             this.Controls.Add(this.Reset);
-            this.Controls.Add(this.ctrl_TXT);
-            this.Controls.Add(this.Mngmnt_TXT);
             this.Controls.Add(this.Settings_TXT);
             this.Controls.Add(this.ServerSettings);
-            this.Controls.Add(this.List_TXT);
             this.Controls.Add(this.CloneServer);
             this.Controls.Add(this.DeleteServer);
             this.Controls.Add(this.NewServer);
             this.Controls.Add(this.Servers);
-            this.Controls.Add(this.LinkMe);
-            this.Controls.Add(this.Desc9);
-            this.Controls.Add(this.GithubLink);
             this.Controls.Add(this.Updater);
             this.Controls.Add(this.Restart);
             this.Controls.Add(this.Toggle);
             this.Controls.Add(this.Plugin);
             this.Controls.Add(this.Workshop);
             this.Controls.Add(this.Settings);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Controls.Add(this.btn_stop_server);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "Manager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -304,21 +312,16 @@ namespace Pustalorc.Applications.USM.GUI
         private Button Plugin;
         private Button Toggle;
         private Button Updater;
-        private LinkLabel GithubLink;
-        private Label Desc9;
-        private LinkLabel LinkMe;
         public NotifyIcon Notifier;
         private ListBox Servers;
         private Button NewServer;
         private Button DeleteServer;
         private Button CloneServer;
-        private Label List_TXT;
         private RichTextBox ServerSettings;
         private Label Settings_TXT;
         private Button Restart;
-        private Label Mngmnt_TXT;
-        private Label ctrl_TXT;
         private Button Reset;
         private Button OpenLocal;
+        private Button btn_stop_server;
     }
 }

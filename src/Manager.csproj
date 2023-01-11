@@ -14,6 +14,10 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <LangVersion>latest</LangVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,10 +32,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,9 +39,10 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,6 +64,7 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ConfigModification.cs" />
     <Compile Include="Configuration\GameConfiguration.cs" />
     <Compile Include="Configuration\Installation.cs" />
     <Compile Include="Configuration\LocalVersions.cs" />
@@ -72,21 +74,21 @@
     <Compile Include="GUI\AddServer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Add Or Clone Server.Designer.cs">
+    <Compile Include="GUI\AddServer.Designer.cs">
       <DependentUpon>AddServer.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\FirstStart.cs">
+    <Compile Include="GUI\ChooseServer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\First Start.Designer.cs">
-      <DependentUpon>FirstStart.cs</DependentUpon>
+    <Compile Include="GUI\ChooseServer.Designer.cs">
+      <DependentUpon>ChooseServer.cs</DependentUpon>
     </Compile>
     <Compile Include="Loading\Entry.cs" />
-    <Compile Include="GUI\ConstConfig.cs">
+    <Compile Include="GUI\ConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Server Settings.Designer.cs">
-      <DependentUpon>ConstConfig.cs</DependentUpon>
+    <Compile Include="GUI\ConfigForm.Designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Manager.cs">
       <SubType>Form</SubType>
@@ -102,6 +104,11 @@
     </Compile>
     <Compile Include="Loading\Servers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Server Instance\Server.cs" />
     <Compile Include="GUI\UpdateMenu.cs">
       <SubType>Form</SubType>
@@ -117,14 +124,11 @@
     <Compile Include="GUI\Workshop Download.Designer.cs">
       <DependentUpon>Workshop.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="GUI\Add Or Clone Server.resx">
-      <DependentUpon>AddServer.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\ChooseServer.resx">
+      <DependentUpon>ChooseServer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\First Start.resx">
-      <DependentUpon>FirstStart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Server Settings.resx">
-      <DependentUpon>ConstConfig.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\ConfigForm.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Manager.resx">
       <DependentUpon>Manager.cs</DependentUpon>
@@ -137,6 +141,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Workshop Download.resx">
       <DependentUpon>Workshop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="..\LICENSE.md" />
     <None Include="..\README.md" />
@@ -152,7 +160,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 et x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -169,6 +177,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.IO.Compression" />

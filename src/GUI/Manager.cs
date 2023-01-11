@@ -36,10 +36,8 @@ namespace Pustalorc.Applications.USM.GUI
             exit.Click += Exit_Click;
             wiki.Index = 0;
             wiki.Text = @"Wiki";
-            wiki.Click += Github_Click;
             issues.Index = 0;
             issues.Text = @"Issues And Suggestions";
-            issues.Click += Issues_Click;
             Notifier.ContextMenu = menu;
         }
 
@@ -76,12 +74,15 @@ namespace Pustalorc.Applications.USM.GUI
             ServerSettings.Enabled = status;
             Toggle.Enabled = status;
             OpenLocal.Enabled = status;
-            Restart.Enabled = false;
             Reset.Enabled = status;
             Workshop.Enabled = status;
             Plugin.Enabled = status;
             DeleteServer.Enabled = status;
             CloneServer.Enabled = status;
+            // Restart Server Button is not visible
+            Restart.Visible = false;
+            // Stop Server Button is not visible
+            btn_stop_server.Visible = false;
         }
 
         private void LoadServerDetails()
@@ -91,7 +92,6 @@ namespace Pustalorc.Applications.USM.GUI
             var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
 
-            Restart.Enabled = server.IsRunning;
         }
 
         // Notification tray actions.
@@ -110,33 +110,12 @@ namespace Pustalorc.Applications.USM.GUI
             Application.Exit();
         }
 
-        private static void Github_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://github.com/pustalorc/UnturnedServerManager/wiki");
-        }
-
-        private static void Issues_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://github.com/pustalorc/UnturnedServerManager/issues");
-        }
-
-        // Form events.
-        private void GithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/pustalorc/UnturnedServerManager/");
-        }
-
-        private void LinkMe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://pustalorc.github.io/");
-        }
-
         private void Settings_Click(object sender, EventArgs e)
         {
             _otherGuiOpen = true;
             Hide();
 
-            var f = new ConstConfig(_selectedServer);
+            var f = new ConfigForm(_selectedServer);
             f.ShowDialog();
 
             Show();
@@ -196,17 +175,13 @@ namespace Pustalorc.Applications.USM.GUI
         {
             var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
             if (server == null) return;
-
-            if (server.IsRunning)
-            {
-                Restart.Enabled = false;
-                server.Shutdown();
-            }
             else
             {
-                Restart.Enabled = true;
                 server.Start();
             }
+            Toggle.Visible = false;
+            Restart.Visible = true;
+            btn_stop_server.Visible = true;
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -272,8 +247,47 @@ namespace Pustalorc.Applications.USM.GUI
             if (_reloaded) return;
 
             _selectedServer = (string) Servers.SelectedItem;
-
+            Settings_TXT.Text = $"Your server: {_selectedServer}";
             LoadServerDetails();
+        }
+
+        private void Mngmnt_TXT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void List_TXT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Settings_TXT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ServerSettings_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ctrl_TXT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tn_stop_server_Click(object sender, EventArgs e)
+        {
+
+            var server = Loading.Servers.RegisteredServers.Find(k => k.Name == _selectedServer);
+            if (server == null) return;
+            else if (server.IsRunning)
+            {
+                server.Shutdown();
+            }
+            Toggle.Visible = true;
+            Restart.Visible = false;
+            btn_stop_server.Visible = false;
         }
     }
 }

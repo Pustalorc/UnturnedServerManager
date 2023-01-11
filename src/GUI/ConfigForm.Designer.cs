@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Pustalorc.Applications.USM.GUI
 {
-    internal sealed partial class ConstConfig
+    internal sealed partial class ConfigForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,6 @@ namespace Pustalorc.Applications.USM.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConstConfig));
             this.Rate2 = new System.Windows.Forms.RadioButton();
             this.Cycle1 = new System.Windows.Forms.RadioButton();
             this.Cycle2 = new System.Windows.Forms.RadioButton();
@@ -112,6 +111,7 @@ namespace Pustalorc.Applications.USM.GUI
             this.IPDot2 = new System.Windows.Forms.Label();
             this.Port = new System.Windows.Forms.NumericUpDown();
             this.Maps = new System.Windows.Forms.ComboBox();
+            this.btn_config = new System.Windows.Forms.Button();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChatRate)).BeginInit();
@@ -1014,12 +1014,23 @@ namespace Pustalorc.Applications.USM.GUI
             this.Maps.Size = new System.Drawing.Size(280, 21);
             this.Maps.TabIndex = 103;
             // 
+            // btn_config
+            // 
+            this.btn_config.Location = new System.Drawing.Point(42, 551);
+            this.btn_config.Name = "btn_config";
+            this.btn_config.Size = new System.Drawing.Size(81, 23);
+            this.btn_config.TabIndex = 104;
+            this.btn_config.Text = "Open Config";
+            this.btn_config.UseVisualStyleBackColor = true;
+            this.btn_config.Click += new System.EventHandler(this.btn_config_Click);
+            // 
             // ConstConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(384, 585);
+            this.Controls.Add(this.btn_config);
             this.Controls.Add(this.Maps);
             this.Controls.Add(this.Port);
             this.Controls.Add(this.IPDot2);
@@ -1068,7 +1079,6 @@ namespace Pustalorc.Applications.USM.GUI
             this.Controls.Add(this.NameSel);
             this.Controls.Add(this.NameDesc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConstConfig";
@@ -1195,5 +1205,6 @@ namespace Pustalorc.Applications.USM.GUI
         private NumericUpDown MaxPlayers;
         private NumericUpDown Port;
         private ComboBox Maps;
+        private Button btn_config;
     }
 }

@@ -20,7 +20,7 @@ namespace Pustalorc.Applications.USM.GUI
 
         private void ServerName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar != (char) Keys.Enter) return;
+            if (e.KeyChar != (char)Keys.Enter) return;
 
             _accepted = true;
             Close();
