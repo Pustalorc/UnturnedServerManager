@@ -2,17 +2,10 @@
 
 Version: Public 4.0.1.2
 
-[![Github Releases](https://img.shields.io/github/downloads/Pustalorc/UnturnedServerManager/latest/total.svg?style=plastic)](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
-
 # Requirements:
 
 [.Net Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) or later versions
 
-Windows or Linux
-
-# Download:
-
-[Releases](https://github.com/Pustalorc/UnturnedServerManager/releases/latest)
 
 # Changelog:
 
@@ -180,18 +173,15 @@ Windows or Linux
 * Changed Self-Version Checking Feature To The Full Updater + Notification.
 * Changed USM Configuration File.
 
-**V2.0.1.0** - 
 
-* Changed How Rocket Install Works Due To Rocket Changing Their Builds And How They Function (Fully explained here: https://rocketmod.net/viewtopic.php?f=44&t=2961).
-* Added Small Self-Version Checking Feature. Will Be Improved In Expected 3.0.0.0 Release.
-
-**V2.0.0.0** - 
+**V2.0.0.0** 
 
 * Added Link To Reddit Post.
 * Fixed SRS (Shutdown, Restart and Start) Buttons To Apply To The Servers That The Program Started Only.
 * Added Rocket Install, Workshop Install And Plugin Install (Plugin install is buggy!).
 * Added Per-Server SRS Features.
 
-**V1.0.0.1** - Added link to github page.
-
+**V2.0.1.0**
+* Update README 
+   
 ----------- Unturned Server Manager -----------
